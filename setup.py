@@ -4,7 +4,7 @@ from setuptools import find_packages
 from setuptools import setup
 
 version = '0.1'
-description = 'FIXME'
+description = 'Agenda de membros do Governo Brasileiro'
 long_description = (
     open('README.rst').read() + '\n' +
     open('CONTRIBUTORS.rst').read() + '\n' +
@@ -28,7 +28,7 @@ setup(
         'Programming Language :: Python :: 2.7',
         'Topic :: Software Development :: Libraries :: Python Modules',
     ],
-    keywords='plonegovbr, agenda, brasil, plone, dexterity',
+    keywords='plonegovbr agenda brasil plone dexterity',
     author='PloneGovBr',
     author_email='gov@plone.org.br',
     url='https://github.com/plonegovbr/brasil.gov.agenda',

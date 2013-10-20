@@ -9,7 +9,7 @@
 
     <gs:registerProfile
         name="default"
-        title="brasil.gov.agenda: Instalação do Pacote"
+        title="Brasil.gov.br: Agenda de Membros do Governo Brasileiro"
         directory="profiles/default"
         description="Instala o pacote brasil.gov.agenda dentro de um portal Plone"
         provides="Products.GenericSetup.interfaces.EXTENSION"
@@ -18,7 +18,7 @@
 
     <gs:registerProfile
         name="uninstall"
-        title="brasil.gov.agenda: Remoção do Pacote"
+        title="Brasil.gov.br: Remoção do suporte a Agenda"
         directory="profiles/uninstall"
         description="Remove o pacote brasil.gov.agenda de dentro de um portal Plone"
         provides="Products.GenericSetup.interfaces.EXTENSION"
