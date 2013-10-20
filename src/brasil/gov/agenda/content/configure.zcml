@@ -1,0 +1,8 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    i18n_domain="brasil.gov.agenda">
+
+  <adapter name="start" factory=".compromisso.start_date" />
+  <adapter name="end" factory=".compromisso.end_date" />
+
+</configure>

@@ -1,0 +1,33 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:metal="http://xml.zope.org/namespaces/metal"
+    xmlns:tal="http://xml.zope.org/namespaces/tal"
+    xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+    metal:use-macro="context/main_template/macros/master">
+
+    <metal:block fill-slot="content-core">
+		<span id="orgao" tal:content="view/orgao">Presidência da República</span><br />
+		<span  id="data_dia" tal:content="view/weekday">Segunda-Feira</span><br />
+        <span  id="data_longa" tal:content="view/long_date">14 de Outubro de 2013</span><br />
+        <div id='compromissos'>
+        	Compromissos do dia
+        	<div class="compromisso"  tal:repeat="comp view/compromissos">
+        		<time class="horario"
+        			  tal:attributes="datetime comp/start_date"
+        			  tal:content="comp/start_time">12h00</time>
+        		<span  class="titulo" tal:content="comp/title">Reunião com Dorneles Treméa</span><br />
+        		<span class="local"
+        			tal:condition="comp/location"
+        			tal:content="comp/location">Palácio do Planalto</span>
+                <a tal:condition="view/editable"
+                   class="editar_compromisso"
+                   tal:attributes="href string:${comp/url}/edit"
+                   i18n:translate="">Editar Compromisso</a>
+        	</div>
+            <a tal:condition="view/editable"
+               class="adicionar_compromisso"
+               tal:attributes="href string:${context/absolute_url}/++add++Compromisso"
+               i18n:translate="">Adicionar Compromisso</a>
+        </div>
+    </metal:block>
+
+</html>

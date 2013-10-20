@@ -1,0 +1,9 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:i18n="http://namespaces.zope.org/i18n"
+    i18n_domain="brasil.gov.agenda">
+
+    <!-- Passos de atualizacao -->
+    <include package=".v2000" />
+
+</configure>

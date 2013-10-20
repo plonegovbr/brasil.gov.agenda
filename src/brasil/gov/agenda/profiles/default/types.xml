@@ -1,0 +1,5 @@
+<object meta_type="Plone Types Tool" name="portal_types">
+    <object meta_type="Dexterity FTI" name="Agenda" />
+    <object meta_type="Dexterity FTI" name="AgendaDiaria" />
+    <object meta_type="Dexterity FTI" name="Compromisso" />
+</object>

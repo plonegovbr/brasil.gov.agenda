@@ -1,0 +1,18 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:metal="http://xml.zope.org/namespaces/metal"
+    xmlns:tal="http://xml.zope.org/namespaces/tal"
+    xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+    metal:use-macro="context/main_template/macros/master">
+
+    <metal:block fill-slot="content-core">
+        <a tal:condition="view/editable"
+           class="adicionar_compromisso"
+           tal:attributes="href string:${context/absolute_url}/++add++AgendaDiaria"
+           i18n:translate="">Adicionar Agenda Diária</a> <br />
+        <a tal:condition="view/editable"
+           class="adicionar_compromisso"
+           tal:attributes="href string:${context/absolute_url}/++add++Compromisso"
+           i18n:translate="">Adicionar Compromisso</a>
+    </metal:block>
+
+</html>

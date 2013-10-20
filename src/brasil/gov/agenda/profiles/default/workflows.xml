@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<object name="portal_workflow" meta_type="Plone Workflow Tool">
+ <object name="agendadiaria_workflow" meta_type="Workflow"/>
+ <bindings>
+  <type type_id="AgendaDiaria">
+   <bound-workflow workflow_id="agendadiaria_workflow"/>
+  </type>
+  <type type_id="Compromisso"/>
+ </bindings>
+</object>

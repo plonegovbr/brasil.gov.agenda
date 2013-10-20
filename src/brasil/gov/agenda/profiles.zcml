@@ -1,0 +1,37 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:gs="http://namespaces.zope.org/genericsetup"
+    xmlns:i18n="http://namespaces.zope.org/i18n"
+    xmlns:zcml="http://namespaces.zope.org/zcml"
+    i18n_domain="brasil.gov.agenda">
+
+    <!-- Profiles -->
+
+    <gs:registerProfile
+        name="default"
+        title="brasil.gov.agenda: Instalação do Pacote"
+        directory="profiles/default"
+        description="Instala o pacote brasil.gov.agenda dentro de um portal Plone"
+        provides="Products.GenericSetup.interfaces.EXTENSION"
+        i18n:attributes="title; description"
+        />
+
+    <gs:registerProfile
+        name="uninstall"
+        title="brasil.gov.agenda: Remoção do Pacote"
+        directory="profiles/uninstall"
+        description="Remove o pacote brasil.gov.agenda de dentro de um portal Plone"
+        provides="Products.GenericSetup.interfaces.EXTENSION"
+        i18n:attributes="title; description"
+        />
+
+    <!-- Upgrades -->
+    <include package=".upgrades" />
+
+    <!-- Oculta profile -->
+    <utility
+        factory=".config.HiddenProfiles"
+        name="brasil.gov.agenda" />
+
+
+</configure>

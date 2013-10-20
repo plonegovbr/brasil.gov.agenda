@@ -1,0 +1,40 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:browser="http://namespaces.zope.org/browser"
+    xmlns:grok="http://namespaces.zope.org/grok"
+    xmlns:i18n="http://namespaces.zope.org/i18n"
+    i18n_domain="brasil.gov.agenda">
+
+    <permission
+        id="brasil.gov.agenda.AddAgenda"
+        title="brasil.gov.agenda: Add Agenda"
+        />
+
+    <permission
+        id="brasil.gov.agenda.AddAgendaDiaria"
+        title="brasil.gov.agenda: Add AgendaDiaria"
+        />
+
+    <permission
+        id="brasil.gov.agenda.AddCompromisso"
+        title="brasil.gov.agenda: Add Compromisso"
+        />
+
+    <includeDependencies package="." />
+
+    <!-- Suporte ao Generic Setup-->
+    <include file="profiles.zcml" />
+
+    <include package=".behaviors" />
+    <include package=".browser" />
+    <include package=".content" />
+
+    <grok:grok package="." />
+    
+    <!-- Publish static files -->
+    <browser:resourceDirectory
+      name="brasil.gov.agenda"
+      directory="static"
+      />
+
+</configure>

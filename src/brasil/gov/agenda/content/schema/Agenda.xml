@@ -1,0 +1,27 @@
+<model xmlns="http://namespaces.plone.org/supermodel/schema"
+       xmlns:indexer="http://namespaces.plone.org/supermodel/indexer"
+       xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+       i18n:domain="brasil.gov.agenda">
+  <schema>
+    <field name="orgao" type="zope.schema.TextLine">
+      <description i18n:translate="">Informe o orgao ao qual esta agenda pertence. ex: Presidencia da Republica</description>
+      <required>True</required>
+      <title i18n:translate="">Orgao</title>
+    </field>
+    <field name="autoridade" type="zope.schema.TextLine">
+      <description i18n:translate=""></description>
+      <required>True</required>
+      <title i18n:translate="">Nome da autoridade</title>
+    </field>
+    <field name="image" type="plone.namedfile.field.NamedBlobImage">
+      <description />
+      <required>False</required>
+      <title i18n:translate="Brasao">Brasao</title>
+    </field>
+    <field name="location" type="zope.schema.TextLine" indexer:searchable="true">
+      <description i18n:translate="">Local padrao para eventos desta agenda</description>
+      <required>False</required>
+      <title i18n:translate="label_event_location">Event Location</title>
+    </field>
+  </schema>
+</model>
