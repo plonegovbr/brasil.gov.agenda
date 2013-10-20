@@ -5,22 +5,10 @@
     xmlns:i18n="http://namespaces.zope.org/i18n"
     i18n_domain="brasil.gov.agenda">
 
-    <permission
-        id="brasil.gov.agenda.AddAgenda"
-        title="brasil.gov.agenda: Add Agenda"
-        />
-
-    <permission
-        id="brasil.gov.agenda.AddAgendaDiaria"
-        title="brasil.gov.agenda: Add AgendaDiaria"
-        />
-
-    <permission
-        id="brasil.gov.agenda.AddCompromisso"
-        title="brasil.gov.agenda: Add Compromisso"
-        />
-
     <includeDependencies package="." />
+
+    <!-- Adiciona permissoes -->
+    <include file="permissions.zcml" />
 
     <!-- Suporte ao Generic Setup-->
     <include file="profiles.zcml" />
