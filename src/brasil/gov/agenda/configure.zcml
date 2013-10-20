@@ -25,6 +25,9 @@
     <!-- Suporte ao Generic Setup-->
     <include file="profiles.zcml" />
 
+    <!-- Registra traducoes -->
+    <i18n:registerTranslations directory="locales" />
+
     <include package=".behaviors" />
     <include package=".browser" />
     <include package=".content" />
