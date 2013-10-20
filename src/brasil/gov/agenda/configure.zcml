@@ -22,10 +22,7 @@
 
     <grok:grok package="." />
     
-    <!-- Publish static files -->
-    <browser:resourceDirectory
-      name="brasil.gov.agenda"
-      directory="static"
-      />
+    <!-- Suporte a arquivos estaticos -->
+    <browser:resourceDirectory name="brasil.gov.agenda" directory="static" />
 
 </configure>
