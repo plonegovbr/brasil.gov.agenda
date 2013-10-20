@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: brasil.gov.vcge\n"
-"POT-Creation-Date: 2013-10-19 15:26+0000\n"
+"POT-Creation-Date: 2013-10-20 16:52+0000\n"
 "PO-Revision-Date: 2012-09-18 23:00+0000\n"
 "Last-Translator: PloneGov.Br <gov@plone.org.br>\n"
 "Language-Team: PloneGov.Br <gov@plone.org.br>\n"
@@ -49,9 +49,13 @@ msgstr "Data desta Agenda"
 msgid "Informe o orgao ao qual esta agenda pertence. ex: Presidencia da Republica"
 msgstr "Informe o órgão ao qual esta agenda pertence. ex: Presidência da República"
 
+#: ../content/schema/Agenda.xml
+msgid "Local padrao para eventos desta agenda"
+msgstr "Local padrão para os compromissos desta agenda."
+
 #: ../content/schema/AgendaDiaria.xml
 msgid "Local padrao para eventos durante este dia"
-msgstr "Local padrão para eventos durante este dia."
+msgstr "Local padrão para compromissos durante este dia."
 
 #: ../content/schema/Agenda.xml
 #: ../content/schema/AgendaDiaria.xml
@@ -82,6 +86,7 @@ msgid "label_event_end"
 msgstr "Date e hora de término"
 
 #. Default: "Event Location"
+#: ../content/schema/Agenda.xml
 #: ../content/schema/AgendaDiaria.xml
 #: ../content/schema/Compromisso.xml
 msgid "label_event_location"
