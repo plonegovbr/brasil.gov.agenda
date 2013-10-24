@@ -76,6 +76,10 @@ class AgendaDiariaView (grok.View):
             tag = scale.tag()
             return tag
 
+    def update_info(self):
+        update_info = self.context.update
+        return update_info
+
     def Title(self):
         parts = {}
         parts['weekday'] = self.weekday()

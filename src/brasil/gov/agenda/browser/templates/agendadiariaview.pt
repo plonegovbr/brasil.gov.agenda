@@ -8,6 +8,12 @@
 		<span id="orgao" tal:content="view/orgao">Presidência da República</span><br />
 		<span  id="data_dia" tal:content="view/weekday">Segunda-Feira</span><br />
         <span  id="data_longa" tal:content="view/long_date">14 de Outubro de 2013</span><br />
+        <div
+            class="portalMessage info"
+            tal:condition="view/update_info"
+            tal:content="view/update_info ">
+            Alterada em ...
+        </div>
         <div id='compromissos'>
         	Compromissos do dia
         	<div class="compromisso"  tal:repeat="comp view/compromissos">
