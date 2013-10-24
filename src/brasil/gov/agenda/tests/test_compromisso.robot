@@ -86,7 +86,9 @@ Create
     Input Text  css=${end_hour_selector}  14    
     Input Text  css=${end_min_selector}  00    
     Click Button  Save
-    Page Should Contain  30 de Outubro
+    Page Should Contain  30
+    Page Should Contain  de
+    Page Should Contain  2013
 
 Update
     [arguments]  ${title}  ${description}
