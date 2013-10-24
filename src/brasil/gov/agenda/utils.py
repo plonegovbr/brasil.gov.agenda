@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+from datetime import datetime
+from DateTime import DateTime
 from zope.i18nmessageid import MessageFactory
 
 
@@ -30,3 +32,10 @@ def format_date(date):
     parts['month'] = translate_month(date)
     parts['year'] = date.strftime('%Y')
     return '%(weekday)s, %(day)s de %(month)s de %(year)s' % parts
+
+
+def rfc2445dt(value):
+    if isinstance(value, datetime):
+        value = DateTime(value.strftime('%Y/%m/%d %H:%M'))
+    # return UTC in RFC2445 format YYYYMMDDTHHMMSSZ
+    return value.HTML4().replace('-', '').replace(':', '')
