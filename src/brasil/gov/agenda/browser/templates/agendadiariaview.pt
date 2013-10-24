@@ -5,8 +5,15 @@
     metal:use-macro="context/main_template/macros/master">
 
     <metal:block fill-slot="content-core">
+
+
+    <img tal:define="scale context/@@images"
+         tal:replace="structure python: scale.scale('image',
+                      scale='mini').tag(css_class='newsImage')" /><br />
+
 		<span id="orgao" tal:content="view/orgao">Presidência da República</span><br />
 		<span  id="data_dia" tal:content="view/weekday">Segunda-Feira</span><br />
+
         <span  id="data_longa" tal:content="view/long_date">14 de Outubro de 2013</span><br />
         <div
             class="portalMessage info"
@@ -14,35 +21,56 @@
             tal:content="view/update_info ">
             Alterada em ...
         </div>
+
+        <br />
         <div id='compromissos'>
         	Compromissos do dia
+
         	<div class="compromisso"  tal:repeat="comp view/compromissos">
+            <br />
         		<time class="horario"
         			  tal:attributes="datetime comp/start_date"
-        			  tal:content="comp/start_time">12h00</time>
-        		<span  class="titulo" tal:content="comp/title">Reunião com Dorneles Treméa</span><br />
+        			  tal:content="comp/start_time">12h00</time> <br />
+
+        		<span class="titulo" tal:content="comp/title">Reunião com Dorneles Treméa</span> <br />
+
         		<span class="local"
         			tal:condition="comp/location"
-        			tal:content="comp/location">Palácio do Planalto</span>
+        			tal:content="comp/location">Palácio do Planalto</span> <br />
+
+            <span class="pauta"
+              tal:condition="comp/description"
+              tal:content="comp/description">Assunto a ser tratado</span> <br />
+
+            <span class="participantes"
+              tal:condition="comp/attendees"
+              tal:content="comp/attendees">Dorneles Treméa</span> <br />
+
                 <a tal:condition="view/editable"
                    class="compromisso acao editar_compromisso"
                    tal:attributes="href string:${comp/url}/edit"
-                   i18n:translate="">Editar</a>
+                   i18n:translate="">Editar</a> <br />
                 <a tal:condition="view/editable"
                    class="compromisso acao remover_compromisso"
                    tal:attributes="href string:${comp/url}/delete_confirmation"
-                   i18n:translate="">Remover</a>
+                   i18n:translate="">Remover</a> <br />
                 <a class="ical"
                    tal:attributes="href string:${comp/url}/ical_view"
-                   i18n:translate="">ICAL</a>
+                   i18n:translate="">ICAL</a> <br />
                 <a class="vcal"
                    tal:attributes="href string:${comp/url}/vcal_view"
-                   i18n:translate="">VCAL</a>
+                   i18n:translate="">VCAL</a> <br />
         	</div>
-            <a tal:condition="view/editable"
-               class="adicionar_compromisso"
-               tal:attributes="href string:${context/absolute_url}/++add++Compromisso"
-               i18n:translate="">Adicionar Compromisso</a>
+
+          <div class="semcompromisso"  tal:condition="not:view/compromissos">
+              <span>Sem compromissos oficiais</span>
+          </div>
+
+          <a tal:condition="view/editable"
+             class="adicionar_compromisso"
+             tal:attributes="href string:${context/absolute_url}/++add++Compromisso"
+             i18n:translate="">Adicionar Compromisso</a>
+
         </div>
     <script>
       jQuery(function($){
