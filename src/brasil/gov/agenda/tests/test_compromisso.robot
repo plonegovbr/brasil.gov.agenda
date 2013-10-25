@@ -93,7 +93,7 @@ Create
 Update
     [arguments]  ${title}  ${description}
 
-    Click Link  css=a.editar_compromisso
+    Click Link  css=a.compromisso editar_compromisso acao
     Input Text  css=${title_selector}  ${title}
     Input Text  css=${description_selector}  ${description}
     Click Button  Save
