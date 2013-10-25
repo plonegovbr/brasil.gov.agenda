@@ -70,12 +70,12 @@
 
           <ul class="compromisso-acoes" tal:condition="view/editable">
             <li class="compromisso-acao">
-              <a class="editar_compromisso acao"
+              <a class="compromisso editar_compromisso acao"
                  tal:attributes="href string:${comp/url}/edit"
                  i18n:translate="">Editar</a>
             </li>
             <li class="compromisso-acao">
-              <a class="remover_compromisso acao"
+              <a class="compromisso remover_compromisso acao"
                  tal:attributes="href string:${comp/url}/delete_confirmation"
                  i18n:translate="">Remover</a>
             </li>
