@@ -9,10 +9,6 @@
 		<div class="dados-agenda">
 
 			<h3>Detalhe do compromisso</h3>
-			<img class="brasao-agenda"
-			   tal:define="scale context/@@images"
-			   tal:replace="structure python: scale.scale('image',
-			                scale='mini').tag(css_class='brasao-agenda')" />
 
 			<h2 class="agenda-orgao" tal:content="view/orgao">Presidência da República</h2>
 			<h3 class="agenda-autoridade" tal:content="view/autoridade">Autoridade</h3>

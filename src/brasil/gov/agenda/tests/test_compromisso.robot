@@ -93,7 +93,7 @@ Create
 Update
     [arguments]  ${title}  ${description}
 
-    Click Link  css=a#plone-contentmenu-actions-delete
+    Click Link  link=Edit
     Input Text  css=${title_selector}  ${title}
     Input Text  css=${description_selector}  ${description}
     Click Button  Save

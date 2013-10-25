@@ -59,7 +59,7 @@ class VCSView (grok.View):
             'summary': vformat(context.Title()),
             'startdate': rfc2445dt(context.start_date),
             'enddate': rfc2445dt(context.end_date),
-            }
+        }
         out.write(VCS_EVENT_START % map)
         description = context.Description()
         if description:
