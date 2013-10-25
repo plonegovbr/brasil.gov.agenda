@@ -4,74 +4,93 @@
     xmlns:i18n="http://xml.zope.org/namespaces/i18n"
     metal:use-macro="context/main_template/macros/master">
 
-    <metal:block fill-slot="content-core">
 
+  <metal:header fill-slot="header">
+    <h1 tal:content="view/TitleAgenda"></h1>
+  </metal:header>
 
-    <img tal:define="scale context/@@images"
+  <metal:block fill-slot="content-core">
+
+    <img class="brasao-agenda"
+         tal:define="scale context/@@images"
          tal:replace="structure python: scale.scale('image',
-                      scale='mini').tag(css_class='newsImage')" /><br />
+                      scale='mini').tag(css_class='newsImage')" />
 
-		<span id="orgao" tal:content="view/orgao">Presidência da República</span><br />
-		<span  id="data_dia" tal:content="view/weekday">Segunda-Feira</span><br />
+    <h2 class="agenda-orgao" tal:content="view/orgao">Presidência da República</h2>
+    <h3 class="agenda-autoridade" tal:content="view/autoridade">Autoridade</h3>
 
-        <span  id="data_longa" tal:content="view/long_date">14 de Outubro de 2013</span><br />
-        <div
-            class="portalMessage info"
-            tal:condition="view/update_info"
-            tal:content="view/update_info ">
-            Alterada em ...
+    <span class="agenda-dia" tal:content="view/weekday">Segunda-Feira, </span>
+    <span class="agenda-dia-extenso" tal:content="view/long_date">14 de Outubro de 2013</span>
+
+    <div class="portalMessage info"
+        tal:condition="view/update_info">
+        Alterada alterada
+    </div>
+
+    <ul class="list-compromissos">
+
+      <li class="item-compromisso" tal:repeat="comp view/compromissos">
+
+        <div class="comprimisso-horarios">
+          <time class="comprimisso-inicio"
+            tal:attributes="datetime comp/start_date"
+            tal:content="comp/start_time">16h20</time>
+          <time class="comprimisso-fim"
+            tal:attributes="datetime comp/end_date"
+            tal:content="comp/end_date">17h20</time>
         </div>
 
-        <br />
-        <div id='compromissos'>
-        	Compromissos do dia
+        <div class="comprimisso--dados">
 
-        	<div class="compromisso"  tal:repeat="comp view/compromissos">
-            <br />
-        		<time class="horario"
-        			  tal:attributes="datetime comp/start_date"
-        			  tal:content="comp/start_time">12h00</time> <br />
+          <h4 class="comprimisso-titulo" tal:content="comp/title">Reunião com Dorneles Treméa</h4>
 
-        		<span class="titulo" tal:content="comp/title">Reunião com Dorneles Treméa</span> <br />
+          <p class="comprimisso-participantes"
+            tal:condition="comp/attendees"
+            tal:content="comp/attendees">Dorneles Treméa</p>
 
-        		<span class="local"
-        			tal:condition="comp/location"
-        			tal:content="comp/location">Palácio do Planalto</span> <br />
+          <p class="comprimisso-pauta"
+            tal:condition="comp/description">
+            <label>Pauta:</label> <span tal:replace="comp/description">Assunto a ser tratado</span></p>
 
-            <span class="pauta"
-              tal:condition="comp/description"
-              tal:content="comp/description">Assunto a ser tratado</span> <br />
+          <p class="local"
+            tal:condition="comp/location">
+            <label>Local:</label> <span tal:replace="comp/location">Palácio do Planalto</span></p>
 
-            <span class="participantes"
-              tal:condition="comp/attendees"
-              tal:content="comp/attendees">Dorneles Treméa</span> <br />
+          <a class="ical"
+             tal:attributes="href string:${comp/url}/ical_view"
+             i18n:translate="">ICAL</a> <br />
+          <a class="vcal"
+             tal:attributes="href string:${comp/url}/vcal_view"
+             i18n:translate="">VCAL</a> <br />
 
-                <a tal:condition="view/editable"
-                   class="compromisso acao editar_compromisso"
-                   tal:attributes="href string:${comp/url}/edit"
-                   i18n:translate="">Editar</a> <br />
-                <a tal:condition="view/editable"
-                   class="compromisso acao remover_compromisso"
-                   tal:attributes="href string:${comp/url}/delete_confirmation"
-                   i18n:translate="">Remover</a> <br />
-                <a class="ical"
-                   tal:attributes="href string:${comp/url}/ical_view"
-                   i18n:translate="">ICAL</a> <br />
-                <a class="vcal"
-                   tal:attributes="href string:${comp/url}/vcal_view"
-                   i18n:translate="">VCAL</a> <br />
-        	</div>
-
-          <div class="semcompromisso"  tal:condition="not:view/compromissos">
-              <span>Sem compromissos oficiais</span>
-          </div>
-
-          <a tal:condition="view/editable"
-             class="adicionar_compromisso"
-             tal:attributes="href string:${context/absolute_url}/++add++Compromisso"
-             i18n:translate="">Adicionar Compromisso</a>
+          <ul class="compromisso-acoes" tal:condition="view/editable">
+            <li class="compromisso-acao">
+              <a class="editar_compromisso"
+                 tal:attributes="href string:${comp/url}/edit"
+                 i18n:translate="">Editar</a>
+            </li>
+            <li class="compromisso-acao">
+              <a class="remover_compromisso"
+                 tal:attributes="href string:${comp/url}/delete_confirmation"
+                 i18n:translate="">Remover</a>
+            </li>
+          </ul>
 
         </div>
+
+      </li>
+
+      <li class="sem-compromisso"  tal:condition="not:view/compromissos">
+          <span>Sem compromissos oficiais</span>
+      </li>
+
+    </ul>
+
+    <a tal:condition="view/editable"
+         class="adicionar_compromisso"
+         tal:attributes="href string:${context/absolute_url}/++add++Compromisso"
+         i18n:translate="">Adicionar Compromisso</a>
+
     <script>
       jQuery(function($){
         $('#compromissos a.acao').prepOverlay(
@@ -88,6 +107,6 @@
         );
       });
     </script>
-    </metal:block>
+  </metal:block>
 
 </html>
