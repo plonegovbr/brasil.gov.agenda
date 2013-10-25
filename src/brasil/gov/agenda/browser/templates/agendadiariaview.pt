@@ -59,12 +59,14 @@
             tal:condition="comp/location">
             <label>Local:</label> <span tal:replace="comp/location">Palácio do Planalto</span></p>
 
-          <!-- <a class="ical"
+          <!-- <a class="add-agenda ical"
              tal:attributes="href string:${comp/url}/ical_view"
              i18n:translate="">ICAL</a> <br /> -->
-          <a class="vcal"
+          <span class="download-compromisso">
+            <a class="add-agenda vcal"
              tal:attributes="href string:${comp/url}/vcal_view"
              i18n:translate="">VCAL</a> Adicionar ao meu calendário
+          </span>
 
           <ul class="compromisso-acoes" tal:condition="view/editable">
             <li class="compromisso-acao">
