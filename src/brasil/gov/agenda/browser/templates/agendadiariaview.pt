@@ -5,16 +5,16 @@
     metal:use-macro="context/main_template/macros/master">
 
 
-  <metal:header fill-slot="header">
-    <h1 tal:content="view/TitleAgenda"></h1>
-  </metal:header>
+  <metal:slot metal:fill-slot="header">
+    <h1 class="documentFirstHeading" tal:content="view/TitleAgenda"></h1>
+  </metal:slot>
 
   <metal:block fill-slot="content-core">
 
     <img class="brasao-agenda"
          tal:define="scale context/@@images"
          tal:replace="structure python: scale.scale('image',
-                      scale='mini').tag(css_class='newsImage')" />
+                      scale='mini').tag(css_class='brasao-agenda')" />
 
     <h2 class="agenda-orgao" tal:content="view/orgao">Presidência da República</h2>
     <h3 class="agenda-autoridade" tal:content="view/autoridade">Autoridade</h3>
