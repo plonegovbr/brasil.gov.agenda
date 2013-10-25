@@ -68,12 +68,12 @@
 
           <ul class="compromisso-acoes" tal:condition="view/editable">
             <li class="compromisso-acao">
-              <a class="editar_compromisso"
+              <a class="editar_compromisso acao"
                  tal:attributes="href string:${comp/url}/edit"
                  i18n:translate="">Editar</a>
             </li>
             <li class="compromisso-acao">
-              <a class="remover_compromisso"
+              <a class="remover_compromisso acao"
                  tal:attributes="href string:${comp/url}/delete_confirmation"
                  i18n:translate="">Remover</a>
             </li>
@@ -96,7 +96,7 @@
 
     <script>
       jQuery(function($){
-        $('#compromissos a.acao').prepOverlay(
+        $('.compromisso-acao a.acao').prepOverlay(
             {
                 subtype: 'ajax',
                 filter: common_content_filter,
