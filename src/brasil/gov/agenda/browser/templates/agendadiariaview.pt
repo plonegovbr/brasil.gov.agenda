@@ -98,8 +98,18 @@
 
     <div class="footer-actions">
       <ul class="list-actions">
-        <li class="item"><a class="print" href="javascrip: window.print();">Imprimir</a></li>
-        <li class="item"><a class="related-errors" href="relatar-erros">Relatar Erros</a></li>
+        <li class="item print">
+          <a href="javascrip: window.print();">
+            <span class="texto">Imprimir</span>
+          </a>
+        </li>
+        <tal:reporterros tal:define="urlerros view/get_link_erros">
+        <li class="item relatar-erros">
+          <a tal:attributes="href urlerros">
+            <span class="texto">Reportar erro</span>
+          </a>
+        </li>
+        </tal:reporterros>
       </ul>
     </div>
 
