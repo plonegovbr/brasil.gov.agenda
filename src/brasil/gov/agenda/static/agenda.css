@@ -83,6 +83,10 @@
     font-weight: bold;
 }
 
+/*
+ * Lista dos compromissos
+ */
+
 #content .list-compromissos {
     margin-left: 0;
 }
@@ -95,12 +99,26 @@
     list-style: none;
 }
 
+/* ==========================================================================
+   Dados Compromisso
+   ========================================================================== */
+
 .comprimisso-horarios {
     width: 68px;
     float: left;
 }
 
-.comprimisso-horarios .horario { display: block; }
+.comprimisso-horarios .horario {
+    display: block;
+    padding: 0 0 10px 20px;
+    height: 14px;
+    line-height: 1em;
+    background: url("++resource++brasil.gov.agenda/icon-horarios.png") no-repeat;
+}
+
+.comprimisso-horarios .comprimisso-inicio { background-position: 0 0; }
+
+.comprimisso-horarios .comprimisso-fim { background-position: 0 -25px; }
 
 .comprimisso-dados {
     float: left;
@@ -112,8 +130,14 @@
 
 .comprimisso-titulo { margin-bottom: 20px; }
 
-.comprimisso-participantes { line-height: 1.5em; }
+.comprimisso-participantes { line-height: 1.25em; }
 
-.comprimisso-pauta,
-.comprimisso-local { color: #596e7f; }
+#content .comprimisso-pauta,
+#content .comprimisso-local {
+    color: #596e7f;
+    line-height: 1.25em;
+    font-size: 1em;
+}
+
+/* ++resource++brasil.gov.agenda/ *
 
