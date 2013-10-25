@@ -5,21 +5,61 @@
     metal:use-macro="context/main_template/macros/master">
 
     <metal:block fill-slot="content-core">
-		<span id="orgao" tal:content="view/orgao">Presidência da República</span><br />
-		<span  id="data_dia" tal:content="view/weekday">Segunda-Feira</span><br />
-        <span  id="data_longa" tal:content="view/long_date">14 de Outubro de 2013</span><br />
-        <div id='compromisso' tal:define="comp view/compromisso">
-		<time class="horario"
-			  tal:attributes="datetime comp/start_date"
-			  tal:content="comp/start_time">12h00</time>
-		<span  class="titulo" tal:content="comp/title">Reunião com Dorneles Treméa</span><br />
-		<span class="pauta"
-			tal:condition="context/description"
-			tal:content="context/description">Assunto a ser tratado</span> <br />
-		<span class="local"
-			tal:condition="comp/location"
-			tal:content="comp/location">Palácio do Planalto</span>
-        </div>
+
+		<div class="dados-agenda">
+
+			<h3>Detalhe do compromisso</h3>
+			<img class="brasao-agenda"
+			   tal:define="scale context/@@images"
+			   tal:replace="structure python: scale.scale('image',
+			                scale='mini').tag(css_class='brasao-agenda')" />
+
+			<h2 class="agenda-orgao" tal:content="view/orgao">Presidência da República</h2>
+			<h3 class="agenda-autoridade" tal:content="view/autoridade">Autoridade</h3>
+
+			<span class="agenda-dia">
+				<span tal:replace="view/weekday">Segunda-Feira</span>, <span tal:replace="view/long_date">14 de Outubro de 2013</span>
+			</span>
+
+		</div>
+
+    	<ul class="list-compromissos">
+	        <div id='compromisso' tal:define="comp view/compromisso">
+
+				<li class="item-compromisso last-item">
+
+			        <div class="comprimisso-horarios">
+			          <time class="horario comprimisso-inicio"
+			            tal:attributes="datetime comp/start_date"
+			            tal:content="comp/start_time">16h20</time>
+			        </div>
+
+			        <div class="comprimisso-dados">
+
+			          <h4 class="comprimisso-titulo" tal:content="comp/title">Reunião com Dorneles Treméa</h4>
+
+			          <p class="comprimisso-participantes"
+			            tal:condition="comp/attendees"
+			            tal:content="structure python: '<br/>'.join(comp['attendees'].split('\n'))">Dorneles Treméa</p>
+
+			          <p class="comprimisso-pauta"
+			            tal:condition="comp/description">
+			            <label>Pauta:</label> <span tal:replace="comp/description">Assunto a ser tratado</span></p>
+
+			          <p class="comprimisso-local"
+			            tal:condition="comp/location">
+			            <label>Local:</label> <span tal:replace="comp/location">Palácio do Planalto</span></p>
+
+				      <span class="download-compromisso">
+				        <a class="add-agenda vcal"
+				         tal:attributes="href string:${comp/url}/vcal_view"
+				         i18n:translate="">VCAL</a> Adicionar ao meu calendário
+				      </span>
+
+			         </div>
+			    </li>
+	        </div>
+	     </ul>
     </metal:block>
 
 </html>
