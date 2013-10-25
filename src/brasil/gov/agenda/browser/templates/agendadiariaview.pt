@@ -41,9 +41,6 @@
           <time class="horario comprimisso-inicio"
             tal:attributes="datetime comp/start_date"
             tal:content="comp/start_time">16h20</time>
-          <time class="horario comprimisso-fim"
-            tal:attributes="datetime comp/end_date"
-            tal:content="comp/end_time">17h20</time>
         </div>
 
         <div class="comprimisso-dados">
