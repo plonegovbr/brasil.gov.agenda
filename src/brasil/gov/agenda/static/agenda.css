@@ -106,16 +106,17 @@
    ========================================================================== */
 
 .comprimisso-horarios {
-    width: 68px;
     float: left;
+    width: 68px;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 .comprimisso-horarios .horario {
     display: block;
     padding: 0 0 10px 20px;
     height: 14px;
-    line-height: 1em;
     background: url("++resource++brasil.gov.agenda/icon-horarios.png") no-repeat;
+    line-height: 14px !important;
 }
 
 .comprimisso-horarios .comprimisso-inicio { background-position: 0 0; }
@@ -130,7 +131,10 @@
     font-family: Arial, Helvetica, sans-serif;
 }
 
-.comprimisso-titulo { margin-bottom: 20px; }
+.comprimisso-titulo {
+    margin-bottom: 20px;
+    font-family: Arial, Helvetica, sans-serif;
+}
 
 .comprimisso-participantes { line-height: 1.25em; }
 

@@ -96,6 +96,13 @@
          tal:attributes="href string:${context/absolute_url}/++add++Compromisso"
          i18n:translate="">Adicionar Compromisso</a>
 
+    <div class="footer-actions">
+      <ul class="list-actions">
+        <li class="item"><a class="print" href="javascrip: window.print();">Imprimir</a></li>
+        <li class="item"><a class="related-errors" href="relatar-erros">Relatar Erros</a></li>
+      </ul>
+    </div>
+
     <script>
       jQuery(function($){
         $('.compromisso-acao a.acao').prepOverlay(
