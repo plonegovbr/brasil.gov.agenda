@@ -6,56 +6,64 @@
 
     <metal:block fill-slot="content-core">
 
-		<div class="dados-agenda">
+        <div class="dados-agenda">
 
-			<h3>Detalhe do compromisso</h3>
+            <h3>Detalhe do compromisso</h3>
 
-			<h2 class="agenda-orgao" tal:content="view/orgao">Presidência da República</h2>
-			<h3 class="agenda-autoridade" tal:content="view/autoridade">Autoridade</h3>
+            <tal:image condition="view/imagem">
+                <img class="brasao-agenda"
+                   tal:define="scale context/@@images"
+                   tal:replace="structure python: scale.scale('image',
+                                scale='mini').tag(css_class='brasao-agenda')" />
 
-			<span class="agenda-dia">
-				<span tal:replace="view/weekday">Segunda-Feira</span>, <span tal:replace="view/long_date">14 de Outubro de 2013</span>
-			</span>
+            </tal:image>
 
-		</div>
+            <h2 class="agenda-orgao" tal:content="view/orgao">Presidência da República</h2>
+            <h3 class="agenda-autoridade" tal:content="view/autoridade">Autoridade</h3>
 
-    	<ul class="list-compromissos">
-	        <div id='compromisso' tal:define="comp view/compromisso">
+            <span class="agenda-dia">
+                <span tal:replace="view/weekday">Segunda-Feira</span>, <span tal:replace="view/long_date">14 de Outubro de 2013</span>
+            </span>
 
-				<li class="item-compromisso last-item">
+        </div>
 
-			        <div class="comprimisso-horarios">
-			          <time class="horario comprimisso-inicio"
-			            tal:attributes="datetime comp/start_date"
-			            tal:content="comp/start_time">16h20</time>
-			        </div>
+        <ul class="list-compromissos">
+            <div id='compromisso' tal:define="comp view/compromisso">
 
-			        <div class="comprimisso-dados">
+                <li class="item-compromisso last-item">
 
-			          <h4 class="comprimisso-titulo" tal:content="comp/title">Reunião com Dorneles Treméa</h4>
+                    <div class="comprimisso-horarios">
+                      <time class="horario comprimisso-inicio"
+                        tal:attributes="datetime comp/start_date"
+                        tal:content="comp/start_time">16h20</time>
+                    </div>
 
-			          <p class="comprimisso-participantes"
-			            tal:condition="comp/attendees"
-			            tal:content="structure python: '<br/>'.join(comp['attendees'].split('\n'))">Dorneles Treméa</p>
+                    <div class="comprimisso-dados">
 
-			          <p class="comprimisso-pauta"
-			            tal:condition="comp/description">
-			            <label>Pauta:</label> <span tal:replace="comp/description">Assunto a ser tratado</span></p>
+                      <h4 class="comprimisso-titulo" tal:content="comp/title">Reunião com Dorneles Treméa</h4>
 
-			          <p class="comprimisso-local"
-			            tal:condition="comp/location">
-			            <label>Local:</label> <span tal:replace="comp/location">Palácio do Planalto</span></p>
+                      <p class="comprimisso-participantes"
+                        tal:condition="comp/attendees"
+                        tal:content="structure python: '<br/>'.join(comp['attendees'].split('\n'))">Dorneles Treméa</p>
 
-				      <span class="download-compromisso">
-				        <a class="add-agenda vcal"
-				         tal:attributes="href string:${comp/url}/vcal_view"
-				         i18n:translate="">VCAL</a> Adicionar ao meu calendário
-				      </span>
+                      <p class="comprimisso-pauta"
+                        tal:condition="comp/description">
+                        <label>Pauta:</label> <span tal:replace="comp/description">Assunto a ser tratado</span></p>
 
-			         </div>
-			    </li>
-	        </div>
-	     </ul>
+                      <p class="comprimisso-local"
+                        tal:condition="comp/location">
+                        <label>Local:</label> <span tal:replace="comp/location">Palácio do Planalto</span></p>
+
+                      <span class="download-compromisso">
+                        <a class="add-agenda vcal"
+                         tal:attributes="href string:${comp/url}/vcal_view"
+                         i18n:translate="">VCAL</a> Adicionar ao meu calendário
+                      </span>
+
+                     </div>
+                </li>
+            </div>
+         </ul>
     </metal:block>
 
 </html>
