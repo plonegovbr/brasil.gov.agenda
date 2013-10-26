@@ -41,5 +41,8 @@
 .portaltype-agendadiaria #logo,
 .portaltype-agendadiaria #portal-logo {
     display: block !important;
-    color: black !important;
+    color: #000 !important;
 }
+
+#content .comprimisso-pauta,
+#content .comprimisso-local { color: #000; }
