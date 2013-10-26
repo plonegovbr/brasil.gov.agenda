@@ -4,12 +4,6 @@
     xmlns:i18n="http://xml.zope.org/namespaces/i18n"
     metal:use-macro="context/main_template/macros/master">
 
-<metal:slot metal:fill-slot="style_slot">
-  <link rel="stylesheet" type="text/css" href="++resource++brasil.gov.agenda/agenda.css" media="screen">
-  <link rel="stylesheet" type="text/css" href="++resource++brasil.gov.agenda/agenda-print.css" media="print">
-</metal:slot>
-
-
   <metal:slot metal:fill-slot="content-title">
     <h1 class="documentFirstHeading" tal:content="view/TitleAgenda"></h1>
   </metal:slot>

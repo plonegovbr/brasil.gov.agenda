@@ -4,11 +4,6 @@
     xmlns:i18n="http://xml.zope.org/namespaces/i18n"
     metal:use-macro="context/main_template/macros/master">
 
-<metal:slot metal:fill-slot="style_slot">
-  <link rel="stylesheet" type="text/css" href="++resource++brasil.gov.agenda/agenda.css" media="screen">
-  <link rel="stylesheet" type="text/css" href="++resource++brasil.gov.agenda/agenda-print.css" media="print">
-</metal:slot>
-
     <metal:block fill-slot="content-core">
 
         <div class="dados-agenda">
