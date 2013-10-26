@@ -219,6 +219,67 @@
 
 
 /* ==========================================================================
+   Portlet laterais
+   ========================================================================== */
+
+.portletSearch .portletHeader,
+.portletCalendar .portletHeader {
+    font-weight: normal;
+    font-size: 1.3em;
+    font-family: "open_sansbold", Arial, Helvetica, sans-serif;
+    padding: 15px 12px;
+}
+
+.portletCalendar .weekdays th { font-weight: normal; }
+
+.portletCalendar .ploneCalendar td { font-weight: bold; }
+
+.ploneCalendar .weekdays th { background: none; }
+
+
+/* Portlet de busca
+   ========================================================================== */
+
+.portletSearch .portletHeader .tile { margin-bottom: 0 !important; }
+
+.portletSearch .portletItem {
+    margin: 10px 12px !important;
+    padding: 2px !important;
+    padding: 2px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+    background: #fff;
+    font-size: 80%;
+}
+
+.portletSearch .portletItem .searchField {
+    padding: 0.3em 0.35em;
+    width: 170px;
+    border: none;
+    border-right: none;
+    font-size: 1.2em;
+    font-family: "open_sansregular", Arial, Helvetica, sans-serif;
+}
+
+.portletSearch .portletItem .searchButton {
+    padding: 4px 15px;
+    padding-right: 5px;
+    border: none;
+    background: transparent;
+    background-image: url("++resource++brasil.gov.agenda/icon-search-agenda.png");
+    background-position: 0px 2px;
+    background-repeat: no-repeat;
+    text-indent: -100px;
+}
+
+
+.portletSearch .portletFooter {
+    border-top: 1px dotted #c1c2c2;
+    text-align: right;
+}
+
+
+/* ==========================================================================
    Contraste Agenda
    ========================================================================== */
 
