@@ -111,3 +111,16 @@ class AgendaDiariaView (grok.View):
             comp['url'] = obj.absolute_url()
             compromissos.append(comp)
         return compromissos
+
+    def TitleAgenda(self):
+        context = self.context
+        ctx_parent = context.aq_parent
+        title = ctx_parent.Title()
+        return title
+
+    def get_link_erros(self):
+        portal_obj = self.context.portal_url.getPortalObject()
+        if (hasattr(portal_obj, 'relatar-erros')):
+            return self.context.absolute_url() + '/relatar-erros'
+        else:
+            return None

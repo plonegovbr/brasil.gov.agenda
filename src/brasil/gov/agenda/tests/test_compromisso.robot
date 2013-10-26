@@ -83,8 +83,8 @@ Create
     Input Text  css=${end_day_selector}  30
     Input Text  css=${end_year_selector}  2013
     Select From List  css=${start_month_selector}  10
-    Input Text  css=${end_hour_selector}  14    
-    Input Text  css=${end_min_selector}  00    
+    Input Text  css=${end_hour_selector}  14
+    Input Text  css=${end_min_selector}  00
     Click Button  Save
     Page Should Contain  30
     Page Should Contain  de

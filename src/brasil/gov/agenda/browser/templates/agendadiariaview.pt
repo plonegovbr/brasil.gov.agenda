@@ -4,77 +4,119 @@
     xmlns:i18n="http://xml.zope.org/namespaces/i18n"
     metal:use-macro="context/main_template/macros/master">
 
-    <metal:block fill-slot="content-core">
+  <metal:slot metal:fill-slot="content-title">
+    <h1 class="documentFirstHeading" tal:content="view/TitleAgenda"></h1>
+  </metal:slot>
 
+  <metal:block fill-slot="content-core">
 
-    <img tal:define="scale context/@@images"
-         tal:replace="structure python: scale.scale('image',
-                      scale='mini').tag(css_class='newsImage')" /><br />
+    <div class="dados-agenda">
 
-		<span id="orgao" tal:content="view/orgao">Presidência da República</span><br />
-		<span  id="data_dia" tal:content="view/weekday">Segunda-Feira</span><br />
+      <tal:image condition="view/imagem">
+        <img class="brasao-agenda"
+             tal:define="scale context/@@images"
+             tal:replace="structure python: scale.scale('image',
+                          scale='mini').tag(css_class='brasao-agenda')" />
+      </tal:image>
 
-        <span  id="data_longa" tal:content="view/long_date">14 de Outubro de 2013</span><br />
-        <div
-            class="portalMessage info"
-            tal:condition="view/update_info"
-            tal:content="view/update_info ">
-            Alterada em ...
+      <h2 class="agenda-orgao" tal:content="view/orgao">Presidência da República</h2>
+      <h3 class="agenda-autoridade" tal:content="view/autoridade">Autoridade</h3>
+
+      <span class="agenda-dia">
+        <span tal:replace="view/weekday">Segunda-Feira</span>, <span tal:replace="view/long_date">14 de Outubro de 2013</span>
+      </span>
+
+      <div class="portalMessage info"
+          tal:condition="view/update_info"
+          tal:content="view/update_info">
+          Alterada
+      </div>
+
+    </div>
+
+    <ul class="list-compromissos">
+
+      <li class="item-compromisso" tal:repeat="comp view/compromissos">
+
+        <div class="comprimisso-horarios">
+          <time class="horario comprimisso-inicio"
+            tal:attributes="datetime comp/start_date"
+            tal:content="comp/start_time">16h20</time>
         </div>
 
-        <br />
-        <div id='compromissos'>
-        	Compromissos do dia
+        <div class="comprimisso-dados">
 
-        	<div class="compromisso"  tal:repeat="comp view/compromissos">
-            <br />
-        		<time class="horario"
-        			  tal:attributes="datetime comp/start_date"
-        			  tal:content="comp/start_time">12h00</time> <br />
+          <h4 class="comprimisso-titulo" tal:content="comp/title">Reunião com Dorneles Treméa</h4>
 
-        		<span class="titulo" tal:content="comp/title">Reunião com Dorneles Treméa</span> <br />
+          <p class="comprimisso-participantes"
+            tal:condition="comp/attendees"
+            tal:content="structure python: '<br/>'.join(comp['attendees'].split('\n'))">Dorneles Treméa</p>
 
-        		<span class="local"
-        			tal:condition="comp/location"
-        			tal:content="comp/location">Palácio do Planalto</span> <br />
+          <p class="comprimisso-pauta"
+            tal:condition="comp/description">
+            <label>Pauta:</label> <span tal:replace="comp/description">Assunto a ser tratado</span></p>
 
-            <span class="pauta"
-              tal:condition="comp/description"
-              tal:content="comp/description">Assunto a ser tratado</span> <br />
+          <p class="comprimisso-local"
+            tal:condition="comp/location">
+            <label>Local:</label> <span tal:replace="comp/location">Palácio do Planalto</span></p>
 
-            <span class="participantes"
-              tal:condition="comp/attendees"
-              tal:content="comp/attendees">Dorneles Treméa</span> <br />
+          <!-- <a class="add-agenda ical"
+             tal:attributes="href string:${comp/url}/ical_view"
+             i18n:translate="">ICAL</a> <br /> -->
+          <span class="download-compromisso">
+            <a class="add-agenda vcal"
+             tal:attributes="href string:${comp/url}/vcal_view"
+             i18n:translate="">VCAL</a> Adicionar ao meu calendário
+          </span>
 
-                <a tal:condition="view/editable"
-                   class="compromisso acao editar_compromisso"
-                   tal:attributes="href string:${comp/url}/edit"
-                   i18n:translate="">Editar</a> <br />
-                <a tal:condition="view/editable"
-                   class="compromisso acao remover_compromisso"
-                   tal:attributes="href string:${comp/url}/delete_confirmation"
-                   i18n:translate="">Remover</a> <br />
-                <a class="ical"
-                   tal:attributes="href string:${comp/url}/ical_view"
-                   i18n:translate="">ICAL</a> <br />
-                <a class="vcal"
-                   tal:attributes="href string:${comp/url}/vcal_view"
-                   i18n:translate="">VCAL</a> <br />
-        	</div>
-
-          <div class="semcompromisso"  tal:condition="not:view/compromissos">
-              <span>Sem compromissos oficiais</span>
-          </div>
-
-          <a tal:condition="view/editable"
-             class="adicionar_compromisso"
-             tal:attributes="href string:${context/absolute_url}/++add++Compromisso"
-             i18n:translate="">Adicionar Compromisso</a>
+          <ul class="compromisso-acoes" tal:condition="view/editable">
+            <li class="compromisso-acao">
+              <a class="compromisso editar_compromisso acao"
+                 tal:attributes="href string:${comp/url}/edit"
+                 i18n:translate="">Editar</a>
+            </li>
+            <li class="compromisso-acao">
+              <a class="compromisso remover_compromisso acao"
+                 tal:attributes="href string:${comp/url}/delete_confirmation"
+                 i18n:translate="">Remover</a>
+            </li>
+          </ul>
 
         </div>
+
+      </li>
+
+      <li class="sem-compromisso"  tal:condition="not:view/compromissos">
+          <span>Sem compromissos oficiais</span>
+      </li>
+
+    </ul>
+
+    <a tal:condition="view/editable"
+         class="adicionar_compromisso"
+         tal:attributes="href string:${context/absolute_url}/++add++Compromisso"
+         i18n:translate="">Adicionar Compromisso</a>
+
+    <div class="footer-actions">
+      <ul class="list-actions">
+        <li class="item print">
+          <a href="javascript:window.print();">
+            <span class="texto">Imprimir</span>
+          </a>
+        </li>
+        <tal:reporterros tal:define="urlerros view/get_link_erros">
+        <li class="item relatar-erros">
+          <a tal:attributes="href urlerros">
+            <span class="texto">Reportar erro</span>
+          </a>
+        </li>
+        </tal:reporterros>
+      </ul>
+    </div>
+
     <script>
       jQuery(function($){
-        $('#compromissos a.acao').prepOverlay(
+        $('.compromisso-acao a.acao').prepOverlay(
             {
                 subtype: 'ajax',
                 filter: common_content_filter,
@@ -88,6 +130,6 @@
         );
       });
     </script>
-    </metal:block>
+  </metal:block>
 
 </html>
