@@ -1,0 +1,45 @@
+/*
+ *
+ * CSS com estilos para impressão da Agenda
+ *
+ * @Autor
+ *
+ * - DESERTO Digital - www.desertodigital.com.br
+ *
+ * @Referencias
+ *
+ * Lista de padrões, convenções e boas praticas CSS que devem ser seguidas.
+ * https: //github.com/necolas/idiomatic-css/tree/master/translations/pt-BR
+ *
+ * Plugins para ordenar os atributos de CSS.
+ * http://csscomb.com/
+ *
+ * Validador de CSS do W3C.
+ * http://jigsaw.w3.org/css-validator/
+ */
+
+/* ==========================================================================
+   Objetos que não devem ser exibidos
+   ========================================================================== */
+
+.portaltype-agendadiaria #barra-brasil,
+.portaltype-agendadiaria #accessibility,
+.portaltype-agendadiaria #portal-siteactions,
+.portaltype-agendadiaria #portal-searchbox,
+.portaltype-agendadiaria #social-icons,
+.portaltype-agendadiaria #sobre,
+.portaltype-agendadiaria #viewlet-below-content-title,
+.portaltype-agendadiaria #navigation,
+.portaltype-agendadiaria #footer,
+.portaltype-agendadiaria #voltar-topo,
+.portaltype-agendadiaria #extra-footer,
+.portaltype-agendadiaria .download-compromisso,
+.portaltype-agendadiaria .footer-actions {
+    display: none;
+}
+
+.portaltype-agendadiaria #logo,
+.portaltype-agendadiaria #portal-logo {
+    display: block !important;
+    color: black !important;
+}

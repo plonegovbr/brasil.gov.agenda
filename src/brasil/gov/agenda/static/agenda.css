@@ -23,13 +23,12 @@
    Title
    ========================================================================== */
 
-.portaltype-agendadiaria #content .titulo-agenda {
+.portaltype-agendadiaria #content .documentFirstHeading {
     margin-bottom: 0.5em;
     padding: 0 0 0.5em;
     border-bottom: 1px dotted #bfc0c2;
 }
 
-.portaltype-agendadiaria #content .documentFirstHeading { display: none; }
 
 /* ==========================================================================
    Viewlet Bellow Content Title
@@ -47,6 +46,7 @@
  * Social Like
  */
 
+.portaltype-agendadiaria #viewlet-social-like,
 .portaltype-agendadiaria div.width-1\3a 2 #viewlet-social-like {
     right: -25px;
     padding: 0.5em 0;
@@ -91,6 +91,7 @@
 
 #content .list-compromissos {
     margin-left: 0;
+    border-bottom: 1px solid #d6dcd7;
 }
 
 #content .item-compromisso {
@@ -100,6 +101,7 @@
     border-top: 1px solid #d6dcd7;
     list-style: none;
 }
+
 
 /* ==========================================================================
    Dados Compromisso
@@ -133,6 +135,7 @@
 
 .comprimisso-titulo {
     margin-bottom: 20px;
+    font-weight: bold;
     font-family: Arial, Helvetica, sans-serif;
 }
 
@@ -144,6 +147,21 @@
     line-height: 1.25em;
     font-size: 1em;
 }
+
+/* Botões de editar e remover
+   ========================================================================== */
+
+
+.compromisso-acoes {
+    margin: 10px 0 !important;
+}
+
+.compromisso-acoes li { display: inline-block !important; }
+
+.adicionar_compromisso { line-height: 30px; }
+
+/* vCal iCal
+   ========================================================================== */
 
 .download-compromisso { line-height: 20px; }
 
@@ -159,5 +177,68 @@
     white-space: nowrap;
 }
 
-/* ++resource++brasil.gov.agenda/ *
+/* ==========================================================================
+   Rodape Agenda
+   ========================================================================== */
 
+.footer-actions {
+    margin: 45px 0 0 0;
+    padding: 12px 0;
+    border-top: 4px solid #172938;
+    border-bottom: 2px solid #8b949b;
+}
+
+.list-actions { display: inline-block; }
+
+.list-actions .item {
+    display: block !important;
+    float: left;
+    clear: none !important;
+    margin-bottom: 0 !important;
+    width: 100px;
+    height: 20px;
+    list-style: none !important;
+}
+
+#content .print a .texto {
+    display: block;
+    margin-left: 2.273em;
+    height: 1.909em;
+    color: #172938;
+    font-size: 0.917em;
+    line-height: 1.909em;
+}
+
+/*
+ * Print Icon
+ */
+
+.list-actions .print {
+    background: url("++resource++brasil.gov.portal/img/print-icon.png") no-repeat;
+}
+
+
+/* ==========================================================================
+   Contraste Agenda
+   ========================================================================== */
+
+body.contraste .list-actions .print {
+    background: url("++resource++brasil.gov.portal/img/print-icon-altocontraste.png") no-repeat;
+}
+
+body.contraste #content .comprimisso-pauta,
+body.contraste #content .comprimisso-local,
+body.contraste #content .print a .texto { color: white; }
+
+body.contraste .footer-actions {
+    border-top: 4px solid #fff;
+    border-bottom: 2px solid #fff;
+}
+
+body.contraste #content .list-compromissos {
+    border-bottom: 1px solid #fff;
+}
+
+body.contraste #content .item-compromisso {
+    border-top: 1px solid #d6dcd7;
+}
