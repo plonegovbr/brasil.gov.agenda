@@ -4,9 +4,14 @@
     xmlns:i18n="http://xml.zope.org/namespaces/i18n"
     metal:use-macro="context/main_template/macros/master">
 
+<metal:slot metal:fill-slot="style_slot">
+  <link rel="stylesheet" type="text/css" href="++resource++brasil.gov.agenda/agenda.css" media="screen">
+  <link rel="stylesheet" type="text/css" href="++resource++brasil.gov.agenda/agenda-print.css" media="print">
+</metal:slot>
 
-  <metal:slot metal:fill-slot="header">
-    <h1 class="titulo-agenda" tal:content="view/TitleAgenda"></h1>
+
+  <metal:slot metal:fill-slot="content-title">
+    <h1 class="documentFirstHeading" tal:content="view/TitleAgenda"></h1>
   </metal:slot>
 
   <metal:block fill-slot="content-core">
@@ -101,7 +106,7 @@
     <div class="footer-actions">
       <ul class="list-actions">
         <li class="item print">
-          <a href="javascrip: window.print();">
+          <a href="javascript:window.print();">
             <span class="texto">Imprimir</span>
           </a>
         </li>
