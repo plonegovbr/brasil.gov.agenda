@@ -124,7 +124,7 @@ class ContentTypeBrowserTestCase(unittest.TestCase):
 
         # Exibiremos a AgendaDiaria de 02/05/2014
         browser.open(agenda_url)
-        self.assertIn('05 de Fevereiro de 2014',
+        self.assertIn('05/02/2014 &mdash;',
                       browser.contents.decode('utf-8'))
 
         # Nos autenticamos como admin
