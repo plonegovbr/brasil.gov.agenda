@@ -1,0 +1,45 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:browser="http://namespaces.zope.org/browser"
+    xmlns:cache="http://namespaces.zope.org/cache"
+    >
+
+  <include package="z3c.caching" file="meta.zcml" />
+
+  <!-- Agenda -->
+  <cache:rulesetType
+      name="brasil.gov.agenda.Agenda"
+      title="Agenda View"
+      description="Configuracao de Cache para View de Agenda"
+      />
+
+  <cache:ruleset
+      for="brasil.gov.agenda.browser.agenda.AgendaView"
+      ruleset="brasil.gov.agenda.Agenda"
+      />
+
+  <!-- AgendaDiaria -->
+  <cache:rulesetType
+      name="brasil.gov.agenda.AgendaDiaria"
+      title="AgendaDiaria View"
+      description="Configuracao de Cache para View de AgendaDiaria"
+      />
+
+  <cache:ruleset
+      for="brasil.gov.agenda.browser.agendadiaria.AgendaDiariaView"
+      ruleset="brasil.gov.agenda.AgendaDiaria"
+      />
+
+  <!-- Compromisso -->
+  <cache:rulesetType
+      name="brasil.gov.agenda.Compromisso"
+      title="Compromisso View"
+      description="Configuracao de Cache para View de Compromisso"
+      />
+
+  <cache:ruleset
+      for="brasil.gov.agenda.browser.compromisso.CompromissoView"
+      ruleset="brasil.gov.agenda.Compromisso"
+      />
+
+</configure>

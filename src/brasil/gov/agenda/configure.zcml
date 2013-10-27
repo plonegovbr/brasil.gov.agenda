@@ -18,6 +18,7 @@
 
     <include package=".behaviors" />
     <include package=".browser" />
+    <include package=".caching" />
     <include package=".content" />
 
     <grok:grok package="." />
