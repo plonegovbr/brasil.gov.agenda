@@ -2,6 +2,7 @@
 
 from brasil.gov.agenda.interfaces import IAgendaDiaria
 from brasil.gov.agenda.testing import INTEGRATION_TESTING
+from DateTime import DateTime
 from plone.app.dexterity.behaviors.exclfromnav import IExcludeFromNavigation
 from plone.app.referenceablebehavior.referenceable import IReferenceable
 from plone.app.testing import setRoles
@@ -11,6 +12,7 @@ from plone.uuid.interfaces import IAttributeUUID
 from zope.component import createObject
 from zope.component import queryUtility
 
+import datetime
 import unittest2 as unittest
 
 
@@ -20,7 +22,7 @@ class ContentTypeTestCase(unittest.TestCase):
 
     def setUp(self):
         self.portal = self.layer['portal']
-
+        self.ct = self.portal.portal_catalog
         setRoles(self.portal, TEST_USER_ID, ['Manager'])
         self.portal.invokeFactory('Folder', 'test-folder')
         setRoles(self.portal, TEST_USER_ID, ['Member'])
@@ -51,6 +53,36 @@ class ContentTypeTestCase(unittest.TestCase):
 
     def test_exclude_from_nav(self):
         self.assertTrue(IExcludeFromNavigation.providedBy(self.agendadiaria))
+
+    def test_start_indexing(self):
+        ct = self.ct
+        self.agendadiaria.date = datetime.datetime(2013, 2, 5)
+        self.agendadiaria.reindexObject()
+        results = ct.searchResults(portal_type='AgendaDiaria',
+                                   start={'query': DateTime('2013-02-06'),
+                                          'range': 'max'})
+        self.assertEqual(len(results), 1)
+        self.agendadiaria.date = datetime.datetime(2013, 10, 17)
+        self.agendadiaria.reindexObject()
+        results = ct.searchResults(portal_type='AgendaDiaria',
+                                   start={'query': DateTime('2013-10-17'),
+                                          'range': 'min'})
+        self.assertEqual(len(results), 1)
+
+    def test_end_indexing(self):
+        ct = self.ct
+        self.agendadiaria.date = datetime.datetime(2013, 2, 6)
+        self.agendadiaria.reindexObject()
+        results = ct.searchResults(portal_type='AgendaDiaria',
+                                   end={'query': DateTime('2013-02-06'),
+                                        'range': 'min'})
+        self.assertEqual(len(results), 1)
+        self.agendadiaria.date = datetime.datetime(2013, 10, 17)
+        self.agendadiaria.reindexObject()
+        results = ct.searchResults(portal_type='AgendaDiaria',
+                                   end={'query': DateTime('2013-10-17'),
+                                        'range': 'min'})
+        self.assertEqual(len(results), 1)
 
     def test_agendadiaria_icon(self):
         from plone.testing.z2 import Browser

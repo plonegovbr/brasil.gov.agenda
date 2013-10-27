@@ -75,24 +75,28 @@ class ContentTypeTestCase(unittest.TestCase):
 
     def test_start_indexing(self):
         ct = self.ct
-        results = ct.searchResults(start={'query': DateTime('2013-02-06'),
+        results = ct.searchResults(portal_type='Compromisso',
+                                   start={'query': DateTime('2013-02-06'),
                                           'range': 'max'})
         self.assertEqual(len(results), 1)
         self.compromisso.start_date = datetime.datetime(2013, 10, 17)
         self.compromisso.reindexObject()
-        results = ct.searchResults(start={'query': DateTime('2013-10-17'),
+        results = ct.searchResults(portal_type='Compromisso',
+                                   start={'query': DateTime('2013-10-17'),
                                           'range': 'min'})
         self.assertEqual(len(results), 1)
 
     def test_end_indexing(self):
         ct = self.ct
         self.compromisso.end_date = datetime.datetime(2013, 2, 6)
-        results = ct.searchResults(end={'query': DateTime('2013-02-06'),
+        results = ct.searchResults(portal_type='Compromisso',
+                                   end={'query': DateTime('2013-02-06'),
                                         'range': 'min'})
         self.assertEqual(len(results), 1)
         self.compromisso.end_date = datetime.datetime(2013, 10, 17)
         self.compromisso.reindexObject()
-        results = ct.searchResults(end={'query': DateTime('2013-10-17'),
+        results = ct.searchResults(portal_type='Compromisso',
+                                   end={'query': DateTime('2013-10-17'),
                                         'range': 'min'})
         self.assertEqual(len(results), 1)
 

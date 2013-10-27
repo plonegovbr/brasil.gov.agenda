@@ -5,4 +5,7 @@
   <adapter name="start" factory=".compromisso.start_date" />
   <adapter name="end" factory=".compromisso.end_date" />
 
+  <adapter name="start" factory=".agendadiaria.start_date" />
+  <adapter name="end" factory=".agendadiaria.end_date" />
+
 </configure>

@@ -2,10 +2,12 @@
 
 from brasil.gov.agenda.interfaces import IAgenda
 from brasil.gov.agenda.interfaces import IAgendaDiaria
+from DateTime import DateTime
 from five import grok
 from plone.app.dexterity.behaviors.exclfromnav import IExcludeFromNavigation
 from plone.dexterity.content import Container
 from plone.directives import form
+from plone.indexer.decorator import indexer
 from plone.supermodel.interfaces import IDefaultFactory
 from zope.interface import provider
 from zope.schema.interfaces import IContextAwareDefaultFactory
@@ -44,3 +46,26 @@ def default_location(context):
 def default_date():
     ''' Retorna um dia no futuro '''
     return datetime.date.today() + datetime.timedelta(1)
+
+
+@indexer(IAgendaDiaria)
+def start_date(obj):
+    ''' Converte a data da AgendaDiaria para DateTime e coloca o
+        horario como 00:00:00
+    '''
+    start_date = IAgendaDiaria(obj).date
+    # Comeco do dia
+    start_date = DateTime('%s 00:00:00' % start_date.strftime('%Y-%m-%d'))
+    return start_date
+
+
+@indexer(IAgendaDiaria)
+def end_date(obj):
+    ''' Converte a data da AgendaDiaria para DateTime e coloca o
+        horario como 23:59:59
+    '''
+    end_date = IAgendaDiaria(obj).date
+    # Final do dia
+    end_date = DateTime('%s 23:59:59' % end_date.strftime('%Y-%m-%d'))
+
+    return end_date
