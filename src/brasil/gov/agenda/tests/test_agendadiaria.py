@@ -109,6 +109,7 @@ class ContentTypeTestCase(unittest.TestCase):
         # Ao alterar o local e autoridade devemos ficar sem resultados
         self.agendadiaria.location = u'Palacio do Planalto'
         self.agendadiaria.autoridade = u'Juscelino Kubitschek'
+        self.agendadiaria.update = u'Alterado local e autoridade'
         self.agendadiaria.reindexObject()
         results = ct.searchResults(portal_type='AgendaDiaria',
                                    SearchableText='Clarice')
@@ -116,6 +117,10 @@ class ContentTypeTestCase(unittest.TestCase):
         results = ct.searchResults(portal_type='AgendaDiaria',
                                    SearchableText='Esplanada')
         self.assertEqual(len(results), 0)
+        # Porem busca por Alterado deve retornar algo
+        results = ct.searchResults(portal_type='AgendaDiaria',
+                                   SearchableText='Alterado')
+        self.assertEqual(len(results), 1)
 
     def test_SearchableText_indexing_com_compromissos(self):
         ct = self.ct
