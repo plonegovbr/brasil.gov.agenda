@@ -92,6 +92,22 @@ class TestInstall(BaseTestCase):
             types_not_searched
         )
 
+    def test_agendadiaria_in_calendar(self):
+        calendar = getattr(self.portal, 'portal_calendar')
+        calendar_types = calendar.calendar_types
+        self.assertIn(
+            'AgendaDiaria',
+            calendar_types
+        )
+
+    def test_compromisso_not_in_calendar(self):
+        calendar = getattr(self.portal, 'portal_calendar')
+        calendar_types = calendar.calendar_types
+        self.assertNotIn(
+            'Compromisso',
+            calendar_types
+        )
+
 
 class TestUpgrade(BaseTestCase):
     """Ensure product upgrades work."""

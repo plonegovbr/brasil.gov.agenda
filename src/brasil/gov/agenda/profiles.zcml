@@ -25,6 +25,15 @@
         i18n:attributes="title; description"
         />
 
+
+    <gs:importStep
+        name="setup_site"
+        handler="brasil.gov.agenda.setuphandlers.setup_site"
+        title="Configura Brasil.gov.agenda"
+        description="Finaliza configuracao do produto de agenda">
+     <depends name="typeinfo"/>
+    </gs:importStep>
+
     <!-- Upgrades -->
     <include package=".upgrades" />
 
