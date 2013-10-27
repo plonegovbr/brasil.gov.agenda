@@ -35,6 +35,8 @@ class ContentTypeTestCase(unittest.TestCase):
         # Criamos a agenda diaria
         self.agenda.invokeFactory('AgendaDiaria', '2013-02-05')
         self.agendadiaria = self.agenda['2013-02-05']
+        self.agendadiaria.date = datetime.datetime(2013, 2, 5)
+        self.agendadiaria.reindexObject()
 
     def test_adding(self):
         self.assertTrue(IAgendaDiaria.providedBy(self.agendadiaria))
@@ -55,6 +57,10 @@ class ContentTypeTestCase(unittest.TestCase):
 
     def test_exclude_from_nav(self):
         self.assertTrue(IExcludeFromNavigation.providedBy(self.agendadiaria))
+
+    def test_title(self):
+        agendadiaria = self.agendadiaria
+        self.assertEqual(agendadiaria.Title(), '05/02/2013')
 
     def test_start_indexing(self):
         ct = self.ct

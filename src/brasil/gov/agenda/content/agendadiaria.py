@@ -21,6 +21,12 @@ class AgendaDiaria(Container):
 
     grok.implements(IAgendaDiaria)
 
+    def Title(self):
+        ''' Retorna data como titulo para esta AgendaDiaria '''
+        date = self.date
+        title = date.strftime('%d/%m/%Y')
+        return title
+
 
 @form.default_value(field=IExcludeFromNavigation['exclude_from_nav'])
 def exclude_from_nav_default_value(data):
