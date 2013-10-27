@@ -58,6 +58,10 @@ class ContentTypeTestCase(unittest.TestCase):
     def test_exclude_from_nav(self):
         self.assertTrue(IExcludeFromNavigation.providedBy(self.agendadiaria))
 
+    def test_exclude_from_nav_default(self):
+        behavior = IExcludeFromNavigation(self.agendadiaria)
+        self.assertTrue(behavior.exclude_from_nav)
+
     def test_title(self):
         agendadiaria = self.agendadiaria
         self.assertEqual(agendadiaria.Title(), '05/02/2013')
