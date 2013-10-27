@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from brasil.gov.agenda.interfaces import ICompromisso
+from brasil.gov.agenda.testing import FUNCTIONAL_TESTING
 from brasil.gov.agenda.testing import INTEGRATION_TESTING
 from DateTime import DateTime
 from plone.app.contenttypes.interfaces import IEvent
@@ -8,12 +9,12 @@ from plone.app.referenceablebehavior.referenceable import IReferenceable
 from plone.app.testing import setRoles
 from plone.app.testing import TEST_USER_ID
 from plone.dexterity.interfaces import IDexterityFTI
+from plone.testing.z2 import Browser
 from plone.uuid.interfaces import IAttributeUUID
 from zope.component import createObject
 from zope.component import queryUtility
 from zope.event import notify
 from zope.lifecycleevent import ObjectModifiedEvent
-from plone.testing.z2 import Browser
 
 import datetime
 import unittest2 as unittest
@@ -107,7 +108,7 @@ class ContentTypeTestCase(unittest.TestCase):
 
 class ContentTypeBrowserTestCase(unittest.TestCase):
 
-    layer = INTEGRATION_TESTING
+    layer = FUNCTIONAL_TESTING
 
     def setUp(self):
         self.portal = self.layer['portal']
