@@ -7,5 +7,6 @@
 
   <adapter name="start" factory=".agendadiaria.start_date" />
   <adapter name="end" factory=".agendadiaria.end_date" />
+  <adapter name="SearchableText" factory=".agendadiaria.SearchableText_AgendaDiaria" />
 
 </configure>

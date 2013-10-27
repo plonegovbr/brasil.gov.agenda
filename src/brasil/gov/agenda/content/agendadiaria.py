@@ -2,6 +2,7 @@
 
 from brasil.gov.agenda.interfaces import IAgenda
 from brasil.gov.agenda.interfaces import IAgendaDiaria
+from brasil.gov.agenda.interfaces import ICompromisso
 from DateTime import DateTime
 from five import grok
 from plone.app.dexterity.behaviors.exclfromnav import IExcludeFromNavigation
@@ -46,6 +47,29 @@ def default_location(context):
 def default_date():
     ''' Retorna um dia no futuro '''
     return datetime.date.today() + datetime.timedelta(1)
+
+
+@indexer(IAgendaDiaria)
+def SearchableText_AgendaDiaria(obj):
+    ''' Indexa os dados dos compromissos dentro desta AgendaDiaria
+        para prover busca por texto integral
+    '''
+    children = obj.objectValues()
+    SearchableText = []
+    for child in children:
+        if not ICompromisso.providedBy(child):
+            continue
+        # Campos indexaveis
+        SearchableText.append(child.title)
+        SearchableText.append(child.description)
+        SearchableText.append(child.autoridade)
+        SearchableText.append(child.location)
+        SearchableText.append(child.attendees)
+    if not SearchableText:
+        SearchableText.append(obj.autoridade)
+        SearchableText.append(obj.location)
+    return ' '.join([text for text in SearchableText
+                     if isinstance(text, basestring)])
 
 
 @indexer(IAgendaDiaria)
