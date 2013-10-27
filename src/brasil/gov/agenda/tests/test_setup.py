@@ -74,6 +74,24 @@ class TestInstall(BaseTestCase):
             stylesheets_ids
         )
 
+    def test_agenda_not_searched(self):
+        pp = getattr(self.portal, 'portal_properties')
+        site_properties = pp.site_properties
+        types_not_searched = site_properties.types_not_searched
+        self.assertIn(
+            'Agenda',
+            types_not_searched
+        )
+
+    def test_compromisso_not_searched(self):
+        pp = getattr(self.portal, 'portal_properties')
+        site_properties = pp.site_properties
+        types_not_searched = site_properties.types_not_searched
+        self.assertIn(
+            'Compromisso',
+            types_not_searched
+        )
+
 
 class TestUpgrade(BaseTestCase):
     """Ensure product upgrades work."""
