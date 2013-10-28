@@ -85,6 +85,12 @@
     font-weight: bold;
 }
 
+#content .portalMessage {
+    margin-top: 30px;
+    color: #596e7f;
+    text-align: left;
+}
+
 /*
  * Lista dos compromissos
  */

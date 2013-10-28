@@ -29,7 +29,7 @@
       <div class="portalMessage info"
           tal:condition="view/update_info"
           tal:content="view/update_info">
-          Alterada
+          Agenda alterada
       </div>
 
     </div>
