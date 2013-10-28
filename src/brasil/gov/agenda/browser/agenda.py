@@ -47,7 +47,9 @@ class AgendaView (grok.View):
     def agenda_recente(self):
         ''' Retorna a agenda mais publicada mais recente '''
         ct = self.catalog
+        path = '/'.join(self.context.getPhysicalPath())
         params = {}
+        params['path'] = path
         params['portal_type'] = 'AgendaDiaria'
         params['review_state'] = 'published'
         params['sort_on'] = 'start'
