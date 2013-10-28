@@ -1,0 +1,19 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:browser="http://namespaces.zope.org/browser"
+    xmlns:plone="http://namespaces.plone.org/plone"
+    xmlns:i18n="http://namespaces.zope.org/i18n"
+    i18n_domain="brasil.gov.agenda">
+
+    <include package="plone.app.portlets" />
+
+    <plone:portlet
+        name="brasil.gov.agenda.busca"
+        interface=".busca.IBuscaPortlet"
+        assignment=".busca.Assignment"
+        renderer=".busca.Renderer"
+        addview=".busca.AddForm"
+        editview=".busca.EditForm"
+    />
+
+</configure>

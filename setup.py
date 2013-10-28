@@ -40,6 +40,7 @@ setup(
     include_package_data=True,
     zip_safe=False,
     install_requires=[
+        'collective.portlet.calendar',
         'plone.app.contenttypes',
         'plone.app.dexterity [grok]',
         'plone.app.referenceablebehavior',

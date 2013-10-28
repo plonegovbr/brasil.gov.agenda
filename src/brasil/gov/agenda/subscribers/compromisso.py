@@ -48,6 +48,8 @@ def move_compromisso_para_agendadiaria(event, obj=None):
     destination = _get_destination(agenda, obj, origin, destination_id)
     if not IAgendaDiaria.providedBy(destination):
         logger.warn('Objeto %s nao foi movido' % str(obj))
+        # Reindexamos o SearchableText de origin
+        origin.reindexObject(idxs=['SearchableText', ])
         return None
 
     new_id = _generate_id(destination, old_id)
@@ -72,6 +74,8 @@ def move_compromisso_para_agendadiaria(event, obj=None):
     obj._postCopy(destination, op=1)
     # try to make ownership implicit if possible
     obj.manage_changeOwnershipType(explicit=0)
+    # Reindexamos o SearchableText de destination
+    destination.reindexObject(idxs=['SearchableText', ])
 
 
 def _get_agenda(base_folder):

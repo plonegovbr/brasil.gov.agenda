@@ -1,16 +1,19 @@
 # -*- coding: utf-8 -*-
 
 from brasil.gov.agenda.interfaces import IAgenda
+from brasil.gov.agenda.testing import FUNCTIONAL_TESTING
 from brasil.gov.agenda.testing import INTEGRATION_TESTING
 from plone.app.dexterity.behaviors.nextprevious import INextPreviousToggle
 from plone.app.referenceablebehavior.referenceable import IReferenceable
 from plone.app.testing import setRoles
 from plone.app.testing import TEST_USER_ID
 from plone.dexterity.interfaces import IDexterityFTI
+from plone.testing.z2 import Browser
 from plone.uuid.interfaces import IAttributeUUID
 from zope.component import createObject
 from zope.component import queryUtility
 
+import datetime
 import unittest2 as unittest
 
 
@@ -61,13 +64,73 @@ class ContentTypeTestCase(unittest.TestCase):
         oIds = list(self.agenda.objectIds())
         self.assertEqual(['2012-02-05', '2013-02-05', '2013-10-17'], oIds)
 
+
+class ContentTypeBrowserTestCase(unittest.TestCase):
+
+    layer = FUNCTIONAL_TESTING
+
+    def setUp(self):
+        self.portal = self.layer['portal']
+        self.ct = self.portal.portal_catalog
+        self.wt = self.portal.portal_workflow
+
+    def setupContent(self, portal):
+        setRoles(self.portal, TEST_USER_ID, ['Manager'])
+        # Criamos a agenda
+        self.portal.invokeFactory('Agenda', 'agenda-vice-presidente')
+        self.agenda = self.portal['agenda-vice-presidente']
+        # Criamos a agenda diaria
+        self.agenda.invokeFactory('AgendaDiaria', '2014-02-05')
+        self.agendadiaria = self.agenda['2014-02-05']
+        self.agendadiaria.date = datetime.datetime(2014, 2, 5)
+        self.agendadiaria.reindexObject()
+        # Criamos o compromisso
+        self.agendadiaria.invokeFactory('Compromisso',
+                                        'compromisso',
+                                        start_date=datetime.datetime(
+                                            2014, 2, 5, 10, 0, 0
+                                        ),
+                                        end_date=datetime.datetime(
+                                            2014, 2, 5, 12, 0, 0
+                                        ))
+        self.compromisso = self.agendadiaria['compromisso']
+        # Publicamos os conteudos
+        self.wt.doActionFor(self.agenda, 'publish')
+        self.wt.doActionFor(self.agendadiaria, 'publish')
+        setRoles(self.portal, TEST_USER_ID, ['Member'])
+
     def test_agenda_icon(self):
-        from plone.testing.z2 import Browser
-        portal = self.portal
         app = self.layer['app']
+        portal = self.portal
 
         browser = Browser(app)
         portal_url = portal.absolute_url()
 
         browser.open('%s/++resource++brasil.gov.agenda/agenda_icon.png' % portal_url)
         self.assertEqual(browser.headers['status'], '200 Ok')
+
+    def test_agenda_view(self):
+        from plone.app.testing import TEST_USER_NAME, TEST_USER_PASSWORD
+        app = self.layer['app']
+        portal = self.portal
+        self.setupContent(portal)
+        import transaction
+        transaction.commit()
+        self.browser = Browser(app)
+        self.browser.handleErrors = False
+
+        agenda_url = self.agenda.absolute_url()
+        browser = self.browser
+
+        # Exibiremos a AgendaDiaria de 02/05/2014
+        browser.open(agenda_url)
+        self.assertIn('05/02/2014 &mdash;',
+                      browser.contents.decode('utf-8'))
+
+        # Nos autenticamos como admin
+        browser.addHeader('Authorization', 'Basic %s:%s' % (TEST_USER_NAME, TEST_USER_PASSWORD,))
+        # Vemos o conteudo da view de Agenda
+        browser.open(agenda_url)
+        self.assertEqual(browser.headers['status'], '200 Ok')
+        self.assertIn(u'Adicionar Agenda Di',
+                      browser.contents.decode('utf-8'))

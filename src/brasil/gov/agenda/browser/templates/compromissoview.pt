@@ -4,6 +4,17 @@
     xmlns:i18n="http://xml.zope.org/namespaces/i18n"
     metal:use-macro="context/main_template/macros/master">
 
+    <metal:header fill-slot="header">
+        <dl class="portalMessage info"
+            tal:condition="view/editable">
+            <dt i18n:translate="">Info</dt>
+            <dd i18n:translate="">
+              Você vê esta página porque possui permissão para editá-la. Outros usuários serão redirecionados para a
+              visão da Agenda Diária
+            </dd>
+        </dl>
+    </metal:header>
+
     <metal:block fill-slot="content-core">
 
         <div class="dados-agenda">

@@ -4,6 +4,7 @@ from brasil.gov.agenda.interfaces import IAgenda
 from five import grok
 from Products.CMFCore.utils import getToolByName
 from zope.component import getMultiAdapter
+from zope.publisher.publish import mapply
 
 grok.templatedir('templates')
 
@@ -24,6 +25,14 @@ class AgendaView (grok.View):
         self.catalog = plone_tools.catalog()
         self.editable = context_state.is_editable()
 
+    def __call__(self):
+        mapply(self.update, (), self.request)
+        agenda_recente = self.agenda_recente()
+        if agenda_recente and not self.editable:
+            return agenda_recente.restrictedTraverse('@@view')()
+        else:
+            return super(AgendaView, self).__call__()
+
     def _format_time(self, value):
         return value.strftime('%Hh%M')
 
@@ -34,6 +43,21 @@ class AgendaView (grok.View):
                               {},
                               context=self.context,
                               target_language='pt_BR')
+
+    def agenda_recente(self):
+        ''' Retorna a agenda mais publicada mais recente '''
+        ct = self.catalog
+        path = '/'.join(self.context.getPhysicalPath())
+        params = {}
+        params['path'] = path
+        params['portal_type'] = 'AgendaDiaria'
+        params['review_state'] = 'published'
+        params['sort_on'] = 'start'
+        params['sort_order'] = 'reverse'
+        results = ct.searchResults(**params)
+        if results:
+            # Retornamos a AgendaDiaria mais recente
+            return results[0].getObject()
 
     @property
     def date(self):

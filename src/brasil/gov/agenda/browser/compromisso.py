@@ -4,6 +4,7 @@ from Acquisition import aq_parent
 from brasil.gov.agenda.interfaces import ICompromisso
 from five import grok
 from Products.CMFCore.utils import getToolByName
+from zope.component import getMultiAdapter
 
 grok.templatedir('templates')
 
@@ -16,7 +17,14 @@ class CompromissoView (grok.View):
 
     def update(self):
         self._ts = getToolByName(self.context, 'translation_service')
-        self.agenda = aq_parent(aq_parent(self.context))
+        context_state = getMultiAdapter((self.context, self.request),
+                                        name=u'plone_context_state')
+        self.agendadiaria = aq_parent(self.context)
+        self.agenda = aq_parent(self.agendadiaria)
+        self.editable = context_state.is_editable()
+        if not self.editable:
+            url = self.agendadiaria.absolute_url()
+            return self.context.REQUEST.RESPONSE.redirect(url)
 
     def _format_time(self, value):
         return value.strftime('%Hh%M')

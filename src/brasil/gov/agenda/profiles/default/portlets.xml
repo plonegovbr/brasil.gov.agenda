@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<portlets
+    xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+    i18n:domain="brasil.gov.agenda">
+ <!-- Portlet type registrations -->
+ <portlet
+   addview="brasil.gov.agenda.busca"
+   title="Busca para Agenda"
+   description="Portlet de busca para Agenda."
+   i18n:attributes="title;
+                    description"
+   >
+   <for interface="plone.app.portlets.interfaces.IColumn" />
+   <for interface="plone.app.portlets.interfaces.IDashboard" />
+ </portlet>
+
+
+</portlets>

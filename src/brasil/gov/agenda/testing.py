@@ -20,6 +20,10 @@ class Fixture(PloneSandboxLayer):
     def setUpPloneSite(self, portal):
         self.applyProfile(
             portal, 'brasil.gov.agenda:default')
+        portal.portal_workflow.setChainForPortalTypes(
+            ('Agenda', 'Folder', ),
+            'simple_publication_workflow'
+        )
 
 
 FIXTURE = Fixture()

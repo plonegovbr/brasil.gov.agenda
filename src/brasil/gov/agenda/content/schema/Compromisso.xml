@@ -3,16 +3,6 @@
        xmlns:i18n="http://xml.zope.org/namespaces/i18n"
        i18n:domain="brasil.gov.agenda">
   <schema>
-      <field name="title" type="zope.schema.TextLine">
-        <description i18n:translate=""></description>
-        <required>true</required>
-        <title i18n:translate="">Compromisso</title>
-      </field>
-      <field name="description" type="zope.schema.Text">
-        <description i18n:translate=""></description>
-        <required>False</required>
-        <title i18n:translate="">Pauta</title>
-      </field>
       <field name="autoridade" type="zope.schema.TextLine" indexer:searchable="true">
         <description i18n:translate=""></description>
         <required>False</required>
@@ -29,10 +19,20 @@
         <defaultFactory>brasil.gov.agenda.content.compromisso.default_end_date</defaultFactory>
         <title i18n:translate="label_event_end">Event Ends</title>
       </field>
+      <field name="title" type="zope.schema.TextLine">
+        <description i18n:translate=""></description>
+        <required>true</required>
+        <title i18n:translate="">Compromisso</title>
+      </field>
       <field name="attendees" type="zope.schema.Text" indexer:searchable="true">
         <description i18n:translate="">Outros participantes deste compromisso, um por linha.</description>
         <required>False</required>
         <title i18n:translate="label_event_attendees">Outros participantes</title>
+      </field>
+      <field name="description" type="zope.schema.Text">
+        <description i18n:translate=""></description>
+        <required>False</required>
+        <title i18n:translate="">Pauta</title>
       </field>
       <field name="location" type="zope.schema.TextLine" indexer:searchable="true">
         <description />
