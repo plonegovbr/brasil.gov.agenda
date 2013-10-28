@@ -241,6 +241,8 @@
    Portlet laterais
    ========================================================================== */
 
+.portletSearch,
+.portletCalendar,
 .portletSearch .portletItem,
 .portletCalendar .portletItem,
 .portletSearch .portletHeader,
