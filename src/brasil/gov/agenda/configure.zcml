@@ -20,6 +20,7 @@
     <include package=".browser" />
     <include package=".caching" />
     <include package=".content" />
+    <include package=".portlets" />
 
     <grok:grok package="." />
     
