@@ -8,11 +8,14 @@
   <dt class="portletHeader">
       <span class="portletTopLeft"></span>
       <a class="tile"
-         tal:attributes="href view/search_action"
-         i18n:translate="box_search">Search</a>
+         tal:attributes="href view/search_action">Busca de Agenda</a>
       <span class="portletTopRight"></span>
   </dt>
-
+  <dd class="portletText">
+      <span id="busca_agenda_texto">
+        Fa&ccedil;a buscas de agenda por palavras chave
+      </span>
+  </dd>
     <dd class="portletItem">
       <form id="searchform" action="search"
             tal:attributes="action view/search_action">
@@ -47,12 +50,6 @@
     </dd>
 
     <dd class="portletFooter">
-        <a href="#"
-         class="tile"
-         tal:attributes="href view/search_action"
-         i18n:translate="label_advanced_search">
-        Advanced Search&hellip;
-        </a>
         <span class="portletBottomLeft"></span>
         <span class="portletBottomRight"></span>
     </dd>

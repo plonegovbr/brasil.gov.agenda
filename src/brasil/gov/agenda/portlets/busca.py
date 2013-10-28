@@ -33,7 +33,7 @@ class Assignment(base.Assignment):
 
     @property
     def title(self):
-        return _(u"Busca")
+        return _(u"Busca de Agenda")
 
 
 class Renderer(base.Renderer):
