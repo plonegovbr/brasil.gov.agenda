@@ -86,8 +86,8 @@
 
       </li>
 
-      <li class="sem-compromisso"  tal:condition="not:view/compromissos">
-          <span>Sem compromissos oficiais</span>
+      <li class="sem-compromisso item-compromisso"  tal:condition="not:view/compromissos">
+          <span>Sem compromissos ofíciais.</span>
       </li>
 
     </ul>
