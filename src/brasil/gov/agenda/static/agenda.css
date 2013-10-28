@@ -241,6 +241,13 @@
    Portlet laterais
    ========================================================================== */
 
+.portletSearch .portletItem,
+.portletCalendar .portletItem,
+.portletSearch .portletHeader,
+.portletCalendar .portletHeader,
+.portletSearch .portletFooter,
+.portletCalendar .portletFooter { background: #edeff1 !important; }
+
 .portletSearch .portletHeader,
 .portletCalendar .portletHeader {
     padding: 15px 12px;
