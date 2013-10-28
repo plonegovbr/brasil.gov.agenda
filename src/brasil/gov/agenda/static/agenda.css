@@ -283,7 +283,7 @@
     padding: 2px;
     -webkit-border-radius: 5px;
     border-radius: 5px;
-    background: #fff;
+    background: #fff !important;
     font-size: 80%;
 }
 
