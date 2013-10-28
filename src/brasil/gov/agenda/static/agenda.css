@@ -154,9 +154,20 @@
     font-size: 1em;
 }
 
+
+/*
+ * Sem compromisso
+ */
+
+.sem-compromisso {
+    color: #464a55;
+    font-weight: bold;
+    font-size: 1.2em;
+}
+
+
 /* Botões de editar e remover
    ========================================================================== */
-
 
 .compromisso-acoes {
     margin: 10px 0 !important;
@@ -165,6 +176,7 @@
 .compromisso-acoes li { display: inline-block !important; }
 
 .adicionar_compromisso { line-height: 30px; }
+
 
 /* vCal iCal
    ========================================================================== */
@@ -182,6 +194,7 @@
     text-indent: 100%;
     white-space: nowrap;
 }
+
 
 /* ==========================================================================
    Rodape Agenda
@@ -230,10 +243,11 @@
 
 .portletSearch .portletHeader,
 .portletCalendar .portletHeader {
+    padding: 15px 12px;
+    background: #edeff1 !important;
     font-weight: normal;
     font-size: 1.3em;
     font-family: "open_sansbold", Arial, Helvetica, sans-serif;
-    padding: 15px 12px;
 }
 
 /* Portlet de Calendario
@@ -286,8 +300,7 @@
 
 
 .portletSearch .portletFooter {
-    border-top: 1px dotted #c1c2c2;
-    text-align: right;
+    display: none;
 }
 
 
