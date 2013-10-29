@@ -1,4 +1,6 @@
 Contributors
 ============
 
-Érico Andrei (ericof)
+* Érico Andrei (ericof)
+* Felipe Duardo (felipeduardo)
+* Danilo Barbato (dbarbato)
