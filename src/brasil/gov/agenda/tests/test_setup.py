@@ -117,6 +117,15 @@ class TestInstall(BaseTestCase):
         self.assertEqual(allowed,
                          ['Contributor', 'Manager', 'Owner', 'Site Administrator'])
 
+    def test_add_agendadiaria_permission(self):
+        permission = 'brasil.gov.agenda: Add AgendaDiaria'
+        portal = self.portal
+        allowed = [x['name']
+                   for x in portal.rolesOfPermission(permission)
+                   if x['selected']]
+        self.assertEqual(allowed,
+                         ['Contributor', 'Manager', 'Owner', 'Site Administrator'])
+
 
 class TestUpgrade(BaseTestCase):
     """Ensure product upgrades work."""
