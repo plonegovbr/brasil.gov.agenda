@@ -8,7 +8,7 @@ Changelog
 
 
 1.0a1 (2013-10-29)
-^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^
 
   * Estilização de css, templates e portlets laterais (closes `#3`_).
     [felipeduardo]
