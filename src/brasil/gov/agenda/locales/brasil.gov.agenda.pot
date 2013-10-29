@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: brasil.gov.vcge\n"
-"POT-Creation-Date: 2013-10-20 16:52+0000\n"
+"POT-Creation-Date: 2013-10-29 13:02+0000\n"
 "PO-Revision-Date: 2012-09-18 23:00+0000\n"
 "Last-Translator: PloneGov.Br <gov@plone.org.br>\n"
 "Language-Team: PloneGov.Br <gov@plone.org.br>\n"
@@ -13,6 +13,10 @@ msgstr ""
 "Language-Name: English\n"
 "Preferred-Encodings: utf-8 latin1\n"
 "Domain: brasil.gov.agenda\n"
+
+#: ../portlets/busca.py:68
+msgid "Adiciona Portlet de Busca de Agenda"
+msgstr ""
 
 #: ../profiles/default/types/Agenda.xml
 msgid "Agenda"
@@ -27,9 +31,21 @@ msgstr ""
 msgid "Agenda de membro do governo brasileiro."
 msgstr ""
 
+#: ../content/schema/AgendaDiaria.xml
+msgid "Atualizacao"
+msgstr ""
+
 #. Default: "Brasao"
 #: ../content/schema/Agenda.xml
 msgid "Brasao"
+msgstr ""
+
+#: ../portlets/busca.py:36
+msgid "Busca de Agenda"
+msgstr ""
+
+#: ../profiles/default/portlets.xml
+msgid "Busca para Agenda"
 msgstr ""
 
 #: ../content/schema/Compromisso.xml
@@ -43,6 +59,18 @@ msgstr ""
 
 #: ../content/schema/AgendaDiaria.xml
 msgid "Data da Agenda"
+msgstr ""
+
+#: ../content/schema/AgendaDiaria.xml
+msgid "Descreva aqui se esta agenda foi atualizada. Deixe este campo em branco se nao houver nenhuma atualizacao."
+msgstr ""
+
+#: ../portlets/busca.py:69
+msgid "Este portlet busca no conteudo de agendas diarias."
+msgstr ""
+
+#: ../portlets/busca.py:20
+msgid "Informe a raiz da busca de Agendas Diarias"
 msgstr ""
 
 #: ../content/schema/Agenda.xml
@@ -73,6 +101,14 @@ msgstr ""
 
 #: ../content/schema/Compromisso.xml
 msgid "Pauta"
+msgstr ""
+
+#: ../profiles/default/portlets.xml
+msgid "Portlet de busca para Agenda."
+msgstr ""
+
+#: ../portlets/busca.py:19
+msgid "Raiz"
 msgstr ""
 
 #. Default: "Outros participantes"

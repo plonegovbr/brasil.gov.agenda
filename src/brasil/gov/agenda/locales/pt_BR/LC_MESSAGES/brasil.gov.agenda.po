@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: brasil.gov.vcge\n"
-"POT-Creation-Date: 2013-10-20 16:52+0000\n"
+"POT-Creation-Date: 2013-10-29 13:02+0000\n"
 "PO-Revision-Date: 2012-09-18 23:00+0000\n"
 "Last-Translator: PloneGov.Br <gov@plone.org.br>\n"
 "Language-Team: PloneGov.Br <gov@plone.org.br>\n"
@@ -13,6 +13,10 @@ msgstr ""
 "Language-Name: English\n"
 "Preferred-Encodings: utf-8 latin1\n"
 "Domain: brasil.gov.agenda\n"
+
+#: ../portlets/busca.py:68
+msgid "Adiciona Portlet de Busca de Agenda"
+msgstr "Adiciona Portlet de Busca de Agenda"
 
 #: ../profiles/default/types/Agenda.xml
 msgid "Agenda"
@@ -27,10 +31,22 @@ msgstr "Agenda Diária"
 msgid "Agenda de membro do governo brasileiro."
 msgstr "Agenda de um membro do Governo Brasileiro"
 
+#: ../content/schema/AgendaDiaria.xml
+msgid "Atualizacao"
+msgstr "Atualização"
+
 #. Default: "Brasao"
 #: ../content/schema/Agenda.xml
 msgid "Brasao"
 msgstr "Brasão"
+
+#: ../portlets/busca.py:36
+msgid "Busca de Agenda"
+msgstr "Busca de Agenda"
+
+#: ../profiles/default/portlets.xml
+msgid "Busca para Agenda"
+msgstr "Busca de Agenda"
 
 #: ../content/schema/Compromisso.xml
 #: ../profiles/default/types/Compromisso.xml
@@ -44,6 +60,18 @@ msgstr "Compromisso de um membro do Governo Brasileiro"
 #: ../content/schema/AgendaDiaria.xml
 msgid "Data da Agenda"
 msgstr "Data desta Agenda"
+
+#: ../content/schema/AgendaDiaria.xml
+msgid "Descreva aqui se esta agenda foi atualizada. Deixe este campo em branco se nao houver nenhuma atualizacao."
+msgstr "Descreva aqui se esta agenda foi atualizada. Deixe este campo em branco se não houver nenhuma atualização."
+
+#: ../portlets/busca.py:69
+msgid "Este portlet busca no conteudo de agendas diarias."
+msgstr "Este portlet busca no conteúdo de agendas diárias"
+
+#: ../portlets/busca.py:20
+msgid "Informe a raiz da busca de Agendas Diarias"
+msgstr "Informe a raiz de busca de Agendas Diárias"
 
 #: ../content/schema/Agenda.xml
 msgid "Informe o orgao ao qual esta agenda pertence. ex: Presidencia da Republica"
@@ -74,6 +102,14 @@ msgstr "Outros participantes deste compromisso, um por linha."
 #: ../content/schema/Compromisso.xml
 msgid "Pauta"
 msgstr "Pauta"
+
+#: ../profiles/default/portlets.xml
+msgid "Portlet de busca para Agenda."
+msgstr "Portlet de busca para Agenda."
+
+#: ../portlets/busca.py:19
+msgid "Raiz"
+msgstr "Raiz"
 
 #. Default: "Outros participantes"
 #: ../content/schema/Compromisso.xml
