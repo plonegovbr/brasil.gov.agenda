@@ -108,6 +108,15 @@ class TestInstall(BaseTestCase):
             calendar_types
         )
 
+    def test_add_agenda_permission(self):
+        permission = 'brasil.gov.agenda: Add Agenda'
+        portal = self.portal
+        allowed = [x['name']
+                   for x in portal.rolesOfPermission(permission)
+                   if x['selected']]
+        self.assertEqual(allowed,
+                         ['Contributor', 'Manager', 'Owner', 'Site Administrator'])
+
 
 class TestUpgrade(BaseTestCase):
     """Ensure product upgrades work."""
