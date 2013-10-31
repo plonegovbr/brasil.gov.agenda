@@ -4,7 +4,8 @@ Changelog
 1.0a2 (unreleased)
 ^^^^^^^^^^^^^^^^^^
 
-- Nothing changed yet.
+  * Adiciona validação para data de AgendaDiaria
+    [ericof]
 
 
 1.0a1 (2013-10-29)
