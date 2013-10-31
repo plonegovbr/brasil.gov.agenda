@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 
+from brasil.gov.agenda import _
+from brasil.gov.agenda.config import AGENDADIARIAFMT
 from brasil.gov.agenda.interfaces import IAgenda
 from brasil.gov.agenda.interfaces import IAgendaDiaria
 from brasil.gov.agenda.interfaces import ICompromisso
@@ -12,6 +14,8 @@ from plone.indexer.decorator import indexer
 from plone.supermodel.interfaces import IDefaultFactory
 from zope.interface import provider
 from zope.schema.interfaces import IContextAwareDefaultFactory
+from z3c.form.validator import SimpleFieldValidator
+from zope.interface import Invalid
 
 import datetime
 
@@ -53,6 +57,16 @@ def default_location(context):
 def default_date():
     ''' Retorna um dia no futuro '''
     return datetime.date.today() + datetime.timedelta(1)
+
+
+class DateValidator(SimpleFieldValidator):
+    def validate(self, value):
+        ''' Garantimos a unicidade das AgendasDiarias '''
+        super(DateValidator, self).validate(value)
+        date = value.strftime(AGENDADIARIAFMT)
+        oIds = self.context.objectIds()
+        if date in oIds:
+            raise Invalid(_(u'Ja existe uma agenda para esta data'))
 
 
 @indexer(IAgendaDiaria)

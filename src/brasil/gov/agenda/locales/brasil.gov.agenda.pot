@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: brasil.gov.vcge\n"
-"POT-Creation-Date: 2013-10-29 13:02+0000\n"
+"POT-Creation-Date: 2013-10-31 18:34+0000\n"
 "PO-Revision-Date: 2012-09-18 23:00+0000\n"
 "Last-Translator: PloneGov.Br <gov@plone.org.br>\n"
 "Language-Team: PloneGov.Br <gov@plone.org.br>\n"
@@ -75,6 +75,10 @@ msgstr ""
 
 #: ../content/schema/Agenda.xml
 msgid "Informe o orgao ao qual esta agenda pertence. ex: Presidencia da Republica"
+msgstr ""
+
+#: ../content/agendadiaria.py:69
+msgid "Ja existe uma agenda para esta data"
 msgstr ""
 
 #: ../content/schema/Agenda.xml

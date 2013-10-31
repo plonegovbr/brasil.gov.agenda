@@ -1,9 +1,11 @@
 <model xmlns="http://namespaces.plone.org/supermodel/schema"
        xmlns:indexer="http://namespaces.plone.org/supermodel/indexer"
+       xmlns:form="http://namespaces.plone.org/supermodel/form"
        xmlns:i18n="http://xml.zope.org/namespaces/i18n"
        i18n:domain="brasil.gov.agenda">
   <schema>
-    <field name="date" type="zope.schema.Date">
+    <field name="date" type="zope.schema.Date"
+      form:validator="brasil.gov.agenda.content.agendadiaria.DateValidator">
         <description />
         <defaultFactory>brasil.gov.agenda.content.agendadiaria.default_date</defaultFactory>
         <title i18n:translate="">Data da Agenda</title>
