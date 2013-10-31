@@ -194,3 +194,27 @@ class ContentTypeBrowserTestCase(unittest.TestCase):
         self.assertIn('DTSTART:20140205',
                       browser.contents)
 
+    def test_compromisso_vcs(self):
+        app = self.layer['app']
+        portal = self.portal
+        self.setupContent(portal)
+        import transaction
+        transaction.commit()
+        self.browser = Browser(app)
+        self.browser.handleErrors = False
+
+        vcal_url = '%s/vcal_view' % self.compromisso.absolute_url()
+        browser = self.browser
+
+        # Acessaremos a view de vcal
+        browser.open(vcal_url)
+        self.assertEqual(browser.headers['status'], '200 Ok')
+        # Headers devem indicar dados VCAL
+        self.assertIn('text/x-vCalendar',
+                      browser.headers['content-type'])
+        # Corpo deve conter indicacao do produto que o criou
+        self.assertIn('BEGIN:VCALENDAR\r\nPRODID:brasil.gov.agenda',
+                      browser.contents)
+        # E a data de inicio
+        self.assertIn('BEGIN:VEVENT\r\nDTSTART:20140205',
+                      browser.contents)
