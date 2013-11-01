@@ -31,6 +31,9 @@ O estado atual dos testes pode ser visto na imagem a seguir:
 .. image:: https://secure.travis-ci.org/plonegovbr/brasil.gov.agenda.png?branch=master
     :target: http://travis-ci.org/plonegovbr/brasil.gov.agenda
 
+.. image:: https://coveralls.io/repos/plonegovbr/brasil.gov.agenda/badge.png?branch=master
+    :target: https://coveralls.io/r/plonegovbr/brasil.gov.agenda
+
 
 Instalação
 ------------
