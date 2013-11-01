@@ -58,9 +58,8 @@ class BuscaPortletTestCase(unittest.TestCase):
             'root': u'/'.join(self.agenda.getPhysicalPath())}
         )
 
-        self.assertEquals(len(mapping), 1)
-        self.failUnless(isinstance(mapping.values()[0],
-                        busca.Assignment))
+        self.assertEqual(len(mapping), 1)
+        self.assertTrue(isinstance(mapping.values()[0], busca.Assignment))
 
     def test_portlet_properties(self):
         portlet = getUtility(IPortletType, name='brasil.gov.agenda.busca')
