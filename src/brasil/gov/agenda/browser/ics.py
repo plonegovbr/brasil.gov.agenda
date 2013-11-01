@@ -41,8 +41,8 @@ END:VEVENT
 
 
 class ICSView (grok.View):
-    ''' Visao vCal
-    '''
+    """ Visao vCal
+    """
     grok.name('ical_view')
     grok.context(ICompromisso)
 

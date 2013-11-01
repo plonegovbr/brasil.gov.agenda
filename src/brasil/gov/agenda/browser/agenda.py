@@ -10,8 +10,8 @@ grok.templatedir('templates')
 
 
 class AgendaView (grok.View):
-    ''' Visao padrao da agenda
-    '''
+    """ Visao padrao da agenda
+    """
 
     grok.name('view')
     grok.context(IAgenda)
@@ -45,7 +45,7 @@ class AgendaView (grok.View):
                               target_language='pt_BR')
 
     def agenda_recente(self):
-        ''' Retorna a agenda mais publicada mais recente '''
+        """ Retorna a agenda mais publicada mais recente """
         ct = self.catalog
         path = '/'.join(self.context.getPhysicalPath())
         params = {}

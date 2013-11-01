@@ -10,8 +10,8 @@ grok.templatedir('templates')
 
 
 class CompromissoView (grok.View):
-    ''' Visao padrao do tipo compromisso
-    '''
+    """ Visao padrao do tipo compromisso
+    """
     grok.name('view')
     grok.context(ICompromisso)
 

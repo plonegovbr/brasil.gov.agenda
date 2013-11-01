@@ -26,7 +26,7 @@ class AgendaDiaria(Container):
     grok.implements(IAgendaDiaria)
 
     def Title(self):
-        ''' Retorna data como titulo para esta AgendaDiaria '''
+        """ Retorna data como titulo para esta AgendaDiaria """
         date = self.date
         title = date.strftime('%d/%m/%Y')
         return title
@@ -42,9 +42,9 @@ def exclude_from_nav_default_value(data):
 
 @provider(IContextAwareDefaultFactory)
 def default_autoridade(context):
-    ''' Por padrao utilizamos a autoridade
+    """ Por padrao utilizamos a autoridade
         definida no objeto pai
-    '''
+    """
     return getattr(context, 'autoridade', u'')
 
 
@@ -55,13 +55,13 @@ def default_location(context):
 
 @provider(IDefaultFactory)
 def default_date():
-    ''' Retorna um dia no futuro '''
+    """ Retorna um dia no futuro """
     return datetime.date.today() + datetime.timedelta(1)
 
 
 class DateValidator(SimpleFieldValidator):
     def validate(self, value):
-        ''' Garantimos a unicidade das AgendasDiarias '''
+        """ Garantimos a unicidade das AgendasDiarias """
         super(DateValidator, self).validate(value)
         date = value.strftime(AGENDADIARIAFMT)
         oIds = self.context.objectIds()
@@ -71,9 +71,9 @@ class DateValidator(SimpleFieldValidator):
 
 @indexer(IAgendaDiaria)
 def SearchableText_AgendaDiaria(obj):
-    ''' Indexa os dados dos compromissos dentro desta AgendaDiaria
+    """ Indexa os dados dos compromissos dentro desta AgendaDiaria
         para prover busca por texto integral
-    '''
+    """
     children = obj.objectValues()
     SearchableText = []
     for child in children:
@@ -96,9 +96,9 @@ def SearchableText_AgendaDiaria(obj):
 
 @indexer(IAgendaDiaria)
 def start_date(obj):
-    ''' Converte a data da AgendaDiaria para DateTime e coloca o
+    """ Converte a data da AgendaDiaria para DateTime e coloca o
         horario como 00:00:00
-    '''
+    """
     start_date = IAgendaDiaria(obj).date
     # Comeco do dia
     start_date = DateTime('%s 00:00:00' % start_date.strftime('%Y-%m-%d'))
@@ -107,9 +107,9 @@ def start_date(obj):
 
 @indexer(IAgendaDiaria)
 def end_date(obj):
-    ''' Converte a data da AgendaDiaria para DateTime e coloca o
+    """ Converte a data da AgendaDiaria para DateTime e coloca o
         horario como 23:59:59
-    '''
+    """
     end_date = IAgendaDiaria(obj).date
     # Final do dia
     end_date = DateTime('%s 23:59:59' % end_date.strftime('%Y-%m-%d'))
