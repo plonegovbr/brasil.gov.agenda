@@ -9,15 +9,7 @@ Introdução
 -----------
 
 Este pacote provê tipos de conteúdo necessários a gestão de Agendas de membros
- do Governo Brasileiro.
-
-
-Requisitos
-------------
-
-Para uso deste pacote, seu site deve ter sido construído com:
-
-    * Plone 4.3 ou superior (http://plone.org/products/plone)
+do Governo Brasileiro.
 
 
 Estado deste pacote

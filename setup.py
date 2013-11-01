@@ -56,7 +56,7 @@ setup(
         'plone.supermodel >=1.2.3',
         'plone.uuid',
         'Products.CMFCore',
-        'Products.CMFPlone',
+        'Products.CMFPlone >=4.3',
         'Products.GenericSetup',
         'setuptools',
         'zope.component',
