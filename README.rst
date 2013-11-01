@@ -18,7 +18,7 @@ Estado deste pacote
 O **brasil.gov.agenda** tem testes automatizados e, a cada alteração em seu
 código os testes são executados pelo serviço Travis. 
 
-O estado atual dos testes pode ser visto na imagem a seguir:
+O estado atual dos testes pode ser visto nas imagens a seguir:
 
 .. image:: https://secure.travis-ci.org/plonegovbr/brasil.gov.agenda.png?branch=master
     :target: http://travis-ci.org/plonegovbr/brasil.gov.agenda
