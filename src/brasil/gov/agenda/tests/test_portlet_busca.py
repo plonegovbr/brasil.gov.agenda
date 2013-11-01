@@ -11,7 +11,8 @@ from plone.portlets.interfaces import IPortletType
 from Products.GenericSetup.utils import _getDottedName
 from zope.component import getMultiAdapter
 from zope.component import getUtility
-import unittest2 as unittest
+
+import unittest
 
 
 class BuscaPortletTestCase(unittest.TestCase):

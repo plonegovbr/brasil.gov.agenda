@@ -11,7 +11,7 @@ from plone.testing.z2 import Browser
 from Products.GenericSetup.upgrade import listUpgradeSteps
 from zope.site.hooks import setSite
 
-import unittest2 as unittest
+import unittest
 
 
 class Plone43TestCase(unittest.TestCase):

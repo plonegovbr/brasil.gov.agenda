@@ -15,7 +15,7 @@ from zope.event import notify
 from zope.lifecycleevent import ObjectModifiedEvent
 
 import datetime
-import unittest2 as unittest
+import unittest
 
 
 class ContentTypeTestCase(unittest.TestCase):
