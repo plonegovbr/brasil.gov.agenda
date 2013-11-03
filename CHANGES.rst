@@ -4,6 +4,9 @@ Changelog
 1.0a2 (unreleased)
 ^^^^^^^^^^^^^^^^^^
 
+  * Campo atualização do tipo AgendaDiaria agora é RichText
+    [ericof]
+
   * Adiciona validação para data de AgendaDiaria
     [ericof]
 
