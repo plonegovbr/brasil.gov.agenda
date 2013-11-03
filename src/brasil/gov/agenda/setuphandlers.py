@@ -3,7 +3,7 @@ from Products.CMFCore.utils import getToolByName
 
 
 def list_agendadiaria_calendar(p):
-    ''' Listaremos o tipo AgendaDiaria no calendario do site '''
+    """ Listaremos o tipo AgendaDiaria no calendario do site """
     calendar = getToolByName(p, "portal_calendar", None)
     if calendar is not None:
         our_type = 'AgendaDiaria'
@@ -14,8 +14,8 @@ def list_agendadiaria_calendar(p):
 
 
 def setup_site(context):
-    ''' Ajustamos o site para receber o produto de agenda
-    '''
+    """ Ajustamos o site para receber o produto de agenda
+    """
     # Executado apenas se o estivermos no Profile correto
     if context.readDataFile('brasil.gov.agenda.txt') is None:
         return

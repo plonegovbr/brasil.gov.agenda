@@ -9,15 +9,7 @@ Introdução
 -----------
 
 Este pacote provê tipos de conteúdo necessários a gestão de Agendas de membros
- do Governo Brasileiro.
-
-
-Requisitos
-------------
-
-Para uso deste pacote, seu site deve ter sido construído com:
-
-    * Plone 4.3 ou superior (http://plone.org/products/plone)
+do Governo Brasileiro.
 
 
 Estado deste pacote
@@ -26,10 +18,13 @@ Estado deste pacote
 O **brasil.gov.agenda** tem testes automatizados e, a cada alteração em seu
 código os testes são executados pelo serviço Travis. 
 
-O estado atual dos testes pode ser visto na imagem a seguir:
+O estado atual dos testes pode ser visto nas imagens a seguir:
 
 .. image:: https://secure.travis-ci.org/plonegovbr/brasil.gov.agenda.png?branch=master
     :target: http://travis-ci.org/plonegovbr/brasil.gov.agenda
+
+.. image:: https://coveralls.io/repos/plonegovbr/brasil.gov.agenda/badge.png?branch=master
+    :target: https://coveralls.io/r/plonegovbr/brasil.gov.agenda
 
 
 Instalação

@@ -5,8 +5,7 @@ from brasil.gov.agenda.interfaces import IBrowserLayer
 from plone.browserlayer.utils import registered_layers
 from zope.site.hooks import setSite
 
-
-import unittest2 as unittest
+import unittest
 
 
 class TestBrowserLayer(unittest.TestCase):

@@ -9,8 +9,8 @@ grok.templatedir('templates')
 
 
 class AgendaDiariaView (grok.View):
-    ''' Visao padrao da agenda
-    '''
+    """ Visao padrao da agenda
+    """
 
     grok.name('view')
     grok.context(IAgendaDiaria)

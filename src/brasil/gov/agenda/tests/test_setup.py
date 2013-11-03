@@ -49,7 +49,7 @@ class TestInstall(BaseTestCase):
                         '%s not installed' % PROJECTNAME)
 
     def test_version(self):
-        self.assertEquals(
+        self.assertEqual(
             self.st.getLastVersionForProfile(self.profile),
             (u'2000',)
         )
@@ -148,7 +148,7 @@ class TestUpgrade(BaseTestCase):
         step = [step for step in upgradeSteps
                 if (step[0]['dest'] == ('2000',))
                 and (step[0]['source'] == ('1000',))]
-        self.assertEquals(len(step), 1)
+        self.assertEqual(len(step), 1)
 
     def test_2000_fix_agendadiaria(self):
         # Criamos a agenda

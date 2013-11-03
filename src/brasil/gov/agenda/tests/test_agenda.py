@@ -14,7 +14,7 @@ from zope.component import createObject
 from zope.component import queryUtility
 
 import datetime
-import unittest2 as unittest
+import unittest
 
 
 class ContentTypeTestCase(unittest.TestCase):

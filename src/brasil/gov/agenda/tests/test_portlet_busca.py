@@ -11,7 +11,8 @@ from plone.portlets.interfaces import IPortletType
 from Products.GenericSetup.utils import _getDottedName
 from zope.component import getMultiAdapter
 from zope.component import getUtility
-import unittest2 as unittest
+
+import unittest
 
 
 class BuscaPortletTestCase(unittest.TestCase):
@@ -57,9 +58,8 @@ class BuscaPortletTestCase(unittest.TestCase):
             'root': u'/'.join(self.agenda.getPhysicalPath())}
         )
 
-        self.assertEquals(len(mapping), 1)
-        self.failUnless(isinstance(mapping.values()[0],
-                        busca.Assignment))
+        self.assertEqual(len(mapping), 1)
+        self.assertTrue(isinstance(mapping.values()[0], busca.Assignment))
 
     def test_portlet_properties(self):
         portlet = getUtility(IPortletType, name='brasil.gov.agenda.busca')

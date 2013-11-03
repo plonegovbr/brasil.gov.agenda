@@ -12,8 +12,8 @@ from zope.interface import implements
 
 
 class IBuscaPortlet(IPortletDataProvider):
-    ''' Portlet de busca dentro da agenda
-    '''
+    """ Portlet de busca dentro da agenda
+    """
 
     root = schema.Choice(
         title=_(u"Raiz"),
