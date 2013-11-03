@@ -89,7 +89,10 @@ def SearchableText_AgendaDiaria(obj):
         SearchableText.append(obj.autoridade)
         SearchableText.append(obj.location)
     # Alteracao da agenda
-    SearchableText.append(obj.update)
+    update = obj.update
+    if hasattr(update, 'output'):
+        update = update.output
+    SearchableText.append(update)
     return ' '.join([text for text in SearchableText
                      if isinstance(text, basestring)])
 

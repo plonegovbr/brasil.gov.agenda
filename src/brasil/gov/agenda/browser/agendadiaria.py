@@ -78,7 +78,7 @@ class AgendaDiariaView (grok.View):
 
     def update_info(self):
         update_info = self.context.update
-        return update_info
+        return getattr(update_info, 'output', '')
 
     def Title(self):
         parts = {}
