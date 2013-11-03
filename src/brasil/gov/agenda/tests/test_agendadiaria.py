@@ -5,6 +5,7 @@ from brasil.gov.agenda.testing import INTEGRATION_TESTING
 from DateTime import DateTime
 from plone.app.dexterity.behaviors.exclfromnav import IExcludeFromNavigation
 from plone.app.referenceablebehavior.referenceable import IReferenceable
+from plone.app.textfield.value import RichTextValue
 from plone.app.testing import setRoles
 from plone.app.testing import TEST_USER_ID
 from plone.dexterity.interfaces import IDexterityFTI
@@ -113,7 +114,10 @@ class ContentTypeTestCase(unittest.TestCase):
         # Ao alterar o local e autoridade devemos ficar sem resultados
         self.agendadiaria.location = u'Palacio do Planalto'
         self.agendadiaria.autoridade = u'Juscelino Kubitschek'
-        self.agendadiaria.update = u'Alterado local e autoridade'
+        self.agendadiaria.update = RichTextValue(u'Alterado local e autoridade',
+                                                 'text/html',
+                                                 'text/x-html-safe',
+                                                 encoding='utf-8')
         self.agendadiaria.reindexObject()
         results = ct.searchResults(portal_type='AgendaDiaria',
                                    SearchableText='Clarice')

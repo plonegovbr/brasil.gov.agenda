@@ -22,7 +22,7 @@
         <defaultFactory>brasil.gov.agenda.content.agendadiaria.default_location</defaultFactory>
       <title i18n:translate="label_event_location">Event Location</title>
     </field>
-    <field name="update" type="zope.schema.Text">
+    <field name="update" type="plone.app.textfield.RichText">
         <description i18n:translate="">Descreva aqui se esta agenda foi atualizada. Deixe este campo em branco se nao houver nenhuma atualizacao.</description>
         <required>False</required>
         <title i18n:translate="">Atualizacao</title>
