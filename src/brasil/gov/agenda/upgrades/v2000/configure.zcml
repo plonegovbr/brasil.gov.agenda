@@ -27,6 +27,12 @@
             handler=".handler.apply_profile"
             />
 
+        <gs:upgradeStep
+            title="Migra campo atualizacao"
+            description="Campo atualizacao, que era text, vira RichText."
+            handler=".handler.fix_agendadiaria_update"
+            />
+
     </gs:upgradeSteps>
 
 
