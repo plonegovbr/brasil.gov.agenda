@@ -11,6 +11,7 @@ from plone.testing.z2 import Browser
 from Products.GenericSetup.upgrade import listUpgradeSteps
 from zope.site.hooks import setSite
 
+import datetime
 import unittest2 as unittest
 
 
@@ -50,7 +51,7 @@ class TestInstall(BaseTestCase):
     def test_version(self):
         self.assertEquals(
             self.st.getLastVersionForProfile(self.profile),
-            (u'1000',)
+            (u'2000',)
         )
 
     def test_static_resource_grokker(self):
@@ -148,6 +149,34 @@ class TestUpgrade(BaseTestCase):
                 if (step[0]['dest'] == ('2000',))
                 and (step[0]['source'] == ('1000',))]
         self.assertEquals(len(step), 1)
+
+    def test_2000_fix_agendadiaria(self):
+        # Criamos a agenda
+        self.portal.invokeFactory('Agenda', 'agenda')
+        self.agenda = self.portal['agenda']
+        # Criamos a agenda diaria
+        self.agenda.invokeFactory('AgendaDiaria', '2013-02-05')
+        self.agendadiaria = self.agenda['2013-02-05']
+        self.agendadiaria.date = datetime.datetime(2013, 2, 5)
+        self.agendadiaria.update = u'Reuniao em Mirtilo\nVisita Eslovenia'
+        self.agendadiaria.reindexObject()
+        # Setamos o profile para versao 1000
+        self.st.setLastVersionForProfile(self.profile, u'1000')
+        # Pegamos os upgrade steps
+        upgradeSteps = listUpgradeSteps(self.st,
+                                        self.profile,
+                                        '1000')
+        steps = [step for step in upgradeSteps
+                 if (step[0]['dest'] == ('2000',))
+                 and (step[0]['source'] == ('1000',))][0]
+        # Os executamos
+        for step in steps:
+            step['step'].doStep(self.st)
+        self.assertTrue(hasattr(self.agendadiaria.update, 'raw'))
+        output = self.agendadiaria.update.output
+        self.assertIn('<br', output)
+        self.assertIn('Eslovenia', output)
+        self.assertIn('Mirtilo', output)
 
 
 class TestUninstall(BaseTestCase):
