@@ -1,7 +1,7 @@
 Changelog
 ---------
 
-1.0a2 (unreleased)
+1.0a2 (2013-11-04)
 ^^^^^^^^^^^^^^^^^^
 
   * Campo atualização do tipo AgendaDiaria agora é RichText
