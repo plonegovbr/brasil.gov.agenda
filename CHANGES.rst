@@ -10,6 +10,8 @@ Changelog
   * Adiciona validação para data de AgendaDiaria
     [ericof]
 
+  * Implementa relatório de coverage dos testes
+    [hvelarde]
 
 1.0a1 (2013-10-29)
 ^^^^^^^^^^^^^^^^^^^^^
