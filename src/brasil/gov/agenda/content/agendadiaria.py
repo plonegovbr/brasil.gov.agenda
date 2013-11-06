@@ -26,9 +26,12 @@ class AgendaDiaria(Container):
     grok.implements(IAgendaDiaria)
 
     def Title(self):
-        """ Retorna data como titulo para esta AgendaDiaria """
+        """ Retorna titulo calculado com autoridade e data
+        """
         date = self.date
-        title = date.strftime('%d/%m/%Y')
+        fmt_date = date.strftime('%d/%m/%Y')
+        autoridade = self.autoridade
+        title = u'Agenda de %s para %s' % (autoridade, fmt_date)
         return title
 
 

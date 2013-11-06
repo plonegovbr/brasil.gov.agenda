@@ -36,6 +36,7 @@ class ContentTypeTestCase(unittest.TestCase):
         # Criamos a agenda diaria
         self.agenda.invokeFactory('AgendaDiaria', '2013-02-05')
         self.agendadiaria = self.agenda['2013-02-05']
+        self.agendadiaria.autoridade = u'Clarice Lispector'
         self.agendadiaria.date = datetime.datetime(2013, 2, 5)
         self.agendadiaria.reindexObject()
 
@@ -65,7 +66,8 @@ class ContentTypeTestCase(unittest.TestCase):
 
     def test_title(self):
         agendadiaria = self.agendadiaria
-        self.assertEqual(agendadiaria.Title(), '05/02/2013')
+        self.assertEqual(agendadiaria.Title(),
+                         'Agenda de Clarice Lispector para 05/02/2013')
 
     def test_start_indexing(self):
         ct = self.ct

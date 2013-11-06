@@ -4,7 +4,9 @@ Changelog
 1.0a3 (unreleased)
 ^^^^^^^^^^^^^^^^^^
 
-- Nothing changed yet.
+  * Título de AgendaDiaria fica no formato
+    "Agenda de <autoridade> para <data>"
+    [ericof]
 
 
 1.0a2 (2013-11-04)
