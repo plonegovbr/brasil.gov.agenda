@@ -8,6 +8,9 @@ Changelog
     "Agenda de <autoridade> para <data>"
     [ericof]
 
+  * Adicionado indice location ao portal_catalog
+    [ericof]
+
 
 1.0a2 (2013-11-04)
 ^^^^^^^^^^^^^^^^^^
