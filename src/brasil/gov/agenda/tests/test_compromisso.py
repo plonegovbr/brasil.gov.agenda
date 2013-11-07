@@ -105,6 +105,21 @@ class ContentTypeTestCase(unittest.TestCase):
                                         'range': 'minmax'})
         self.assertEqual(len(results), 1)
 
+    def test_location_indexing(self):
+        ct = self.ct
+        self.compromisso.location = u'Sala 635'
+        self.compromisso.reindexObject()
+        results = ct.searchResults(portal_type='Compromisso',
+                                   location=u'Sala 635')
+        self.assertEqual(len(results), 1)
+        self.assertEqual(results[0].location, u'Sala 635')
+        self.compromisso.location = u'Palacio do Planalto'
+        self.compromisso.reindexObject()
+        results = ct.searchResults(portal_type='Compromisso',
+                                   location=u'Palacio do Planalto')
+        self.assertEqual(len(results), 1)
+        self.assertEqual(results[0].location, u'Palacio do Planalto')
+
 
 class ContentTypeBrowserTestCase(unittest.TestCase):
 
