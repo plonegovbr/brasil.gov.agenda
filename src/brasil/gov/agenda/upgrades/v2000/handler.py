@@ -18,7 +18,7 @@ def apply_profile(context):
 
 
 def fix_agendadiaria_update(context):
-    """Atualiza perfil para versao 2000."""
+    """Atualiza campo update da AgendaDiaria."""
     site = getSite()
     ct = site.portal_catalog
     results = ct.searchResults(portal_type='AgendaDiaria')

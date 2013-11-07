@@ -51,7 +51,7 @@ class TestInstall(BaseTestCase):
     def test_version(self):
         self.assertEqual(
             self.st.getLastVersionForProfile(self.profile),
-            (u'2000',)
+            (u'3000',)
         )
 
     def test_static_resource_grokker(self):
@@ -150,6 +150,16 @@ class TestUpgrade(BaseTestCase):
                 and (step[0]['source'] == ('1000',))]
         self.assertEqual(len(step), 1)
 
+    def test_to3000_available(self):
+
+        upgradeSteps = listUpgradeSteps(self.st,
+                                        self.profile,
+                                        '2000')
+        step = [step for step in upgradeSteps
+                if (step[0]['dest'] == ('3000',))
+                and (step[0]['source'] == ('2000',))]
+        self.assertEqual(len(step), 1)
+
     def test_2000_fix_agendadiaria(self):
         # Criamos a agenda
         self.portal.invokeFactory('Agenda', 'agenda')
@@ -177,6 +187,52 @@ class TestUpgrade(BaseTestCase):
         self.assertIn('<br', output)
         self.assertIn('Eslovenia', output)
         self.assertIn('Mirtilo', output)
+
+    def test_3000_fix_agendadiaria_catalog(self):
+        ct = self.portal.portal_catalog
+        # Criamos a agenda
+        self.portal.invokeFactory('Agenda', 'agenda')
+        self.agenda = self.portal['agenda']
+        # Criamos a agenda diaria
+        self.agenda.invokeFactory('AgendaDiaria', '2013-02-05')
+        self.agendadiaria = self.agenda['2013-02-05']
+        self.agendadiaria.date = datetime.datetime(2013, 2, 5)
+        self.agendadiaria.autoridade = u'Clarice Lispector'
+        self.agendadiaria.location = u'Palacio do Planalto'
+
+        # Fazemos um monkey patch no tipo AgendaDiaria
+        def Title():
+            return '05/02/2013'
+
+        self.agendadiaria._title = self.agendadiaria.Title
+        self.agendadiaria.Title = Title
+        self.agendadiaria.reindexObject()
+        results = ct.searchResults(
+            path='/'.join(self.agendadiaria.getPhysicalPath())
+        )
+        self.assertEqual(results[0].Title, '05/02/2013')
+
+        # Revertemos o monkey patch
+        self.agendadiaria.Title = self.agendadiaria._title
+
+        # Setamos o profile para versao 2000
+        self.st.setLastVersionForProfile(self.profile, u'2000')
+        # Pegamos os upgrade steps
+        upgradeSteps = listUpgradeSteps(self.st,
+                                        self.profile,
+                                        '2000')
+        steps = [step for step in upgradeSteps
+                 if (step[0]['dest'] == ('3000',))
+                 and (step[0]['source'] == ('2000',))][0]
+        # Os executamos
+        for step in steps:
+            step['step'].doStep(self.st)
+
+        results = ct.searchResults(
+            path='/'.join(self.agendadiaria.getPhysicalPath())
+        )
+        self.assertEqual(results[0].Title,
+                         u'Agenda de Clarice Lispector para 05/02/2013')
 
 
 class TestUninstall(BaseTestCase):
