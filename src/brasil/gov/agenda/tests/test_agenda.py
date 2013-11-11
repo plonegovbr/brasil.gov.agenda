@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-
+from brasil.gov.agenda.config import AGENDADIARIAFMT
 from brasil.gov.agenda.interfaces import IAgenda
 from brasil.gov.agenda.testing import FUNCTIONAL_TESTING
 from brasil.gov.agenda.testing import INTEGRATION_TESTING
@@ -125,6 +125,32 @@ class ContentTypeBrowserTestCase(unittest.TestCase):
         # Exibiremos a AgendaDiaria de 02/05/2014
         browser.open(agenda_url)
         self.assertIn('05/02/2014 &mdash;',
+                      browser.contents.decode('utf-8'))
+
+        # Criamos uma agenda para o dia de hoje
+        hoje = datetime.datetime.now()
+        fmt_id = hoje.strftime(AGENDADIARIAFMT)
+        fmt_display = hoje.strftime('%d/%m/%Y')
+        self.agenda.invokeFactory('AgendaDiaria', fmt_id)
+        self.agendahoje = self.agenda[fmt_id]
+        self.agendahoje.date = hoje
+        self.agendahoje.reindexObject()
+        transaction.commit()
+
+        # Como esta AgendaDiaria nao foi publicada, continuamos a
+        # exibir a de 05/02
+        browser.open(agenda_url)
+        self.assertIn('05/02/2014 &mdash;',
+                      browser.contents.decode('utf-8'))
+
+        # Ao publicarmos a AgendaDiaria de hoje
+        setRoles(self.portal, TEST_USER_ID, ['Manager'])
+        self.wt.doActionFor(self.agendahoje, 'publish')
+        setRoles(self.portal, TEST_USER_ID, ['Member'])
+        transaction.commit()
+        # Ela se torna a ativa
+        browser.open(agenda_url)
+        self.assertIn('%s &mdash;' % fmt_display,
                       browser.contents.decode('utf-8'))
 
         # Nos autenticamos como admin

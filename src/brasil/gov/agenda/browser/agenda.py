@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 
+from brasil.gov.agenda.config import AGENDADIARIAFMT
 from brasil.gov.agenda.interfaces import IAgenda
+from DateTime import DateTime
 from five import grok
 from Products.CMFCore.utils import getToolByName
 from zope.component import getMultiAdapter
@@ -23,6 +25,7 @@ class AgendaView (grok.View):
                                         name=u'plone_context_state')
         self._ts = getToolByName(self.context, 'translation_service')
         self.catalog = plone_tools.catalog()
+        self.workflow = plone_tools.workflow()
         self.editable = context_state.is_editable()
 
     def __call__(self):
@@ -46,18 +49,27 @@ class AgendaView (grok.View):
 
     def agenda_recente(self):
         """ Retorna a agenda mais publicada mais recente """
-        ct = self.catalog
-        path = '/'.join(self.context.getPhysicalPath())
-        params = {}
-        params['path'] = path
-        params['portal_type'] = 'AgendaDiaria'
-        params['review_state'] = 'published'
-        params['sort_on'] = 'start'
-        params['sort_order'] = 'reverse'
-        results = ct.searchResults(**params)
-        if results:
-            # Retornamos a AgendaDiaria mais recente
-            return results[0].getObject()
+        agenda = None
+        hoje = DateTime().strftime(AGENDADIARIAFMT)
+        # Validamos se existe uma agenda para o dia de hoje
+        # e se ela esta publicada
+        if hoje in self.context.objectIds():
+            agenda = self.context[hoje]
+            review_state = self.workflow.getInfoFor(agenda, 'review_state')
+            agenda = agenda if review_state == 'published' else None
+        if not agenda:
+            # Caso nao exista retornamos a agenda mais recente
+            ct = self.catalog
+            path = '/'.join(self.context.getPhysicalPath())
+            params = {}
+            params['path'] = path
+            params['portal_type'] = 'AgendaDiaria'
+            params['review_state'] = 'published'
+            params['sort_on'] = 'start'
+            params['sort_order'] = 'reverse'
+            results = ct.searchResults(**params)
+            agenda = results[0].getObject() if results else None
+        return agenda
 
     @property
     def date(self):
