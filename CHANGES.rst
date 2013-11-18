@@ -1,7 +1,7 @@
 Changelog
 ---------
 
-1.0a3 (unreleased)
+1.0a3 (2013-11-18)
 ^^^^^^^^^^^^^^^^^^^
   * Exibe a mensagem de "Sem compromissos oficiais." apenas se
     nao tivermos compromissos e o campo atualizacao nao
