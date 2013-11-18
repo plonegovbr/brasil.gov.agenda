@@ -2,7 +2,7 @@ Changelog
 ---------
 
 1.0a3 (unreleased)
-^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^
 
   * A visão padrão de Agenda agora exibe a AgendaDiaria
     do dia se estiver publicada ou a mais recente.
