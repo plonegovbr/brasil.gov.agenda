@@ -1,6 +1,12 @@
 Changelog
 ---------
 
+1.0a4 (unreleased)
+^^^^^^^^^^^^^^^^^^
+
+- Nothing changed yet.
+
+
 1.0a3 (2013-11-18)
 ^^^^^^^^^^^^^^^^^^^
   * Exibe a mensagem de "Sem compromissos oficiais." apenas se
