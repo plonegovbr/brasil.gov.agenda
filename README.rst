@@ -9,7 +9,10 @@ Introdução
 -----------
 
 Este pacote provê tipos de conteúdo necessários a gestão de Agendas de membros
-do Governo Brasileiro.
+do Governo Brasileiro conforme disposto na
+`Lei 12.813, de 16 de Maio de 2013
+<http://www.planalto.gov.br/ccivil_03/_Ato2011-2014/2013/Lei/L12813.htm>`_
+artigos 2o. e 11o.
 
 
 Estado deste pacote
