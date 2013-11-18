@@ -173,6 +173,39 @@ class ContentTypeTestCase(unittest.TestCase):
                                    SearchableText='Clarice')
         self.assertEqual(len(results), 1)
 
+    def test_view_sem_compromissos(self):
+        agendadiaria = self.agendadiaria
+        view = agendadiaria.restrictedTraverse('@@view')
+        # AgendaDiaria sem compromissos e sem nada no campo atualizacao
+        view.update()
+        sem_compromissos = view.exibe_sem_compromissos()
+        self.assertTrue(sem_compromissos)
+
+        # Adicionamos uma informacao no campo atualizacao
+        agendadiaria.update = RichTextValue(u'Alterado local e autoridade',
+                                            'text/html',
+                                            'text/x-html-safe',
+                                            encoding='utf-8')
+        view.update()
+        sem_compromissos = view.exibe_sem_compromissos()
+        self.assertFalse(sem_compromissos)
+
+        # Removemos a atualizacao e adicionamos um compromisso
+        agendadiaria.update = None
+        start_date = datetime.datetime(2013, 2, 5, 10, 0, 0)
+        agendadiaria.invokeFactory('Compromisso', 'reuniao-ministerial',
+                                   start_date=start_date)
+        reuniao = agendadiaria['reuniao-ministerial']
+        reuniao.title = u'Reunião Ministerial'
+        reuniao.description = u'Encontro com todos os ministros'
+        reuniao.autoridade = u'Clarice Lispector'
+        reuniao.location = u'Palacio do Planalto'
+        reuniao.attendees = u'Mario de Andrade\nTarsila do Amaral'
+        reuniao.reindexObject()
+        view.update()
+        sem_compromissos = view.exibe_sem_compromissos()
+        self.assertFalse(sem_compromissos)
+
     def test_agendadiaria_icon(self):
         from plone.testing.z2 import Browser
         portal = self.portal

@@ -80,6 +80,13 @@ class AgendaDiariaView (grok.View):
         update_info = self.context.update
         return getattr(update_info, 'output', '')
 
+    def exibe_sem_compromissos(self):
+        compromissos = self.compromissos()
+        is_updated = self.update_info()
+        # Exibe apenas se nao tivermos compromissos
+        # E tambem nao tiver atualizacoes
+        return not (compromissos or is_updated)
+
     def Title(self):
         parts = {}
         parts['weekday'] = self.weekday()

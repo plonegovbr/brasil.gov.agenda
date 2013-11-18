@@ -3,6 +3,10 @@ Changelog
 
 1.0a3 (unreleased)
 ^^^^^^^^^^^^^^^^^^^
+  * Exibe a mensagem de "Sem compromissos oficiais." apenas se
+    nao tivermos compromissos e o campo atualizacao nao
+    estiver preenchido
+    [ericof]
 
   * A visão padrão de Agenda agora exibe a AgendaDiaria
     do dia se estiver publicada ou a mais recente.
