@@ -10,6 +10,8 @@
     <!-- Adiciona permissoes -->
     <include file="permissions.zcml" />
 
+    <include package=".tiles" />
+
     <!-- Suporte ao Generic Setup-->
     <include file="profiles.zcml" />
 
