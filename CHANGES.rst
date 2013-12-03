@@ -2,7 +2,8 @@ Changelog
 ---------
 
 1.0a4 (unreleased)
-^^^^^^^^^^^^^^^^^^
+  * Template e CSS do tile agenda
+    [rennan]
 
 - Nothing changed yet.
 

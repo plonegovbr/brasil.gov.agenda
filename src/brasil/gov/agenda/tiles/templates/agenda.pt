@@ -8,7 +8,7 @@
              tal:attributes="id string:agenda-$tile_id"
              tal:define="results view/data;">
             <!--<h3 class="title" tal:content="view/data/title">Agenda da Autoridade</h3>-->
-            <h3 class="title">Agenda da Autoridade</h3>
+            <h2 class="title">Agenda da Autoridade</h2>
             <p class="period"><strong>01 de Dezembro de 2013</strong></p>
             <p class="latest-update">Última atualização: 13h55</p>
             <ul class="collection-events">
