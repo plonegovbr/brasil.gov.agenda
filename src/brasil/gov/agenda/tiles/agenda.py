@@ -93,6 +93,34 @@ class AgendaTile(PersistentCoverTile):
     def lastest_update(self):
         return u'Última atualização: 13h55'
 
+    def collection_events(self):
+        return [
+            {
+                'time': '11h56',
+                'description': 'Lorem ipsum dolor sitam etcon setetur adipiscing volupt',
+            },
+            {
+                'time': '11h56',
+                'description': 'Lorem ipsum dolor sitam etcon setetur adipiscing volupt',
+            },
+            {
+                'time': '11h56',
+                'description': 'Lorem ipsum dolor sitam etcon setetur adipiscing volupt',
+            },
+            {
+                'time': '11h56',
+                'description': 'Lorem ipsum dolor sitam etcon setetur adipiscing volupt',
+            },
+            {
+                'time': '11h56',
+                'description': 'Lorem ipsum dolor sitam etcon setetur adipiscing volupt',
+            },
+            {
+                'time': '11h56',
+                'description': 'Lorem ipsum dolor sitam etcon setetur adipiscing volupt',
+            },
+        ]
+
     def accepted_ct(self):
         """ Return a list of content types accepted by the tile.
         """

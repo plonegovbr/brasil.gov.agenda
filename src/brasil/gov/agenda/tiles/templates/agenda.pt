@@ -7,8 +7,8 @@
         <div class="agenda-tile"
              tal:attributes="id string:agenda-$tile_id">
             <tal:fields repeat="field view/get_configured_fields">
-                <tal:title tal:define="htmltag python:field.get('htmltag', 'h1')"
-                           tal:condition="python:field['id']=='title'">
+                <tal:title define="htmltag python:field.get('htmltag', 'h1')"
+                           condition="python:field['id']=='title'">
                     <h1 tal:condition="python:htmltag=='h1'"
                         class="title">
                         ${view/data/title}
@@ -26,29 +26,23 @@
                         ${view/data/title}
                     </h4>
                 </tal:title>
-                <tal:period tal:condition="python:field['id']=='period'">
+                <tal:period condition="python:field['id']=='period'">
                     <p class="period"><strong>${view/period}</strong></p>
                 </tal:period>
-                <tal:lastest_update tal:condition="python:field['id']=='lastest_update'">
+                <tal:lastest_update condition="python:field['id']=='lastest_update'">
                     <p class="latest-update">${view/lastest_update}</p>
                 </tal:lastest_update>
-                <tal:collection_events tal:condition="python:field['id']=='collection_events'">
+                <tal:collection_events condition="python:field['id']=='collection_events'">
                     <ul class="collection-events">
-                        <li>
-                            <span class="timestamp">11h56</span>
-                            <a class="title-item" href="#">Lorem ipsum dolor sitam etcon setetur adipiscing volupt</a>
-                        </li>
-                        <li>
-                            <span class="timestamp">11h56</span>
-                            <a class="title-item" href="#">Lorem ipsum dolor sitam etcon setetur adipiscing volupt</a>
-                        </li>
-                        <li>
-                            <span class="timestamp">11h56</span>
-                            <a class="title-item" href="#">Lorem ipsum dolor sitam etcon setetur adipiscing volupt</a>
-                        </li>
+                        <tal:event repeat="event view/collection_events">
+                            <li>
+                                <span class="timestamp">${event/time}</span>
+                                <a class="title-item" href="#">${event/description}</a>
+                            </li>
+                        </tal:event>
                     </ul>
                 </tal:collection_events>
-                <tal:agenda_tile_footer tal:condition="python:field['id']=='agenda_tile_footer'">
+                <tal:agenda_tile_footer condition="python:field['id']=='agenda_tile_footer'">
                     <div class="agenda-tile-footer">
                         <a href="${view/data/link_url}">${view/data/link_text}</a>
                     </div>
