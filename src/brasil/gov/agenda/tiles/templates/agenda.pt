@@ -7,7 +7,27 @@
         <div class="agenda-tile"
              tal:attributes="id string:agenda-$tile_id"
              tal:define="results view/data;">
-            <h3 class="title" tal:content="view/data/title"></h3>
+            <!--<h3 class="title" tal:content="view/data/title">Agenda da Autoridade</h3>-->
+            <h3 class="title">Agenda da Autoridade</h3>
+            <p class="period"><strong>01 de Dezembro de 2013</strong></p>
+            <p class="latest-update">Última atualização: 13h55</p>
+            <ul class="collection-events">
+                <li>
+                    <span class="timestamp">11h56</span>
+                    <a class="title-item" href="#">Lorem ipsum dolor sitam etcon setetur adipiscing volupt</a>
+                </li>
+                <li>
+                    <span class="timestamp">11h56</span>
+                    <a class="title-item" href="#">Lorem ipsum dolor sitam etcon setetur adipiscing volupt</a>
+                </li>
+                <li>
+                    <span class="timestamp">11h56</span>
+                    <a class="title-item" href="#">Lorem ipsum dolor sitam etcon setetur adipiscing volupt</a>
+                </li>
+            </ul>
+            <div class="agenda-tile-footer">
+                <a href="#">Acesse todas as agendas</a>
+            </div>
         </div>
     </body>
 </html>
