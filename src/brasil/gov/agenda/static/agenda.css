@@ -378,26 +378,26 @@
 }
 
 #content .collection-events li {
+    margin: 0px;
+    padding: 14px 0px 14px 12px;
     list-style: outside none;
-    padding: 14px 0px;
 }
 
 .collection-events li {
-    margin: 0px;
-    padding: 0px;
     border-bottom: 1px dotted #c1c1c1;
 }
 
 .collection-events .timestamp {
+    margin: 0px 12px 0px 0px;
+    padding: 0px 12px 0px 20px;
+    border-right: 1px solid #c1c1c1;
+    background-image: url("icon-clock.png");
+    background-position: 0px 0px;
+    background-repeat: no-repeat;
     color: #5c6f7e;
     font-weight: normal;
     font-size: 11px;
     font-family: "open_sansregular", Arial, Helvetica, sans-serif;
-    margin: 0px 12px 0px 12px;
-    padding: 0px 0px 0px 20px;
-    background-image: url("icon-clock.png");
-    background-repeat: no-repeat;
-    background-position: 0px 0px;
 }
 
 .collection-events .title-item {
@@ -418,7 +418,8 @@ body.contraste .list-actions .print {
 
 body.contraste #content .comprimisso-pauta,
 body.contraste #content .comprimisso-local,
-body.contraste #content .print a .texto { color: white; }
+body.contraste #content .print a .texto,
+body.contraste #content .collection-events .timestamp { color: white; }
 
 body.contraste .footer-actions {
     border-top: 4px solid #fff;
@@ -431,4 +432,8 @@ body.contraste #content .list-compromissos {
 
 body.contraste #content .item-compromisso {
     border-top: 1px solid #d6dcd7;
+}
+
+body.contraste #content .collection-events .timestamp {
+    background-position: 0px -15px;
 }
