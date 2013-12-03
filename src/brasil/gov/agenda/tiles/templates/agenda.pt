@@ -4,7 +4,7 @@
       xmlns:i18n="http://xml.zope.org/namespaces/i18n"
       i18n:domain="brasil.gov.tiles">
     <body tal:define="tile_id view/id;">
-        <div class="agenda-tile"
+        <div class="agenda-tile tile-content"
              tal:attributes="id string:agenda-$tile_id">
             <tal:fields repeat="field view/get_configured_fields">
                 <tal:title define="htmltag python:field.get('htmltag', 'h1')"
