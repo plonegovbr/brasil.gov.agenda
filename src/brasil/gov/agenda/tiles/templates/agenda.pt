@@ -30,7 +30,8 @@
                     <p class="period"><strong>${view/period}</strong></p>
                 </tal:period>
                 <tal:lastest_update condition="python:field['id']=='lastest_update'">
-                    <p class="latest-update">${view/lastest_update}</p>
+                    <div class="latest-update"
+                         tal:content="structure view/lastest_update" />
                 </tal:lastest_update>
                 <tal:collection_events condition="python:field['id']=='collection_events'">
                     <ul class="collection-events">

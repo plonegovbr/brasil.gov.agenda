@@ -4,11 +4,15 @@ from collective.cover import _
 from collective.cover.tiles.base import IPersistentCoverTile
 from collective.cover.tiles.base import PersistentCoverTile
 from collective.cover.tiles.configuration_view import IDefaultConfigureForm
+from plone.app.uuid.utils import uuidToObject
 from plone.directives import form
+from plone.memoize import forever
 from plone.tiles.interfaces import ITileDataManager
 from plone.uuid.interfaces import IUUID
+from Products.CMFCore.utils import getToolByName
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from zope import schema
+
 
 import time
 
@@ -70,14 +74,12 @@ class AgendaTile(PersistentCoverTile):
 
         if obj.portal_type in self.accepted_ct():
             title = _(u'Agenda do {0}').format(obj.autoridade)
-            path = '/'.join(obj.getPhysicalPath())
             link_url = obj.absolute_url()
             link_text = _(u'Acesse a agenda do {0}').format(obj.autoridade)
-            uuid = IUUID(obj)
+            uuid = IUUID(obj, None)
             data_mgr = ITileDataManager(self)
             data_mgr.set({
                 'title': title,
-                'path': path,
                 'link_url': link_url,
                 'link_text': link_text,
                 'period': True,
@@ -87,39 +89,77 @@ class AgendaTile(PersistentCoverTile):
                 'uuid': uuid
             })
 
+    def _last_modified(self):
+        agenda = uuidToObject(self.data['uuid'])
+        last_modified = int(agenda.modified().strftime("%s"))
+        agenda_diaria = agenda.get(time.strftime('%Y-%m-%d'), None)
+        if agenda_diaria:
+            modified = int(agenda_diaria.modified().strftime("%s"))
+            if modified > last_modified:
+                last_modified = modified
+            for compromisso in agenda_diaria.objectValues():
+                modified = int(compromisso.modified().strftime("%s"))
+                if modified > last_modified:
+                    last_modified = modified
+        return last_modified
+
+    def _translate(self, msgid):
+        tool = getToolByName(self.context, 'translation_service')
+        return tool.translate(msgid,
+                              'plonelocales',
+                              {},
+                              context=self.context,
+                              target_language='pt_BR')
+
+    def _month(self):
+        tool = getToolByName(self.context, 'translation_service')
+        return self._translate(tool.month_msgid(time.strftime('%m')))
+
+    @forever.memoize
+    def _period(self, last_modified=None):
+        parts = {}
+        parts['day'] = time.strftime('%d')
+        parts['month'] = self._month().lower()
+        parts['year'] = time.strftime('%Y')
+        return '%(day)s de %(month)s de %(year)s' % parts
+
     def period(self):
-        return u'01 de Dezembro de 2013'
+        return self._period(self._last_modified())
+
+    @forever.memoize
+    def _lastest_update(self, last_modified=None):
+        agenda = uuidToObject(self.data['uuid'])
+        agenda_diaria = agenda.get(time.strftime('%Y-%m-%d'), None)
+        if agenda_diaria:
+            update_info = agenda_diaria.update
+            return getattr(update_info, 'output', '')
 
     def lastest_update(self):
-        return u'Última atualização: 13h55'
+        return self._lastest_update(self._last_modified())
+
+    @forever.memoize
+    def _collection_events(self, last_modified=None):
+        agenda = uuidToObject(self.data['uuid'])
+        agenda_diaria = agenda.get(time.strftime('%Y-%m-%d'), None)
+        collection_events = []
+        if agenda_diaria:
+            catalog = getToolByName(self.context, 'portal_catalog')
+            query = {}
+            query['portal_type'] = 'Compromisso'
+            query['sort_on'] = 'start'
+            query['path'] = '/'.join(agenda_diaria.getPhysicalPath())
+            results = catalog.searchResults(**query)
+            for brain in results:
+                compr = brain.getObject()
+                compromisso = {
+                    'time': compr.start_date.strftime('%Hh%M'),
+                    'description': compr.Title()
+                }
+                collection_events.append(compromisso)
+        return collection_events
 
     def collection_events(self):
-        return [
-            {
-                'time': '11h56',
-                'description': 'Lorem ipsum dolor sitam etcon setetur adipiscing volupt',
-            },
-            {
-                'time': '11h56',
-                'description': 'Lorem ipsum dolor sitam etcon setetur adipiscing volupt',
-            },
-            {
-                'time': '11h56',
-                'description': 'Lorem ipsum dolor sitam etcon setetur adipiscing volupt',
-            },
-            {
-                'time': '11h56',
-                'description': 'Lorem ipsum dolor sitam etcon setetur adipiscing volupt',
-            },
-            {
-                'time': '11h56',
-                'description': 'Lorem ipsum dolor sitam etcon setetur adipiscing volupt',
-            },
-            {
-                'time': '11h56',
-                'description': 'Lorem ipsum dolor sitam etcon setetur adipiscing volupt',
-            },
-        ]
+        return self._collection_events(self._last_modified())
 
     def accepted_ct(self):
         """ Return a list of content types accepted by the tile.
