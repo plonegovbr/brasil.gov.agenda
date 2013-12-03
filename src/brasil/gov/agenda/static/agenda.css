@@ -345,15 +345,14 @@
     margin-bottom: 0.188em;
 }
 
-#content .agenda-tile .latest-update {
+#content .agenda-tile .latest-update p {
     margin-bottom: 0px;
+    font-size: 1.1em;
 }
 
 .agenda-tile .latest-update {
     padding: 0px 0px 1.2em .9em;
     border-bottom: 1px solid #c1c1c1;
-    color: #162938;
-    font-size: 1.1em;
 }
 
 .agenda-tile-footer {
@@ -362,11 +361,15 @@
     text-align: right;
 }
 
+.agenda-tile .latest-update p,
+.agenda-tile-footer a {
+    color: #172734 !important;
+}
+
 .agenda-tile-footer a {
     margin: 0;
     padding: 0;
     padding-right: 1em;
-    color: #6a696f !important;
     text-transform: uppercase;
     font-weight: normal;
     font-size: .9em;
