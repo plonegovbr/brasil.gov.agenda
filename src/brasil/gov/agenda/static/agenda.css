@@ -324,10 +324,11 @@
 
 .agenda-tile .title {
     margin: 0;
-    padding: 19px 0 19px 12px;
+    padding: 14px 0 14px 12px;
     border-bottom: 1px solid #c1c1c1;
     color: #444;
     text-transform: uppercase;
+    letter-spacing: normal;
     font-weight: normal;
     font-size: 15px;
     font-family: "open_sansbold", Arial, Helvetica, sans-serif;
@@ -387,6 +388,10 @@
     border-bottom: 1px dotted #c1c1c1;
 }
 
+.collection-events li:last-child {
+    border-bottom: none;
+}
+
 .collection-events .timestamp {
     margin: 0px 12px 0px 0px;
     padding: 0px 12px 0px 20px;
@@ -403,8 +408,49 @@
 .collection-events .title-item {
     color: #315177;
     font-weight: bold;
-    font-size: 16px;
+    font-size: 14px;
     font-family: Arial, Helvetica, sans-serif;
+}
+
+/* 1 coluna  */
+.width-15 .collection-events,
+.width-16 .collection-events {
+    max-height: 190px;
+    overflow: auto;
+}
+
+/* 2 colunas  */
+.width-10 .collection-events {
+    max-height: 259px;
+    overflow: auto;
+}
+
+.width-10 .collection-events .timestamp {
+    float: left;
+    margin-top: 10px;
+    height: 15px;
+    border-right: none;
+    line-height: 15px;
+}
+
+.width-10 .collection-events .title-item {
+    display: inline-block;
+    padding-left: 12px;
+    width: 360px;
+    border-left: 1px solid #c1c1c1;
+}
+
+/* 3 colunas */
+.width-5 .collection-events {
+    max-height: 422px;
+    overflow: auto;
+}
+
+.width-5 .agenda-tile .collection-events .timestamp {
+    display: block;
+    margin-bottom: 5px;
+    border: none;
+    background-position: 0px 3px;
 }
 
 
