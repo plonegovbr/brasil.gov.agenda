@@ -43,8 +43,9 @@
                             </li>
                         </tal:event>
                     </ul>
-                    <div tal:condition="not:view/collection_events">
-                        sem compromissos
+                    <div class="collection-events"
+                         tal:condition="not:view/collection_events">
+                        Não existem compromissos para este dia
                     </div>
                 </tal:collection_events>
                 <tal:agenda_tile_footer condition="python:field['id']=='agenda_tile_footer'">
