@@ -38,12 +38,14 @@
                         tal:condition="view/collection_events">
                         <tal:event repeat="event view/collection_events">
                             <li>
-                                <span class="timestamp">${event/time}</span>
+                                <div class="timestamp-cell">
+                                    <span class="timestamp">${event/time}</span>
+                                </div>
                                 <a class="title-item" href="#">${event/description}</a>
                             </li>
                         </tal:event>
                     </ul>
-                    <div class="collection-events"
+                    <div class="no-events"
                          tal:condition="not:view/collection_events">
                         Não existem compromissos para este dia
                     </div>
