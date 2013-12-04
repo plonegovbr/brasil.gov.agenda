@@ -46,7 +46,6 @@ setup(
         'plone.app.portlets',
         'plone.app.referenceablebehavior',
         'plone.app.upgrade',
-        'plone.app.upgrade',
         'plone.app.versioningbehavior',
         'plone.app.vocabularies',
         'plone.behavior',
