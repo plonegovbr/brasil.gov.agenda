@@ -27,39 +27,39 @@ class IAgendaTile(IPersistentCoverTile):
     )
     form.omitted('period')
     form.no_omit(IDefaultConfigureForm, 'period')
-    period = schema.TextLine(
-        title=_(u'Period'),
+    period = schema.Text(
+        title=_(u'Data'),
         required=False,
     )
     form.omitted('lastest_update')
     form.no_omit(IDefaultConfigureForm, 'lastest_update')
-    lastest_update = schema.TextLine(
-        title=_(u'Lastest update'),
+    lastest_update = schema.Text(
+        title=_(u'Última atualização'),
         required=False,
     )
     form.omitted('collection_events')
     form.no_omit(IDefaultConfigureForm, 'collection_events')
-    collection_events = schema.TextLine(
-        title=_(u'Collection events'),
+    collection_events = schema.Text(
+        title=_(u'Compromissos'),
         required=False,
     )
     form.omitted('agenda_tile_footer')
     form.no_omit(IDefaultConfigureForm, 'agenda_tile_footer')
-    agenda_tile_footer = schema.TextLine(
-        title=_(u'Agenda tile footer'),
+    agenda_tile_footer = schema.Text(
+        title=_(u'Rodapé da Agenda'),
         required=False,
     )
 
     form.no_omit('link_text')
     form.omitted(IDefaultConfigureForm, 'link_text')
     link_text = schema.TextLine(
-        title=_(u'Link text'),
+        title=_(u'Texto do rodapé'),
         required=False,
     )
     form.no_omit('link_url')
     form.omitted(IDefaultConfigureForm, 'link_url')
     link_url = schema.TextLine(
-        title=_(u'Link url'),
+        title=_(u'URL do rodapé'),
         required=False,
     )
 

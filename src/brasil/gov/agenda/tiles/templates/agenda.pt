@@ -34,7 +34,8 @@
                          tal:content="structure view/lastest_update" />
                 </tal:lastest_update>
                 <tal:collection_events condition="python:field['id']=='collection_events'">
-                    <ul class="collection-events">
+                    <ul class="collection-events"
+                        tal:condition="view/collection_events">
                         <tal:event repeat="event view/collection_events">
                             <li>
                                 <span class="timestamp">${event/time}</span>
@@ -42,6 +43,9 @@
                             </li>
                         </tal:event>
                     </ul>
+                    <div tal:condition="not:view/collection_events">
+                        sem compromissos
+                    </div>
                 </tal:collection_events>
                 <tal:agenda_tile_footer condition="python:field['id']=='agenda_tile_footer'">
                     <div class="agenda-tile-footer">
