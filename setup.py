@@ -39,6 +39,7 @@ setup(
     include_package_data=True,
     zip_safe=False,
     install_requires=[
+        'brasil.gov.tiles',
         'collective.portlet.calendar',
         'plone.app.content',
         'plone.app.contenttypes',
