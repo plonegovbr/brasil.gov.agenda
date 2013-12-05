@@ -335,14 +335,14 @@
 }
 
 .agenda-tile .period {
-    padding: 1.5em 0px 0.5em 0.75em;
+    padding: .6em 0px 0.0em 0.75em;
     color: #162938;
     font-size: 1.3em;
     font-family: Arial, Helvetica, sans-serif;
 }
 
 #content .agenda-tile .period {
-    margin-bottom: 0.188em;
+    margin-bottom: 0em;
 }
 
 #content .agenda-tile .latest-update p {
@@ -351,12 +351,12 @@
 }
 
 .agenda-tile .latest-update {
-    padding: 0px 0px 1.2em .9em;
+    padding: .2em 0em 1em .9em;
     border-bottom: 1px solid #c1c1c1;
 }
 
 .agenda-tile-footer {
-    padding: 1.55em 0px;
+    padding: .9em .6em;
     border-top: 1px solid #c1c1c1;
     text-align: right;
 }
@@ -369,7 +369,7 @@
 .agenda-tile-footer a {
     margin: 0;
     padding: 0;
-    padding-right: 1em;
+    padding-right:0em;
     text-transform: uppercase;
     font-weight: normal;
     font-size: .9em;
@@ -390,7 +390,7 @@
     margin: 0px;
     width: 95%;
     padding: 0.5em 0px 0.5em 1.1em;
-    height: 63px;
+    height: 54px;
     list-style: outside none;
     float: left;
     display: table;
@@ -408,10 +408,10 @@
 .collection-events .timestamp-cell{
     display:table-cell;
     vertical-align:middle;
+    width: 15%;
 }
 
 .collection-events .timestamp {
-    /*margin: 0px 1.1em 0px 0px;*/
     text-align: center;
     float: left;
     width: 100%;
@@ -420,7 +420,9 @@
     background-repeat: no-repeat;
     color: #5c6f7e;
     font-weight: normal;
-    font-size: .9em;
+    font-size: 1em;
+    padding: 0px 0px 0px 3px;
+    margin: 0px 0px 0px 0px;
     font-family: "open_sansregular", Arial, Helvetica, sans-serif;
     height: 15px;
 }
@@ -441,14 +443,24 @@
 /* 1 coluna  */
 .width-15 .collection-events,
 .width-16 .collection-events {
-    max-height: 24.4em;
+    max-height: 21.3em;
     overflow: auto;
 }
 
+.width-15 .collection-events  .timestamp-cell,
+.width-16  .collection-events .timestamp-cell{
+    width:9.3%;
+    line-height: 1.2em !important;
+} 
+
 /* 2 colunas  */
+.width-8 .collection-events .timestamp-cell{
+    width:20%;
+}
+
 .width-8 .collection-events,
 .width-10 .collection-events {
-    height: 24.4em;
+    height: 21.3em;
     overflow: auto;
 }
 .width-8 .collection-events .timestamp,
@@ -457,19 +469,18 @@
    /* margin-top: .9em;
     height: 1.3em;*/
     border-right: none;
-    line-height: 1.3em !important;
+    line-height: 1.2em !important;
 }
 .width-8 .collection-events .title-item,
 .width-10 .collection-events .title-item {
     padding-left: .9em;
-    max-width: 26.3em;
-    width: 16em;
+    width: 87%;
     border-left: 1px solid #c1c1c1;
 }
 
 /* 3 colunas */
 .width-5 .collection-events {
-    height: 24.4em;
+    height:21.3em;
     overflow: auto;
 }
 #content .width-5 .collection-events li{
@@ -491,11 +502,13 @@
 .width-5 .agenda-tile .collection-events .timestamp {
    margin-bottom: 5px;
    border: none;
-   background-position: 0px 3px;
+   background-position: 0px 0px;
    color: #305373;
-   font-size: .9em;
+   font-size: 1em;
    font-family: Arial, Helvetica, sans-serif;
-   width:0;
+   text-align: left;
+   padding: 0px 0px 0px 19px;
+   line-height: 14px;
 }
 
 
