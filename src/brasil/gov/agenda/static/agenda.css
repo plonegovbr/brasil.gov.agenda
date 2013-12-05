@@ -492,6 +492,8 @@
 #content .width-5 .collection-events li a
 {
     display:inline-block;
+    overflow: hidden;
+    height: 2.5em;
 }
 
 .width-5 .agenda-tile .collection-events .title-item{
