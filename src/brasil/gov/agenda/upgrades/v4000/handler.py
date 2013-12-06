@@ -1,7 +1,6 @@
 # -*- coding:utf-8 -*-
 from brasil.gov.agenda.config import PROJECTNAME
 from plone.app.upgrade.utils import loadMigrationProfile
-from zope.component.hooks import getSite
 
 import logging
 
