@@ -4,8 +4,8 @@ Changelog
 1.0a4 (unreleased)
 ^^^^^^^^^^^^^^^^^^
 
-- Nothing changed yet.
-
+  * Fixed default buildout and travis configuration (closes `#14`_).
+    [rodfersou]
 
 1.0a3 (2013-11-18)
 ^^^^^^^^^^^^^^^^^^^
@@ -50,3 +50,4 @@ Changelog
 
 .. _`#1`: https://github.com/plonegovbr/brasil.gov.agenda/issues/1
 .. _`#3`: https://github.com/plonegovbr/brasil.gov.agenda/issues/3
+.. _`#14`: https://github.com/plonegovbr/brasil.gov.agenda/issues/14
