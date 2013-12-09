@@ -2,7 +2,7 @@ Changelog
 ---------
 
 1.0a4 (unreleased)
-^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^
 
   * Backend do tile da agenda (closes `#12`_).
     [rodfersou]
@@ -12,7 +12,7 @@ Changelog
 
 
 1.0a3 (2013-11-18)
-^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^
   * Exibe a mensagem de "Sem compromissos oficiais." apenas se
     nao tivermos compromissos e o campo atualizacao nao
     estiver preenchido
@@ -43,7 +43,7 @@ Changelog
     [hvelarde]
 
 1.0a1 (2013-10-29)
-^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^
 
   * Estilização de css, templates e portlets laterais (closes `#3`_).
     [felipeduardo]
