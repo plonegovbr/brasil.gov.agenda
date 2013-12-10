@@ -314,6 +314,214 @@
 
 
 /* ==========================================================================
+   Tile de agenda
+   ========================================================================== */
+
+.agenda-tile {
+    border: 1px solid #c1c1c1;
+    border-radius: 3px;
+}
+
+.agenda-tile .title {
+    margin: 0px;
+    padding: 1em 1em 1em 1em;
+    border-bottom: 1px solid #c1c1c1;
+    color: #444;
+    text-transform: uppercase;
+    letter-spacing: normal;
+    font-weight: normal;
+    font-size: 1.2em;
+    font-family: "open_sansbold", Arial, Helvetica, sans-serif;
+}
+
+.agenda-tile .period {
+    padding: .6em 0px 0.0em 0.75em;
+    color: #162938;
+    font-size: 1.3em;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+#content .agenda-tile .period {
+    margin-bottom: 0em;
+}
+
+#content .agenda-tile .latest-update p {
+    margin-bottom: 0px;
+    font-size: 1.1em;
+}
+
+.agenda-tile .latest-update {
+    padding: .2em 0em 1em .9em;
+    border-bottom: 1px solid #c1c1c1;
+}
+
+.agenda-tile-footer {
+    padding: .9em .6em;
+    border-top: 1px solid #c1c1c1;
+    text-align: right;
+}
+
+.agenda-tile .latest-update p,
+.agenda-tile-footer a {
+    color: #172734 !important;
+}
+
+.agenda-tile-footer a {
+    margin: 0;
+    padding: 0;
+    padding-right:0em;
+    text-transform: uppercase;
+    font-weight: normal;
+    font-size: .9em;
+    font-family: "open_sansregular", Arial, Helvetica, sans-serif;
+}
+
+#content .no-events {
+    padding-top: 12.2em;
+    height: 12.2em;
+    text-align: center;
+}
+
+#content .collection-events{
+    margin:0px;
+    padding:0px;
+}
+
+#content .collection-events li {
+    display: table;
+    float: left;
+    overflow: hidden;
+    margin: 0px;
+    padding: 0.5em 0px 0.5em 1.1em;
+    width: 95%;
+    height: 54px;
+    list-style: outside none;
+}
+
+.collection-events li {
+    border-bottom: 1px dotted #c1c1c1;
+}
+
+.collection-events li:last-child {
+    border-bottom: none;
+}
+
+.collection-events .timestamp-cell{
+    display:table-cell;
+    width: 15%;
+    vertical-align:middle;
+}
+
+.collection-events .timestamp {
+    float: left;
+    margin: 0px 0px 0px 0px;
+    padding: 0px 0px 0px 3px;
+    width: 100%;
+    height: 15px;
+    background-image: url("icon-clock.png");
+    background-position: 0px 1px;
+    background-repeat: no-repeat;
+    color: #5c6f7e;
+    text-align: center;
+    font-weight: normal;
+    font-size: 1em;
+    font-family: "open_sansregular", Arial, Helvetica, sans-serif;
+}
+
+.collection-events .title-item {
+    display: table-cell;
+    padding: 0px 1.1em 0px 20px;
+    padding-left: 0.9em;
+    width: 90%;
+    height: 50px;
+    border-left: 1px solid #c1c1c1;
+    color: #305373 !important;
+    vertical-align: middle;
+    font-weight: bold;
+    font-size: 1.1em;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+/* 1 coluna  */
+.width-15 .collection-events,
+.width-16 .collection-events {
+    overflow: auto;
+    max-height: 21.3em;
+}
+
+.width-15 .collection-events  .timestamp-cell,
+.width-16  .collection-events .timestamp-cell{
+    width:9.3%;
+    line-height: 1.2em !important;
+} 
+
+/* 2 colunas  */
+.width-8 .collection-events .timestamp-cell{
+    width:20%;
+}
+
+.width-8 .collection-events,
+.width-10 .collection-events {
+    overflow: auto;
+    height: 21.3em;
+}
+
+.width-8 .collection-events .timestamp,
+.width-10 .collection-events .timestamp {
+    /*float: left;
+      /* margin-top: .9em;
+      height: 1.3em;*/
+    border-right: none;
+    line-height: 1.2em !important;
+}
+
+.width-8 .collection-events .title-item,
+.width-10 .collection-events .title-item {
+    padding-left: .9em;
+    width: 87%;
+    border-left: 1px solid #c1c1c1;
+}
+
+/* 3 colunas */
+.width-5 .collection-events {
+    overflow: auto;
+    height:21.3em;
+}
+
+#content .width-5 .collection-events li{
+    display:inline-block;
+    width:92%;
+
+}
+
+#content .width-5 .collection-events li .timestamp-cel,
+#content .width-5 .collection-events li a
+{
+    display:inline-block;
+    overflow: hidden;
+    height: 2.5em;
+}
+
+.width-5 .agenda-tile .collection-events .title-item{
+    padding:0;
+    width:100%;
+    border:0;
+}
+
+.width-5 .agenda-tile .collection-events .timestamp {
+    margin-bottom: 5px;
+    padding: 0px 0px 0px 19px;
+    border: none;
+    background-position: 0px 0px;
+    color: #305373;
+    text-align: left;
+    font-size: 1em;
+    font-family: Arial, Helvetica, sans-serif;
+    line-height: 14px;
+}
+
+
+/* ==========================================================================
    Contraste Agenda
    ========================================================================== */
 
@@ -323,7 +531,8 @@ body.contraste .list-actions .print {
 
 body.contraste #content .comprimisso-pauta,
 body.contraste #content .comprimisso-local,
-body.contraste #content .print a .texto { color: white; }
+body.contraste #content .print a .texto,
+body.contraste #content .collection-events .timestamp { color: white; }
 
 body.contraste .footer-actions {
     border-top: 4px solid #fff;
@@ -336,4 +545,8 @@ body.contraste #content .list-compromissos {
 
 body.contraste #content .item-compromisso {
     border-top: 1px solid #d6dcd7;
+}
+
+body.contraste #content .collection-events .timestamp {
+    background-position: 0px -15px;
 }

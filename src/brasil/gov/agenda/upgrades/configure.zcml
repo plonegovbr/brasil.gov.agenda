@@ -6,5 +6,6 @@
     <!-- Passos de atualizacao -->
     <include package=".v2000" />
     <include package=".v3000" />
+    <include package=".v4000" />
 
 </configure>

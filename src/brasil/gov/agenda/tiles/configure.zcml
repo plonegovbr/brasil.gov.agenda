@@ -1,0 +1,21 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:i18n="http://namespaces.zope.org/i18n"
+    xmlns:plone="http://namespaces.plone.org/plone"
+    i18n_domain="brasil.gov.agenda">
+
+  <include package="plone.tiles" file="meta.zcml" />
+
+  <plone:tile
+      name="agenda"
+      title="Agenda"
+      description="Tile que exibe uma agenda"
+      add_permission="cmf.ModifyPortalContent"
+      schema=".agenda.IAgendaTile"
+      class=".agenda.AgendaTile"
+      permission="zope2.View"
+      for="*"
+      i18n:attributes="title; description"
+      />
+
+</configure>

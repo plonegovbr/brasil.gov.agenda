@@ -1,0 +1,61 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      i18n:domain="brasil.gov.tiles">
+    <body tal:define="tile_id view/id;">
+        <div class="agenda-tile tile-content"
+             tal:attributes="id string:agenda-$tile_id">
+            <tal:fields repeat="field view/get_configured_fields">
+                <tal:title define="htmltag python:field.get('htmltag', 'h1')"
+                           condition="python:field['id']=='title'">
+                    <h1 tal:condition="python:htmltag=='h1'"
+                        class="title">
+                        ${view/data/title}
+                    </h1>
+                    <h2 tal:condition="python:htmltag=='h2'"
+                        class="title">
+                        ${view/data/title}
+                    </h2>
+                    <h3 tal:condition="python:htmltag=='h3'"
+                        class="title">
+                        ${view/data/title}
+                    </h3>
+                    <h4 tal:condition="python:htmltag=='h4'"
+                        class="title">
+                        ${view/data/title}
+                    </h4>
+                </tal:title>
+                <tal:period condition="python:field['id']=='period'">
+                    <p class="period"><strong>${view/period}</strong></p>
+                </tal:period>
+                <tal:lastest_update condition="python:field['id']=='lastest_update'">
+                    <div class="latest-update"
+                         tal:content="structure view/lastest_update" />
+                </tal:lastest_update>
+                <tal:collection_events condition="python:field['id']=='collection_events'">
+                    <ul class="collection-events"
+                        tal:condition="view/collection_events">
+                        <tal:event repeat="event view/collection_events">
+                            <li>
+                                <div class="timestamp-cell">
+                                    <span class="timestamp">${event/time}</span>
+                                </div>
+                                <a class="title-item" href="#">${event/description}</a>
+                            </li>
+                        </tal:event>
+                    </ul>
+                    <div class="no-events"
+                         tal:condition="not:view/collection_events">
+                        Não existem compromissos para este dia
+                    </div>
+                </tal:collection_events>
+                <tal:agenda_tile_footer condition="python:field['id']=='agenda_tile_footer'">
+                    <div class="agenda-tile-footer">
+                        <a href="${view/data/link_url}">${view/data/link_text}</a>
+                    </div>
+                </tal:agenda_tile_footer>
+            </tal:fields>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,33 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:gs="http://namespaces.zope.org/genericsetup"
+    xmlns:i18n="http://namespaces.zope.org/i18n"
+    xmlns:zcml="http://namespaces.zope.org/zcml"
+    i18n_domain="brasil.gov.agenda">
+
+    <!-- Profile -->
+    <gs:registerProfile
+        name="default"
+        title="brasil.gov.agenda: Versao 3000"
+        directory="profile"
+        description="Atualiza o pacote brasil.gov.agenda para versao 3000"
+        provides="Products.GenericSetup.interfaces.EXTENSION"
+        i18n:attributes="title; description"
+        />
+
+    <!-- Upgrade -->
+    <gs:upgradeSteps
+        source="3000"
+        destination="4000"
+        profile="brasil.gov.agenda:default">
+
+        <gs:upgradeStep
+            title="Atualiza portal para versao 4000"
+            description="Adiciona tile agenda"
+            handler=".handler.apply_profile"
+            />
+
+    </gs:upgradeSteps>
+
+
+</configure>

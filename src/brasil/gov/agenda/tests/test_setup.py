@@ -51,7 +51,7 @@ class TestInstall(BaseTestCase):
     def test_version(self):
         self.assertEqual(
             self.st.getLastVersionForProfile(self.profile),
-            (u'3000',)
+            (u'4000',)
         )
 
     def test_static_resource_grokker(self):
