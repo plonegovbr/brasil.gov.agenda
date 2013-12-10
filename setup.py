@@ -41,7 +41,7 @@ setup(
     install_requires=[
         'collective.portlet.calendar',
         'plone.app.content',
-        'plone.app.contenttypes',
+        'plone.app.contenttypes<1.1a1',
         'plone.app.dexterity [grok]',
         'plone.app.portlets',
         'plone.app.referenceablebehavior',
