@@ -223,7 +223,7 @@ class ContentTypeBrowserTestCase(unittest.TestCase):
         self.setupContent(portal)
         view = self.compromisso.restrictedTraverse('@@view')
         view.update()
-        self.assertIn(u'Quarta, 05', view.Title())
+        self.assertIn(u', 05 de', view.Title())
 
     def test_compromisso_view_imagem(self):
         portal = self.portal
