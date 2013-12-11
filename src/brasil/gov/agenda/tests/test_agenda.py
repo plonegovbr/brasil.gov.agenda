@@ -126,7 +126,7 @@ class ContentTypeBrowserTestCase(unittest.TestCase):
 
         # Exibiremos a AgendaDiaria de 02/05/2014
         browser.open(agenda_url)
-        self.assertIn('05/02/2014 &mdash;',
+        self.assertIn('05/02/2014 &#8212',
                       browser.contents.decode('utf-8'))
 
         # Criamos uma agenda para o dia de hoje
@@ -142,7 +142,7 @@ class ContentTypeBrowserTestCase(unittest.TestCase):
         # Como esta AgendaDiaria nao foi publicada, continuamos a
         # exibir a de 05/02
         browser.open(agenda_url)
-        self.assertIn('05/02/2014 &mdash;',
+        self.assertIn('05/02/2014 &#8212',
                       browser.contents.decode('utf-8'))
 
         # Ao publicarmos a AgendaDiaria de hoje
@@ -152,7 +152,7 @@ class ContentTypeBrowserTestCase(unittest.TestCase):
         transaction.commit()
         # Ela se torna a ativa
         browser.open(agenda_url)
-        self.assertIn('%s &mdash;' % fmt_display,
+        self.assertIn('%s &#8212' % fmt_display,
                       browser.contents.decode('utf-8'))
 
         # Nos autenticamos como admin
