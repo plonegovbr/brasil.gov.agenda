@@ -2,7 +2,6 @@
 
 import unittest
 
-from brasil.gov.agenda.testing import FIXTURE
 from brasil.gov.agenda.testing import INTEGRATION_TESTING
 from brasil.gov.agenda.tiles.agenda import AgendaTile
 from collective.cover.tiles.base import IPersistentCoverTile
@@ -17,14 +16,9 @@ from plone.app.testing import setRoles
 class AgendaTileTestCase(unittest.TestCase):
 
     layer = INTEGRATION_TESTING
-    fixture = FIXTURE
 
     def setUp(self):
         self.portal = self.layer['portal']
-        import collective.cover
-        self.fixture.loadZCML(package=collective.cover)
-        self.fixture.applyProfile(
-            self.portal, 'brasil.gov.agenda:default')
         setRoles(self.portal, TEST_USER_ID, ['Manager'])
         self.request = self.layer['request']
         self.name = u"agenda"
@@ -45,6 +39,3 @@ class AgendaTileTestCase(unittest.TestCase):
         self.assertTrue(self.tile.is_configurable)
         self.assertTrue(self.tile.is_droppable)
         self.assertTrue(self.tile.is_editable)
-
-    def test_tile_is_empty(self):
-        self.assertTrue(self.tile.is_empty())
