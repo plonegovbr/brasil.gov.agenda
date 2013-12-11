@@ -16,8 +16,6 @@ class Fixture(PloneSandboxLayer):
         # Load ZCML
         import collective.cover
         self.loadZCML(package=collective.cover)
-        import collective.polls
-        self.loadZCML(package=collective.polls)
         import brasil.gov.agenda
         self.loadZCML(package=brasil.gov.agenda)
 
