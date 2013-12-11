@@ -40,7 +40,7 @@ class CompromissoView (grok.View):
     @property
     def date(self):
         context = self.context
-        date = context.date
+        date = context.start_date
         return date
 
     def weekday(self):
