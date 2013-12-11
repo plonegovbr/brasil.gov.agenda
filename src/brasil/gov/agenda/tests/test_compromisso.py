@@ -9,6 +9,7 @@ from plone.app.referenceablebehavior.referenceable import IReferenceable
 from plone.app.testing import setRoles
 from plone.app.testing import TEST_USER_ID
 from plone.dexterity.interfaces import IDexterityFTI
+from plone.namedfile.file import NamedBlobImage
 from plone.testing.z2 import Browser
 from plone.uuid.interfaces import IAttributeUUID
 from zope.component import createObject
@@ -17,7 +18,13 @@ from zope.event import notify
 from zope.lifecycleevent import ObjectModifiedEvent
 
 import datetime
+import os
 import unittest
+
+TEST_JPEG_FILE = open(
+    os.path.sep.join(__file__.split(os.path.sep)[:-1] + ['brasil.jpg', ]),
+    'rb'
+).read()
 
 
 class ContentTypeTestCase(unittest.TestCase):
@@ -35,6 +42,7 @@ class ContentTypeTestCase(unittest.TestCase):
         # Criamos a agenda diaria
         self.agenda.invokeFactory('AgendaDiaria', '2013-02-05')
         self.agendadiaria = self.agenda['2013-02-05']
+        self.agendadiaria.date = datetime.datetime(2013, 2, 5)
         # Criamos o compromisso
         self.agendadiaria.invokeFactory('Compromisso',
                                         'compromisso',
@@ -61,6 +69,28 @@ class ContentTypeTestCase(unittest.TestCase):
 
     def test_exclude_from_nav(self):
         self.assertTrue(IExcludeFromNavigation.providedBy(self.compromisso))
+
+    def test_default_start_date(self):
+        from brasil.gov.agenda.content.compromisso import default_start_date
+        date_fmt = '%Y-%m-%d %H:%M'
+        # No contexto de Agenda a data de inicio eh a atual + 1 dia
+        date = (datetime.datetime.now() + datetime.timedelta(1)).strftime(date_fmt)
+        self.assertEqual(default_start_date(self.agenda).strftime(date_fmt),
+                         date)
+        # No contexto de uma agendadiaria a data de inicio eh a da AgendaDiaria
+        self.assertEqual(default_start_date(self.agendadiaria).strftime(date_fmt),
+                         '2013-02-05 00:00')
+
+    def test_default_end_date(self):
+        from brasil.gov.agenda.content.compromisso import default_end_date
+        date_fmt = '%Y-%m-%d %H:%M'
+        # No contexto de Agenda a data de inicio eh a atual + 1 dia + 1 hora
+        date = (datetime.datetime.now() + datetime.timedelta(1, 3600)).strftime(date_fmt)
+        self.assertEqual(default_end_date(self.agenda).strftime(date_fmt),
+                         date)
+        # No contexto de uma agendadiaria a data de inicio eh a da AgendaDiaria
+        self.assertEqual(default_end_date(self.agendadiaria).strftime(date_fmt),
+                         '2013-02-05 00:00')
 
     def test_ievent(self):
         self.assertTrue(IEvent.providedBy(self.compromisso))
@@ -137,12 +167,16 @@ class ContentTypeBrowserTestCase(unittest.TestCase):
         self.agenda = self.portal['agenda-presidente']
         # Criamos a agenda diaria
         self.agenda.invokeFactory('AgendaDiaria', '2014-02-05')
+        self.agenda.image = NamedBlobImage(data=TEST_JPEG_FILE,
+                                           filename=u'brasil.jpg')
         self.agendadiaria = self.agenda['2014-02-05']
         # Criamos o compromisso
         self.agendadiaria.invokeFactory('Compromisso',
                                         'compromisso',
-                                        start_date=datetime.datetime(2014, 2, 5))
+                                        start_date=datetime.datetime(2014, 2, 5, 12, 0, 0))
         self.compromisso = self.agendadiaria['compromisso']
+        self.compromisso.start_date = datetime.datetime(2014, 2, 5, 12, 0, 0)
+        self.compromisso.end_date = datetime.datetime(2014, 2, 5, 13, 0, 0)
         # Publicamos os conteudos
         self.wt.doActionFor(self.agenda, 'publish')
         self.wt.doActionFor(self.agendadiaria, 'publish')
@@ -184,10 +218,28 @@ class ContentTypeBrowserTestCase(unittest.TestCase):
         self.assertEqual(browser.headers['status'], '200 Ok')
         self.assertEqual(browser.url, compromisso_url)
 
+    def test_compromisso_view_title(self):
+        portal = self.portal
+        self.setupContent(portal)
+        view = self.compromisso.restrictedTraverse('@@view')
+        view.update()
+        self.assertIn(u'Quarta, 05', view.Title())
+
+    def test_compromisso_view_imagem(self):
+        portal = self.portal
+        self.setupContent(portal)
+        view = self.compromisso.restrictedTraverse('@@view')
+        view.update()
+        self.assertIn(u'<img src="http://nohost/plone/agenda-presidente/@@images/',
+                      view.imagem())
+
     def test_compromisso_ics(self):
         app = self.layer['app']
         portal = self.portal
         self.setupContent(portal)
+        self.compromisso.location = u'Palacio do Planalto'
+        self.compromisso.description = u'Reuniao com Ministros'
+        self.compromisso.autoridade = u'Clarice Lispector'
         import transaction
         transaction.commit()
         self.browser = Browser(app)
@@ -213,6 +265,9 @@ class ContentTypeBrowserTestCase(unittest.TestCase):
         app = self.layer['app']
         portal = self.portal
         self.setupContent(portal)
+        self.compromisso.location = u'Palacio do Planalto'
+        self.compromisso.description = u'Reuniao com Ministros'
+        self.compromisso.autoridade = u'Clarice Lispector'
         import transaction
         transaction.commit()
         self.browser = Browser(app)

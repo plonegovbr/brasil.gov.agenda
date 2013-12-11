@@ -9,6 +9,7 @@ from plone.app.textfield.value import RichTextValue
 from plone.app.testing import setRoles
 from plone.app.testing import TEST_USER_ID
 from plone.dexterity.interfaces import IDexterityFTI
+from plone.namedfile.file import NamedBlobImage
 from plone.uuid.interfaces import IAttributeUUID
 from zope.component import createObject
 from zope.component import queryUtility
@@ -16,7 +17,13 @@ from zope.event import notify
 from zope.lifecycleevent import ObjectModifiedEvent
 
 import datetime
+import os
 import unittest
+
+TEST_JPEG_FILE = open(
+    os.path.sep.join(__file__.split(os.path.sep)[:-1] + ['brasil.jpg', ]),
+    'rb'
+).read()
 
 
 class ContentTypeTestCase(unittest.TestCase):
@@ -33,6 +40,8 @@ class ContentTypeTestCase(unittest.TestCase):
         # Criamos a agenda
         self.folder.invokeFactory('Agenda', 'agenda')
         self.agenda = self.folder['agenda']
+        self.agenda.image = NamedBlobImage(data=TEST_JPEG_FILE,
+                                           filename=u'brasil.jpg')
         # Criamos a agenda diaria
         self.agenda.invokeFactory('AgendaDiaria', '2013-02-05')
         self.agendadiaria = self.agenda['2013-02-05']
@@ -63,6 +72,26 @@ class ContentTypeTestCase(unittest.TestCase):
     def test_exclude_from_nav_default(self):
         behavior = IExcludeFromNavigation(self.agendadiaria)
         self.assertTrue(behavior.exclude_from_nav)
+
+    def test_datevalidator(self):
+        from brasil.gov.agenda.content.agendadiaria import DateValidator
+        from zope.interface.exceptions import Invalid
+        import zope
+
+        class IAgendaDiaria(zope.interface.Interface):
+            date = zope.schema.Date(title=u'Date', required=True)
+
+        validator = DateValidator(None, None, None,
+                                  IAgendaDiaria['date'], None)
+        validator.context = self.agenda
+        # Se usarmos a data de uma agendadiaria existente
+        # teremos um erro
+        self.assertRaises(Invalid,
+                          validator.validate,
+                          datetime.date(2013, 2, 5))
+        # Se usarmos outra data o validador retornara None
+        self.assertEqual(None,
+                         validator.validate(datetime.date(2013, 2, 6)))
 
     def test_title(self):
         agendadiaria = self.agendadiaria
@@ -216,3 +245,9 @@ class ContentTypeTestCase(unittest.TestCase):
 
         browser.open('%s/++resource++brasil.gov.agenda/agenda_icon.png' % portal_url)
         self.assertEqual(browser.headers['status'], '200 Ok')
+
+    def test_agendadiaria_view_imagem(self):
+        view = self.agendadiaria.restrictedTraverse('@@view')
+        view.update()
+        self.assertIn(u'<img src="http://nohost/plone/test-folder/agenda/@@images/',
+                      view.imagem())

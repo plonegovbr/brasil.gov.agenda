@@ -79,6 +79,8 @@ class ContentTypeBrowserTestCase(unittest.TestCase):
         # Criamos a agenda
         self.portal.invokeFactory('Agenda', 'agenda-vice-presidente')
         self.agenda = self.portal['agenda-vice-presidente']
+        self.agenda.autoridade = u'Clarice Lispector'
+        self.agenda.orgao = u'Presidencia da Republica'
         # Criamos a agenda diaria
         self.agenda.invokeFactory('AgendaDiaria', '2014-02-05')
         self.agendadiaria = self.agenda['2014-02-05']
