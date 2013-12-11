@@ -27,6 +27,10 @@ class AgendaTileTestCase(unittest.TestCase):
         self.tile = getMultiAdapter((self.cover, self.request), name=self.name)
         self.tile = self.tile['test']
 
+    def setUpPloneSite(self, portal):
+        self.applyProfile(
+            portal, 'brasil.gov.agenda:default')
+
     def test_interface(self):
         self.assertTrue(IPersistentCoverTile.implementedBy(AgendaTile))
         self.assertTrue(verifyClass(IPersistentCoverTile, AgendaTile))
