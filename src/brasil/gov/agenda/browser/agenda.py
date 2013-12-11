@@ -36,17 +36,6 @@ class AgendaView (grok.View):
         else:
             return super(AgendaView, self).__call__()
 
-    def _format_time(self, value):
-        return value.strftime('%Hh%M')
-
-    def _translate(self, msgid):
-        tool = self._ts
-        return tool.translate(msgid,
-                              'plonelocales',
-                              {},
-                              context=self.context,
-                              target_language='pt_BR')
-
     def agenda_recente(self):
         """ Retorna a agenda mais publicada mais recente """
         agenda = None
@@ -70,47 +59,3 @@ class AgendaView (grok.View):
             results = ct.searchResults(**params)
             agenda = results[0].getObject() if results else None
         return agenda
-
-    @property
-    def date(self):
-        context = self.context
-        date = context.date
-        return date
-
-    def weekday(self):
-        date = self.date
-        return self._translate(self._ts.day_msgid(date.strftime('%w')))
-
-    def month(self):
-        date = self.date
-        return self._translate(self._ts.month_msgid(date.strftime('%m')))
-
-    def long_date(self):
-        date = self.date
-        parts = {}
-        parts['day'] = date.strftime('%d')
-        parts['month'] = self.month()
-        parts['year'] = date.strftime('%Y')
-        return '%(day)s de %(month)s de %(year)s' % parts
-
-    def orgao(self):
-        orgao = self.context.orgao
-        return orgao
-
-    def autoridade(self):
-        autoridade = self.context.autoridade
-        return autoridade
-
-    def imagem(self):
-        imagem = self.context.image
-        if imagem:
-            view = self.context.restrictedTraverse('@@images')
-            scale = view.scale(fieldname='image', scale='large')
-            tag = scale.tag()
-            return tag
-
-    def Title(self):
-        parts = {}
-        parts['weekday'] = self.weekday()
-        parts['long_date'] = self.long_date()
-        return '%(weekday)s, %(long_date)s' % parts
