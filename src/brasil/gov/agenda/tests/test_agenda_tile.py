@@ -2,6 +2,7 @@
 
 import unittest
 
+from brasil.gov.agenda.testing import FIXTURE
 from brasil.gov.agenda.testing import INTEGRATION_TESTING
 from collective.cover.tiles.base import IPersistentCoverTile
 from brasil.gov.agenda.tiles.agenda import AgendaTile
@@ -19,6 +20,8 @@ class AgendaTileTestCase(unittest.TestCase):
 
     def setUp(self):
         self.portal = self.layer['portal']
+        FIXTURE.applyProfile(
+            self.portal, 'brasil.gov.agenda:default')
         setRoles(self.portal, TEST_USER_ID, ['Manager'])
         self.request = self.layer['request']
         self.name = u"agenda"
@@ -26,10 +29,6 @@ class AgendaTileTestCase(unittest.TestCase):
         self.cover = self.portal['frontpage']
         self.tile = getMultiAdapter((self.cover, self.request), name=self.name)
         self.tile = self.tile['test']
-
-    def setUpPloneSite(self, portal):
-        self.applyProfile(
-            portal, 'brasil.gov.agenda:default')
 
     def test_interface(self):
         self.assertTrue(IPersistentCoverTile.implementedBy(AgendaTile))
