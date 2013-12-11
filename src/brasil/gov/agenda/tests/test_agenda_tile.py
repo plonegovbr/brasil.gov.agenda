@@ -4,8 +4,8 @@ import unittest
 
 from brasil.gov.agenda.testing import FIXTURE
 from brasil.gov.agenda.testing import INTEGRATION_TESTING
-from collective.cover.tiles.base import IPersistentCoverTile
 from brasil.gov.agenda.tiles.agenda import AgendaTile
+from collective.cover.tiles.base import IPersistentCoverTile
 from zope.component import getMultiAdapter
 from zope.interface.verify import verifyClass
 from zope.interface.verify import verifyObject
@@ -17,10 +17,13 @@ from plone.app.testing import setRoles
 class AgendaTileTestCase(unittest.TestCase):
 
     layer = INTEGRATION_TESTING
+    fixture = FIXTURE
 
     def setUp(self):
         self.portal = self.layer['portal']
-        FIXTURE.applyProfile(
+        import collective.cover
+        self.fixture.loadZCML(package=collective.cover)
+        self.fixture.applyProfile(
             self.portal, 'brasil.gov.agenda:default')
         setRoles(self.portal, TEST_USER_ID, ['Manager'])
         self.request = self.layer['request']

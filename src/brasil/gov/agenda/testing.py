@@ -14,8 +14,6 @@ class Fixture(PloneSandboxLayer):
 
     def setUpZope(self, app, configurationContext):
         # Load ZCML
-        import collective.cover
-        self.loadZCML(package=collective.cover)
         import brasil.gov.agenda
         self.loadZCML(package=brasil.gov.agenda)
 
