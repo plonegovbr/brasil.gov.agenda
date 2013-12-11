@@ -27,7 +27,8 @@ fake-eggs/
 parts/
 dist/
 var/
-
+.coverage
+htmlcov/
 
 
 # OSX
