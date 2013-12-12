@@ -1,7 +1,7 @@
 Changelog
 ---------
 
-1.0a4 (unreleased)
+1.0b1 (2013-12-12)
 ^^^^^^^^^^^^^^^^^^
 
   * Backend do tile da agenda (closes `#12`_).
