@@ -88,8 +88,6 @@ Configure Cover
     Sleep  1s
     Click Button  from2toButton
     Sleep  1s
-    Click Button  from2toButton
-    Sleep  1s
     Click Button  form-buttons-save
 
 Click Add Agenda
