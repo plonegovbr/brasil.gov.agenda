@@ -4,7 +4,8 @@ Changelog
 1.0b2 (unreleased)
 ^^^^^^^^^^^^^^^^^^
 
-- Nothing changed yet.
+  * Adicionando teste do tile da agenda (closes `#17`_).
+    [dbarbato]
 
 
 1.0b1 (2013-12-12)
@@ -63,3 +64,4 @@ Changelog
 .. _`#1`: https://github.com/plonegovbr/brasil.gov.agenda/issues/1
 .. _`#3`: https://github.com/plonegovbr/brasil.gov.agenda/issues/3
 .. _`#12`: https://github.com/plonegovbr/brasil.gov.agenda/issues/12
+.. _`#17`: https://github.com/plonegovbr/brasil.gov.agenda/issues/17
