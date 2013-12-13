@@ -11,7 +11,6 @@ from zope.interface.verify import verifyObject
 from plone.app.testing import TEST_USER_ID
 from plone.app.testing import setRoles
 
-import datetime
 
 class AgendaTileTestCase(unittest.TestCase):
 
@@ -63,7 +62,7 @@ class AgendaTileTestCase(unittest.TestCase):
         # tile's data attributed is cached so we should re-instantiate the tile
         tile = getMultiAdapter((self.cover, self.request), name=self.name)
         tile = tile['test']
-        self.assertEqual(self.tile.results()['title'],  'Agenda do None')
+        self.assertEqual(self.tile.results()['title'], 'Agenda do None')
 
     def test_accepted_content_types(self):
         # only Agenda is accepted
