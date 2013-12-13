@@ -175,4 +175,4 @@ class AgendaTile(PersistentCoverTile):
 
     def is_empty(self):
         data = self.results()
-        return data['title'] == None
+        return data['title'] is None
