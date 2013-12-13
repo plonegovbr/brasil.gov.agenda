@@ -3,7 +3,14 @@
       xmlns:tal="http://xml.zope.org/namespaces/tal"
       xmlns:i18n="http://xml.zope.org/namespaces/i18n"
       i18n:domain="brasil.gov.tiles">
-    <body tal:define="tile_id view/id;">
+    <body tal:define="tile_id view/id;
+                      is_empty nocall:view/is_empty;">
+
+  <p tal:condition="is_empty" i18n:translate="">
+    Please drag&amp;drop some content here to populate the tile.
+  </p>
+
+
         <div class="agenda-tile tile-content"
              tal:attributes="id string:agenda-$tile_id">
             <tal:fields repeat="field view/get_configured_fields">

@@ -165,3 +165,14 @@ class AgendaTile(PersistentCoverTile):
         """ Return a list of content types accepted by the tile.
         """
         return ['Agenda']
+
+    def results(self):
+        """ Return the list of objects stored in the tile.
+        """
+        data_mgr = ITileDataManager(self)
+        data = data_mgr.get()
+        return data
+
+    def is_empty(self):
+        data = self.results()
+        return data['title'] == None
