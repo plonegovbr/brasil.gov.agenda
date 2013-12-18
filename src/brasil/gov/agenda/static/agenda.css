@@ -307,6 +307,9 @@
     text-indent: -100px;
 }
 
+.portletSearch .portletText {
+    margin: 10px 13px;
+}
 
 .portletSearch .portletFooter {
     display: none;
