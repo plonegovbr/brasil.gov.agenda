@@ -14,7 +14,7 @@ Changelog
   * Backend do tile da agenda (closes `#12`_).
     [rodfersou]
 
-  * Template e CSS do tile agenda (closes `#18`_).
+  * Template e CSS do tile agenda (closes `#12`_).
     [rennan]
 
 
