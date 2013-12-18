@@ -4,7 +4,8 @@ Changelog
 1.0b2 (unreleased)
 ^^^^^^^^^^^^^^^^^^
 
-- Nothing changed yet.
+  * Acertos no portlet de busca (closes `#18`_).
+    [dbarbato]
 
 
 1.0b1 (2013-12-12)
@@ -63,3 +64,4 @@ Changelog
 .. _`#1`: https://github.com/plonegovbr/brasil.gov.agenda/issues/1
 .. _`#3`: https://github.com/plonegovbr/brasil.gov.agenda/issues/3
 .. _`#12`: https://github.com/plonegovbr/brasil.gov.agenda/issues/12
+.. _`#18`: https://github.com/plonegovbr/brasil.gov.agenda/issues/18
