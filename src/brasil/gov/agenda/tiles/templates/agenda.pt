@@ -41,7 +41,7 @@
                                 <div class="timestamp-cell">
                                     <span class="timestamp">${event/time}</span>
                                 </div>
-                                <a class="title-item" href="#">${event/description}</a>
+                                <a class="title-item" href="${view/url_agenda}">${event/description}</a>
                             </li>
                         </tal:event>
                     </ul>
