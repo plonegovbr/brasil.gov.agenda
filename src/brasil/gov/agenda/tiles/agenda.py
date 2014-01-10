@@ -161,15 +161,15 @@ class AgendaTile(PersistentCoverTile):
     def collection_events(self):
         return self._collection_events(self._last_modified())
 
-+    @forever.memoize
-+    def _url_agenda(self, last_modified=None):
-+        agenda = uuidToObject(self.data['uuid'])
-+        agenda_diaria = agenda.get(time.strftime('%Y-%m-%d'), None)
-+        if agenda_diaria:
-+            return agenda_diaria.absolute_url()
-+
-+    def url_agenda(self):
-+        return self._url_agenda(self._last_modified())
+    @forever.memoize
+    def _url_agenda(self, last_modified=None):
+        agenda = uuidToObject(self.data['uuid'])
+        agenda_diaria = agenda.get(time.strftime('%Y-%m-%d'), None)
+        if agenda_diaria:
+            return agenda_diaria.absolute_url()
+
+    def url_agenda(self):
+        return self._url_agenda(self._last_modified())
 
     def accepted_ct(self):
         """ Return a list of content types accepted by the tile.
