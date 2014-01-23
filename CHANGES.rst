@@ -4,6 +4,9 @@ Changelog
 1.0b2 (unreleased)
 ^^^^^^^^^^^^^^^^^^
 
+  * Correções gerais no tile de agenda (closes `#12`_).
+    [rodfersou]
+
   * Acertos no portlet de busca (closes `#18`_).
     [dbarbato]
 
