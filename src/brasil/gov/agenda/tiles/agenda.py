@@ -59,7 +59,7 @@ class IAgendaTile(IPersistentCoverTile):
     form.no_omit('link_url')
     form.omitted(IDefaultConfigureForm, 'link_url')
     link_url = schema.TextLine(
-        title=_(u'URL do rodapé'),
+        title=_(u'Link do rodapé'),
         required=False,
     )
 

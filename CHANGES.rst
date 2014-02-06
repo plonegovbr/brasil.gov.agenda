@@ -4,6 +4,9 @@ Changelog
 1.0b2 (unreleased)
 ^^^^^^^^^^^^^^^^^^
 
+  * Revisão do tile agenda (closes `#23`_).
+    [rodfersou]
+
   * Correções gerais no tile de agenda (closes `#12`_).
     [rodfersou]
 
@@ -68,3 +71,4 @@ Changelog
 .. _`#3`: https://github.com/plonegovbr/brasil.gov.agenda/issues/3
 .. _`#12`: https://github.com/plonegovbr/brasil.gov.agenda/issues/12
 .. _`#18`: https://github.com/plonegovbr/brasil.gov.agenda/issues/18
+.. _`#23`: https://github.com/plonegovbr/brasil.gov.agenda/issues/23
