@@ -75,18 +75,18 @@ Create
     Click Add Compromisso
     Input Text  css=${title_selector}  ${title}
     Input Text  css=${description_selector}  ${description}
-    Input Text  css=${start_day_selector}  30
+    Input Text  css=${start_day_selector}  28
     Input Text  css=${start_year_selector}  2013
     Select From List  css=${start_month_selector}  10
     Input Text  css=${start_hour_selector}  13
     Input Text  css=${start_min_selector}  30
-    Input Text  css=${end_day_selector}  30
+    Input Text  css=${end_day_selector}  28
     Input Text  css=${end_year_selector}  2013
     Select From List  css=${start_month_selector}  10
     Input Text  css=${end_hour_selector}  14
     Input Text  css=${end_min_selector}  00
     Click Button  Save
-    Page Should Contain  30
+    Page Should Contain  28
     Page Should Contain  de
     Page Should Contain  2013
 
