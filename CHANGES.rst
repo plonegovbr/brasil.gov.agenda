@@ -1,6 +1,12 @@
 Changelog
 ---------
 
+y (unreleased)
+^^^^^^^^^^^^^^
+
+- Nothing changed yet.
+
+
 1.0b2 (2014-02-16)
 ^^^^^^^^^^^^^^^^^^
 
