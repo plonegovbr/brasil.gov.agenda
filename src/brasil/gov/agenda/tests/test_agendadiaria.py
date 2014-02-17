@@ -255,7 +255,7 @@ class ContentTypeTestCase(unittest.TestCase):
     def test_agendadiaria_persiste_data(self):
         from brasil.gov.agenda import utils
 
-        # Realizamos o monkey patch da funcao tomorrow, usada pelo 
+        # Realizamos o monkey patch da funcao tomorrow, usada pelo
         # agendadiaria.default_date assim ele retornara a data de 25/12/2013
         def mocked_tomorrow():
             return datetime.date(2013, 12, 25)
