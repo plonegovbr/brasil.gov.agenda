@@ -4,6 +4,16 @@ Changelog
 1.0b2 (unreleased)
 ^^^^^^^^^^^^^^^^^^
 
+  * Oculta upgrade steps
+    [ericof]
+
+  * Ajustes de estilo no pacote.
+    [ericof]
+
+  * Corrige o problema com AgendaDiaria utilizando o campo date diretamente
+    do default_factory ao inves de armazenar o valor dentro do objeto.
+    [ericof]
+
   * Revisão do tile agenda (closes `#23`_).
     [rodfersou]
 
