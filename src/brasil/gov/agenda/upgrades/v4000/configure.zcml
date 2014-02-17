@@ -8,9 +8,9 @@
     <!-- Profile -->
     <gs:registerProfile
         name="default"
-        title="brasil.gov.agenda: Versao 3000"
+        title="brasil.gov.agenda: Versao 4000"
         directory="profile"
-        description="Atualiza o pacote brasil.gov.agenda para versao 3000"
+        description="Atualiza o pacote brasil.gov.agenda para versao 4000"
         provides="Products.GenericSetup.interfaces.EXTENSION"
         i18n:attributes="title; description"
         />
