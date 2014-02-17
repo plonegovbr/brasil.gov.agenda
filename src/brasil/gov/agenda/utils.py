@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
+from datetime import date
 from datetime import datetime
+from datetime import timedelta
 from DateTime import DateTime
 from zope.i18nmessageid import MessageFactory
 
@@ -39,3 +41,8 @@ def rfc2445dt(value):
         value = DateTime(value.strftime('%Y/%m/%d %H:%M'))
     # return UTC in RFC2445 format YYYYMMDDTHHMMSSZ
     return value.HTML4().replace('-', '').replace(':', '')
+
+
+def tomorrow():
+    """ Return datetime.date for tomorrow """
+    return date.today() + timedelta(1)

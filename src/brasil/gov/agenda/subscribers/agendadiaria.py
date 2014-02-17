@@ -6,6 +6,7 @@ from five import grok
 from plone.app.dexterity.behaviors.exclfromnav import IExcludeFromNavigation
 from zope.lifecycleevent.interfaces import IObjectAddedEvent
 
+import datetime
 import logging
 
 logger = logging.getLogger(PROJECTNAME)
@@ -25,5 +26,11 @@ def ordenacao_agenda(event, obj=None):
     behavior = IExcludeFromNavigation(obj)
     behavior.exclude_from_nav = True
 
+    # Forcamos a data manualmente pois quando nao alterada
+    # ele mantem o default_factory como valor padrao (o que muda todos os dias)
+    date = [int(p) for p in obj.getId().split('-')]
+    obj.date = datetime.date(*date)
+
+    #Ordena objetos
     parent = aq_parent(obj)
     parent.orderObjects('id', reverse=False)

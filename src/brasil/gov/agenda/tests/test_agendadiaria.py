@@ -251,3 +251,32 @@ class ContentTypeTestCase(unittest.TestCase):
         view.update()
         self.assertIn(u'<img src="http://nohost/plone/test-folder/agenda/@@images/',
                       view.imagem())
+
+    def test_agendadiaria_persiste_data(self):
+        from brasil.gov.agenda import utils
+
+        # Realizamos o monkey patch da funcao tomorrow, usada pelo 
+        # agendadiaria.default_date assim ele retornara a data de 25/12/2013
+        def mocked_tomorrow():
+            return datetime.date(2013, 12, 25)
+
+        utils._tomorrow = utils.tomorrow
+        utils.tomorrow = mocked_tomorrow
+
+        # Criamos uma agenda para o dia seguibte.
+        self.agenda.invokeFactory('AgendaDiaria', '2013-12-25')
+        obj = self.agenda['2013-12-25']
+        obj.autoridade = u'Clarice Lispector'
+        self.assertEqual(obj.date, datetime.date(2013, 12, 25))
+
+        # Agora retornamos dia 31/12/2013 na funcao tomorrow
+        # o valor do campo date do objeto nao deve se alterar
+        def mocked_tomorrow():
+            return datetime.date(2013, 12, 30)
+
+        setattr(utils, 'tomorrow', mocked_tomorrow)
+
+        self.assertEqual(obj.date, datetime.date(2013, 12, 25))
+
+        # Voltamos o metodo ao seu valor original
+        setattr(utils, 'tomorrow', utils._tomorrow)

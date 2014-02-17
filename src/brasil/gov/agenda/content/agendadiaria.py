@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from brasil.gov.agenda import _
+from brasil.gov.agenda import utils
 from brasil.gov.agenda.config import AGENDADIARIAFMT
 from brasil.gov.agenda.interfaces import IAgenda
 from brasil.gov.agenda.interfaces import IAgendaDiaria
@@ -16,8 +17,6 @@ from zope.interface import provider
 from zope.schema.interfaces import IContextAwareDefaultFactory
 from z3c.form.validator import SimpleFieldValidator
 from zope.interface import Invalid
-
-import datetime
 
 
 class AgendaDiaria(Container):
@@ -59,7 +58,7 @@ def default_location(context):
 @provider(IDefaultFactory)
 def default_date():
     """ Retorna um dia no futuro """
-    return datetime.date.today() + datetime.timedelta(1)
+    return utils.tomorrow()
 
 
 class DateValidator(SimpleFieldValidator):
