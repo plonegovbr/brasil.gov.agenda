@@ -11,7 +11,7 @@
         name="default"
         title="Brasil.gov.br: Agenda de Membros do Governo Brasileiro"
         directory="profiles/default"
-        description="Instala o pacote brasil.gov.agenda dentro de um portal Plone"
+        description="Instala o pacote brasil.gov.agenda dentro de um Portal Padrão"
         provides="Products.GenericSetup.interfaces.EXTENSION"
         i18n:attributes="title; description"
         />
@@ -20,7 +20,7 @@
         name="uninstall"
         title="Brasil.gov.br: Remoção do suporte a Agenda"
         directory="profiles/uninstall"
-        description="Remove o pacote brasil.gov.agenda de dentro de um portal Plone"
+        description="Remove o pacote brasil.gov.agenda de dentro de um Portal Padrão"
         provides="Products.GenericSetup.interfaces.EXTENSION"
         i18n:attributes="title; description"
         />
