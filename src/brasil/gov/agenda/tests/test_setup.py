@@ -51,7 +51,7 @@ class TestInstall(BaseTestCase):
     def test_version(self):
         self.assertEqual(
             self.st.getLastVersionForProfile(self.profile),
-            (u'4000',)
+            (u'4001',)
         )
 
     def test_static_resource_grokker(self):
@@ -158,6 +158,26 @@ class TestUpgrade(BaseTestCase):
         step = [step for step in upgradeSteps
                 if (step[0]['dest'] == ('3000',))
                 and (step[0]['source'] == ('2000',))]
+        self.assertEqual(len(step), 1)
+
+    def test_to4000_available(self):
+
+        upgradeSteps = listUpgradeSteps(self.st,
+                                        self.profile,
+                                        '3000')
+        step = [step for step in upgradeSteps
+                if (step[0]['dest'] == ('4000',))
+                and (step[0]['source'] == ('3000',))]
+        self.assertEqual(len(step), 1)
+
+    def test_to4001_available(self):
+
+        upgradeSteps = listUpgradeSteps(self.st,
+                                        self.profile,
+                                        '4000')
+        step = [step for step in upgradeSteps
+                if (step[0]['dest'] == ('4001',))
+                and (step[0]['source'] == ('4000',))]
         self.assertEqual(len(step), 1)
 
     def test_2000_fix_agendadiaria(self):
