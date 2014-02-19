@@ -1,10 +1,14 @@
 Changelog
 ---------
 
-y (unreleased)
-^^^^^^^^^^^^^^
+1.0b3.dev0 (unreleased)
+^^^^^^^^^^^^^^^^^^^^^^^^
 
-- Nothing changed yet.
+  * Renomeia pacote (profile) para .gov.br
+    [ericof]
+
+  * Oculta upgrade steps
+    [dbarbato]
 
 
 1.0b2 (2014-02-16)
