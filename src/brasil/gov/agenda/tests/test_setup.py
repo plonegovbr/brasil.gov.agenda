@@ -254,6 +254,19 @@ class TestUpgrade(BaseTestCase):
         self.assertEqual(results[0].Title,
                          u'Agenda de Clarice Lispector para 05/02/2013')
 
+    def test_hidden_upgrade_profiles(self):
+        upgrades = [
+            'brasil.gov.agenda.upgrades.v2000',
+            'brasil.gov.agenda.upgrades.v3000',
+            'brasil.gov.agenda.upgrades.v4000',
+            'brasil.gov.agenda.upgrades.v4001',
+        ]
+        packages = [p['id'] for p in self.qi.listInstallableProducts()]
+        result = [p for p in upgrades if p in packages]
+        self.assertFalse(result,
+                         ("Estes upgrades nao estao ocultas: %s" %
+                          ", ".join(result)))
+
 
 class TestUninstall(BaseTestCase):
     """Ensure product is properly uninstalled."""
