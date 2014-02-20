@@ -4,6 +4,9 @@ Changelog
 1.0b3.dev0 (unreleased)
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
+  * Aumenta cobertura de testes para os tiles
+    [dbarbato]
+
   * Aumenta cobertura de testes
     [ericof]
 
