@@ -4,16 +4,16 @@ Changelog
 1.0b3.dev0 (unreleased)
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
-  * Aumenta cobertura de testes para os tiles
+  * Aumenta cobertura de testes para os tiles.
     [dbarbato]
 
-  * Aumenta cobertura de testes
+  * Aumenta cobertura de testes.
     [ericof]
 
-  * Renomeia pacote (profile) para .gov.br
+  * Renomeia pacote (profile) para .gov.br.
     [ericof]
 
-  * Oculta upgrade steps
+  * Oculta upgrade steps.
     [dbarbato]
 
 
