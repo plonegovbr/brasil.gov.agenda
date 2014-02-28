@@ -1,7 +1,7 @@
 Changelog
 ---------
 
-1.0b3.dev0 (unreleased)
+1.0b3 (2014-02-28)
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
   * Aumenta cobertura de testes para os tiles.
