@@ -1,5 +1,5 @@
 ***************************************************************
-`Brasil.gov.br: Agenda de Membros do Governo Brasileiro`
+`.gov.br: Agenda de Membros do Governo Brasileiro`
 ***************************************************************
 
 .. contents:: Conteúdo
