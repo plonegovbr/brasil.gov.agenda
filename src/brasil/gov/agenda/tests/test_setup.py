@@ -307,7 +307,7 @@ class TestUpgrade(BaseTestCase):
         # Para os testes removemos o behavior manualmente
         behaviors = list(types_tool['Agenda'].behaviors)
         behaviors.remove(behavior)
-        types_tool['AgendaDiaria'].behaviors = behaviors
+        types_tool['Agenda'].behaviors = behaviors
 
         # Setamos o profile para versao 4001
         self.st.setLastVersionForProfile(self.profile, u'4001')

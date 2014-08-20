@@ -33,8 +33,8 @@ def aplica_behavior_agenda(context):
     for pt in types:
         obj = types_tool[pt]
         behaviors = list(obj.behaviors)
-        if behavior in behaviors:
-            behaviors.remove(behavior)
+        if behavior not in behaviors:
+            behaviors.append(behavior)
             obj.behaviors = tuple(behaviors)
             logger.info('Aplicado IExcludeFromNavigation no tipo {0}'.format(pt))
 
