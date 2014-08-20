@@ -3,6 +3,7 @@
 from brasil.gov.agenda.config import PROJECTNAME
 from brasil.gov.agenda.testing import FUNCTIONAL_TESTING
 from brasil.gov.agenda.testing import INTEGRATION_TESTING
+from plone import api
 from plone.app.testing import login
 from plone.app.testing import setRoles
 from plone.app.testing import TEST_USER_ID
@@ -140,6 +141,25 @@ class TestInstall(BaseTestCase):
 class TestUpgrade(BaseTestCase):
     """Ensure product upgrades work."""
 
+    def setup_content(self):
+        # Criamos a agenda
+        self.agenda = api.content.create(
+            type='Agenda',
+            id='agenda',
+            container=self.portal
+        )
+        # Criamos a agenda diaria
+        self.agendadiaria = api.content.create(
+            type='AgendaDiaria',
+            id='2013-02-05',
+            container=self.agenda
+        )
+        self.agendadiaria.date = datetime.datetime(2013, 2, 5)
+        self.agendadiaria.update = u'Reuniao em Mirtilo\nVisita Eslovenia'
+        self.agendadiaria.autoridade = u'Clarice Lispector'
+        self.agendadiaria.location = u'Palacio do Planalto'
+        self.agendadiaria.reindexObject()
+
     def test_to2000_available(self):
 
         upgradeSteps = listUpgradeSteps(self.st,
@@ -180,16 +200,18 @@ class TestUpgrade(BaseTestCase):
                 and (step[0]['source'] == ('4000',))]
         self.assertEqual(len(step), 1)
 
+    def test_to4002_available(self):
+
+        upgradeSteps = listUpgradeSteps(self.st,
+                                        self.profile,
+                                        '4001')
+        step = [step for step in upgradeSteps
+                if (step[0]['dest'] == ('4002',))
+                and (step[0]['source'] == ('4001',))]
+        self.assertEqual(len(step), 1)
+
     def test_2000_fix_agendadiaria(self):
-        # Criamos a agenda
-        self.portal.invokeFactory('Agenda', 'agenda')
-        self.agenda = self.portal['agenda']
-        # Criamos a agenda diaria
-        self.agenda.invokeFactory('AgendaDiaria', '2013-02-05')
-        self.agendadiaria = self.agenda['2013-02-05']
-        self.agendadiaria.date = datetime.datetime(2013, 2, 5)
-        self.agendadiaria.update = u'Reuniao em Mirtilo\nVisita Eslovenia'
-        self.agendadiaria.reindexObject()
+        self.setup_content()
         # Setamos o profile para versao 1000
         self.st.setLastVersionForProfile(self.profile, u'1000')
         # Pegamos os upgrade steps
@@ -210,15 +232,7 @@ class TestUpgrade(BaseTestCase):
 
     def test_3000_fix_agendadiaria_catalog(self):
         ct = self.portal.portal_catalog
-        # Criamos a agenda
-        self.portal.invokeFactory('Agenda', 'agenda')
-        self.agenda = self.portal['agenda']
-        # Criamos a agenda diaria
-        self.agenda.invokeFactory('AgendaDiaria', '2013-02-05')
-        self.agendadiaria = self.agenda['2013-02-05']
-        self.agendadiaria.date = datetime.datetime(2013, 2, 5)
-        self.agendadiaria.autoridade = u'Clarice Lispector'
-        self.agendadiaria.location = u'Palacio do Planalto'
+        self.setup_content()
 
         # Fazemos um monkey patch no tipo AgendaDiaria
         def Title():
