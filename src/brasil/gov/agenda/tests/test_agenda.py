@@ -3,6 +3,7 @@ from brasil.gov.agenda.config import AGENDADIARIAFMT
 from brasil.gov.agenda.interfaces import IAgenda
 from brasil.gov.agenda.testing import FUNCTIONAL_TESTING
 from brasil.gov.agenda.testing import INTEGRATION_TESTING
+from plone.app.dexterity.behaviors.exclfromnav import IExcludeFromNavigation
 from plone.app.dexterity.behaviors.nextprevious import INextPreviousToggle
 from plone.app.referenceablebehavior.referenceable import IReferenceable
 from plone.app.testing import setRoles
@@ -51,6 +52,13 @@ class ContentTypeTestCase(unittest.TestCase):
 
     def test_next_previous(self):
         self.assertTrue(INextPreviousToggle.providedBy(self.agenda))
+
+    def test_exclude_from_nav(self):
+        self.assertTrue(IExcludeFromNavigation.providedBy(self.agenda))
+
+    def test_exclude_from_nav_default(self):
+        behavior = IExcludeFromNavigation(self.agenda)
+        self.assertFalse(behavior.exclude_from_nav)
 
     def test_agendadiaria_ordering(self):
         # Create two AgendaDiaria objects
