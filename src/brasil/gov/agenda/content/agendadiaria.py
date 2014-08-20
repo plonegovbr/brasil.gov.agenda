@@ -1,22 +1,18 @@
 # -*- coding: utf-8 -*-
-
 from brasil.gov.agenda import _
 from brasil.gov.agenda import utils
 from brasil.gov.agenda.config import AGENDADIARIAFMT
-from brasil.gov.agenda.interfaces import IAgenda
 from brasil.gov.agenda.interfaces import IAgendaDiaria
 from brasil.gov.agenda.interfaces import ICompromisso
 from DateTime import DateTime
 from five import grok
-from plone.app.dexterity.behaviors.exclfromnav import IExcludeFromNavigation
 from plone.dexterity.content import Container
-from plone.directives import form
 from plone.indexer.decorator import indexer
 from plone.supermodel.interfaces import IDefaultFactory
-from zope.interface import provider
-from zope.schema.interfaces import IContextAwareDefaultFactory
 from z3c.form.validator import SimpleFieldValidator
 from zope.interface import Invalid
+from zope.interface import provider
+from zope.schema.interfaces import IContextAwareDefaultFactory
 
 
 class AgendaDiaria(Container):
@@ -33,13 +29,10 @@ class AgendaDiaria(Container):
         title = u'Agenda de %s para %s' % (autoridade, fmt_date)
         return title
 
-
-@form.default_value(field=IExcludeFromNavigation['exclude_from_nav'])
-def exclude_from_nav_default_value(data):
-    # AgendaDiaria e Compromisso nao devem aparecer na navegacao
-    context = data.context
-    exclude = IAgenda.providedBy(context) or IAgendaDiaria.providedBy(context)
-    return exclude
+    def exclude_from_nav(self):
+        """ AgendaDiaria nao eh visivel na navegacao do portal
+        """
+        return True
 
 
 @provider(IContextAwareDefaultFactory)
@@ -120,3 +113,9 @@ def end_date(obj):
     end_date = DateTime('%s 23:59:59' % end_date.strftime('%Y-%m-%d'))
 
     return end_date
+
+
+@indexer(IAgendaDiaria)
+def exclude_from_nav(obj):
+    # Agendas Diarias sempre serao ocultas da navegacao
+    return obj.exclude_from_nav()

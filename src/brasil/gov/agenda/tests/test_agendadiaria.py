@@ -67,11 +67,12 @@ class ContentTypeTestCase(unittest.TestCase):
         self.assertTrue(IAttributeUUID.providedBy(self.agendadiaria))
 
     def test_exclude_from_nav(self):
-        self.assertTrue(IExcludeFromNavigation.providedBy(self.agendadiaria))
+        results = self.ct.searchResults(portal_type='AgendaDiaria')
+        brain = results[0]
+        self.assertTrue(brain.exclude_from_nav)
 
-    def test_exclude_from_nav_default(self):
-        behavior = IExcludeFromNavigation(self.agendadiaria)
-        self.assertTrue(behavior.exclude_from_nav)
+    def test_exclude_from_nav_behavior(self):
+        self.assertFalse(IExcludeFromNavigation.providedBy(self.agendadiaria))
 
     def test_datevalidator(self):
         from brasil.gov.agenda.content.agendadiaria import DateValidator

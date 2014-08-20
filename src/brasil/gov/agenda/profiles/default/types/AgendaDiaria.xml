@@ -27,7 +27,6 @@
     <property name="behaviors">
         <element value="brasil.gov.agenda.behaviors.date.INameFromDate"/>
         <element value="plone.app.referenceablebehavior.referenceable.IReferenceable" />
-        <element value="plone.app.dexterity.behaviors.exclfromnav.IExcludeFromNavigation"/>
     </property>
 
     <!-- View information -->
