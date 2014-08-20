@@ -8,7 +8,7 @@ def list_agendadiaria_calendar(p):
     if calendar is not None:
         our_type = 'AgendaDiaria'
         types = list(calendar.calendar_types)
-        if not our_type in types:
+        if our_type not in types:
             types.append(our_type)
             calendar.calendar_types = tuple(types)
 
