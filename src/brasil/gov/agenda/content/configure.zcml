@@ -4,6 +4,8 @@
 
   <adapter name="start" factory=".compromisso.start_date" />
   <adapter name="end" factory=".compromisso.end_date" />
+  <adapter name="exclude_from_nav" factory=".compromisso.exclude_from_nav" />
+
 
   <adapter name="start" factory=".agendadiaria.start_date" />
   <adapter name="end" factory=".agendadiaria.end_date" />

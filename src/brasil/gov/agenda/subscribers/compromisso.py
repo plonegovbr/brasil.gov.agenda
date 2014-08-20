@@ -87,7 +87,7 @@ def _get_agenda(base_folder):
 
 
 def _get_destination(agenda, obj, origin, destination_id):
-    if not destination_id in agenda.objectIds():
+    if destination_id not in agenda.objectIds():
         # Valores padrao para a AgendaDiaria
         autoridade = obj.autoridade
         location = obj.location
