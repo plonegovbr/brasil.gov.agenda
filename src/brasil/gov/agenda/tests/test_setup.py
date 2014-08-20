@@ -268,12 +268,108 @@ class TestUpgrade(BaseTestCase):
         self.assertEqual(results[0].Title,
                          u'Agenda de Clarice Lispector para 05/02/2013')
 
+    def test_4002_remove_behavior(self):
+        types_tool = self.portal.portal_types
+        behavior = 'plone.app.dexterity.behaviors.exclfromnav.IExcludeFromNavigation'
+
+        # Para os testes adicionamos o behavior manualmente
+        behaviors = list(types_tool['AgendaDiaria'].behaviors)
+        behaviors.append(behavior)
+        types_tool['AgendaDiaria'].behaviors = behaviors
+
+        # Para os testes adicionamos o behavior manualmente
+        behaviors = list(types_tool['Compromisso'].behaviors)
+        behaviors.append(behavior)
+        types_tool['Compromisso'].behaviors = behaviors
+
+        # Setamos o profile para versao 4001
+        self.st.setLastVersionForProfile(self.profile, u'4001')
+        # Pegamos os upgrade steps
+        upgradeSteps = listUpgradeSteps(self.st,
+                                        self.profile,
+                                        '4001')
+        steps = [step for step in upgradeSteps
+                 if (step[0]['dest'] == ('4002',))
+                 and (step[0]['source'] == ('4001',))][0]
+        # Os executamos
+        for step in steps:
+            step['step'].doStep(self.st)
+
+        # Removido do tipo AgendaDiaria
+        self.assertNotIn(behavior, types_tool['AgendaDiaria'].behaviors)
+        # Removido do tipo Compromisso
+        self.assertNotIn(behavior, types_tool['Compromisso'].behaviors)
+
+    def test_4002_aplica_behavior(self):
+        types_tool = self.portal.portal_types
+        behavior = 'plone.app.dexterity.behaviors.exclfromnav.IExcludeFromNavigation'
+
+        # Para os testes removemos o behavior manualmente
+        behaviors = list(types_tool['Agenda'].behaviors)
+        behaviors.remove(behavior)
+        types_tool['AgendaDiaria'].behaviors = behaviors
+
+        # Setamos o profile para versao 4001
+        self.st.setLastVersionForProfile(self.profile, u'4001')
+        # Pegamos os upgrade steps
+        upgradeSteps = listUpgradeSteps(self.st,
+                                        self.profile,
+                                        '4001')
+        steps = [step for step in upgradeSteps
+                 if (step[0]['dest'] == ('4002',))
+                 and (step[0]['source'] == ('4001',))][0]
+        # Os executamos
+        for step in steps:
+            step['step'].doStep(self.st)
+
+        # Removido do tipo AgendaDiaria
+        self.assertIn(behavior, types_tool['Agenda'].behaviors)
+
+    def test_4002_atualiza_exclude_from_nav(self):
+        ct = self.portal.portal_catalog
+        self.setup_content()
+
+        def exclude_from_nav():
+            return False
+
+        agendadiaria = self.agendadiaria
+        # Monkey patch exclude_from_nav
+        setattr(agendadiaria, '_exclude_from_nav', agendadiaria.exclude_from_nav)
+        setattr(agendadiaria, 'exclude_from_nav', exclude_from_nav)
+        # Reindexa o objeto
+        agendadiaria.reindexObject()
+        # Testamos que exclude_from_nav agora eh False
+        results = ct.searchResults(portal_type='AgendaDiaria')
+        b = results[0]
+        self.assertFalse(b.exclude_from_nav)
+
+        # Voltamos o comportamento original
+        setattr(agendadiaria, 'exclude_from_nav', agendadiaria._exclude_from_nav)
+
+        # Setamos o profile para versao 4001
+        self.st.setLastVersionForProfile(self.profile, u'4001')
+        # Pegamos os upgrade steps
+        upgradeSteps = listUpgradeSteps(self.st,
+                                        self.profile,
+                                        '4001')
+        steps = [step for step in upgradeSteps
+                 if (step[0]['dest'] == ('4002',))
+                 and (step[0]['source'] == ('4001',))][0]
+        # Os executamos
+        for step in steps:
+            step['step'].doStep(self.st)
+
+        results = ct.searchResults(portal_type='AgendaDiaria')
+        b = results[0]
+        self.assertTrue(b.exclude_from_nav)
+
     def test_hidden_upgrade_profiles(self):
         upgrades = [
             'brasil.gov.agenda.upgrades.v2000',
             'brasil.gov.agenda.upgrades.v3000',
             'brasil.gov.agenda.upgrades.v4000',
             'brasil.gov.agenda.upgrades.v4001',
+            'brasil.gov.agenda.upgrades.v4002',
         ]
         packages = [p['id'] for p in self.qi.listInstallableProducts()]
         result = [p for p in upgrades if p in packages]
