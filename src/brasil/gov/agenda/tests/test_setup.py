@@ -160,6 +160,20 @@ class TestUpgrade(BaseTestCase):
         self.agendadiaria.location = u'Palacio do Planalto'
         self.agendadiaria.reindexObject()
 
+    def executa_upgrade(self, source, dest):
+        # Setamos o profile para versao source
+        self.st.setLastVersionForProfile(self.profile, source)
+        # Pegamos os upgrade steps
+        upgradeSteps = listUpgradeSteps(self.st,
+                                        self.profile,
+                                        source)
+        steps = [step for step in upgradeSteps
+                 if (step[0]['dest'] == (dest,))
+                 and (step[0]['source'] == (source,))][0]
+        # Os executamos
+        for step in steps:
+            step['step'].doStep(self.st)
+
     def test_to2000_available(self):
 
         upgradeSteps = listUpgradeSteps(self.st,
@@ -212,18 +226,7 @@ class TestUpgrade(BaseTestCase):
 
     def test_2000_fix_agendadiaria(self):
         self.setup_content()
-        # Setamos o profile para versao 1000
-        self.st.setLastVersionForProfile(self.profile, u'1000')
-        # Pegamos os upgrade steps
-        upgradeSteps = listUpgradeSteps(self.st,
-                                        self.profile,
-                                        '1000')
-        steps = [step for step in upgradeSteps
-                 if (step[0]['dest'] == ('2000',))
-                 and (step[0]['source'] == ('1000',))][0]
-        # Os executamos
-        for step in steps:
-            step['step'].doStep(self.st)
+        self.executa_upgrade(u'1000', u'2000')
         self.assertTrue(hasattr(self.agendadiaria.update, 'raw'))
         output = self.agendadiaria.update.output
         self.assertIn('<br', output)
@@ -249,18 +252,7 @@ class TestUpgrade(BaseTestCase):
         # Revertemos o monkey patch
         self.agendadiaria.Title = self.agendadiaria._title
 
-        # Setamos o profile para versao 2000
-        self.st.setLastVersionForProfile(self.profile, u'2000')
-        # Pegamos os upgrade steps
-        upgradeSteps = listUpgradeSteps(self.st,
-                                        self.profile,
-                                        '2000')
-        steps = [step for step in upgradeSteps
-                 if (step[0]['dest'] == ('3000',))
-                 and (step[0]['source'] == ('2000',))][0]
-        # Os executamos
-        for step in steps:
-            step['step'].doStep(self.st)
+        self.executa_upgrade(u'2000', u'3000')
 
         results = ct.searchResults(
             path='/'.join(self.agendadiaria.getPhysicalPath())
@@ -282,18 +274,7 @@ class TestUpgrade(BaseTestCase):
         behaviors.append(behavior)
         types_tool['Compromisso'].behaviors = behaviors
 
-        # Setamos o profile para versao 4001
-        self.st.setLastVersionForProfile(self.profile, u'4001')
-        # Pegamos os upgrade steps
-        upgradeSteps = listUpgradeSteps(self.st,
-                                        self.profile,
-                                        '4001')
-        steps = [step for step in upgradeSteps
-                 if (step[0]['dest'] == ('4002',))
-                 and (step[0]['source'] == ('4001',))][0]
-        # Os executamos
-        for step in steps:
-            step['step'].doStep(self.st)
+        self.executa_upgrade(u'4001', u'4002')
 
         # Removido do tipo AgendaDiaria
         self.assertNotIn(behavior, types_tool['AgendaDiaria'].behaviors)
@@ -310,18 +291,7 @@ class TestUpgrade(BaseTestCase):
             if pt in metaTypesNotToList:
                 metaTypesNotToList.remove(pt)
 
-        # Setamos o profile para versao 4001
-        self.st.setLastVersionForProfile(self.profile, u'4001')
-        # Pegamos os upgrade steps
-        upgradeSteps = listUpgradeSteps(self.st,
-                                        self.profile,
-                                        '4001')
-        steps = [step for step in upgradeSteps
-                 if (step[0]['dest'] == ('4002',))
-                 and (step[0]['source'] == ('4001',))][0]
-        # Os executamos
-        for step in steps:
-            step['step'].doStep(self.st)
+        self.executa_upgrade(u'4001', u'4002')
 
         # Os tipos devem estar listados novamente
         metaTypesNotToList = list(navtree_properties.metaTypesNotToList)
@@ -340,18 +310,7 @@ class TestUpgrade(BaseTestCase):
         behaviors.remove(behavior)
         types_tool['Agenda'].behaviors = behaviors
 
-        # Setamos o profile para versao 4001
-        self.st.setLastVersionForProfile(self.profile, u'4001')
-        # Pegamos os upgrade steps
-        upgradeSteps = listUpgradeSteps(self.st,
-                                        self.profile,
-                                        '4001')
-        steps = [step for step in upgradeSteps
-                 if (step[0]['dest'] == ('4002',))
-                 and (step[0]['source'] == ('4001',))][0]
-        # Os executamos
-        for step in steps:
-            step['step'].doStep(self.st)
+        self.executa_upgrade(u'4001', u'4002')
 
         # Removido do tipo AgendaDiaria
         self.assertIn(behavior, types_tool['Agenda'].behaviors)
@@ -377,18 +336,7 @@ class TestUpgrade(BaseTestCase):
         # Voltamos o comportamento original
         setattr(agendadiaria, 'exclude_from_nav', agendadiaria._exclude_from_nav)
 
-        # Setamos o profile para versao 4001
-        self.st.setLastVersionForProfile(self.profile, u'4001')
-        # Pegamos os upgrade steps
-        upgradeSteps = listUpgradeSteps(self.st,
-                                        self.profile,
-                                        '4001')
-        steps = [step for step in upgradeSteps
-                 if (step[0]['dest'] == ('4002',))
-                 and (step[0]['source'] == ('4001',))][0]
-        # Os executamos
-        for step in steps:
-            step['step'].doStep(self.st)
+        self.executa_upgrade(u'4001', u'4002')
 
         results = ct.searchResults(portal_type='AgendaDiaria')
         b = results[0]
