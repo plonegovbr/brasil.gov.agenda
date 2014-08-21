@@ -23,5 +23,10 @@
       <required>False</required>
       <title i18n:translate="label_event_location">Event Location</title>
     </field>
+    <field name="subjects" type="zope.schema.Tuple" indexer:searchable="true">
+      <description>Tags são utilizadas para organização de conteúdo</description>
+      <required>False</required>
+      <title>Tags</title>
+    </field>
   </schema>
 </model>

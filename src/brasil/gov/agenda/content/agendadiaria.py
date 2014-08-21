@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from Acquisition import aq_parent
 from brasil.gov.agenda import _
 from brasil.gov.agenda import utils
 from brasil.gov.agenda.config import AGENDADIARIAFMT
@@ -48,6 +49,11 @@ def default_location(context):
     return getattr(context, 'location', u'')
 
 
+@provider(IContextAwareDefaultFactory)
+def default_subjects(context):
+    return getattr(aq_parent(context), 'subjects', ())
+
+
 @provider(IDefaultFactory)
 def default_date():
     """ Retorna um dia no futuro """
@@ -62,6 +68,14 @@ class DateValidator(SimpleFieldValidator):
         oIds = self.context.objectIds()
         if date in oIds:
             raise Invalid(_(u'Ja existe uma agenda para esta data'))
+
+
+@indexer(IAgendaDiaria)
+def tags(obj):
+    """Indexa tags de AgendaDiaria
+    """
+    tags = obj.subjects
+    return tags
 
 
 @indexer(IAgendaDiaria)

@@ -60,6 +60,16 @@ class ContentTypeTestCase(unittest.TestCase):
         behavior = IExcludeFromNavigation(self.agenda)
         self.assertFalse(behavior.exclude_from_nav)
 
+    def test_subjects_catalog(self):
+        agenda = self.agenda
+        agenda.subjects = ('Brasil', 'Governo')
+        agenda.reindexObject(idxs=['Subject'])
+        ct = self.portal.portal_catalog
+        results = ct.searchResults(portal_type='Agenda')
+        b = results[0]
+        self.assertIn('Brasil', b.Subject)
+        self.assertIn('Governo', b.Subject)
+
     def test_agendadiaria_ordering(self):
         # Create two AgendaDiaria objects
         self.agenda.invokeFactory('AgendaDiaria', '2013-10-17')

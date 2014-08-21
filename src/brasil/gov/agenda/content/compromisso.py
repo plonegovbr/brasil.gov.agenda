@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from Acquisition import aq_parent
 from brasil.gov.agenda.interfaces import IAgendaDiaria
 from brasil.gov.agenda.interfaces import ICompromisso
 from DateTime import DateTime
@@ -30,6 +31,11 @@ def default_autoridade(context):
 @provider(IContextAwareDefaultFactory)
 def default_location(context):
     return getattr(context, 'location', u'')
+
+
+@provider(IContextAwareDefaultFactory)
+def default_subjects(context):
+    return getattr(aq_parent(context), 'subjects', ())
 
 
 @provider(IContextAwareDefaultFactory)
@@ -70,6 +76,14 @@ def start_date(obj):
 @indexer(ICompromisso)
 def end_date(obj):
     return DateTime(ICompromisso(obj).end_date)
+
+
+@indexer(ICompromisso)
+def tags(obj):
+    """Indexa tags de Compromisso
+    """
+    tags = obj.subjects
+    return tags
 
 
 @indexer(ICompromisso)

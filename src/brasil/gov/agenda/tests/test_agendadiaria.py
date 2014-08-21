@@ -74,6 +74,26 @@ class ContentTypeTestCase(unittest.TestCase):
     def test_exclude_from_nav_behavior(self):
         self.assertFalse(IExcludeFromNavigation.providedBy(self.agendadiaria))
 
+    def test_subjects_catalog(self):
+        agendadiaria = self.agendadiaria
+        agendadiaria.subjects = ('Brasil', 'Governo')
+        agendadiaria.reindexObject(idxs=['Subject'])
+        ct = self.portal.portal_catalog
+        results = ct.searchResults(portal_type='AgendaDiaria')
+        b = results[0]
+        self.assertIn('Brasil', b.Subject)
+        self.assertIn('Governo', b.Subject)
+
+    def test_default_subjects(self):
+        from brasil.gov.agenda.content.agendadiaria import default_subjects
+        agenda = self.agenda
+        agenda.subjects = ('Plone', )
+        agendadiaria = self.agendadiaria
+        self.assertIn(
+            'Plone',
+            default_subjects(agendadiaria),
+        )
+
     def test_datevalidator(self):
         from brasil.gov.agenda.content.agendadiaria import DateValidator
         from zope.interface.exceptions import Invalid
