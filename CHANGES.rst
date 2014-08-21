@@ -7,6 +7,9 @@ Changelog
   * Remove AgendaDiaria e Compromisso da navegação.
     [ericof]
 
+  * Provê um portlet de calendário que linka direto para a agendadiaria.
+    [ericof]
+
   * Adiciona testes para upgrade steps.
     [ericof]
 
