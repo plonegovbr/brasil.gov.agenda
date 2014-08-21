@@ -94,6 +94,24 @@ class TestInstall(BaseTestCase):
             types_not_searched
         )
 
+    def test_agendadiaria_not_listed(self):
+        pp = getattr(self.portal, 'portal_properties')
+        navtree_properties = pp.navtree_properties
+        metaTypesNotToList = list(navtree_properties.metaTypesNotToList)
+        self.assertIn(
+            'AgendaDiaria',
+            metaTypesNotToList
+        )
+
+    def test_compromisso_not_listed(self):
+        pp = getattr(self.portal, 'portal_properties')
+        navtree_properties = pp.navtree_properties
+        metaTypesNotToList = list(navtree_properties.metaTypesNotToList)
+        self.assertIn(
+            'Compromisso',
+            metaTypesNotToList
+        )
+
     def test_agendadiaria_in_calendar(self):
         calendar = getattr(self.portal, 'portal_calendar')
         calendar_types = calendar.calendar_types
