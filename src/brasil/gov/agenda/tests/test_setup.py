@@ -278,6 +278,20 @@ class TestUpgrade(BaseTestCase):
         self.assertEqual(results[0].Title,
                          u'Agenda de Clarice Lispector para 05/02/2013')
 
+    def test_4001_corrige_campo_date(self):
+        self.setup_content()
+        agendadiaria = self.agendadiaria
+        # Campo data sera diferente do id gerado
+        agendadiaria.date = datetime.date.today()
+
+        self.executa_upgrade(u'4000', u'4001')
+
+        data = self.agendadiaria.date
+        self.assertEqual(
+            data.strftime('%Y-%m-%d'),
+            self.agendadiaria.getId()
+        )
+
     def test_4002_remove_behavior(self):
         types_tool = self.portal.portal_types
         behavior = 'plone.app.dexterity.behaviors.exclfromnav.IExcludeFromNavigation'
