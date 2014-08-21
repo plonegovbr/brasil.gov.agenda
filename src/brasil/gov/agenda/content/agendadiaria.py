@@ -35,6 +35,18 @@ class AgendaDiaria(Container):
         """
         return True
 
+    @property
+    def effective_date(self):
+        """ Metodo que retorna
+        """
+        # Usamos a logica do indexer para start_date
+        date = _start_date(self)
+        if not date.isPast():
+            # Se estiver no futuro, data de efetivacao sera agora
+            now = DateTime()
+            return now
+        return date
+
 
 @provider(IContextAwareDefaultFactory)
 def default_autoridade(context):
@@ -106,8 +118,7 @@ def SearchableText_AgendaDiaria(obj):
                      if isinstance(text, basestring)])
 
 
-@indexer(IAgendaDiaria)
-def start_date(obj):
+def _start_date(obj):
     """ Converte a data da AgendaDiaria para DateTime e coloca o
         horario como 00:00:00
     """
@@ -115,6 +126,13 @@ def start_date(obj):
     # Comeco do dia
     start_date = DateTime('%s 00:00:00' % start_date.strftime('%Y-%m-%d'))
     return start_date
+
+
+@indexer(IAgendaDiaria)
+def start_date(obj):
+    """ Indexa a data de inicio com base na logica existente em _start_date
+    """
+    return _start_date(obj)
 
 
 @indexer(IAgendaDiaria)

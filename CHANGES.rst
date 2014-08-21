@@ -10,6 +10,10 @@ Changelog
   * Provê um portlet de calendário que linka direto para a agendadiaria.
     [ericof]
 
+  * A data de efetivação de uma AgendaDiaria publicada para datas futuras será a data atual.
+    Para AgendaDiaria com data no passado, a data de efetivação sera a própria data de início da AgendaDiaria.
+    [ericof]
+
   * Agenda, AgendaDiaria e Compromisso agora suportam Tags.
     [ericof]
 
