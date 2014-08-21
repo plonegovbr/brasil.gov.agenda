@@ -18,6 +18,12 @@
             />
 
         <gs:upgradeStep
+            title="Adicionamos tipos ao metaTypesNotToList (navtree_properties)"
+            description="Os tipos AgendaDiaria e Compromisso sao adicionados a lista de metaTypesNotToList da navtree_properties"
+            handler=".handler.metaTypesNotToList_agendadiaria_compromisso"
+            />
+
+        <gs:upgradeStep
             title="Aplica behavior IExcludeFromNav"
             description="Para o tipo Agenda aplicamos o behavior IExcludeFromNav"
             handler=".handler.aplica_behavior_agenda"

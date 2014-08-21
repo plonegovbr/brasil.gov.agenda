@@ -24,6 +24,21 @@ def remove_behavior_agendadiaria_compromisso(context):
             logger.info('Removido IExcludeFromNavigation do tipo {0}'.format(pt))
 
 
+def metaTypesNotToList_agendadiaria_compromisso(context):
+    """Os tipos AgendaDiaria e Compromisso sao adicionados
+       a lista metaTypesNotToList (ocultando-os de portlets de navegacao)
+    """
+    navtree_properties = api.portal.get_tool('portal_properties')['navtree_properties']
+    metaTypesNotToList = list(navtree_properties.metaTypesNotToList)
+    types = ['AgendaDiaria', 'Compromisso']
+
+    for pt in types:
+        if pt not in metaTypesNotToList:
+            metaTypesNotToList.append(pt)
+    navtree_properties._updateProperty('metaTypesNotToList', metaTypesNotToList)
+    logger.info('Tipos adicionados a metaTypesNotToList')
+
+
 def aplica_behavior_agenda(context):
     """Aplicamos o behavior IExcludeFromNav no tipo Agenda
     """

@@ -300,6 +300,37 @@ class TestUpgrade(BaseTestCase):
         # Removido do tipo Compromisso
         self.assertNotIn(behavior, types_tool['Compromisso'].behaviors)
 
+    def test_4002_adiciona_tipos_metaTypesNotToList(self):
+        navtree_properties = self.portal.portal_properties.navtree_properties
+        metaTypesNotToList = list(navtree_properties.metaTypesNotToList)
+
+        # Para os testes removeremos os tipos manualmente
+        types = ['AgendaDiaria', 'Compromisso']
+        for pt in types:
+            if pt in metaTypesNotToList:
+                metaTypesNotToList.remove(pt)
+
+        # Setamos o profile para versao 4001
+        self.st.setLastVersionForProfile(self.profile, u'4001')
+        # Pegamos os upgrade steps
+        upgradeSteps = listUpgradeSteps(self.st,
+                                        self.profile,
+                                        '4001')
+        steps = [step for step in upgradeSteps
+                 if (step[0]['dest'] == ('4002',))
+                 and (step[0]['source'] == ('4001',))][0]
+        # Os executamos
+        for step in steps:
+            step['step'].doStep(self.st)
+
+        # Os tipos devem estar listados novamente
+        metaTypesNotToList = list(navtree_properties.metaTypesNotToList)
+
+        # Adicionado o tipo AgendaDiaria
+        self.assertIn('AgendaDiaria', metaTypesNotToList)
+        # Adicionado o tipo Compromisso
+        self.assertIn('Compromisso', metaTypesNotToList)
+
     def test_4002_aplica_behavior(self):
         types_tool = self.portal.portal_types
         behavior = 'plone.app.dexterity.behaviors.exclfromnav.IExcludeFromNavigation'
