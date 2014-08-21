@@ -82,7 +82,7 @@ Create
     Input Text  css=${start_min_selector}  30
     Input Text  css=${end_day_selector}  28
     Input Text  css=${end_year_selector}  2013
-    Select From List  css=${start_month_selector}  10
+    Select From List  css=${end_month_selector}  10
     Input Text  css=${end_hour_selector}  14
     Input Text  css=${end_min_selector}  00
     Click Button  Save
