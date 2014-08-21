@@ -45,6 +45,9 @@
       <required>False</required>
       <defaultFactory>brasil.gov.agenda.content.compromisso.default_subjects</defaultFactory>
       <title>Tags</title>
+      <value_type type="zope.schema.TextLine">
+        <title>Tag</title>
+      </value_type>
     </field>
   </schema>
 </model>

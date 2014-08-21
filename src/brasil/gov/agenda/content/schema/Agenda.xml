@@ -27,6 +27,9 @@
       <description>Tags são utilizadas para organização de conteúdo</description>
       <required>False</required>
       <title>Tags</title>
+      <value_type type="zope.schema.TextLine">
+        <title>Tag</title>
+      </value_type>
     </field>
   </schema>
 </model>
