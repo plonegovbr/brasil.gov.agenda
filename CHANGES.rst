@@ -4,7 +4,11 @@ Changelog
 1.0b4 (unreleased)
 ^^^^^^^^^^^^^^^^^^
 
-- Nothing changed yet.
+  * Remove AgendaDiaria e Compromisso da navegação.
+    [ericof]
+
+  * Adiciona testes para upgrade steps.
+    [ericof]
 
 
 1.0b3 (2014-02-28)
