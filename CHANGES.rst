@@ -10,6 +10,9 @@ Changelog
   * Provê um portlet de calendário que linka direto para a agendadiaria.
     [ericof]
 
+  * Agenda, AgendaDiaria e Compromisso agora suportam Tags.
+    [ericof]
+
   * Adiciona testes para upgrade steps.
     [ericof]
 
