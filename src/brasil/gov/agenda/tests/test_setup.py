@@ -278,6 +278,21 @@ class TestUpgrade(BaseTestCase):
         self.assertEqual(results[0].Title,
                          u'Agenda de Clarice Lispector para 05/02/2013')
 
+    def test_4000_tile_agenda(self):
+        record = 'plone.app.tiles'
+        # Remove o tile manualmente
+        tiles = list(api.portal.get_registry_record(record))
+        if 'agenda' in tiles:
+            tiles.remove('agenda')
+        api.portal.set_registry_record(record, tiles)
+        self.executa_upgrade(u'3000', u'4000')
+
+        tiles = list(api.portal.get_registry_record(record))
+        self.assertIn(
+            'agenda',
+            tiles
+        )
+
     def test_4001_corrige_campo_date(self):
         self.setup_content()
         agendadiaria = self.agendadiaria
