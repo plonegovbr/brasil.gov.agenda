@@ -137,10 +137,14 @@ class AgendaTile(PersistentCoverTile):
     def lastest_update(self):
         return self._lastest_update(self._last_modified())
 
-    @forever.memoize
-    def _collection_events(self, last_modified=None):
+    def agenda_diaria(self):
         agenda = uuidToObject(self.data['uuid'])
         agenda_diaria = agenda.get(time.strftime('%Y-%m-%d'), None)
+        return agenda_diaria
+
+    @forever.memoize
+    def _collection_events(self, last_modified=None):
+        agenda_diaria = self.agenda_diaria()
         collection_events = []
         if agenda_diaria:
             catalog = getToolByName(self.context, 'portal_catalog')

@@ -14,6 +14,13 @@ Changelog
     Para AgendaDiaria com data no passado, a data de efetivação sera a própria data de início da AgendaDiaria.
     [ericof]
 
+  * Visão padrão de agenda agora exibe a AgendaDiaria para a data corrente.
+    Se não houve AgendaDiaria, exibimos uma mensagem
+    [ericof]
+
+  * Remove limite de altura para compromissos no tile de Agenda.
+    [ericof]
+
   * Agenda, AgendaDiaria e Compromisso agora suportam Tags.
     [ericof]
 
