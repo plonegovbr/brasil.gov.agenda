@@ -10,6 +10,8 @@ Changelog
   * Adiciona testes para upgrade steps.
     [ericof]
 
+  * Adiciona teste para behavior de NameFromDate
+    [ericof]
 
 1.0b3 (2014-02-28)
 ^^^^^^^^^^^^^^^^^^^^^^^^
