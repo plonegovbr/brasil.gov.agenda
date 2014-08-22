@@ -89,10 +89,10 @@ class ContentTypeTestCase(unittest.TestCase):
         from brasil.gov.agenda.content.agendadiaria import default_subjects
         agenda = self.agenda
         agenda.subjects = ('Plone', )
-        agendadiaria = self.agendadiaria
+        # default_factory eh executado no container
         self.assertIn(
             'Plone',
-            default_subjects(agendadiaria),
+            default_subjects(agenda),
         )
 
     def test_datevalidator(self):
