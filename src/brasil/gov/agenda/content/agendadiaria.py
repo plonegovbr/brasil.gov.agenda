@@ -150,4 +150,7 @@ def end_date(obj):
 @indexer(IAgendaDiaria)
 def exclude_from_nav(obj):
     # Agendas Diarias sempre serao ocultas da navegacao
-    return obj.exclude_from_nav()
+    exclude_from_nav = obj.exclude_from_nav
+    if hasattr(exclude_from_nav, '__call__'):
+        exclude_from_nav = exclude_from_nav()
+    return exclude_from_nav
