@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-from Acquisition import aq_parent
 from brasil.gov.agenda import _
 from brasil.gov.agenda import utils
 from brasil.gov.agenda.config import AGENDADIARIAFMT
@@ -63,7 +62,7 @@ def default_location(context):
 
 @provider(IContextAwareDefaultFactory)
 def default_subjects(context):
-    return getattr(aq_parent(context), 'subjects', ())
+    return getattr(context, 'subjects', ())
 
 
 @provider(IDefaultFactory)
