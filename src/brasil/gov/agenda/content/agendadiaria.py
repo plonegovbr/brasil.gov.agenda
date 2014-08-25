@@ -2,6 +2,7 @@
 from brasil.gov.agenda import _
 from brasil.gov.agenda import utils
 from brasil.gov.agenda.config import AGENDADIARIAFMT
+from brasil.gov.agenda.config import TZ
 from brasil.gov.agenda.interfaces import IAgendaDiaria
 from brasil.gov.agenda.interfaces import ICompromisso
 from DateTime import DateTime
@@ -123,7 +124,12 @@ def _start_date(obj):
     """
     start_date = IAgendaDiaria(obj).date
     # Comeco do dia
-    start_date = DateTime('%s 00:00:00' % start_date.strftime('%Y-%m-%d'))
+    start_date = DateTime(
+        '{0} 00:00:00 {1}'.format(
+            start_date.strftime('%Y-%m-%d'),
+            TZ
+        )
+    )
     return start_date
 
 
@@ -141,8 +147,12 @@ def end_date(obj):
     """
     end_date = IAgendaDiaria(obj).date
     # Final do dia
-    end_date = DateTime('%s 23:59:59' % end_date.strftime('%Y-%m-%d'))
-
+    end_date = DateTime(
+        '{0} 23:59:59 {1}'.format(
+            end_date.strftime('%Y-%m-%d'),
+            TZ
+        )
+    )
     return end_date
 
 

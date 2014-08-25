@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+from brasil.gov.agenda.config import TZ
 from brasil.gov.agenda.interfaces import IAgendaDiaria
 from brasil.gov.agenda.testing import INTEGRATION_TESTING
 from DateTime import DateTime
@@ -160,12 +161,14 @@ class ContentTypeTestCase(unittest.TestCase):
                                    start={'query': DateTime('2013-02-06'),
                                           'range': 'max'})
         self.assertEqual(len(results), 1)
+        self.assertEqual(results[0].start.timezone(), TZ)
         self.agendadiaria.date = datetime.datetime(2013, 10, 17)
         self.agendadiaria.reindexObject()
         results = ct.searchResults(portal_type='AgendaDiaria',
                                    start={'query': DateTime('2013-10-17'),
                                           'range': 'min'})
         self.assertEqual(len(results), 1)
+        self.assertEqual(results[0].start.timezone(), TZ)
 
     def test_end_indexing(self):
         ct = self.ct
@@ -175,12 +178,13 @@ class ContentTypeTestCase(unittest.TestCase):
                                    end={'query': DateTime('2013-02-06'),
                                         'range': 'min'})
         self.assertEqual(len(results), 1)
+        self.assertEqual(results[0].end.timezone(), TZ)
         self.agendadiaria.date = datetime.datetime(2013, 10, 17)
         self.agendadiaria.reindexObject()
         results = ct.searchResults(portal_type='AgendaDiaria',
                                    end={'query': DateTime('2013-10-17'),
                                         'range': 'min'})
-        self.assertEqual(len(results), 1)
+        self.assertEqual(results[0].end.timezone(), TZ)
 
     def test_SearchableText_indexing_sem_compromissos(self):
         ct = self.ct
