@@ -1,0 +1,41 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:gs="http://namespaces.zope.org/genericsetup"
+    xmlns:i18n="http://namespaces.zope.org/i18n"
+    xmlns:zcml="http://namespaces.zope.org/zcml"
+    i18n_domain="brasil.gov.agenda">
+
+    <!-- Upgrade -->
+    <gs:upgradeSteps
+        source="4001"
+        destination="4002"
+        profile="brasil.gov.agenda:default">
+
+        <gs:upgradeStep
+            title="Remove behavior IExcludeFromNav"
+            description="Para os tipos AgendaDiaria e Compromisso, removemos o behavior IExcludeFromNav"
+            handler=".handler.remove_behavior_agendadiaria_compromisso"
+            />
+
+        <gs:upgradeStep
+            title="Adicionamos tipos ao metaTypesNotToList (navtree_properties)"
+            description="Os tipos AgendaDiaria e Compromisso sao adicionados a lista de metaTypesNotToList da navtree_properties"
+            handler=".handler.metaTypesNotToList_agendadiaria_compromisso"
+            />
+
+        <gs:upgradeStep
+            title="Aplica behavior IExcludeFromNav"
+            description="Para o tipo Agenda aplicamos o behavior IExcludeFromNav"
+            handler=".handler.aplica_behavior_agenda"
+            />
+
+        <gs:upgradeStep
+            title="Atualiza metadado exclude_from_nav"
+            description="Para os tipos AgendaDiaria e Compromisso, atualizamos o metadado de exclude_from_nav"
+            handler=".handler.atualiza_exclude_from_nav"
+            />
+
+    </gs:upgradeSteps>
+
+
+</configure>

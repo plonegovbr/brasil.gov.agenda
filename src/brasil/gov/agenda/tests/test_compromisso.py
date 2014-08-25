@@ -68,7 +68,32 @@ class ContentTypeTestCase(unittest.TestCase):
         self.assertTrue(IAttributeUUID.providedBy(self.compromisso))
 
     def test_exclude_from_nav(self):
-        self.assertTrue(IExcludeFromNavigation.providedBy(self.compromisso))
+        results = self.ct.searchResults(portal_type='Compromisso')
+        brain = results[0]
+        self.assertTrue(brain.exclude_from_nav)
+
+    def test_exclude_from_nav_behavior(self):
+        self.assertFalse(IExcludeFromNavigation.providedBy(self.compromisso))
+
+    def test_subjects_catalog(self):
+        compromisso = self.compromisso
+        compromisso.subjects = ('Brasil', 'Governo')
+        compromisso.reindexObject(idxs=['Subject'])
+        ct = self.portal.portal_catalog
+        results = ct.searchResults(portal_type='Compromisso')
+        b = results[0]
+        self.assertIn('Brasil', b.Subject)
+        self.assertIn('Governo', b.Subject)
+
+    def test_default_subjects(self):
+        from brasil.gov.agenda.content.compromisso import default_subjects
+        agendadiaria = self.agendadiaria
+        agendadiaria.subjects = ('Plone', )
+        # default_factory eh executado no container
+        self.assertIn(
+            'Plone',
+            default_subjects(agendadiaria),
+        )
 
     def test_default_start_date(self):
         from brasil.gov.agenda.content.compromisso import default_start_date

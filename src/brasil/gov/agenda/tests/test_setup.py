@@ -3,6 +3,7 @@
 from brasil.gov.agenda.config import PROJECTNAME
 from brasil.gov.agenda.testing import FUNCTIONAL_TESTING
 from brasil.gov.agenda.testing import INTEGRATION_TESTING
+from plone import api
 from plone.app.testing import login
 from plone.app.testing import setRoles
 from plone.app.testing import TEST_USER_ID
@@ -51,7 +52,7 @@ class TestInstall(BaseTestCase):
     def test_version(self):
         self.assertEqual(
             self.st.getLastVersionForProfile(self.profile),
-            (u'4001',)
+            (u'4002',)
         )
 
     def test_static_resource_grokker(self):
@@ -91,6 +92,24 @@ class TestInstall(BaseTestCase):
         self.assertIn(
             'Compromisso',
             types_not_searched
+        )
+
+    def test_agendadiaria_not_listed(self):
+        pp = getattr(self.portal, 'portal_properties')
+        navtree_properties = pp.navtree_properties
+        metaTypesNotToList = list(navtree_properties.metaTypesNotToList)
+        self.assertIn(
+            'AgendaDiaria',
+            metaTypesNotToList
+        )
+
+    def test_compromisso_not_listed(self):
+        pp = getattr(self.portal, 'portal_properties')
+        navtree_properties = pp.navtree_properties
+        metaTypesNotToList = list(navtree_properties.metaTypesNotToList)
+        self.assertIn(
+            'Compromisso',
+            metaTypesNotToList
         )
 
     def test_agendadiaria_in_calendar(self):
@@ -140,6 +159,39 @@ class TestInstall(BaseTestCase):
 class TestUpgrade(BaseTestCase):
     """Ensure product upgrades work."""
 
+    def setup_content(self):
+        # Criamos a agenda
+        self.agenda = api.content.create(
+            type='Agenda',
+            id='agenda',
+            container=self.portal
+        )
+        # Criamos a agenda diaria
+        self.agendadiaria = api.content.create(
+            type='AgendaDiaria',
+            id='2013-02-05',
+            container=self.agenda
+        )
+        self.agendadiaria.date = datetime.datetime(2013, 2, 5)
+        self.agendadiaria.update = u'Reuniao em Mirtilo\nVisita Eslovenia'
+        self.agendadiaria.autoridade = u'Clarice Lispector'
+        self.agendadiaria.location = u'Palacio do Planalto'
+        self.agendadiaria.reindexObject()
+
+    def executa_upgrade(self, source, dest):
+        # Setamos o profile para versao source
+        self.st.setLastVersionForProfile(self.profile, source)
+        # Pegamos os upgrade steps
+        upgradeSteps = listUpgradeSteps(self.st,
+                                        self.profile,
+                                        source)
+        steps = [step for step in upgradeSteps
+                 if (step[0]['dest'] == (dest,))
+                 and (step[0]['source'] == (source,))][0]
+        # Os executamos
+        for step in steps:
+            step['step'].doStep(self.st)
+
     def test_to2000_available(self):
 
         upgradeSteps = listUpgradeSteps(self.st,
@@ -180,28 +232,19 @@ class TestUpgrade(BaseTestCase):
                 and (step[0]['source'] == ('4000',))]
         self.assertEqual(len(step), 1)
 
-    def test_2000_fix_agendadiaria(self):
-        # Criamos a agenda
-        self.portal.invokeFactory('Agenda', 'agenda')
-        self.agenda = self.portal['agenda']
-        # Criamos a agenda diaria
-        self.agenda.invokeFactory('AgendaDiaria', '2013-02-05')
-        self.agendadiaria = self.agenda['2013-02-05']
-        self.agendadiaria.date = datetime.datetime(2013, 2, 5)
-        self.agendadiaria.update = u'Reuniao em Mirtilo\nVisita Eslovenia'
-        self.agendadiaria.reindexObject()
-        # Setamos o profile para versao 1000
-        self.st.setLastVersionForProfile(self.profile, u'1000')
-        # Pegamos os upgrade steps
+    def test_to4002_available(self):
+
         upgradeSteps = listUpgradeSteps(self.st,
                                         self.profile,
-                                        '1000')
-        steps = [step for step in upgradeSteps
-                 if (step[0]['dest'] == ('2000',))
-                 and (step[0]['source'] == ('1000',))][0]
-        # Os executamos
-        for step in steps:
-            step['step'].doStep(self.st)
+                                        '4001')
+        step = [step for step in upgradeSteps
+                if (step[0]['dest'] == ('4002',))
+                and (step[0]['source'] == ('4001',))]
+        self.assertEqual(len(step), 1)
+
+    def test_2000_fix_agendadiaria(self):
+        self.setup_content()
+        self.executa_upgrade(u'1000', u'2000')
         self.assertTrue(hasattr(self.agendadiaria.update, 'raw'))
         output = self.agendadiaria.update.output
         self.assertIn('<br', output)
@@ -210,15 +253,7 @@ class TestUpgrade(BaseTestCase):
 
     def test_3000_fix_agendadiaria_catalog(self):
         ct = self.portal.portal_catalog
-        # Criamos a agenda
-        self.portal.invokeFactory('Agenda', 'agenda')
-        self.agenda = self.portal['agenda']
-        # Criamos a agenda diaria
-        self.agenda.invokeFactory('AgendaDiaria', '2013-02-05')
-        self.agendadiaria = self.agenda['2013-02-05']
-        self.agendadiaria.date = datetime.datetime(2013, 2, 5)
-        self.agendadiaria.autoridade = u'Clarice Lispector'
-        self.agendadiaria.location = u'Palacio do Planalto'
+        self.setup_content()
 
         # Fazemos um monkey patch no tipo AgendaDiaria
         def Title():
@@ -235,18 +270,7 @@ class TestUpgrade(BaseTestCase):
         # Revertemos o monkey patch
         self.agendadiaria.Title = self.agendadiaria._title
 
-        # Setamos o profile para versao 2000
-        self.st.setLastVersionForProfile(self.profile, u'2000')
-        # Pegamos os upgrade steps
-        upgradeSteps = listUpgradeSteps(self.st,
-                                        self.profile,
-                                        '2000')
-        steps = [step for step in upgradeSteps
-                 if (step[0]['dest'] == ('3000',))
-                 and (step[0]['source'] == ('2000',))][0]
-        # Os executamos
-        for step in steps:
-            step['step'].doStep(self.st)
+        self.executa_upgrade(u'2000', u'3000')
 
         results = ct.searchResults(
             path='/'.join(self.agendadiaria.getPhysicalPath())
@@ -254,12 +278,124 @@ class TestUpgrade(BaseTestCase):
         self.assertEqual(results[0].Title,
                          u'Agenda de Clarice Lispector para 05/02/2013')
 
+    def test_4000_tile_agenda(self):
+        record = 'plone.app.tiles'
+        # Remove o tile manualmente
+        tiles = list(api.portal.get_registry_record(record))
+        if 'agenda' in tiles:
+            tiles.remove('agenda')
+        api.portal.set_registry_record(record, tiles)
+        self.executa_upgrade(u'3000', u'4000')
+
+        tiles = list(api.portal.get_registry_record(record))
+        self.assertIn(
+            'agenda',
+            tiles
+        )
+
+    def test_4001_corrige_campo_date(self):
+        self.setup_content()
+        agendadiaria = self.agendadiaria
+        # Campo data sera diferente do id gerado
+        agendadiaria.date = datetime.date.today()
+
+        self.executa_upgrade(u'4000', u'4001')
+
+        data = self.agendadiaria.date
+        self.assertEqual(
+            data.strftime('%Y-%m-%d'),
+            self.agendadiaria.getId()
+        )
+
+    def test_4002_remove_behavior(self):
+        types_tool = self.portal.portal_types
+        behavior = 'plone.app.dexterity.behaviors.exclfromnav.IExcludeFromNavigation'
+
+        # Para os testes adicionamos o behavior manualmente
+        behaviors = list(types_tool['AgendaDiaria'].behaviors)
+        behaviors.append(behavior)
+        types_tool['AgendaDiaria'].behaviors = behaviors
+
+        # Para os testes adicionamos o behavior manualmente
+        behaviors = list(types_tool['Compromisso'].behaviors)
+        behaviors.append(behavior)
+        types_tool['Compromisso'].behaviors = behaviors
+
+        self.executa_upgrade(u'4001', u'4002')
+
+        # Removido do tipo AgendaDiaria
+        self.assertNotIn(behavior, types_tool['AgendaDiaria'].behaviors)
+        # Removido do tipo Compromisso
+        self.assertNotIn(behavior, types_tool['Compromisso'].behaviors)
+
+    def test_4002_adiciona_tipos_metaTypesNotToList(self):
+        navtree_properties = self.portal.portal_properties.navtree_properties
+        metaTypesNotToList = list(navtree_properties.metaTypesNotToList)
+
+        # Para os testes removeremos os tipos manualmente
+        types = ['AgendaDiaria', 'Compromisso']
+        for pt in types:
+            if pt in metaTypesNotToList:
+                metaTypesNotToList.remove(pt)
+
+        self.executa_upgrade(u'4001', u'4002')
+
+        # Os tipos devem estar listados novamente
+        metaTypesNotToList = list(navtree_properties.metaTypesNotToList)
+
+        # Adicionado o tipo AgendaDiaria
+        self.assertIn('AgendaDiaria', metaTypesNotToList)
+        # Adicionado o tipo Compromisso
+        self.assertIn('Compromisso', metaTypesNotToList)
+
+    def test_4002_aplica_behavior(self):
+        types_tool = self.portal.portal_types
+        behavior = 'plone.app.dexterity.behaviors.exclfromnav.IExcludeFromNavigation'
+
+        # Para os testes removemos o behavior manualmente
+        behaviors = list(types_tool['Agenda'].behaviors)
+        behaviors.remove(behavior)
+        types_tool['Agenda'].behaviors = behaviors
+
+        self.executa_upgrade(u'4001', u'4002')
+
+        # Removido do tipo AgendaDiaria
+        self.assertIn(behavior, types_tool['Agenda'].behaviors)
+
+    def test_4002_atualiza_exclude_from_nav(self):
+        ct = self.portal.portal_catalog
+        self.setup_content()
+
+        def exclude_from_nav():
+            return False
+
+        agendadiaria = self.agendadiaria
+        # Monkey patch exclude_from_nav
+        setattr(agendadiaria, '_exclude_from_nav', agendadiaria.exclude_from_nav)
+        setattr(agendadiaria, 'exclude_from_nav', exclude_from_nav)
+        # Reindexa o objeto
+        agendadiaria.reindexObject()
+        # Testamos que exclude_from_nav agora eh False
+        results = ct.searchResults(portal_type='AgendaDiaria')
+        b = results[0]
+        self.assertFalse(b.exclude_from_nav)
+
+        # Voltamos o comportamento original
+        setattr(agendadiaria, 'exclude_from_nav', agendadiaria._exclude_from_nav)
+
+        self.executa_upgrade(u'4001', u'4002')
+
+        results = ct.searchResults(portal_type='AgendaDiaria')
+        b = results[0]
+        self.assertTrue(b.exclude_from_nav)
+
     def test_hidden_upgrade_profiles(self):
         upgrades = [
             'brasil.gov.agenda.upgrades.v2000',
             'brasil.gov.agenda.upgrades.v3000',
             'brasil.gov.agenda.upgrades.v4000',
             'brasil.gov.agenda.upgrades.v4001',
+            'brasil.gov.agenda.upgrades.v4002',
         ]
         packages = [p['id'] for p in self.qi.listInstallableProducts()]
         result = [p for p in upgrades if p in packages]

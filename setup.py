@@ -41,6 +41,7 @@ setup(
     install_requires=[
         'brasil.gov.tiles',
         'collective.portlet.calendar',
+        'plone.api',
         'plone.app.content',
         'plone.app.contenttypes<1.1a1',
         'plone.app.dexterity [grok]',

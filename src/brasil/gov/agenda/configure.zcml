@@ -5,6 +5,7 @@
     xmlns:i18n="http://namespaces.zope.org/i18n"
     i18n_domain="brasil.gov.agenda">
 
+    <include package="collective.portlet.calendar" />
     <includeDependencies package="." />
 
     <!-- Adiciona permissoes -->

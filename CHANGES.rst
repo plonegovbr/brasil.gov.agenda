@@ -4,8 +4,31 @@ Changelog
 1.0b4 (unreleased)
 ^^^^^^^^^^^^^^^^^^
 
-- Nothing changed yet.
+  * Remove AgendaDiaria e Compromisso da navegação.
+    [ericof]
 
+  * Provê um portlet de calendário que linka direto para a agendadiaria.
+    [ericof]
+
+  * A data de efetivação de uma AgendaDiaria publicada para datas futuras será a data atual.
+    Para AgendaDiaria com data no passado, a data de efetivação sera a própria data de início da AgendaDiaria.
+    [ericof]
+
+  * Visão padrão de agenda agora exibe a AgendaDiaria para a data corrente.
+    Se não houve AgendaDiaria, exibimos uma mensagem
+    [ericof]
+
+  * Remove limite de altura para compromissos no tile de Agenda.
+    [ericof]
+
+  * Agenda, AgendaDiaria e Compromisso agora suportam Tags.
+    [ericof]
+
+  * Adiciona testes para upgrade steps.
+    [ericof]
+
+  * Adiciona teste para behavior de NameFromDate
+    [ericof]
 
 1.0b3 (2014-02-28)
 ^^^^^^^^^^^^^^^^^^^^^^^^

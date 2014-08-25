@@ -5,6 +5,7 @@
     metal:use-macro="context/main_template/macros/master">
 
     <metal:block fill-slot="content-core">
+      <tal:editable tal:condition="view/editable">
         <a tal:condition="view/editable"
            class="adicionar_compromisso"
            tal:attributes="href string:${context/absolute_url}/++add++AgendaDiaria"
@@ -13,6 +14,54 @@
            class="adicionar_compromisso"
            tal:attributes="href string:${context/absolute_url}/++add++Compromisso"
            i18n:translate="">Adicionar Compromisso</a>
+      </tal:editable>
+      <tal:semagendadiaria tal:condition="not:view/editable">
+    <div class="dados-agenda">
+
+      <tal:image condition="view/imagem">
+        <img class="brasao-agenda"
+             tal:define="scale context/@@images"
+             tal:replace="structure python: scale.scale('image',
+                          scale='mini').tag(css_class='brasao-agenda')" />
+      </tal:image>
+
+      <h2 class="agenda-orgao" tal:content="view/orgao">Presidência da República</h2>
+      <h3 class="agenda-autoridade" tal:content="view/autoridade">Autoridade</h3>
+
+      <span class="agenda-dia">
+        <span tal:replace="view/weekday">Segunda-Feira</span>, <span tal:replace="view/long_date">14 de Outubro de 2013</span>
+      </span>
+
+    </div>
+
+    <ul class="list-compromissos">
+
+      <li class="sem-compromisso item-compromisso">
+          <span 
+            i18n:translate="label_agendadiaria_nao_criada">
+            Atualmente n&atilde;o existem compromissos agendados.
+          </span>
+      </li>
+
+    </ul>
+
+    <div class="footer-actions">
+      <ul class="list-actions">
+        <li class="item print">
+          <a href="javascript:window.print();">
+            <span class="texto">Imprimir</span>
+          </a>
+        </li>
+        <tal:reporterros tal:define="urlerros view/get_link_erros">
+        <li class="item relatar-erros">
+          <a tal:attributes="href urlerros">
+            <span class="texto">Reportar erro</span>
+          </a>
+        </li>
+        </tal:reporterros>
+      </ul>
+    </div>
+      </tal:semagendadiaria>
     </metal:block>
 
 </html>

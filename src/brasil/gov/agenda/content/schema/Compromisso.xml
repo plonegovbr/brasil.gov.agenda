@@ -40,5 +40,14 @@
         <defaultFactory>brasil.gov.agenda.content.compromisso.default_location</defaultFactory>
         <title i18n:translate="label_event_location">Event Location</title>
       </field>
+    <field name="subjects" type="zope.schema.Tuple" indexer:searchable="true">
+      <description>Tags são utilizadas para organização de conteúdo</description>
+      <required>False</required>
+      <defaultFactory>brasil.gov.agenda.content.compromisso.default_subjects</defaultFactory>
+      <title>Tags</title>
+      <value_type type="zope.schema.TextLine">
+        <title>Tag</title>
+      </value_type>
+    </field>
   </schema>
 </model>

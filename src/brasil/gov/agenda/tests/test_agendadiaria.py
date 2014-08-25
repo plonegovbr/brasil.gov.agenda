@@ -3,6 +3,7 @@
 from brasil.gov.agenda.interfaces import IAgendaDiaria
 from brasil.gov.agenda.testing import INTEGRATION_TESTING
 from DateTime import DateTime
+from plone import api
 from plone.app.dexterity.behaviors.exclfromnav import IExcludeFromNavigation
 from plone.app.referenceablebehavior.referenceable import IReferenceable
 from plone.app.textfield.value import RichTextValue
@@ -67,11 +68,32 @@ class ContentTypeTestCase(unittest.TestCase):
         self.assertTrue(IAttributeUUID.providedBy(self.agendadiaria))
 
     def test_exclude_from_nav(self):
-        self.assertTrue(IExcludeFromNavigation.providedBy(self.agendadiaria))
+        results = self.ct.searchResults(portal_type='AgendaDiaria')
+        brain = results[0]
+        self.assertTrue(brain.exclude_from_nav)
 
-    def test_exclude_from_nav_default(self):
-        behavior = IExcludeFromNavigation(self.agendadiaria)
-        self.assertTrue(behavior.exclude_from_nav)
+    def test_exclude_from_nav_behavior(self):
+        self.assertFalse(IExcludeFromNavigation.providedBy(self.agendadiaria))
+
+    def test_subjects_catalog(self):
+        agendadiaria = self.agendadiaria
+        agendadiaria.subjects = ('Brasil', 'Governo')
+        agendadiaria.reindexObject(idxs=['Subject'])
+        ct = self.portal.portal_catalog
+        results = ct.searchResults(portal_type='AgendaDiaria')
+        b = results[0]
+        self.assertIn('Brasil', b.Subject)
+        self.assertIn('Governo', b.Subject)
+
+    def test_default_subjects(self):
+        from brasil.gov.agenda.content.agendadiaria import default_subjects
+        agenda = self.agenda
+        agenda.subjects = ('Plone', )
+        # default_factory eh executado no container
+        self.assertIn(
+            'Plone',
+            default_subjects(agenda),
+        )
 
     def test_datevalidator(self):
         from brasil.gov.agenda.content.agendadiaria import DateValidator
@@ -97,6 +119,38 @@ class ContentTypeTestCase(unittest.TestCase):
         agendadiaria = self.agendadiaria
         self.assertEqual(agendadiaria.Title(),
                          'Agenda de Clarice Lispector para 05/02/2013')
+
+    def test_effective_date_indexing(self):
+        ct = self.ct
+        with api.env.adopt_roles(['Manager']):
+            # Conteudo publicado
+            api.content.transition(
+                self.agendadiaria,
+                'publish'
+            )
+            # Data no passado
+            self.agendadiaria.date = datetime.datetime(2013, 2, 5)
+            self.agendadiaria.reindexObject()
+        # Como usuario anonimo, podemos ver o conteudo
+        with api.env.adopt_roles(['Anonymous']):
+            results = ct.searchResults(portal_type='AgendaDiaria')
+            self.assertEqual(len(results), 1)
+            self.assertTrue(
+                results[0].EffectiveDate.startswith('2013-02')
+            )
+        # Manager
+        with api.env.adopt_roles(['Manager']):
+            self.agendadiaria.date = datetime.datetime(2029, 10, 17)
+            self.agendadiaria.reindexObject()
+        # Anonimo
+        with api.env.adopt_roles(['Anonymous']):
+            # Para um conteudo no futuro, tambem devemos ver o conteudo
+            results = ct.searchResults(portal_type='AgendaDiaria')
+            self.assertEqual(len(results), 1)
+            today = datetime.date.today().strftime('%Y-%m')
+            self.assertTrue(
+                results[0].EffectiveDate.startswith(today)
+            )
 
     def test_start_indexing(self):
         ct = self.ct

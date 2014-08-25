@@ -1,12 +1,9 @@
 # -*- coding: utf-8 -*-
-
 from brasil.gov.agenda.interfaces import IAgendaDiaria
 from brasil.gov.agenda.interfaces import ICompromisso
 from DateTime import DateTime
 from five import grok
-from plone.app.dexterity.behaviors.exclfromnav import IExcludeFromNavigation
 from plone.dexterity.content import Container
-from plone.directives import form
 from plone.indexer.decorator import indexer
 from zope.interface import provider
 from zope.schema.interfaces import IContextAwareDefaultFactory
@@ -19,11 +16,10 @@ class Compromisso(Container):
 
     grok.implements(ICompromisso)
 
-
-@form.default_value(field=IExcludeFromNavigation['exclude_from_nav'],
-                    context=IAgendaDiaria)
-def exclude_from_nav_default_value(data):
-    return True
+    def exclude_from_nav(self):
+        """ Compromisso nao eh visivel na navegacao do portal
+        """
+        return True
 
 
 @provider(IContextAwareDefaultFactory)
@@ -34,6 +30,11 @@ def default_autoridade(context):
 @provider(IContextAwareDefaultFactory)
 def default_location(context):
     return getattr(context, 'location', u'')
+
+
+@provider(IContextAwareDefaultFactory)
+def default_subjects(context):
+    return getattr(context, 'subjects', ())
 
 
 @provider(IContextAwareDefaultFactory)
@@ -74,3 +75,17 @@ def start_date(obj):
 @indexer(ICompromisso)
 def end_date(obj):
     return DateTime(ICompromisso(obj).end_date)
+
+
+@indexer(ICompromisso)
+def tags(obj):
+    """Indexa tags de Compromisso
+    """
+    tags = obj.subjects
+    return tags
+
+
+@indexer(ICompromisso)
+def exclude_from_nav(obj):
+    # Compromissos sempre serao ocultos da navegacao
+    return obj.exclude_from_nav()

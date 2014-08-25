@@ -397,7 +397,6 @@
     margin: 0px;
     padding: 0.5em 0px 0.5em 1.1em;
     width: 95%;
-    height: 54px;
     list-style: outside none;
 }
 
@@ -436,7 +435,6 @@
     padding: 0px 1.1em 0px 20px;
     padding-left: 0.9em;
     width: 90%;
-    height: 50px;
     border-left: 1px solid #c1c1c1;
     color: #305373 !important;
     vertical-align: middle;
@@ -502,7 +500,6 @@
 {
     display:inline-block;
     overflow: hidden;
-    height: 2.5em;
 }
 
 .width-5 .agenda-tile .collection-events .title-item{

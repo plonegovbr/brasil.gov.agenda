@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-
 from brasil.gov.agenda.config import AGENDADIARIAFMT
 from brasil.gov.agenda.interfaces import IAgenda
 from DateTime import DateTime
@@ -37,7 +36,9 @@ class AgendaView (grok.View):
             return super(AgendaView, self).__call__()
 
     def agenda_recente(self):
-        """ Retorna a agenda mais publicada mais recente """
+        """Deve retornar a agendadiaria para o dia atual
+           caso contrario exibimos
+        """
         agenda = None
         hoje = DateTime().strftime(AGENDADIARIAFMT)
         # Validamos se existe uma agenda para o dia de hoje
@@ -46,16 +47,59 @@ class AgendaView (grok.View):
             agenda = self.context[hoje]
             review_state = self.workflow.getInfoFor(agenda, 'review_state')
             agenda = agenda if review_state == 'published' else None
-        if not agenda:
-            # Caso nao exista retornamos a agenda mais recente
-            ct = self.catalog
-            path = '/'.join(self.context.getPhysicalPath())
-            params = {}
-            params['path'] = path
-            params['portal_type'] = 'AgendaDiaria'
-            params['review_state'] = 'published'
-            params['sort_on'] = 'start'
-            params['sort_order'] = 'reverse'
-            results = ct.searchResults(**params)
-            agenda = results[0].getObject() if results else None
         return agenda
+
+    def _format_time(self, value):
+        return value.strftime('%Hh%M')
+
+    def _translate(self, msgid):
+        tool = self._ts
+        return tool.translate(msgid,
+                              'plonelocales',
+                              {},
+                              context=self.context,
+                              target_language='pt_BR')
+
+    def get_link_erros(self):
+        portal_obj = self.context.portal_url.getPortalObject()
+        if (hasattr(portal_obj, 'relatar-erros')):
+            return self.context.absolute_url() + '/relatar-erros'
+        else:
+            return None
+
+    @property
+    def date(self):
+        date = DateTime()
+        return date
+
+    def weekday(self):
+        date = self.date
+        return self._translate(self._ts.day_msgid(date.strftime('%w')))
+
+    def month(self):
+        date = self.date
+        return self._translate(self._ts.month_msgid(date.strftime('%m')))
+
+    def long_date(self):
+        date = self.date
+        parts = {}
+        parts['day'] = date.strftime('%d')
+        parts['month'] = self.month()
+        parts['year'] = date.strftime('%Y')
+        return '%(day)s de %(month)s de %(year)s' % parts
+
+    def orgao(self):
+        orgao = self.context.orgao
+        return orgao
+
+    def autoridade(self):
+        autoridade = self.context.autoridade
+        return autoridade
+
+    def imagem(self):
+        imagem = self.context.image
+        if imagem:
+            view = self.context.restrictedTraverse('@@images')
+            scale = view.scale(fieldname='image', scale='large')
+            tag = scale.tag()
+            return tag

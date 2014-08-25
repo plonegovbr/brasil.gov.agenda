@@ -3,6 +3,7 @@ from brasil.gov.agenda.config import AGENDADIARIAFMT
 from brasil.gov.agenda.interfaces import IAgenda
 from brasil.gov.agenda.testing import FUNCTIONAL_TESTING
 from brasil.gov.agenda.testing import INTEGRATION_TESTING
+from plone.app.dexterity.behaviors.exclfromnav import IExcludeFromNavigation
 from plone.app.dexterity.behaviors.nextprevious import INextPreviousToggle
 from plone.app.referenceablebehavior.referenceable import IReferenceable
 from plone.app.testing import setRoles
@@ -51,6 +52,23 @@ class ContentTypeTestCase(unittest.TestCase):
 
     def test_next_previous(self):
         self.assertTrue(INextPreviousToggle.providedBy(self.agenda))
+
+    def test_exclude_from_nav(self):
+        self.assertTrue(IExcludeFromNavigation.providedBy(self.agenda))
+
+    def test_exclude_from_nav_default(self):
+        behavior = IExcludeFromNavigation(self.agenda)
+        self.assertFalse(behavior.exclude_from_nav)
+
+    def test_subjects_catalog(self):
+        agenda = self.agenda
+        agenda.subjects = ('Brasil', 'Governo')
+        agenda.reindexObject(idxs=['Subject'])
+        ct = self.portal.portal_catalog
+        results = ct.searchResults(portal_type='Agenda')
+        b = results[0]
+        self.assertIn('Brasil', b.Subject)
+        self.assertIn('Governo', b.Subject)
 
     def test_agendadiaria_ordering(self):
         # Create two AgendaDiaria objects
@@ -124,9 +142,10 @@ class ContentTypeBrowserTestCase(unittest.TestCase):
         agenda_url = self.agenda.absolute_url()
         browser = self.browser
 
-        # Exibiremos a AgendaDiaria de 02/05/2014
+        # Exibimos uma mensagem de que nao temos
+        # compromissos para a data de hoje
         browser.open(agenda_url)
-        self.assertIn('05/02/2014 &#8212',
+        self.assertIn('existem compromissos agendados.',
                       browser.contents.decode('utf-8'))
 
         # Criamos uma agenda para o dia de hoje
@@ -140,9 +159,9 @@ class ContentTypeBrowserTestCase(unittest.TestCase):
         transaction.commit()
 
         # Como esta AgendaDiaria nao foi publicada, continuamos a
-        # exibir a de 05/02
+        # exibir a mensagem
         browser.open(agenda_url)
-        self.assertIn('05/02/2014 &#8212',
+        self.assertIn('existem compromissos agendados.',
                       browser.contents.decode('utf-8'))
 
         # Ao publicarmos a AgendaDiaria de hoje
