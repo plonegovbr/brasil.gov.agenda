@@ -88,4 +88,7 @@ def tags(obj):
 @indexer(ICompromisso)
 def exclude_from_nav(obj):
     # Compromissos sempre serao ocultos da navegacao
-    return obj.exclude_from_nav()
+    exclude_from_nav = obj.exclude_from_nav
+    if not isinstance(exclude_from_nav, bool):
+        exclude_from_nav = exclude_from_nav()
+    return exclude_from_nav
