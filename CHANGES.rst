@@ -1,7 +1,7 @@
 Alterações
 -------------
 
-1.0b4 (unreleased)
+1.0rc1 (2014-09-22)
 ^^^^^^^^^^^^^^^^^^
 
   * Remove AgendaDiaria e Compromisso da navegação.
