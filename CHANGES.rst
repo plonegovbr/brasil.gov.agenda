@@ -1,5 +1,5 @@
-Changelog
----------
+Alterações
+-------------
 
 1.0b4 (unreleased)
 ^^^^^^^^^^^^^^^^^^

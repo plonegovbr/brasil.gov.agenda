@@ -1,5 +1,5 @@
-Contributors
--------------
+Colaboradores
+---------------
 
 * Érico Andrei (ericof)
 * Felipe Duardo (felipeduardo)
