@@ -51,7 +51,7 @@ setup(
         'plone.app.versioningbehavior',
         'plone.app.vocabularies',
         'plone.behavior',
-        'plone.dexterity',
+        'plone.dexterity<2.2.4',  # FIXME: https://github.com/plonegovbr/brasil.gov.agenda/issues/32
         'plone.directives.form',
         'plone.portlets',
         'plone.supermodel >=1.2.3',
