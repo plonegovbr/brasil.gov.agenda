@@ -262,8 +262,14 @@
 /* Portlet de Calendario
    ========================================================================== */
 
-.portletCalendarEx tr.month,
-.ploneCalendar .event { background: none !important; }
+.portletCalendarEx tr.month {
+    background: none !important;
+}
+
+.ploneCalendar .event {
+    color: #8f6f35 !important;
+    background: #f0e8cd !important;
+}
 
 .portletCalendar .weekdays th { font-weight: normal; }
 
@@ -454,7 +460,7 @@
 .width-16  .collection-events .timestamp-cell{
     width:9.3%;
     line-height: 1.2em !important;
-} 
+}
 
 /* 2 colunas  */
 .width-8 .collection-events .timestamp-cell{
