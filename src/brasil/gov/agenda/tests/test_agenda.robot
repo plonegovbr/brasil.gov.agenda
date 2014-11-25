@@ -1,8 +1,8 @@
 *** Settings ***
 
-Library  Selenium2Library  timeout=10 seconds  implicit_wait=5 seconds
 Resource  plone/app/robotframework/keywords.robot
 Variables  plone/app/testing/interfaces.py
+Library  Remote  ${PLONE_URL}/RobotRemote
 
 Test Setup  Open test browser
 Test Teardown  Close all browsers
@@ -17,7 +17,7 @@ ${orgao_selector} =  input#form-widgets-orgao
 *** Test cases ***
 
 Test CRUD
-    Log in as site owner
+    Enable Autologin as  Site Administrator
     Go to homepage
 
     Create  Agenda do Presidente  Esta é a agenda do presidente  Machado de Assis
