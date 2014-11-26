@@ -52,7 +52,8 @@ Test Compromisso With Portlet
     Enable Autologin as  Site Administrator
     Go to homepage
 
-    Add Right Portlet  Calendar
+    Add Right Portlet  Calendar portlet
+    Go to homepage
 
     Create Agenda
 
@@ -123,4 +124,3 @@ Add Right Portlet
     [arguments]  ${portlet}
     Manage Portlets
     Select from list  xpath=//div[@id="portletmanager-plone-rightcolumn"]//select  ${portlet}
-    Wait Until Page Contains element  name=form.actions.save
