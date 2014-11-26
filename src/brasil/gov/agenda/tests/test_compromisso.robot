@@ -48,6 +48,17 @@ Test Default Values
     Click Add Compromisso
     Textfield Value Should Be  css=${autoridade_selector}  Clarice Lispector
 
+Test Compromisso With Portlet
+    Enable Autologin as  Site Administrator
+    Go to homepage
+
+    Add Right Portlet  Calendar
+
+    Create Agenda
+
+    Create  Compromisso  Compromisso do dia
+    Page Should Contain  October
+
 *** Keywords ***
 
 Click Add Agenda
@@ -104,3 +115,12 @@ Delete
     Click Link  css=a#plone-contentmenu-actions-delete
     Click Button  Delete
     Page Should Contain  Agenda
+
+Manage Portlets
+    Go to   ${PLONE_URL}/@@manage-portlets
+
+Add Right Portlet
+    [arguments]  ${portlet}
+    Manage Portlets
+    Select from list  xpath=//div[@id="portletmanager-plone-rightcolumn"]//select  ${portlet}
+    Wait Until Page Contains element  name=form.actions.save
