@@ -4,6 +4,9 @@ Alterações
 1.0rc2 (unreleased)
 ^^^^^^^^^^^^^^^^^^^
 
+  * Adiciona a Agenda aos tipos de conteúdo linkables no TinyMCE.
+    [hvelarde]
+
   * Corrige bug de navegação entre meses no portlet de calendário extendido.
     [dbarbato]
 
