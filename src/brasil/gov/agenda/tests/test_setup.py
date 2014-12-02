@@ -52,7 +52,7 @@ class TestInstall(BaseTestCase):
     def test_version(self):
         self.assertEqual(
             self.st.getLastVersionForProfile(self.profile),
-            (u'4002',)
+            (u'4003',)
         )
 
     def test_static_resource_grokker(self):
@@ -154,6 +154,10 @@ class TestInstall(BaseTestCase):
                    if x['selected']]
         self.assertEqual(allowed,
                          ['Contributor', 'Manager', 'Owner', 'Site Administrator'])
+
+    def test_agenda_added_to_tinymce_linkables(self):
+        tinymce = api.portal.get_tool('portal_tinymce')
+        self.assertIn('Agenda', tinymce.linkable)
 
 
 class TestUpgrade(BaseTestCase):
@@ -389,6 +393,19 @@ class TestUpgrade(BaseTestCase):
         b = results[0]
         self.assertTrue(b.exclude_from_nav)
 
+    def test_4003_adds_agenda_to_linkable_content_types_in_tinymce(self):
+        tinymce = api.portal.get_tool('portal_tinymce')
+
+        # simulate TinyMCE state on 4002
+        linkable = tinymce.linkable.split()
+        linkable.remove('Agenda')
+        tinymce.linkable = u'\n'.join(linkable)
+        self.assertNotIn('Agenda', tinymce.linkable.split())
+
+        self.executa_upgrade(u'4002', u'4003')
+
+        self.assertIn('Agenda', tinymce.linkable.split())
+
     def test_hidden_upgrade_profiles(self):
         upgrades = [
             'brasil.gov.agenda.upgrades.v2000',
@@ -396,6 +413,7 @@ class TestUpgrade(BaseTestCase):
             'brasil.gov.agenda.upgrades.v4000',
             'brasil.gov.agenda.upgrades.v4001',
             'brasil.gov.agenda.upgrades.v4002',
+            'brasil.gov.agenda.upgrades.v4003',
         ]
         packages = [p['id'] for p in self.qi.listInstallableProducts()]
         result = [p for p in upgrades if p in packages]
@@ -413,3 +431,7 @@ class TestUninstall(BaseTestCase):
 
     def test_uninstalled(self):
         self.assertFalse(self.qi.isProductInstalled(PROJECTNAME))
+
+    def test_agenda_removed_from_tinymce_linkables(self):
+        tinymce = api.portal.get_tool('portal_tinymce')
+        self.assertNotIn('Agenda', tinymce.linkable)

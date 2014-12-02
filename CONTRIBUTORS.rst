@@ -5,3 +5,4 @@ Colaboradores
 * Felipe Duardo (felipeduardo)
 * Danilo Barbato (dbarbato)
 * Eduardo Goulart
+* Héctor Velarde (hvelarde)

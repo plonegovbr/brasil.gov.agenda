@@ -19,7 +19,9 @@ class HiddenProducts(object):
             'brasil.gov.agenda.upgrades.v3000',
             'brasil.gov.agenda.upgrades.v4000',
             'brasil.gov.agenda.upgrades.v4001',
-            'brasil.gov.agenda.upgrades.v4002']
+            'brasil.gov.agenda.upgrades.v4002',
+            'brasil.gov.agenda.upgrades.v4003',
+        ]
 
 
 class HiddenProfiles(object):

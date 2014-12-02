@@ -4,6 +4,9 @@ Alterações
 1.0rc2 (unreleased)
 ^^^^^^^^^^^^^^^^^^^
 
+  * Adiciona a Agenda aos tipos de conteúdo linkables no TinyMCE.
+    [hvelarde]
+
   * Corrige Portlet Calendário para mostrar o mês da AgendaDiaria ou Compromisso
     visualizado.
     Altera evento no Portlet Calendário para ficar mais visível a data do evento.
