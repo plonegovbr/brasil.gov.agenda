@@ -17,7 +17,6 @@ ${date_day_selector} =  input#form-widgets-date-day
 ${date_month_selector} =  select#form-widgets-date-month
 ${date_year_selector} =  input#form-widgets-date-year
 
-
 *** Test cases ***
 
 Test CRUD
@@ -55,6 +54,18 @@ Test Data Duplicada
     Select From List  css=${date_month_selector}  2
     Click Button  Save
     Page Should Contain  There were some errors
+
+Test AgendaDiaria With Portlet
+    Enable Autologin as  Site Administrator
+    Go to homepage
+
+    Add Right Portlet  Calendar portlet
+    Go to homepage
+
+    Create Agenda
+
+    Create  05  2  2013
+    Page Should Contain    February
 
 
 *** Keywords ***
@@ -108,3 +119,11 @@ Delete
     Click Link  css=a#plone-contentmenu-actions-delete
     Click Button  Delete
     Page Should Contain  Agenda
+
+Manage Portlets
+    Go to   ${PLONE_URL}/@@manage-portlets
+
+Add Right Portlet
+    [arguments]  ${portlet}
+    Manage Portlets
+    Select from list  xpath=//div[@id="portletmanager-plone-rightcolumn"]//select  ${portlet}

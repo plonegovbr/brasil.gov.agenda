@@ -234,14 +234,14 @@ class ContentTypeBrowserTestCase(unittest.TestCase):
         # Seremos redirecionados se acessarmos a view de compromisso
         # como usuarios anonimos
         browser.open(compromisso_url)
-        self.assertEqual(browser.url, agendadiaria_url)
+        self.assertIn(agendadiaria_url, browser.url)
 
         # Nos autenticamos como admin
         browser.addHeader('Authorization', 'Basic %s:%s' % (TEST_USER_NAME, TEST_USER_PASSWORD,))
         # Vemos o conteudo
         browser.open(compromisso_url)
         self.assertEqual(browser.headers['status'], '200 Ok')
-        self.assertEqual(browser.url, compromisso_url)
+        self.assertIn(compromisso_url, browser.url)
 
     def test_compromisso_view_title(self):
         portal = self.portal
