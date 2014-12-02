@@ -4,6 +4,11 @@ Alterações
 1.0rc2 (unreleased)
 ^^^^^^^^^^^^^^^^^^^
 
+  * Corrige Portlet Calendário para mostrar o mês da AgendaDiaria ou Compromisso
+    visualizado.
+    Altera evento no Portlet Calendário para ficar mais visível a data do evento.
+    [rodfersou]
+
   * Corrige bug de navegação entre meses no portlet de calendário extendido.
     [dbarbato]
 
