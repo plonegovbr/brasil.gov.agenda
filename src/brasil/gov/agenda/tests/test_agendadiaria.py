@@ -143,7 +143,21 @@ class ContentTypeTestCase(unittest.TestCase):
         with api.env.adopt_roles(['Manager']):
             self.agendadiaria.date = datetime.datetime(2029, 10, 17)
             self.agendadiaria.reindexObject()
-        # Anonimo
+        # Anonimo Publico
+        with api.env.adopt_roles(['Anonymous']):
+            # Para um conteudo no futuro, tambem devemos ver o conteudo
+            results = ct.searchResults(portal_type='AgendaDiaria')
+            self.assertEqual(len(results), 1)
+            self.assertTrue(
+                results[0].EffectiveDate.startswith('2029-10')
+            )
+        # Manager
+        with api.env.adopt_roles(['Manager']):
+            api.content.transition(
+                self.agendadiaria,
+                'reject'
+            )
+        # Anonimo Privado
         with api.env.adopt_roles(['Anonymous']):
             # Para um conteudo no futuro, tambem devemos ver o conteudo
             results = ct.searchResults(portal_type='AgendaDiaria')

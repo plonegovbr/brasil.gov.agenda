@@ -92,10 +92,3 @@ def exclude_from_nav(obj):
     if not isinstance(exclude_from_nav, bool):
         exclude_from_nav = exclude_from_nav()
     return exclude_from_nav
-
-
-@indexer(ICompromisso)
-def EffectiveDate(obj):
-    """ Indexa a data de publicação como data de início para objetos publicados
-    """
-    return DateTime(ICompromisso(obj).start_date)

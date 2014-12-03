@@ -172,6 +172,6 @@ def EffectiveDate(obj):
     """
     state = api.content.get_state(obj=obj)
     if state == 'published':
-        return _start_date(obj)
-    effective_date = IAgendaDiaria(obj).effective_date
+        return _start_date(obj).ISO()
+    effective_date = IAgendaDiaria(obj).effective_date.ISO()
     return effective_date
