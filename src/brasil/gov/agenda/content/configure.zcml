@@ -6,12 +6,14 @@
 
   <adapter name="start" factory=".compromisso.start_date" />
   <adapter name="end" factory=".compromisso.end_date" />
+  <adapter name="EffectiveDate" factory=".compromisso.EffectiveDate" />
   <adapter name="exclude_from_nav" factory=".compromisso.exclude_from_nav" />
   <adapter name="Subject" factory=".compromisso.tags" />
 
 
   <adapter name="start" factory=".agendadiaria.start_date" />
   <adapter name="end" factory=".agendadiaria.end_date" />
+  <adapter name="EffectiveDate" factory=".agendadiaria.EffectiveDate" />
   <adapter name="exclude_from_nav" factory=".agendadiaria.exclude_from_nav" />
   <adapter name="SearchableText" factory=".agendadiaria.SearchableText_AgendaDiaria" />
   <adapter name="Subject" factory=".agendadiaria.tags" />
