@@ -168,7 +168,8 @@ def exclude_from_nav(obj):
 
 @indexer(IAgendaDiaria)
 def EffectiveDate(obj):
-    """ Indexa a data de publicação como data de início para objetos publicados
+    """Retorna a data de inicio do evento ao invés da data de publicação para
+    objetos publicados.
     """
     state = api.content.get_state(obj=obj)
     if state == 'published':
