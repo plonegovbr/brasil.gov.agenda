@@ -5,15 +5,16 @@ Alterações
 ^^^^^^^^^^^^^^^^^^^
 
   * Altera indexação da data de publicação para funcionar com busca facetada.
-    Agenda Diária retorna agora a data de inicio do evento ao invés da data de publicação.
+    ``AgendaDiaria`` retorna agora a data de inicio do evento ao invés da data de publicação.
     [rodfersou]
 
   * Adiciona a Agenda aos tipos de conteúdo linkables no TinyMCE.
     [hvelarde]
 
-  * Corrige Portlet Calendário para mostrar o mês da AgendaDiaria ou Compromisso
-    visualizado.
-    Altera evento no Portlet Calendário para ficar mais visível a data do evento.
+  * Corrige Portlet Calendário para mostrar o mês da ``AgendaDiaria`` ou ``Compromisso`` visualizado.
+    [rodfersou]
+
+  * Altera evento no Portlet Calendário para ficar mais visível a data do evento.
     [rodfersou]
 
   * Corrige bug de navegação entre meses no portlet de calendário extendido.
@@ -21,7 +22,7 @@ Alterações
 
 
 1.0rc1 (2014-09-22)
-^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^
 
   * Remove AgendaDiaria e Compromisso da navegação.
     [ericof]
