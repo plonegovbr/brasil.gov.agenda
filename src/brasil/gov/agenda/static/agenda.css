@@ -262,18 +262,12 @@
 /* Portlet de Calendario
    ========================================================================== */
 
-.portletCalendarEx tr.month {
-    background: none !important;
-}
+.portletCalendarEx tr.month,
+.ploneCalendar .event { background: none !important; }
 
-.ploneCalendar .event {
-    background: #01961c !important;
-}
-
-#portal-column-two dl.portlet .event a:link,
-#portal-column-two dl.portlet .event a:visited {
-    color: #fff !important;
-}
+.ploneCalendar .activeevent { background: #444 !important; }
+.ploneCalendar .activeevent a:link,
+.ploneCalendar .activeevent a:visited { color: #fff !important; }
 
 .portletCalendar .weekdays th { font-weight: normal; }
 

@@ -129,6 +129,15 @@
             }
         );
       });
+
+      // add style to mark active event on calendar portlet
+      $(document).ready(function () {
+          'use strict';
+          var url = window.location.href;
+          url = url.substring(0, url.indexOf("?"));
+          var active = $('.ploneCalendar a[href="' + url + '"]');
+          active.parents('td').addClass('activeevent');
+      });
     </script>
   </metal:block>
 

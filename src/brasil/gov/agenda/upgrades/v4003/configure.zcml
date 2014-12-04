@@ -11,6 +11,11 @@
       profile="brasil.gov.agenda:default">
 
     <genericsetup:upgradeStep
+        title="Cook CSS resources"
+        description=""
+        handler=".cook_css_resources"
+        />
+    <genericsetup:upgradeStep
         title="Make content types linkable on TinyMCE"
         description="Add package content types to the list of linkables on TinyMCE."
         handler=".make_content_types_linkable"
