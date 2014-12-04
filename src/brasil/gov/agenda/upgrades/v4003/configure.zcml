@@ -11,9 +11,9 @@
       profile="brasil.gov.agenda:default">
 
     <genericsetup:upgradeStep
-        title="Make Agenda linkable on TinyMCE"
-        description="Add Agenda to the list of linkable content types on TinyMCE."
-        handler=".make_agenda_linkable_on_tinymce"
+        title="Make content types linkable on TinyMCE"
+        description="Add package content types to the list of linkables on TinyMCE."
+        handler=".make_content_types_linkable"
         />
     <genericsetup:upgradeStep
         title="Update index on AgendaDiaria"

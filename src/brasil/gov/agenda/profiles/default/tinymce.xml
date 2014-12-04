@@ -3,6 +3,8 @@
   <resourcetypes>
     <linkable purge="false">
       <element value="Agenda" />
+      <element value="AgendaDiaria" />
+      <element value="Compromisso" />
     </linkable>
   </resourcetypes>
 </object>

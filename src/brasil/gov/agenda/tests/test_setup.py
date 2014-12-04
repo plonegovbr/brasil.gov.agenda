@@ -154,9 +154,11 @@ class TestInstall(BaseTestCase):
         self.assertEqual(allowed,
                          ['Contributor', 'Manager', 'Owner', 'Site Administrator'])
 
-    def test_agenda_added_to_tinymce_linkables(self):
+    def test_content_types_added_to_tinymce_linkables(self):
         tinymce = api.portal.get_tool('portal_tinymce')
         self.assertIn('Agenda', tinymce.linkable)
+        self.assertIn('AgendaDiaria', tinymce.linkable)
+        self.assertIn('Compromisso', tinymce.linkable)
 
 
 class TestUpgrade(BaseTestCase):
@@ -392,18 +394,24 @@ class TestUpgrade(BaseTestCase):
         b = results[0]
         self.assertTrue(b.exclude_from_nav)
 
-    def test_4003_adds_agenda_to_linkable_content_types_in_tinymce(self):
+    def test_4003_adds_content_types_to_linkables_in_tinymce(self):
         tinymce = api.portal.get_tool('portal_tinymce')
 
         # simulate TinyMCE state on 4002
         linkable = tinymce.linkable.split()
         linkable.remove('Agenda')
+        linkable.remove('AgendaDiaria')
+        linkable.remove('Compromisso')
         tinymce.linkable = u'\n'.join(linkable)
         self.assertNotIn('Agenda', tinymce.linkable.split())
+        self.assertNotIn('AgendaDiaria', tinymce.linkable.split())
+        self.assertNotIn('Compromisso', tinymce.linkable.split())
 
         self.executa_upgrade(u'4002', u'4003')
 
         self.assertIn('Agenda', tinymce.linkable.split())
+        self.assertIn('AgendaDiaria', tinymce.linkable.split())
+        self.assertIn('Compromisso', tinymce.linkable.split())
 
     def test_4003_updates_indexes(self):
         self.setup_content()
@@ -447,6 +455,8 @@ class TestUninstall(BaseTestCase):
     def test_uninstalled(self):
         self.assertFalse(self.qi.isProductInstalled(PROJECTNAME))
 
-    def test_agenda_removed_from_tinymce_linkables(self):
+    def test_content_types_removed_from_tinymce_linkables(self):
         tinymce = api.portal.get_tool('portal_tinymce')
         self.assertNotIn('Agenda', tinymce.linkable)
+        self.assertNotIn('AgendaDiaria', tinymce.linkable)
+        self.assertNotIn('Compromisso', tinymce.linkable)

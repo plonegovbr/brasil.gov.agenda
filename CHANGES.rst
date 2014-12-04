@@ -8,7 +8,7 @@ Alterações
     ``AgendaDiaria`` retorna agora a data de inicio do evento ao invés da data de publicação.
     [rodfersou]
 
-  * Adiciona a Agenda aos tipos de conteúdo linkables no TinyMCE.
+  * Adiciona ``Agenda``, ``AgendaDiaria`` e ``Compromisso`` aos tipos de conteúdo linkables no TinyMCE.
     [hvelarde]
 
   * Corrige Portlet Calendário para mostrar o mês da ``AgendaDiaria`` ou ``Compromisso`` visualizado.
