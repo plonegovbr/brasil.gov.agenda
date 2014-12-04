@@ -16,9 +16,9 @@
         handler=".make_agenda_linkable_on_tinymce"
         />
     <genericsetup:upgradeStep
-        title="Fix EffectiveDate indexer for use with eea.faceted"
-        description="Corrige data de publicacao da agendadiaria para navegacao facetada"
-        handler=".handler.corrige_campo_date_facetada"
+        title="Update index on Agenda Diaria"
+        description="EffectiveDate must be the start date of the event for use with eea.facetednavigation."
+        handler=".update_effective_date_index"
         />
 
   </genericsetup:upgradeSteps>
