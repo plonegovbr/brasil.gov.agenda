@@ -12,6 +12,7 @@
 
   <adapter name="start" factory=".agendadiaria.start_date" />
   <adapter name="end" factory=".agendadiaria.end_date" />
+  <adapter name="EffectiveDate" factory=".agendadiaria.EffectiveDate" />
   <adapter name="exclude_from_nav" factory=".agendadiaria.exclude_from_nav" />
   <adapter name="SearchableText" factory=".agendadiaria.SearchableText_AgendaDiaria" />
   <adapter name="Subject" factory=".agendadiaria.tags" />

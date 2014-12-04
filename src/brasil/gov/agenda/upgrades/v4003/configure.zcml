@@ -15,7 +15,12 @@
         description="Add Agenda to the list of linkable content types on TinyMCE."
         handler=".make_agenda_linkable_on_tinymce"
         />
+    <genericsetup:upgradeStep
+        title="Update index on Agenda Diaria"
+        description="EffectiveDate must be the start date of the event for use with eea.facetednavigation."
+        handler=".update_effective_date_index"
+        />
 
-    </genericsetup:upgradeSteps>
+  </genericsetup:upgradeSteps>
 
 </configure>

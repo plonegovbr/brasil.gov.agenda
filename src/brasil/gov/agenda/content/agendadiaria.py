@@ -7,6 +7,7 @@ from brasil.gov.agenda.interfaces import IAgendaDiaria
 from brasil.gov.agenda.interfaces import ICompromisso
 from DateTime import DateTime
 from five import grok
+from plone import api
 from plone.dexterity.content import Container
 from plone.indexer.decorator import indexer
 from plone.supermodel.interfaces import IDefaultFactory
@@ -163,3 +164,15 @@ def exclude_from_nav(obj):
     if hasattr(exclude_from_nav, '__call__'):
         exclude_from_nav = exclude_from_nav()
     return exclude_from_nav
+
+
+@indexer(IAgendaDiaria)
+def EffectiveDate(obj):
+    """Retorna a data de inicio do evento ao invés da data de publicação para
+    objetos publicados.
+    """
+    state = api.content.get_state(obj=obj)
+    if state == 'published':
+        return _start_date(obj).ISO()
+    effective_date = IAgendaDiaria(obj).effective_date.ISO()
+    return effective_date

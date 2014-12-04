@@ -4,6 +4,10 @@ Alterações
 1.0rc2 (unreleased)
 ^^^^^^^^^^^^^^^^^^^
 
+  * Altera indexação da data de publicação para funcionar com busca facetada.
+    Agenda Diária retorna agora a data de inicio do evento ao invés da data de publicação.
+    [rodfersou]
+
   * Adiciona a Agenda aos tipos de conteúdo linkables no TinyMCE.
     [hvelarde]
 

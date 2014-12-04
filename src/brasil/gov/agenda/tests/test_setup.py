@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-
 from brasil.gov.agenda.config import PROJECTNAME
 from brasil.gov.agenda.testing import FUNCTIONAL_TESTING
 from brasil.gov.agenda.testing import INTEGRATION_TESTING
@@ -405,6 +404,22 @@ class TestUpgrade(BaseTestCase):
         self.executa_upgrade(u'4002', u'4003')
 
         self.assertIn('Agenda', tinymce.linkable.split())
+
+    def test_4003_updates_indexes(self):
+        self.setup_content()
+        # modify date field without updating the catalog
+        self.agendadiaria.date = datetime.datetime.now()
+        catalog = api.portal.get_tool('portal_catalog')
+        results = catalog(portal_type='AgendaDiaria')
+        assert len(results) == 1
+        before = results[0].EffectiveDate
+
+        self.executa_upgrade(u'4002', u'4003')
+
+        results = catalog(portal_type='AgendaDiaria')
+        assert len(results) == 1
+        after = results[0].EffectiveDate
+        self.assertLess(before, after)
 
     def test_hidden_upgrade_profiles(self):
         upgrades = [
