@@ -6,3 +6,4 @@ Colaboradores
 * Danilo Barbato (dbarbato)
 * Eduardo Goulart
 * Héctor Velarde (hvelarde)
+* Rodrigo Ferreira de Souza (rodfersou)
