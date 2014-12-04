@@ -4,6 +4,9 @@ Alterações
 1.0rc2 (unreleased)
 ^^^^^^^^^^^^^^^^^^^
 
+  * Corrige indexaçao da data de publicaçao para funcionar com busca facetada.
+    [rodfersou]
+
   * Adiciona a Agenda aos tipos de conteúdo linkables no TinyMCE.
     [hvelarde]
 
