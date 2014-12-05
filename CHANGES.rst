@@ -1,7 +1,7 @@
 Alterações
 -------------
 
-1.0rc2 (unreleased)
+1.0rc2 (2014-12-05)
 ^^^^^^^^^^^^^^^^^^^
 
   * Altera indexação da data de publicação para funcionar com busca facetada.
