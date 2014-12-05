@@ -266,8 +266,9 @@
 .ploneCalendar .event { background: none !important; }
 
 .ploneCalendar .activeevent { background: #444 !important; }
-.ploneCalendar .activeevent a:link,
-.ploneCalendar .activeevent a:visited { color: #fff !important; }
+
+#portal-column-two dl.portlet .activeevent a:link,
+#portal-column-two dl.portlet .activeevent a:visited { color: #FFFFFF !important; }
 
 .portletCalendar .weekdays th { font-weight: normal; }
 
