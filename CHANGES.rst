@@ -1,10 +1,11 @@
 Alterações
--------------
+----------
 
 1.0rc3 (unreleased)
 ^^^^^^^^^^^^^^^^^^^
 
-- Nothing changed yet.
+  * Corrige bug de navegação entre meses no portlet de calendário extendido após alteração de melhorias.
+    [dbarbato]
 
 
 1.0rc2 (2014-12-05)
