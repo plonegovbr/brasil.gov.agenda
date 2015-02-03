@@ -4,6 +4,9 @@ Alterações
 1.0rc3 (unreleased)
 ^^^^^^^^^^^^^^^^^^^
 
+  * Corrige css de impressão indicando que as regras só devem ser aplicadas se o tipo for Agenda Diária (closes `#37`_).
+    [idgserpro]
+
   * Corrige bug de navegação entre meses no portlet de calendário extendido após alteração de melhorias.
     [dbarbato]
 

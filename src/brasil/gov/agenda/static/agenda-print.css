@@ -5,6 +5,7 @@
  * @Autor
  *
  * - DESERTO Digital - www.desertodigital.com.br
+ * - Serpro - www.serpro.gov.br
  *
  * @Referencias
  *
@@ -42,9 +43,9 @@
    Estilização para impressão
    ========================================================================== */
 
-#wrapper { width: 420px; }
+.portaltype-agendadiaria #wrapper { width: 420px; }
 
-#portal-column-content { width: 100% }
+.portaltype-agendadiaria #portal-column-content { width: 100%; }
 
 /* Cabeçalho
    ========================================================================== */
@@ -104,7 +105,7 @@
 /* Agenda
    ========================================================================== */
 
-.documentFirstHeading { font-size: 150%; }
+.portaltype-agendadiaria .documentFirstHeading { font-size: 150%; }
 
 .portaltype-agendadiaria #content .documentFirstHeading {
     border-bottom: 1px solid #000 !important;
@@ -134,4 +135,4 @@
 
 .comprimisso-titulo { margin-top: 0; }
 
-label { font-weight: bold; }
+.portaltype-agendadiaria label { font-weight: bold; }
