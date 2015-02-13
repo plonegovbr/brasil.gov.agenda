@@ -157,3 +157,4 @@ Alterações
 .. _`#12`: https://github.com/plonegovbr/brasil.gov.agenda/issues/12
 .. _`#18`: https://github.com/plonegovbr/brasil.gov.agenda/issues/18
 .. _`#23`: https://github.com/plonegovbr/brasil.gov.agenda/issues/23
+.. _`#37`: https://github.com/plonegovbr/brasil.gov.agenda/issues/37
