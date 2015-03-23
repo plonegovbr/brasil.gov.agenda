@@ -1,4 +1,5 @@
 *~
+*.log
 *.pyc
 *.pyo
 *.tmp*
@@ -29,7 +30,6 @@ dist/
 var/
 .coverage
 htmlcov/
-
 
 # OSX
 .DS_Store

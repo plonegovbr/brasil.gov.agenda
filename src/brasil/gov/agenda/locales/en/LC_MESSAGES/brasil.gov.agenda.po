@@ -238,7 +238,7 @@ msgstr "Data e hora de início"
 #: ./browser/agendadiaria.py:78
 #: ./browser/compromisso.py:79
 msgid "long_date_agenda"
-msgstr "${day} de ${month} de ${year}"
+msgstr "${day} ${month} ${year}"
 
 #: ./tiles/agenda.py:37
 msgid "Última atualização"
