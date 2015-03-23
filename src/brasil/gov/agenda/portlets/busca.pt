@@ -1,18 +1,20 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:tal="http://xml.zope.org/namespaces/tal"
       xmlns:i18n="http://xml.zope.org/namespaces/i18n"
-      tal:omit-tag="">
+      tal:omit-tag=""
+      i18n:domain="brasil.gov.agenda">
 <dl class="portlet portletSearch"
     i18n:domain="plone">
 
   <dt class="portletHeader">
       <span class="portletTopLeft"></span>
       <a class="tile"
+         i18n:translate=""
          tal:attributes="href view/search_action">Busca de Agenda</a>
       <span class="portletTopRight"></span>
   </dt>
   <dd class="portletText">
-      <span id="busca_agenda_texto">
+      <span id="busca_agenda_texto" i18n:translate="">
         Fa&ccedil;a buscas de agenda por palavras-chave
       </span>
   </dd>
