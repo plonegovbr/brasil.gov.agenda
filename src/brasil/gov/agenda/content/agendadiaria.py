@@ -32,8 +32,13 @@ class AgendaDiaria(Container):
         date = self.date
         fmt_date = date.strftime('%d/%m/%Y')
         autoridade = self.autoridade
-        title = u'Agenda de %s para %s' % (autoridade, fmt_date)
-        return title
+        mapping = {'autoridade': autoridade, 'fmt_date': fmt_date}
+        # FIXME: Ao trocar a língua de um portal, o título de uma agenda não
+        # será alterado no folder_contents. Como a recomendação atual de sites
+        # multilíngues é a geração de Plone Sites distintos, essa situação
+        # não será um problema, mas quando as discussões acerca do uso do
+        # plone.app.multilingual evoluírem isso deve ser revisto.
+        return self.translate(_(u'agenda_diaria_title', mapping=mapping))
 
     def exclude_from_nav(self):
         """ AgendaDiaria nao eh visivel na navegacao do portal
