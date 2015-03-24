@@ -2,9 +2,10 @@
 
 from brasil.gov.agenda.testing import INTEGRATION_TESTING
 from brasil.gov.agenda.tiles.agenda import AgendaTile
+
 from collective.cover.tiles.base import IPersistentCoverTile
-from plone.app.testing import setRoles
 from plone.app.testing import TEST_USER_ID
+from plone.app.testing import setRoles
 from zope.component import getMultiAdapter
 from zope.interface.verify import verifyClass
 from zope.interface.verify import verifyObject
@@ -21,7 +22,7 @@ class AgendaTileTestCase(unittest.TestCase):
         self.portal = self.layer['portal']
         setRoles(self.portal, TEST_USER_ID, ['Manager'])
         self.request = self.layer['request']
-        self.name = u"agenda"
+        self.name = u'agenda'
         # Criamos a capa
         self.portal.invokeFactory('collective.cover.content', 'frontpage')
         self.cover = self.portal['frontpage']

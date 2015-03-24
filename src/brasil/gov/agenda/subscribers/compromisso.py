@@ -1,14 +1,17 @@
 # -*- coding: utf-8 -*-
+
 from Acquisition import aq_base
 from Acquisition import aq_parent
+from OFS.event import ObjectWillBeMovedEvent
+from Products.CMFPlone.utils import _createObjectByType
+
 from brasil.gov.agenda.config import AGENDADIARIAFMT
 from brasil.gov.agenda.config import PROJECTNAME
 from brasil.gov.agenda.interfaces import IAgenda
 from brasil.gov.agenda.interfaces import IAgendaDiaria
 from brasil.gov.agenda.interfaces import ICompromisso
+
 from five import grok
-from OFS.event import ObjectWillBeMovedEvent
-from Products.CMFPlone.utils import _createObjectByType
 from zope.container.contained import notifyContainerModified
 from zope.event import notify
 from zope.lifecycleevent import ObjectMovedEvent
@@ -116,9 +119,9 @@ def _generate_id(destination, old_id):
     if not taken(old_id):
         return old_id
     idx = 1
-    while taken("%s.%d" % (old_id, idx)):
+    while taken('%s.%d' % (old_id, idx)):
         idx += 1
-    return "%s.%d" % (old_id, idx)
+    return '%s.%d' % (old_id, idx)
 
 
 def _allowed_to_be_moved(obj, destination):

@@ -1,4 +1,4 @@
-# -*- coding:utf-8 -*-
+# -*- coding: utf-8 -*-
 from brasil.gov.agenda import utils
 from brasil.gov.agenda.config import PROJECTNAME
 

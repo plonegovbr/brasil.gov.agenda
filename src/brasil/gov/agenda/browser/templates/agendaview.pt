@@ -37,7 +37,7 @@
     <ul class="list-compromissos">
 
       <li class="sem-compromisso item-compromisso">
-          <span 
+          <span
             i18n:translate="label_agendadiaria_nao_criada">
             Atualmente n&atilde;o existem compromissos agendados.
           </span>
