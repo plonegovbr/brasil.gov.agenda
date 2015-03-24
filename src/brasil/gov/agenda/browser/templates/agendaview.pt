@@ -46,7 +46,7 @@
 
     </ul>
 
-    <div class="footer-actions" i18n:domain="plone">
+    <div class="footer-actions">
       <ul class="list-actions">
         <li class="item print">
           <a href="javascript:window.print();">

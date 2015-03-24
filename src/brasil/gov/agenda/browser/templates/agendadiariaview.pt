@@ -99,7 +99,7 @@
          tal:attributes="href string:${context/absolute_url}/++add++Compromisso"
          i18n:translate="">Adicionar Compromisso</a>
 
-    <div class="footer-actions" i18n:domain="plone">
+    <div class="footer-actions">
       <ul class="list-actions">
         <li class="item print">
           <a href="javascript:window.print();">

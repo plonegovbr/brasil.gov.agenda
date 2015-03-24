@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: brasil.gov.agenda\n"
-"POT-Creation-Date: 2015-03-24 18:59+0000\n"
+"POT-Creation-Date: 2015-03-24 19:51+0000\n"
 "PO-Revision-Date: 2012-09-18 23:00+0000\n"
 "Last-Translator: PloneGov.Br <gov@plone.org.br>\n"
 "Language-Team: PloneGov.Br <gov@plone.org.br>\n"
@@ -14,7 +14,7 @@ msgstr ""
 "Preferred-Encodings: utf-8 latin1\n"
 "Domain: brasil.gov.agenda\n"
 
-#: ./tiles/agenda.py:79
+#: ./tiles/agenda.py:80
 msgid "Acesse a agenda do {0}"
 msgstr ""
 
@@ -53,7 +53,7 @@ msgstr ""
 msgid "Agenda de membro do governo brasileiro."
 msgstr ""
 
-#: ./tiles/agenda.py:77
+#: ./tiles/agenda.py:78
 msgid "Agenda do {0}"
 msgstr ""
 
@@ -83,11 +83,11 @@ msgstr ""
 msgid "Compromisso de membro do governo brasileiro."
 msgstr ""
 
-#: ./tiles/agenda.py:44
+#: ./tiles/agenda.py:45
 msgid "Compromissos"
 msgstr ""
 
-#: ./tiles/agenda.py:32
+#: ./tiles/agenda.py:33
 msgid "Data"
 msgstr ""
 
@@ -111,6 +111,11 @@ msgstr ""
 msgid "Este portlet busca no conteudo de agendas diarias."
 msgstr ""
 
+#: ./browser/templates/agendadiariaview.pt:106
+#: ./browser/templates/agendaview.pt:53
+msgid "Imprimir"
+msgstr ""
+
 #: ./browser/templates/compromissoview.pt:11
 msgid "Info"
 msgstr ""
@@ -127,7 +132,7 @@ msgstr ""
 msgid "Ja existe uma agenda para esta data"
 msgstr ""
 
-#: ./tiles/agenda.py:63
+#: ./tiles/agenda.py:64
 msgid "Link do rodapé"
 msgstr ""
 
@@ -179,7 +184,12 @@ msgstr ""
 msgid "Remover"
 msgstr ""
 
-#: ./tiles/agenda.py:50
+#: ./browser/templates/agendadiariaview.pt:112
+#: ./browser/templates/agendaview.pt:59
+msgid "Reportar erro"
+msgstr ""
+
+#: ./tiles/agenda.py:51
 msgid "Rodapé da Agenda"
 msgstr ""
 
@@ -189,11 +199,11 @@ msgstr ""
 msgid "Tags são utilizadas para organização de conteúdo"
 msgstr ""
 
-#: ./tiles/agenda.py:57
+#: ./tiles/agenda.py:58
 msgid "Texto do rodapé"
 msgstr ""
 
-#: ./tiles/agenda.py:26
+#: ./tiles/agenda.py:27
 msgid "Title"
 msgstr ""
 
@@ -250,7 +260,7 @@ msgstr ""
 msgid "long_date_agenda"
 msgstr ""
 
-#: ./tiles/agenda.py:38
+#: ./tiles/agenda.py:39
 msgid "Última atualização"
 msgstr ""
 
