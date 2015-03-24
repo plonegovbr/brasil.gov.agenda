@@ -16,7 +16,7 @@ msgstr ""
 
 #: ./tiles/agenda.py:78
 msgid "Acesse a agenda do {0}"
-msgstr ""
+msgstr "Acesse a agenda do {0}"
 
 #: ./portlets/busca.py:68
 msgid "Adiciona Portlet de Busca de Agenda"
@@ -24,21 +24,21 @@ msgstr "Adiciona Portlet de Busca de Agenda"
 
 #: ./browser/templates/agendaview.pt:10
 msgid "Adicionar Agenda Diaria"
-msgstr ""
+msgstr "Adicionar Agenda Diária"
 
 #: ./browser/templates/agendadiariaview.pt:97
 #: ./browser/templates/agendaview.pt:14
 msgid "Adicionar Compromisso"
-msgstr ""
+msgstr "Adicionar Compromisso"
 
 #: ./browser/templates/agendadiariaview.pt:71
 #: ./browser/templates/compromissoview.pt:72
 msgid "Adicionar ao meu calendario"
-msgstr ""
+msgstr "Adicionar ao meu calendário"
 
 #: ./tiles/templates/agenda.pt:9
 msgid "Adicione uma agenda a este tile."
-msgstr ""
+msgstr "Adicione uma agenda a este tile."
 
 #: ./profiles/default/types/Agenda.xml
 msgid "Agenda"
@@ -55,7 +55,7 @@ msgstr "Agenda de um membro do Governo Brasileiro"
 
 #: ./tiles/agenda.py:76
 msgid "Agenda do {0}"
-msgstr ""
+msgstr "Agenda do {0}"
 
 #: ./content/schema/AgendaDiaria.xml
 msgid "Atualizacao"
@@ -85,11 +85,11 @@ msgstr "Compromisso de um membro do Governo Brasileiro"
 
 #: ./tiles/agenda.py:43
 msgid "Compromissos"
-msgstr ""
+msgstr "Compromissos"
 
 #: ./tiles/agenda.py:31
 msgid "Data"
-msgstr ""
+msgstr "Data"
 
 #: ./content/schema/AgendaDiaria.xml
 msgid "Data da Agenda"
@@ -101,11 +101,11 @@ msgstr "Descreva aqui se esta agenda foi atualizada. Deixe este campo em branco 
 
 #: ./browser/templates/compromissoview.pt:23
 msgid "Detalhe do compromisso"
-msgstr ""
+msgstr "Detalhe do compromisso"
 
 #: ./browser/templates/agendadiariaview.pt:76
 msgid "Editar"
-msgstr ""
+msgstr "Editar"
 
 #: ./portlets/busca.py:69
 msgid "Este portlet busca no conteudo de agendas diarias."
@@ -113,7 +113,7 @@ msgstr "Este portlet busca no conteúdo de agendas diárias"
 
 #: ./browser/templates/compromissoview.pt:11
 msgid "Info"
-msgstr ""
+msgstr "Info"
 
 #: ./portlets/busca.py:20
 msgid "Informe a raiz da busca de Agendas Diarias"
@@ -129,7 +129,7 @@ msgstr "Já existe uma agenda para esta data."
 
 #: ./tiles/agenda.py:62
 msgid "Link do rodapé"
-msgstr ""
+msgstr "Link do rodapé"
 
 #: ./content/schema/Agenda.xml
 msgid "Local padrao para eventos desta agenda"
@@ -142,7 +142,7 @@ msgstr "Local padrão para compromissos durante este dia."
 #: ./browser/templates/agendadiariaview.pt:63
 #: ./browser/templates/compromissoview.pt:67
 msgid "Local:"
-msgstr ""
+msgstr "Local:"
 
 #: ./content/schema/Agenda.xml
 #: ./content/schema/AgendaDiaria.xml
@@ -165,7 +165,7 @@ msgstr "Pauta"
 #: ./browser/templates/agendadiariaview.pt:59
 #: ./browser/templates/compromissoview.pt:63
 msgid "Pauta:"
-msgstr ""
+msgstr "Pauta:"
 
 #: ./profiles/default/portlets.xml
 msgid "Portlet de busca para Agenda."
@@ -177,40 +177,40 @@ msgstr "Raiz"
 
 #: ./browser/templates/agendadiariaview.pt:81
 msgid "Remover"
-msgstr ""
+msgstr "Remover"
 
 #: ./tiles/agenda.py:49
 msgid "Rodapé da Agenda"
-msgstr ""
+msgstr "Rodapé da Agenda"
 
 #: ./tiles/agenda.py:56
 msgid "Texto do rodapé"
-msgstr ""
+msgstr "Texto do rodapé"
 
 #: ./tiles/agenda.py:25
 msgid "Title"
-msgstr ""
+msgstr "Título"
 
 #: ./browser/templates/agendadiariaview.pt:69
 #: ./browser/templates/compromissoview.pt:70
 msgid "VCAL"
-msgstr ""
+msgstr "VCAL"
 
 #: ./browser/templates/compromissoview.pt:12
 msgid "Voce ve esta pagina porque possui permissao para edita-la. Outros usuarios serao redirecionados para a visao da Agenda Diaria"
-msgstr ""
+msgstr "Voce vê esta página porque possui permissão para editá-la. Outros usuários serão redirecionados para a visão da Agenda Diária"
 
 #. Default: "Atualmente n&atilde;o existem compromissos agendados."
 #: ./browser/templates/agendaview.pt:41
 #: ./tiles/templates/agenda.pt:70
 msgid "label_agendadiaria_nao_criada"
-msgstr ""
+msgstr "Atualmente não existem compromissos agendados."
 
 #. Default: "Sem compromissos oficiais."
 #: ./browser/templates/agendadiariaview.pt:92
 #: ./tiles/templates/agenda.pt:63
 msgid "label_agendadiaria_sem_compromissos"
-msgstr ""
+msgstr "Sem compromissos oficiais."
 
 #. Default: "Outros participantes"
 #: ./content/schema/Compromisso.xml
@@ -242,5 +242,5 @@ msgstr "${day} de ${month} de ${year}"
 
 #: ./tiles/agenda.py:37
 msgid "Última atualização"
-msgstr ""
+msgstr "Última atualização"
 

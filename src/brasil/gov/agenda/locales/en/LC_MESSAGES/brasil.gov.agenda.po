@@ -16,223 +16,223 @@ msgstr ""
 
 #: ./tiles/agenda.py:78
 msgid "Acesse a agenda do {0}"
-msgstr ""
+msgstr "Go to {0}'s schedule"
 
 #: ./portlets/busca.py:68
 msgid "Adiciona Portlet de Busca de Agenda"
-msgstr "Adiciona Portlet de Busca de Agenda"
+msgstr "Add Schedule Search Portlet"
 
 #: ./browser/templates/agendaview.pt:10
 msgid "Adicionar Agenda Diaria"
-msgstr ""
+msgstr "Add Daily Schedule"
 
 #: ./browser/templates/agendadiariaview.pt:97
 #: ./browser/templates/agendaview.pt:14
 msgid "Adicionar Compromisso"
-msgstr ""
+msgstr "Add appointment"
 
 #: ./browser/templates/agendadiariaview.pt:71
 #: ./browser/templates/compromissoview.pt:72
 msgid "Adicionar ao meu calendario"
-msgstr ""
+msgstr "Add to my calendar"
 
 #: ./tiles/templates/agenda.pt:9
 msgid "Adicione uma agenda a este tile."
-msgstr ""
+msgstr "Add a schedule to this tile."
 
 #: ./profiles/default/types/Agenda.xml
 msgid "Agenda"
-msgstr "Agenda"
+msgstr "Schedule"
 
 #: ./profiles/default/types/AgendaDiaria.xml
 msgid "Agenda Diaria"
-msgstr "Agenda Diária"
+msgstr "Daily Schedule"
 
 #: ./profiles/default/types/Agenda.xml
 #: ./profiles/default/types/AgendaDiaria.xml
 msgid "Agenda de membro do governo brasileiro."
-msgstr "Agenda de um membro do Governo Brasileiro"
+msgstr "Brazilian government official's schedule"
 
 #: ./tiles/agenda.py:76
 msgid "Agenda do {0}"
-msgstr ""
+msgstr "{0}'s Schedule"
 
 #: ./content/schema/AgendaDiaria.xml
 msgid "Atualizacao"
-msgstr "Atualização"
+msgstr "Update"
 
 #. Default: "Brasao"
 #: ./content/schema/Agenda.xml
 msgid "Brasao"
-msgstr "Brasão"
+msgstr "Symbol"
 
 #: ./portlets/busca.py:36
 msgid "Busca de Agenda"
-msgstr "Busca de Agenda"
+msgstr "Schedule Search"
 
 #: ./profiles/default/portlets.xml
 msgid "Busca para Agenda"
-msgstr "Busca de Agenda"
+msgstr "Schedule Search"
 
 #: ./content/schema/Compromisso.xml
 #: ./profiles/default/types/Compromisso.xml
 msgid "Compromisso"
-msgstr "Compromisso"
+msgstr "Appointment"
 
 #: ./profiles/default/types/Compromisso.xml
 msgid "Compromisso de membro do governo brasileiro."
-msgstr "Compromisso de um membro do Governo Brasileiro"
+msgstr "Brazilian government official's appointment."
 
 #: ./tiles/agenda.py:43
 msgid "Compromissos"
-msgstr ""
+msgstr "Appointments"
 
 #: ./tiles/agenda.py:31
 msgid "Data"
-msgstr ""
+msgstr "Date"
 
 #: ./content/schema/AgendaDiaria.xml
 msgid "Data da Agenda"
-msgstr "Data desta Agenda"
+msgstr "Date of Schedule"
 
 #: ./content/schema/AgendaDiaria.xml
 msgid "Descreva aqui se esta agenda foi atualizada. Deixe este campo em branco se nao houver nenhuma atualizacao."
-msgstr "Descreva aqui se esta agenda foi atualizada. Deixe este campo em branco se não houver nenhuma atualização."
+msgstr "Describe here if this schedule has been updated. Leave this field blank if not there is no updating."
 
 #: ./browser/templates/compromissoview.pt:23
 msgid "Detalhe do compromisso"
-msgstr ""
+msgstr "Appointment's details"
 
 #: ./browser/templates/agendadiariaview.pt:76
 msgid "Editar"
-msgstr ""
+msgstr "Edit"
 
 #: ./portlets/busca.py:69
 msgid "Este portlet busca no conteudo de agendas diarias."
-msgstr "Este portlet busca no conteúdo de agendas diárias"
+msgstr "This portlet searchs on daily schedules content."
 
 #: ./browser/templates/compromissoview.pt:11
 msgid "Info"
-msgstr ""
+msgstr "Info"
 
 #: ./portlets/busca.py:20
 msgid "Informe a raiz da busca de Agendas Diarias"
-msgstr "Informe a raiz de busca de Agendas Diárias"
+msgstr "Enter the root of Daily Schedule search"
 
 #: ./content/schema/Agenda.xml
 msgid "Informe o orgao ao qual esta agenda pertence. ex: Presidencia da Republica"
-msgstr "Informe o órgão ao qual esta agenda pertence. ex: Presidência da República"
+msgstr "Tell which department this schedule belongs. ex: The Presidency of The Republic"
 
 #: ./content/agendadiaria.py:83
 msgid "Ja existe uma agenda para esta data"
-msgstr "Já existe uma agenda para esta data."
+msgstr "There's already an schedule for this date."
 
 #: ./tiles/agenda.py:62
 msgid "Link do rodapé"
-msgstr ""
+msgstr "Footer's link"
 
 #: ./content/schema/Agenda.xml
 msgid "Local padrao para eventos desta agenda"
-msgstr "Local padrão para os compromissos desta agenda."
+msgstr "Standard location for this schedule events"
 
 #: ./content/schema/AgendaDiaria.xml
 msgid "Local padrao para eventos durante este dia"
-msgstr "Local padrão para compromissos durante este dia."
+msgstr "Standard location for events during this day"
 
 #: ./browser/templates/agendadiariaview.pt:63
 #: ./browser/templates/compromissoview.pt:67
 msgid "Local:"
-msgstr ""
+msgstr "Place:"
 
 #: ./content/schema/Agenda.xml
 #: ./content/schema/AgendaDiaria.xml
 #: ./content/schema/Compromisso.xml
 msgid "Nome da autoridade"
-msgstr "Nome da autoridade"
+msgstr "Authority's name"
 
 #: ./content/schema/Agenda.xml
 msgid "Orgao"
-msgstr "Órgão"
+msgstr "Department"
 
 #: ./content/schema/Compromisso.xml
 msgid "Outros participantes deste compromisso, um por linha."
-msgstr "Outros participantes deste compromisso, um por linha."
+msgstr "Other attendees in this appointment, one per line."
 
 #: ./content/schema/Compromisso.xml
 msgid "Pauta"
-msgstr "Pauta"
+msgstr "Agenda"
 
 #: ./browser/templates/agendadiariaview.pt:59
 #: ./browser/templates/compromissoview.pt:63
 msgid "Pauta:"
-msgstr ""
+msgstr "Agenda:"
 
 #: ./profiles/default/portlets.xml
 msgid "Portlet de busca para Agenda."
-msgstr "Portlet de busca para Agenda."
+msgstr "Schedule's search portlet"
 
 #: ./portlets/busca.py:19
 msgid "Raiz"
-msgstr "Raiz"
+msgstr "Root"
 
 #: ./browser/templates/agendadiariaview.pt:81
 msgid "Remover"
-msgstr ""
+msgstr "Remove"
 
 #: ./tiles/agenda.py:49
 msgid "Rodapé da Agenda"
-msgstr ""
+msgstr "Schedule's footer"
 
 #: ./tiles/agenda.py:56
 msgid "Texto do rodapé"
-msgstr ""
+msgstr "Footer's Text"
 
 #: ./tiles/agenda.py:25
 msgid "Title"
-msgstr ""
+msgstr "Title"
 
 #: ./browser/templates/agendadiariaview.pt:69
 #: ./browser/templates/compromissoview.pt:70
 msgid "VCAL"
-msgstr ""
+msgstr "VCAL"
 
 #: ./browser/templates/compromissoview.pt:12
 msgid "Voce ve esta pagina porque possui permissao para edita-la. Outros usuarios serao redirecionados para a visao da Agenda Diaria"
-msgstr ""
+msgstr "You see this page because you have permission to edit it. Other users will be redirected to the vision of the Daily Schedule"
 
 #. Default: "Atualmente n&atilde;o existem compromissos agendados."
 #: ./browser/templates/agendaview.pt:41
 #: ./tiles/templates/agenda.pt:70
 msgid "label_agendadiaria_nao_criada"
-msgstr ""
+msgstr "Currently there are no scheduled appointments."
 
 #. Default: "Sem compromissos oficiais."
 #: ./browser/templates/agendadiariaview.pt:92
 #: ./tiles/templates/agenda.pt:63
 msgid "label_agendadiaria_sem_compromissos"
-msgstr ""
+msgstr "No official appointments."
 
 #. Default: "Outros participantes"
 #: ./content/schema/Compromisso.xml
 msgid "label_event_attendees"
-msgstr "Outros participantes"
+msgstr "Other attendees"
 
 #. Default: "Event Ends"
 #: ./content/schema/Compromisso.xml
 msgid "label_event_end"
-msgstr "Date e hora de término"
+msgstr "Event Ends"
 
 #. Default: "Event Location"
 #: ./content/schema/Agenda.xml
 #: ./content/schema/AgendaDiaria.xml
 #: ./content/schema/Compromisso.xml
 msgid "label_event_location"
-msgstr "Local do compromisso"
+msgstr "Event Location"
 
 #. Default: "Event Starts"
 #: ./content/schema/Compromisso.xml
 msgid "label_event_start"
-msgstr "Data e hora de início"
+msgstr "Event Starts"
 
 #: ./browser/agenda.py:99
 #: ./browser/agendadiaria.py:78
@@ -242,5 +242,5 @@ msgstr "${day} ${month} ${year}"
 
 #: ./tiles/agenda.py:37
 msgid "Última atualização"
-msgstr ""
+msgstr "Last update"
 
