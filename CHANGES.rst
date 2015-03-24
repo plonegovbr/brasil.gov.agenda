@@ -4,7 +4,8 @@ Alterações
 1.0rc3 (unreleased)
 ^^^^^^^^^^^^^^^^^^^
 
-  * Melhora estrutura de internacionalização e adiciona tradução em inglês.
+  * Melhora estrutura de internacionalização, code-analysis e adiciona tradução
+    em inglês.
     [idgserpro]
 
   * Corrige css de impressão indicando que as regras só devem ser aplicadas se o tipo for Agenda Diária (closes `#37`_).
