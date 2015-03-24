@@ -30,7 +30,7 @@
         <element value="plone.app.dexterity.behaviors.metadata.IBasic" />
         <element value="plone.app.referenceablebehavior.referenceable.IReferenceable" />
         <element value="plone.app.dexterity.behaviors.exclfromnav.IExcludeFromNavigation"/>
-        <element value="plone.app.dexterity.behaviors.nextprevious.INextPreviousToggle"/>        
+        <element value="plone.app.dexterity.behaviors.nextprevious.INextPreviousToggle"/>
     </property>
 
     <!-- View information -->

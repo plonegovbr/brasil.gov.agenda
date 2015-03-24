@@ -1,13 +1,15 @@
 # -*- coding: utf-8 -*-
+
 from brasil.gov.agenda.config import AGENDADIARIAFMT
 from brasil.gov.agenda.interfaces import IAgenda
 from brasil.gov.agenda.testing import FUNCTIONAL_TESTING
 from brasil.gov.agenda.testing import INTEGRATION_TESTING
+
 from plone.app.dexterity.behaviors.exclfromnav import IExcludeFromNavigation
 from plone.app.dexterity.behaviors.nextprevious import INextPreviousToggle
 from plone.app.referenceablebehavior.referenceable import IReferenceable
-from plone.app.testing import setRoles
 from plone.app.testing import TEST_USER_ID
+from plone.app.testing import setRoles
 from plone.dexterity.interfaces import IDexterityFTI
 from plone.testing.z2 import Browser
 from plone.uuid.interfaces import IAttributeUUID

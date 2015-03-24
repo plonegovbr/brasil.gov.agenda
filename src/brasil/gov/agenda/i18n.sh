@@ -23,9 +23,8 @@ for lang in $LANGUAGES; do
     install -d locales/$lang/LC_MESSAGES
 done
 
-# Do we need to merge manual PO entries from a file called manual.pot.
+# Do we need to merge manual PO entries from a file called manual.pot?
 # this option is later passed to i18ndude
-#
 if test -e locales/${DOMAIN}-manual.pot; then
         echo "Manual PO entries detected"
         MERGE="--merge locales/${DOMAIN}-manual.pot"

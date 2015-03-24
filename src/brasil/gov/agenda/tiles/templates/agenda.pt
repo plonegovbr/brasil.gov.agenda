@@ -43,7 +43,7 @@
                     <div class="latest-update"
                          tal:content="structure view/lastest_update" />
                 </tal:lastest_update>
-                <tal:collection_events 
+                <tal:collection_events
                     condition="python:field['id']=='collection_events'">
                 <tal:agendadiaria tal:condition="view/agenda_diaria">
                     <ul class="collection-events"
@@ -53,7 +53,7 @@
                                 <div class="timestamp-cell">
                                     <span class="timestamp" tal:content="event/time">${event/time}</span>
                                 </div>
-                                <a class="title-item" 
+                                <a class="title-item"
                                    href="${view/url_agenda}"
                                    tal:attributes="href view/url_agenda"
                                    tal:content="event/description">${event/description}</a>
@@ -75,7 +75,7 @@
                 </tal:collection_events>
                 <tal:agenda_tile_footer condition="python:field['id']=='agenda_tile_footer'">
                     <div class="agenda-tile-footer">
-                        <a 
+                        <a
                             tal:attributes="href view/data/link_url"
                             tal:content="view/data/link_text"
                             href="${view/data/link_url}">${view/data/link_text}</a>

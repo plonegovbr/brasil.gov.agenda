@@ -1,14 +1,17 @@
 # -*- coding: utf-8 -*-
-from brasil.gov.agenda.config import PROJECTNAME
-from brasil.gov.agenda.interfaces import ICompromisso
-from brasil.gov.agenda.utils import rfc2445dt
-from cStringIO import StringIO
+
 from DateTime import DateTime
-from five import grok
-from plone.uuid.interfaces import IUUID
 from Products.ATContentTypes.lib.calendarsupport import foldLine
 from Products.ATContentTypes.lib.calendarsupport import n2rn
 from Products.ATContentTypes.lib.calendarsupport import vformat
+
+from brasil.gov.agenda.config import PROJECTNAME
+from brasil.gov.agenda.interfaces import ICompromisso
+from brasil.gov.agenda.utils import rfc2445dt
+
+from cStringIO import StringIO
+from five import grok
+from plone.uuid.interfaces import IUUID
 
 # vCal header and footer
 VCS_HEADER = """\

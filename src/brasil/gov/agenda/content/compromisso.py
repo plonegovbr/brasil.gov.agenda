@@ -1,7 +1,9 @@
 # -*- coding: utf-8 -*-
+from DateTime import DateTime
+
 from brasil.gov.agenda.interfaces import IAgendaDiaria
 from brasil.gov.agenda.interfaces import ICompromisso
-from DateTime import DateTime
+
 from five import grok
 from plone.dexterity.content import Container
 from plone.indexer.decorator import indexer
