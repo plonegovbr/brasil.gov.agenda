@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: brasil.gov.agenda\n"
-"POT-Creation-Date: 2015-03-24 18:59+0000\n"
+"POT-Creation-Date: 2015-03-24 19:51+0000\n"
 "PO-Revision-Date: 2012-09-18 23:00+0000\n"
 "Last-Translator: PloneGov.Br <gov@plone.org.br>\n"
 "Language-Team: PloneGov.Br <gov@plone.org.br>\n"
@@ -14,7 +14,7 @@ msgstr ""
 "Preferred-Encodings: utf-8 latin1\n"
 "Domain: brasil.gov.agenda\n"
 
-#: ./tiles/agenda.py:79
+#: ./tiles/agenda.py:80
 msgid "Acesse a agenda do {0}"
 msgstr "Acesse a agenda do {0}"
 
@@ -53,7 +53,7 @@ msgstr "Agenda Diária"
 msgid "Agenda de membro do governo brasileiro."
 msgstr "Agenda de um membro do Governo Brasileiro"
 
-#: ./tiles/agenda.py:77
+#: ./tiles/agenda.py:78
 msgid "Agenda do {0}"
 msgstr "Agenda do {0}"
 
@@ -83,11 +83,11 @@ msgstr "Compromisso"
 msgid "Compromisso de membro do governo brasileiro."
 msgstr "Compromisso de um membro do Governo Brasileiro"
 
-#: ./tiles/agenda.py:44
+#: ./tiles/agenda.py:45
 msgid "Compromissos"
 msgstr "Compromissos"
 
-#: ./tiles/agenda.py:32
+#: ./tiles/agenda.py:33
 msgid "Data"
 msgstr "Data"
 
@@ -111,6 +111,11 @@ msgstr "Editar"
 msgid "Este portlet busca no conteudo de agendas diarias."
 msgstr "Este portlet busca no conteúdo de agendas diárias"
 
+#: ./browser/templates/agendadiariaview.pt:106
+#: ./browser/templates/agendaview.pt:53
+msgid "Imprimir"
+msgstr "Imprimir"
+
 #: ./browser/templates/compromissoview.pt:11
 msgid "Info"
 msgstr "Info"
@@ -127,7 +132,7 @@ msgstr "Informe o órgão ao qual esta agenda pertence. ex: Presidência da Rep�
 msgid "Ja existe uma agenda para esta data"
 msgstr "Já existe uma agenda para esta data."
 
-#: ./tiles/agenda.py:63
+#: ./tiles/agenda.py:64
 msgid "Link do rodapé"
 msgstr "Link do rodapé"
 
@@ -179,7 +184,12 @@ msgstr "Raiz"
 msgid "Remover"
 msgstr "Remover"
 
-#: ./tiles/agenda.py:50
+#: ./browser/templates/agendadiariaview.pt:112
+#: ./browser/templates/agendaview.pt:59
+msgid "Reportar erro"
+msgstr "Reportar erro"
+
+#: ./tiles/agenda.py:51
 msgid "Rodapé da Agenda"
 msgstr "Rodapé da Agenda"
 
@@ -189,11 +199,11 @@ msgstr "Rodapé da Agenda"
 msgid "Tags são utilizadas para organização de conteúdo"
 msgstr "Tags são utilizadas para organização de conteúdo"
 
-#: ./tiles/agenda.py:57
+#: ./tiles/agenda.py:58
 msgid "Texto do rodapé"
 msgstr "Texto do rodapé"
 
-#: ./tiles/agenda.py:26
+#: ./tiles/agenda.py:27
 msgid "Title"
 msgstr "Título"
 
@@ -250,7 +260,7 @@ msgstr "Data e hora de início"
 msgid "long_date_agenda"
 msgstr "${day} de ${month} de ${year}"
 
-#: ./tiles/agenda.py:38
+#: ./tiles/agenda.py:39
 msgid "Última atualização"
 msgstr "Última atualização"
 
