@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: brasil.gov.agenda\n"
-"POT-Creation-Date: 2015-03-23 18:00+0000\n"
+"POT-Creation-Date: 2015-03-24 18:59+0000\n"
 "PO-Revision-Date: 2012-09-18 23:00+0000\n"
 "Last-Translator: PloneGov.Br <gov@plone.org.br>\n"
 "Language-Team: PloneGov.Br <gov@plone.org.br>\n"
@@ -14,11 +14,11 @@ msgstr ""
 "Preferred-Encodings: utf-8 latin1\n"
 "Domain: brasil.gov.agenda\n"
 
-#: ./tiles/agenda.py:78
+#: ./tiles/agenda.py:79
 msgid "Acesse a agenda do {0}"
 msgstr "Go to {0}'s schedule"
 
-#: ./portlets/busca.py:68
+#: ./portlets/busca.py:73
 msgid "Adiciona Portlet de Busca de Agenda"
 msgstr "Add Schedule Search Portlet"
 
@@ -29,7 +29,7 @@ msgstr "Add Daily Schedule"
 #: ./browser/templates/agendadiariaview.pt:97
 #: ./browser/templates/agendaview.pt:14
 msgid "Adicionar Compromisso"
-msgstr "Add appointment"
+msgstr "Add Appointment"
 
 #: ./browser/templates/agendadiariaview.pt:71
 #: ./browser/templates/compromissoview.pt:72
@@ -53,7 +53,7 @@ msgstr "Daily Schedule"
 msgid "Agenda de membro do governo brasileiro."
 msgstr "Brazilian government official's schedule"
 
-#: ./tiles/agenda.py:76
+#: ./tiles/agenda.py:77
 msgid "Agenda do {0}"
 msgstr "{0}'s Schedule"
 
@@ -66,7 +66,7 @@ msgstr "Update"
 msgid "Brasao"
 msgstr "Symbol"
 
-#: ./portlets/busca.py:36
+#: ./portlets/busca.py:39
 msgid "Busca de Agenda"
 msgstr "Schedule Search"
 
@@ -83,11 +83,11 @@ msgstr "Appointment"
 msgid "Compromisso de membro do governo brasileiro."
 msgstr "Brazilian government official's appointment."
 
-#: ./tiles/agenda.py:43
+#: ./tiles/agenda.py:44
 msgid "Compromissos"
 msgstr "Appointments"
 
-#: ./tiles/agenda.py:31
+#: ./tiles/agenda.py:32
 msgid "Data"
 msgstr "Date"
 
@@ -107,7 +107,7 @@ msgstr "Appointment's details"
 msgid "Editar"
 msgstr "Edit"
 
-#: ./portlets/busca.py:69
+#: ./portlets/busca.py:74
 msgid "Este portlet busca no conteudo de agendas diarias."
 msgstr "This portlet searchs on daily schedules content."
 
@@ -115,7 +115,7 @@ msgstr "This portlet searchs on daily schedules content."
 msgid "Info"
 msgstr "Info"
 
-#: ./portlets/busca.py:20
+#: ./portlets/busca.py:23
 msgid "Informe a raiz da busca de Agendas Diarias"
 msgstr "Enter the root of Daily Schedule search"
 
@@ -123,11 +123,11 @@ msgstr "Enter the root of Daily Schedule search"
 msgid "Informe o orgao ao qual esta agenda pertence. ex: Presidencia da Republica"
 msgstr "Tell which department this schedule belongs. ex: The Presidency of The Republic"
 
-#: ./content/agendadiaria.py:83
+#: ./content/agendadiaria.py:92
 msgid "Ja existe uma agenda para esta data"
 msgstr "There's already an schedule for this date."
 
-#: ./tiles/agenda.py:62
+#: ./tiles/agenda.py:63
 msgid "Link do rodapé"
 msgstr "Footer's link"
 
@@ -171,7 +171,7 @@ msgstr "Agenda:"
 msgid "Portlet de busca para Agenda."
 msgstr "Schedule's search portlet"
 
-#: ./portlets/busca.py:19
+#: ./portlets/busca.py:22
 msgid "Raiz"
 msgstr "Root"
 
@@ -179,15 +179,21 @@ msgstr "Root"
 msgid "Remover"
 msgstr "Remove"
 
-#: ./tiles/agenda.py:49
+#: ./tiles/agenda.py:50
 msgid "Rodapé da Agenda"
 msgstr "Schedule's footer"
 
-#: ./tiles/agenda.py:56
+#: ./content/schema/Agenda.xml
+#: ./content/schema/AgendaDiaria.xml
+#: ./content/schema/Compromisso.xml
+msgid "Tags são utilizadas para organização de conteúdo"
+msgstr "Tags are used for content organization."
+
+#: ./tiles/agenda.py:57
 msgid "Texto do rodapé"
 msgstr "Footer's Text"
 
-#: ./tiles/agenda.py:25
+#: ./tiles/agenda.py:26
 msgid "Title"
 msgstr "Title"
 
@@ -199,6 +205,10 @@ msgstr "VCAL"
 #: ./browser/templates/compromissoview.pt:12
 msgid "Voce ve esta pagina porque possui permissao para edita-la. Outros usuarios serao redirecionados para a visao da Agenda Diaria"
 msgstr "You see this page because you have permission to edit it. Other users will be redirected to the vision of the Daily Schedule"
+
+#: ./content/agendadiaria.py:41
+msgid "agenda_diaria_title"
+msgstr "${autoridade}'s schedule for ${fmt_date}"
 
 #. Default: "Atualmente n&atilde;o existem compromissos agendados."
 #: ./browser/templates/agendaview.pt:41
@@ -234,13 +244,13 @@ msgstr "Event Location"
 msgid "label_event_start"
 msgstr "Event Starts"
 
-#: ./browser/agenda.py:99
-#: ./browser/agendadiaria.py:78
-#: ./browser/compromisso.py:79
+#: ./browser/agenda.py:102
+#: ./browser/agendadiaria.py:81
+#: ./browser/compromisso.py:81
 msgid "long_date_agenda"
 msgstr "${day} ${month} ${year}"
 
-#: ./tiles/agenda.py:37
+#: ./tiles/agenda.py:38
 msgid "Última atualização"
 msgstr "Last update"
 
