@@ -16,6 +16,8 @@ from plone.indexer.decorator import indexer
 from plone.supermodel.interfaces import IDefaultFactory
 
 from z3c.form.validator import SimpleFieldValidator
+from zope.component import getMultiAdapter
+from zope.i18nmessageid import Message
 from zope.interface import Invalid
 from zope.interface import provider
 from zope.schema.interfaces import IContextAwareDefaultFactory
@@ -33,12 +35,22 @@ class AgendaDiaria(Container):
         fmt_date = date.strftime('%d/%m/%Y')
         autoridade = self.autoridade
         mapping = {'autoridade': autoridade, 'fmt_date': fmt_date}
+        portal_state = getMultiAdapter((self, self.REQUEST),
+                                       name=u'plone_portal_state')
+        current_language = portal_state.language()
+        tool = api.portal.get_tool('translation_service')
         # FIXME: Ao trocar a língua de um portal, o título de uma agenda não
         # será alterado no folder_contents. Como a recomendação atual de sites
         # multilíngues é a geração de Plone Sites distintos, essa situação
         # não será um problema, mas quando as discussões acerca do uso do
         # plone.app.multilingual evoluírem isso deve ser revisto.
-        return self.translate(_(u'agenda_diaria_title', mapping=mapping))
+        target_language = ('pt_BR' if current_language == 'pt-br'
+                           else current_language)
+        return tool.translate(Message(_(u'agenda_diaria_title'),
+                              mapping=mapping),
+                              'brasil.gov.agenda',
+                              context=self,
+                              target_language=target_language)
 
     def exclude_from_nav(self):
         """ AgendaDiaria nao eh visivel na navegacao do portal
