@@ -17,11 +17,11 @@ class Fixture(PloneSandboxLayer):
         import collective.cover
         self.loadZCML(package=collective.cover)
         import brasil.gov.agenda
-        self.loadZCML(package=brasil.gov.agenda)
+        self.loadZCML(name='testing.zcml', package=brasil.gov.agenda)
 
     def setUpPloneSite(self, portal):
-        self.applyProfile(
-            portal, 'brasil.gov.agenda:default')
+        self.applyProfile(portal, 'brasil.gov.agenda:default')
+        self.applyProfile(portal, 'brasil.gov.agenda:testing')
         portal.portal_workflow.setChainForPortalTypes(
             ('Agenda', 'Folder', ),
             'simple_publication_workflow'
