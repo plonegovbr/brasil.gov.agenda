@@ -142,6 +142,7 @@ class AgendaDiariaView (grok.View):
             # template causa erros durante o parse do i18ndude.
             # -FATAL- - ERROR in document:
             # <unknown>:55:44: not well-formed (invalid token)
+            # No futuro pode ser interessante colocar essa definição no css.
             attendees = ''
             if comp['attendees']:
                 attendees = comp['attendees'].split('\n')

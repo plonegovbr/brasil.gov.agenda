@@ -119,5 +119,14 @@ class CompromissoView (grok.View):
         comp['end_date'] = obj.end_date.strftime('%Y-%m-%d %H:%M')
         comp['location'] = obj.location
         comp['attendees'] = obj.attendees
+        # XXX: Preciso formatar esses dados pela view, uma vez que na
+        # template causa erros durante o parse do i18ndude.
+        # -FATAL- - ERROR in document:
+        # <unknown>:55:44: not well-formed (invalid token)
+        # No futuro pode ser interessante colocar essa definição no css.
+        attendees = ''
+        if comp['attendees']:
+            attendees = comp['attendees'].split('\n')
+        comp['attendees_formatted'] = '<br/>'.join(attendees)
         comp['url'] = obj.absolute_url()
         return comp
