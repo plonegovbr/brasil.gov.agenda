@@ -15,6 +15,7 @@ ${title_selector} =  input#form-widgets-title
 ${description_selector} =  textarea#form-widgets-description
 ${autoridade_selector} =  input#form-widgets-autoridade
 ${orgao_selector} =  input#form-widgets-orgao
+${attendees_selector} =  textarea#form-widgets-attendees
 ${start_day_selector} =  input#form-widgets-start_date-day
 ${start_month_selector} =  select#form-widgets-start_date-month
 ${start_year_selector} =  input#form-widgets-start_date-year
@@ -94,6 +95,7 @@ Create
     Input Text  css=${start_min_selector}  30
     Input Text  css=${end_day_selector}  28
     Input Text  css=${end_year_selector}  2013
+    Input Text  css=${attendees_selector}  Machado de Assis
     Select From List  css=${end_month_selector}  10
     Input Text  css=${end_hour_selector}  2
     Input Text  css=${end_min_selector}  00
