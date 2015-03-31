@@ -2,15 +2,16 @@
     xmlns:metal="http://xml.zope.org/namespaces/metal"
     xmlns:tal="http://xml.zope.org/namespaces/tal"
     xmlns:i18n="http://xml.zope.org/namespaces/i18n"
-    metal:use-macro="context/main_template/macros/master">
+    metal:use-macro="context/main_template/macros/master"
+    i18n:domain="brasil.gov.agenda">
 
     <metal:header fill-slot="header">
         <dl class="portalMessage info"
             tal:condition="view/editable">
             <dt i18n:translate="">Info</dt>
             <dd i18n:translate="">
-              Você vê esta página porque possui permissão para editá-la. Outros usuários serão redirecionados para a
-              visão da Agenda Diária
+              Voce ve esta pagina porque possui permissao para edita-la. Outros usuarios serao redirecionados para a
+              visao da Agenda Diaria
             </dd>
         </dl>
     </metal:header>
@@ -19,7 +20,7 @@
 
         <div class="dados-agenda">
 
-            <h3>Detalhe do compromisso</h3>
+            <h3 i18n:translate="">Detalhe do compromisso</h3>
 
             <tal:image condition="view/imagem">
                 <img class="brasao-agenda"
@@ -29,7 +30,7 @@
 
             </tal:image>
 
-            <h2 class="agenda-orgao" tal:content="view/orgao">Presidência da República</h2>
+            <h2 class="agenda-orgao" tal:content="view/orgao">Presidencia da Republica</h2>
             <h3 class="agenda-autoridade" tal:content="view/autoridade">Autoridade</h3>
 
             <span class="agenda-dia">
@@ -51,24 +52,24 @@
 
                     <div class="comprimisso-dados">
 
-                      <h4 class="comprimisso-titulo" tal:content="comp/title">Reunião com Dorneles Treméa</h4>
+                      <h4 class="comprimisso-titulo" tal:content="comp/title">Reuniao com Dorneles Tremea</h4>
 
                       <p class="comprimisso-participantes"
                         tal:condition="comp/attendees"
-                        tal:content="structure python: '<br/>'.join(comp['attendees'].split('\n'))">Dorneles Treméa</p>
+                        tal:content="structure comp/attendees_formatted">Dorneles Tremea</p>
 
                       <p class="comprimisso-pauta"
                         tal:condition="comp/description">
-                        <label>Pauta:</label> <span tal:replace="comp/description">Assunto a ser tratado</span></p>
+                        <label i18n:translate="">Pauta:</label> <span tal:replace="comp/description">Assunto a ser tratado</span></p>
 
                       <p class="comprimisso-local"
                         tal:condition="comp/location">
-                        <label>Local:</label> <span tal:replace="comp/location">Palácio do Planalto</span></p>
+                        <label i18n:translate="">Local:</label> <span tal:replace="comp/location">Palacio do Planalto</span></p>
 
                       <span class="download-compromisso">
                         <a class="add-agenda vcal"
                          tal:attributes="href string:${comp/url}/vcal_view"
-                         i18n:translate="">VCAL</a> Adicionar ao meu calendário
+                         i18n:translate="">VCAL</a> <span i18n:translate="">Adicionar ao meu calendario</span>
                       </span>
 
                      </div>

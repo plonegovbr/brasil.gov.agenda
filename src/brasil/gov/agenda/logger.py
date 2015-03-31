@@ -1,4 +1,5 @@
-# -*- coding:utf-8 -*-
+# -*- coding: utf-8 -*-
+
 from brasil.gov.agenda.config import PROJECTNAME
 
 import logging

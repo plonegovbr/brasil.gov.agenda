@@ -1,7 +1,9 @@
 # -*- coding: utf-8 -*-
+
 from brasil.gov.agenda.config import PROJECTNAME
-from brasil.gov.agenda.testing import INTEGRATION_TESTING
 from brasil.gov.agenda.interfaces import IBrowserLayer
+from brasil.gov.agenda.testing import INTEGRATION_TESTING
+
 from plone.browserlayer.utils import registered_layers
 from zope.site.hooks import setSite
 

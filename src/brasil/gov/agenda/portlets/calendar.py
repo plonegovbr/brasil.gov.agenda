@@ -1,8 +1,11 @@
 # -*- coding: utf-8 -*-
+
+from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
+
 from brasil.gov.agenda.interfaces import IAgenda
+
 from collective.portlet.calendar import calendar
 from plone.memoize.compress import xhtml_compress
-from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 
 
 class Renderer(calendar.Renderer):

@@ -15,6 +15,7 @@ ${title_selector} =  input#form-widgets-title
 ${description_selector} =  textarea#form-widgets-description
 ${autoridade_selector} =  input#form-widgets-autoridade
 ${orgao_selector} =  input#form-widgets-orgao
+${attendees_selector} =  textarea#form-widgets-attendees
 ${start_day_selector} =  input#form-widgets-start_date-day
 ${start_month_selector} =  select#form-widgets-start_date-month
 ${start_year_selector} =  input#form-widgets-start_date-year
@@ -45,46 +46,46 @@ Test Default Values
 
     Create Agenda
 
-    Click Add Compromisso
+    Click Adicionar Compromisso
     Textfield Value Should Be  css=${autoridade_selector}  Clarice Lispector
 
 Test Compromisso With Portlet
     Enable Autologin as  Site Administrator
     Go to homepage
 
-    Add Right Portlet  Calendar portlet
+    Add Right Portlet  Calendário
     Go to homepage
 
     Create Agenda
 
     Create  Compromisso  Compromisso do dia
-    Page Should Contain  October
+    Page Should Contain  Outubro
 
 *** Keywords ***
 
-Click Add Agenda
+Click Adicionar Agenda
     Open Add New Menu
     Click Link  css=a#agenda
-    Page Should Contain  Add Agenda
+    Page Should Contain  Adicionar Agenda
 
-Click Add Compromisso
+Click Adicionar Compromisso
     Open Add New Menu
     Click Link  css=a#compromisso
-    Page Should Contain  Add Compromisso
+    Page Should Contain  Adicionar Compromisso
 
 Create Agenda
-    Click Add Agenda
+    Click Adicionar Agenda
     Input Text  css=${title_basic_selector}  Agenda da Presidenta
     Input Text  css=${description_basic_selector}  Agenda da Presidenta da República
     Input Text  css=${autoridade_selector}  Clarice Lispector
     Input Text  css=${orgao_selector}  Presidência da República
-    Click Button  Save
-    Page Should Contain  Item created
+    Click Button  Salvar
+    Page Should Contain  Item criado
 
 Create
     [arguments]  ${title}  ${description}
 
-    Click Add Compromisso
+    Click Adicionar Compromisso
     Input Text  css=${title_selector}  ${title}
     Input Text  css=${description_selector}  ${description}
     Input Text  css=${start_day_selector}  28
@@ -94,10 +95,11 @@ Create
     Input Text  css=${start_min_selector}  30
     Input Text  css=${end_day_selector}  28
     Input Text  css=${end_year_selector}  2013
+    Input Text  css=${attendees_selector}  Machado de Assis
     Select From List  css=${end_month_selector}  10
     Input Text  css=${end_hour_selector}  2
     Input Text  css=${end_min_selector}  00
-    Click Button  Save
+    Click Button  Salvar
     Page Should Contain  28
     Page Should Contain  de
     Page Should Contain  2013
@@ -105,16 +107,16 @@ Create
 Update
     [arguments]  ${title}  ${description}
 
-    Click Link  link=Edit
+    Click Link  link=Edição
     Input Text  css=${title_selector}  ${title}
     Input Text  css=${description_selector}  ${description}
-    Click Button  Save
-    Page Should Contain  Changes saved
+    Click Button  Salvar
+    Page Should Contain  Alterações salvas
 
 Delete
     Open Action Menu
     Click Link  css=a#plone-contentmenu-actions-delete
-    Click Button  Delete
+    Click Button  Excluir
     Page Should Contain  Agenda
 
 Manage Portlets

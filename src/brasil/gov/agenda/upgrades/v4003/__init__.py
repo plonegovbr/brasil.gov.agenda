@@ -1,4 +1,5 @@
-# -*- coding:utf-8 -*-
+# -*- coding: utf-8 -*-
+
 from brasil.gov.agenda.logger import logger
 from plone import api
 

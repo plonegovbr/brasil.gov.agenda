@@ -1,9 +1,14 @@
 # -*- coding: utf-8 -*-
+
 from Acquisition import aq_parent
-from brasil.gov.agenda.interfaces import IAgendaDiaria
-from five import grok
 from Products.CMFCore.utils import getToolByName
+
+from brasil.gov.agenda import _
+from brasil.gov.agenda.interfaces import IAgendaDiaria
+
+from five import grok
 from zope.component import getMultiAdapter
+from zope.i18nmessageid import Message
 
 grok.templatedir('templates')
 
@@ -20,6 +25,9 @@ class AgendaDiariaView (grok.View):
                                       name='plone_tools')
         context_state = getMultiAdapter((self.context, self.request),
                                         name=u'plone_context_state')
+        portal_state = getMultiAdapter((self.context, self.request),
+                                       name=u'plone_portal_state')
+        self.current_language = portal_state.language()
         self._ts = getToolByName(self.context, 'translation_service')
         self.catalog = plone_tools.catalog()
         self.agenda = aq_parent(self.context)
@@ -37,13 +45,18 @@ class AgendaDiariaView (grok.View):
     def _format_time(self, value):
         return value.strftime('%Hh%M')
 
-    def _translate(self, msgid):
+    def _translate(self, msgid, locale='plonelocales', mapping=None):
         tool = self._ts
+        # XXX: Por que é retornado 'pt-br' do portal_state ao invés de 'pt_BR'?
+        # Quando uso 'pt-br' ao invés de 'pt_BR', não pega a tradução quando
+        # feita de forma manual.
+        target_language = ('pt_BR' if self.current_language == 'pt-br'
+                           else self.current_language)
         return tool.translate(msgid,
-                              'plonelocales',
-                              {},
+                              locale,
+                              mapping=mapping,
                               context=self.context,
-                              target_language='pt_BR')
+                              target_language=target_language)
 
     @property
     def date(self):
@@ -65,7 +78,8 @@ class AgendaDiariaView (grok.View):
         parts['day'] = date.strftime('%d')
         parts['month'] = self.month()
         parts['year'] = date.strftime('%Y')
-        return '%(day)s de %(month)s de %(year)s' % parts
+        return self.context.translate(Message(_(u'long_date_agenda'),
+                                              mapping=parts))
 
     def orgao(self):
         orgao = self.agenda.orgao
@@ -124,6 +138,15 @@ class AgendaDiariaView (grok.View):
             comp['end_date'] = obj.end_date.strftime('%Y-%m-%d %H:%M')
             comp['location'] = obj.location
             comp['attendees'] = obj.attendees
+            # XXX: Preciso formatar esses dados pela view, uma vez que na
+            # template causa erros durante o parse do i18ndude.
+            # -FATAL- - ERROR in document:
+            # <unknown>:55:44: not well-formed (invalid token)
+            # No futuro pode ser interessante colocar essa definição no css.
+            attendees = ''
+            if comp['attendees']:
+                attendees = comp['attendees'].split('\n')
+            comp['attendees_formatted'] = '<br/>'.join(attendees)
             comp['url'] = obj.absolute_url()
             compromissos.append(comp)
         return compromissos

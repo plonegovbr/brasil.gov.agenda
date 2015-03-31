@@ -3,7 +3,7 @@
 from setuptools import find_packages
 from setuptools import setup
 
-version = '1.0rc3.dev0'
+version = '1.0rc3.dev2'
 description = 'Agenda de membros do Governo Brasileiro'
 long_description = (
     open('README.rst').read() + '\n' +
@@ -51,7 +51,8 @@ setup(
         'plone.app.versioningbehavior',
         'plone.app.vocabularies',
         'plone.behavior',
-        'plone.dexterity<2.2.4',  # FIXME: https://github.com/plonegovbr/brasil.gov.agenda/issues/32
+        # FIXME: https://github.com/plonegovbr/brasil.gov.agenda/issues/32
+        'plone.dexterity<2.2.4',
         'plone.directives.form',
         'plone.portlets',
         'plone.supermodel >=1.2.3',

@@ -4,6 +4,13 @@ Alterações
 1.0rc3 (unreleased)
 ^^^^^^^^^^^^^^^^^^^
 
+  * Melhora estrutura de internacionalização, code-analysis e adiciona tradução
+    em inglês.
+    [idgserpro]
+
+  * Corrige css de impressão indicando que as regras só devem ser aplicadas se o tipo for Agenda Diária (closes `#37`_).
+    [idgserpro]
+
   * Corrige bug de navegação entre meses no portlet de calendário extendido após alteração de melhorias.
     [dbarbato]
 
@@ -154,3 +161,4 @@ Alterações
 .. _`#12`: https://github.com/plonegovbr/brasil.gov.agenda/issues/12
 .. _`#18`: https://github.com/plonegovbr/brasil.gov.agenda/issues/18
 .. _`#23`: https://github.com/plonegovbr/brasil.gov.agenda/issues/23
+.. _`#37`: https://github.com/plonegovbr/brasil.gov.agenda/issues/37

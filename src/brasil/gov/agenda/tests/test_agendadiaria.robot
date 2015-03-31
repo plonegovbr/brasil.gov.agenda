@@ -35,7 +35,7 @@ Test Default Values
 
     Create Agenda
 
-    Click Add AgendaDiaria
+    Click Adicionar AgendaDiaria
     Textfield Value Should Be  css=${autoridade_selector}  Clarice Lispector
 
 Test Data Duplicada
@@ -48,55 +48,55 @@ Test Data Duplicada
 
     Click Link  Agenda da Presidenta
 
-    Click Add AgendaDiaria
+    Click Adicionar AgendaDiaria
     Input Text  css=${date_day_selector}  05
     Input Text  css=${date_year_selector}  2013
     Select From List  css=${date_month_selector}  2
-    Click Button  Save
-    Page Should Contain  There were some errors
+    Click Button  Salvar
+    Page Should Contain  Existem alguns erros
 
 Test AgendaDiaria With Portlet
     Enable Autologin as  Site Administrator
     Go to homepage
 
-    Add Right Portlet  Calendar portlet
+    Add Right Portlet  Calendário
     Go to homepage
 
     Create Agenda
 
     Create  05  2  2013
-    Page Should Contain    February
+    Page Should Contain    Fevereiro
 
 
 *** Keywords ***
 
-Click Add Agenda
+Click Adicionar Agenda
     Open Add New Menu
     Click Link  css=a#agenda
-    Page Should Contain  Add Agenda
+    Page Should Contain  Adicionar Agenda
 
-Click Add AgendaDiaria
+Click Adicionar AgendaDiaria
     Open Add New Menu
     Click Link  css=a#agendadiaria
-    Page Should Contain  Add Agenda Diaria
+    Page Should Contain  Adicionar Agenda Diária
 
 Create Agenda
-    Click Add Agenda
+    Click Adicionar Agenda
     Input Text  css=${title_basic_selector}  Agenda da Presidenta
     Input Text  css=${description_basic_selector}  Agenda da Presidenta da República
     Input Text  css=${autoridade_selector}  Clarice Lispector
     Input Text  css=${orgao_selector}  Presidência da República
-    Click Button  Save
-    Page Should Contain  Item created
+    Click Button  Salvar
+    Page Should Contain  Item criado
 
 Create
     [arguments]  ${dia}  ${mes}  ${ano}
 
-    Click Add AgendaDiaria
+    Click Adicionar AgendaDiaria
     Input Text  css=${date_day_selector}  ${dia}
     Input Text  css=${date_year_selector}  ${ano}
     Select From List  css=${date_month_selector}  ${mes}
-    Click Button  Save
+    Click Button  Salvar
     Page Should Contain  ${dia}
     Page Should Contain  de
     Page Should Contain  ${ano}
@@ -104,12 +104,12 @@ Create
 Update
     [arguments]  ${dia}  ${mes}  ${ano}
 
-    Click Link  link=Edit
+    Click Link  link=Edição
     Input Text  css=${date_day_selector}  ${dia}
     Input Text  css=${date_year_selector}  ${ano}
     Select From List  css=${date_month_selector}  ${mes}
-    Click Button  Save
-    Page Should Contain  Changes saved
+    Click Button  Salvar
+    Page Should Contain  Alterações salvas
     Page Should Contain  ${dia}
     Page Should Contain  de
     Page Should Contain  ${ano}
@@ -117,7 +117,7 @@ Update
 Delete
     Open Action Menu
     Click Link  css=a#plone-contentmenu-actions-delete
-    Click Button  Delete
+    Click Button  Excluir
     Page Should Contain  Agenda
 
 Manage Portlets

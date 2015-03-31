@@ -1,5 +1,8 @@
 # -*- coding: utf-8 -*-
 
+from Products.CMFCore.utils import getToolByName
+from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
+
 from collective.cover import _
 from collective.cover.tiles.base import IPersistentCoverTile
 from collective.cover.tiles.base import PersistentCoverTile
@@ -9,9 +12,8 @@ from plone.directives import form
 from plone.memoize import forever
 from plone.tiles.interfaces import ITileDataManager
 from plone.uuid.interfaces import IUUID
-from Products.CMFCore.utils import getToolByName
-from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from zope import schema
+from zope.component import getMultiAdapter
 
 
 import time
@@ -65,7 +67,7 @@ class IAgendaTile(IPersistentCoverTile):
 
 
 class AgendaTile(PersistentCoverTile):
-    index = ViewPageTemplateFile("templates/agenda.pt")
+    index = ViewPageTemplateFile('templates/agenda.pt')
     is_configurable = True
     limit = 1
 
@@ -91,25 +93,33 @@ class AgendaTile(PersistentCoverTile):
 
     def _last_modified(self):
         agenda = uuidToObject(self.data['uuid'])
-        last_modified = int(agenda.modified().strftime("%s"))
+        last_modified = int(agenda.modified().strftime('%s'))
         agenda_diaria = agenda.get(time.strftime('%Y-%m-%d'), None)
         if agenda_diaria:
-            modified = int(agenda_diaria.modified().strftime("%s"))
+            modified = int(agenda_diaria.modified().strftime('%s'))
             if modified > last_modified:
                 last_modified = modified
             for compromisso in agenda_diaria.objectValues():
-                modified = int(compromisso.modified().strftime("%s"))
+                modified = int(compromisso.modified().strftime('%s'))
                 if modified > last_modified:
                     last_modified = modified
         return last_modified
 
     def _translate(self, msgid):
         tool = getToolByName(self.context, 'translation_service')
+        portal_state = getMultiAdapter((self.context, self.request),
+                                       name=u'plone_portal_state')
+        current_language = portal_state.language()
+        # XXX: Por que é retornado 'pt-br' do portal_state ao invés de 'pt_BR'?
+        # Quando uso 'pt-br' ao invés de 'pt_BR', não pega a tradução quando
+        # feita de forma manual.
+        target_language = ('pt_BR' if current_language == 'pt-br'
+                           else current_language)
         return tool.translate(msgid,
                               'plonelocales',
                               {},
                               context=self.context,
-                              target_language='pt_BR')
+                              target_language=target_language)
 
     def _month(self):
         tool = getToolByName(self.context, 'translation_service')

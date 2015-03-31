@@ -2,7 +2,8 @@
     xmlns:metal="http://xml.zope.org/namespaces/metal"
     xmlns:tal="http://xml.zope.org/namespaces/tal"
     xmlns:i18n="http://xml.zope.org/namespaces/i18n"
-    metal:use-macro="context/main_template/macros/master">
+    metal:use-macro="context/main_template/macros/master"
+    i18n:domain="brasil.gov.agenda">
 
   <metal:slot metal:fill-slot="content-title">
     <h1 class="documentFirstHeading" tal:content="view/TitleAgenda"></h1>
@@ -28,7 +29,8 @@
 
       <div class="portalMessage info"
           tal:condition="view/update_info"
-          tal:content="structure view/update_info">
+          tal:content="structure view/update_info"
+          i18n:translate="">
           Agenda alterada
       </div>
 
@@ -50,15 +52,15 @@
 
           <p class="comprimisso-participantes"
             tal:condition="comp/attendees"
-            tal:content="structure python: '<br/>'.join(comp['attendees'].split('\n'))">Dorneles Treméa</p>
+            tal:content="structure comp/attendees_formatted">Dorneles Treméa</p>
 
           <p class="comprimisso-pauta"
             tal:condition="comp/description">
-            <label>Pauta:</label> <span tal:replace="comp/description">Assunto a ser tratado</span></p>
+            <label i18n:translate="">Pauta:</label> <span tal:replace="comp/description">Assunto a ser tratado</span></p>
 
           <p class="comprimisso-local"
             tal:condition="comp/location">
-            <label>Local:</label> <span tal:replace="comp/location">Palácio do Planalto</span></p>
+            <label i18n:translate="">Local:</label> <span tal:replace="comp/location">Palácio do Planalto</span></p>
 
           <!-- <a class="add-agenda ical"
              tal:attributes="href string:${comp/url}/ical_view"
@@ -66,7 +68,7 @@
           <span class="download-compromisso">
             <a class="add-agenda vcal"
              tal:attributes="href string:${comp/url}/vcal_view"
-             i18n:translate="">VCAL</a> Adicionar ao meu calendário
+             i18n:translate="">VCAL</a> <span i18n:translate="">Adicionar ao meu calendario</span>
           </span>
 
           <ul class="compromisso-acoes" tal:condition="view/editable">
@@ -101,13 +103,13 @@
       <ul class="list-actions">
         <li class="item print">
           <a href="javascript:window.print();">
-            <span class="texto">Imprimir</span>
+            <span class="texto" i18n:translate="">Imprimir</span>
           </a>
         </li>
         <tal:reporterros tal:define="urlerros view/get_link_erros">
         <li class="item relatar-erros">
           <a tal:attributes="href urlerros">
-            <span class="texto">Reportar erro</span>
+            <span class="texto" i18n:translate="">Reportar erro</span>
           </a>
         </li>
         </tal:reporterros>
@@ -115,6 +117,7 @@
     </div>
 
     <script>
+    // <![CDATA[
       jQuery(function($){
         $('.compromisso-acao a.acao').prepOverlay(
             {
@@ -176,7 +179,7 @@
           });
 
       }(jQuery));
-
+    // ]]>
     </script>
   </metal:block>
 

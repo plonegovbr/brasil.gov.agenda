@@ -4,7 +4,7 @@ from Products.CMFCore.utils import getToolByName
 
 def list_agendadiaria_calendar(p):
     """ Listaremos o tipo AgendaDiaria no calendario do site """
-    calendar = getToolByName(p, "portal_calendar", None)
+    calendar = getToolByName(p, 'portal_calendar', None)
     if calendar is not None:
         our_type = 'AgendaDiaria'
         types = list(calendar.calendar_types)

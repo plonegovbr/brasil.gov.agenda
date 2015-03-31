@@ -1,0 +1,21 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:five="http://namespaces.zope.org/five"
+    xmlns:i18n="http://namespaces.zope.org/i18n"
+    xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
+    i18n_domain="brasil.gov.agenda">
+
+  <!-- Esse arquivo de configuração só é carregado durante a execução dos
+       testes. -->
+
+  <include file="configure.zcml" />
+
+  <genericsetup:registerProfile
+      name="testing"
+      title="brasil.gov.agenda tests"
+      directory="profiles/testing"
+      description="Steps to ease tests of brasil.gov.agenda"
+      provides="Products.GenericSetup.interfaces.EXTENSION"
+      />
+
+</configure>

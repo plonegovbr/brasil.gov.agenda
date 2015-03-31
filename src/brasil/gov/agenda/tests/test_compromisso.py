@@ -1,13 +1,16 @@
 # -*- coding: utf-8 -*-
+
+from DateTime import DateTime
+
 from brasil.gov.agenda.interfaces import ICompromisso
 from brasil.gov.agenda.testing import FUNCTIONAL_TESTING
 from brasil.gov.agenda.testing import INTEGRATION_TESTING
-from DateTime import DateTime
+
 from plone.app.contenttypes.interfaces import IEvent
 from plone.app.dexterity.behaviors.exclfromnav import IExcludeFromNavigation
 from plone.app.referenceablebehavior.referenceable import IReferenceable
-from plone.app.testing import setRoles
 from plone.app.testing import TEST_USER_ID
+from plone.app.testing import setRoles
 from plone.dexterity.interfaces import IDexterityFTI
 from plone.namedfile.file import NamedBlobImage
 from plone.testing.z2 import Browser
@@ -248,7 +251,7 @@ class ContentTypeBrowserTestCase(unittest.TestCase):
         self.setupContent(portal)
         view = self.compromisso.restrictedTraverse('@@view')
         view.update()
-        self.assertIn(u', 05 de', view.Title())
+        self.assertIn(u', 05', view.Title())
 
     def test_compromisso_view_imagem(self):
         portal = self.portal
