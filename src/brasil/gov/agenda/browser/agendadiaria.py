@@ -2,7 +2,6 @@
 from Acquisition import aq_parent
 from Products.CMFCore.utils import getToolByName
 
-from brasil.gov.agenda import _
 from brasil.gov.agenda.interfaces import IAgendaDiaria
 
 from five import grok
