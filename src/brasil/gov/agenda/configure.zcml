@@ -28,7 +28,7 @@
     <include package=".portlets" />
 
     <grok:grok package="." />
-    
+
     <!-- Suporte a arquivos estaticos -->
     <browser:resourceDirectory name="brasil.gov.agenda" directory="static" />
 

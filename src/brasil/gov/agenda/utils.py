@@ -1,10 +1,12 @@
 # -*- coding: utf-8 -*-
+
+from DateTime import DateTime
+
 from datetime import date
 from datetime import datetime
 from datetime import timedelta
-from DateTime import DateTime
-from zope.i18nmessageid import MessageFactory
 
+from zope.i18nmessageid import MessageFactory
 
 PloneMessageFactory = MessageFactory('plonelocales')
 
