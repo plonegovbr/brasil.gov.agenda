@@ -13,6 +13,7 @@ from plone.memoize import forever
 from plone.tiles.interfaces import ITileDataManager
 from plone.uuid.interfaces import IUUID
 from zope import schema
+from zope.component import getMultiAdapter
 
 
 import time
@@ -106,11 +107,19 @@ class AgendaTile(PersistentCoverTile):
 
     def _translate(self, msgid):
         tool = getToolByName(self.context, 'translation_service')
+        portal_state = getMultiAdapter((self.context, self.request),
+                                       name=u'plone_portal_state')
+        current_language = portal_state.language()
+        # XXX: Por que é retornado 'pt-br' do portal_state ao invés de 'pt_BR'?
+        # Quando uso 'pt-br' ao invés de 'pt_BR', não pega a tradução quando
+        # feita de forma manual.
+        target_language = ('pt_BR' if current_language == 'pt-br'
+                           else current_language)
         return tool.translate(msgid,
                               'plonelocales',
                               {},
                               context=self.context,
-                              target_language='pt_BR')
+                              target_language=target_language)
 
     def _month(self):
         tool = getToolByName(self.context, 'translation_service')
