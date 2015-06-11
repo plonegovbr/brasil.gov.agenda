@@ -128,11 +128,13 @@ class ContentTypeBrowserTestCase(unittest.TestCase):
         browser = Browser(app)
         portal_url = portal.absolute_url()
 
-        browser.open('%s/++resource++brasil.gov.agenda/agenda_icon.png' % portal_url)
+        browser.open('%s/++resource++brasil.gov.agenda/agenda_icon.png' %
+                     portal_url)
         self.assertEqual(browser.headers['status'], '200 Ok')
 
     def test_agenda_view(self):
-        from plone.app.testing import TEST_USER_NAME, TEST_USER_PASSWORD
+        from plone.app.testing import TEST_USER_NAME
+        from plone.app.testing import TEST_USER_PASSWORD
         app = self.layer['app']
         portal = self.portal
         self.setupContent(portal)
@@ -173,11 +175,13 @@ class ContentTypeBrowserTestCase(unittest.TestCase):
         transaction.commit()
         # Ela se torna a ativa
         browser.open(agenda_url)
-        self.assertIn('%s &#8212' % fmt_display,
+        self.assertIn('%s &mdash;' % fmt_display,
                       browser.contents.decode('utf-8'))
 
         # Nos autenticamos como admin
-        browser.addHeader('Authorization', 'Basic %s:%s' % (TEST_USER_NAME, TEST_USER_PASSWORD,))
+        browser.addHeader('Authorization', 'Basic %s:%s' % (
+            TEST_USER_NAME,
+            TEST_USER_PASSWORD,))
         # Vemos o conteudo da view de Agenda
         browser.open(agenda_url)
         self.assertEqual(browser.headers['status'], '200 Ok')
