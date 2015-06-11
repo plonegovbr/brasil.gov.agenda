@@ -33,3 +33,4 @@ htmlcov/
 
 # OSX
 .DS_Store
+/.settings/*
