@@ -1,8 +1,7 @@
 *** Settings ***
 
-Resource  plone/app/robotframework/keywords.robot
+Resource  brasil/gov/agenda/tests/keywords.robot
 Variables  plone/app/testing/interfaces.py
-Library  Remote  ${PLONE_URL}/RobotRemote
 
 Test Setup  Open test browser
 Test Teardown  Close all browsers
@@ -25,7 +24,7 @@ Test CRUD
 
     Create Agenda
 
-    Create  05  2  2013
+    Create AgendaDiaria  05  2  2013
     Update  17  10  2013
     Delete
 
@@ -44,7 +43,7 @@ Test Data Duplicada
 
     Create Agenda
 
-    Create  05  2  2013
+    Create AgendaDiaria  05  2  2013
 
     Click Link  Agenda da Presidenta
 
@@ -64,22 +63,11 @@ Test AgendaDiaria With Portlet
 
     Create Agenda
 
-    Create  05  2  2013
+    Create AgendaDiaria  05  2  2013
     Page Should Contain    Fevereiro
 
 
 *** Keywords ***
-
-Click Adicionar Agenda
-    Open Add New Menu
-    Click Link  css=a#agenda
-    Page Should Contain  Adicionar Agenda
-
-Click Adicionar AgendaDiaria
-    Open Add New Menu
-    Click Link  css=a#agendadiaria
-    Page Should Contain  Adicionar Agenda Diária
-
 Create Agenda
     Click Adicionar Agenda
     Input Text  css=${title_basic_selector}  Agenda da Presidenta
@@ -88,18 +76,6 @@ Create Agenda
     Input Text  css=${orgao_selector}  Presidência da República
     Click Button  Salvar
     Page Should Contain  Item criado
-
-Create
-    [arguments]  ${dia}  ${mes}  ${ano}
-
-    Click Adicionar AgendaDiaria
-    Input Text  css=${date_day_selector}  ${dia}
-    Input Text  css=${date_year_selector}  ${ano}
-    Select From List  css=${date_month_selector}  ${mes}
-    Click Button  Salvar
-    Page Should Contain  ${dia}
-    Page Should Contain  de
-    Page Should Contain  ${ano}
 
 Update
     [arguments]  ${dia}  ${mes}  ${ano}
@@ -119,11 +95,3 @@ Delete
     Click Link  css=a#plone-contentmenu-actions-delete
     Click Button  Excluir
     Page Should Contain  Agenda
-
-Manage Portlets
-    Go to   ${PLONE_URL}/@@manage-portlets
-
-Add Right Portlet
-    [arguments]  ${portlet}
-    Manage Portlets
-    Select from list  xpath=//div[@id="portletmanager-plone-rightcolumn"]//select  ${portlet}
