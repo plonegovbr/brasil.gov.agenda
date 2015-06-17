@@ -4,6 +4,9 @@ Alterações
 1.0rc3 (unreleased)
 ^^^^^^^^^^^^^^^^^^^
 
+  * Teste robot para navegação entre meses do portlet de calendário extendido.
+    [idgserpro]
+
   * Melhora estrutura de internacionalização, code-analysis e adiciona tradução
     em inglês.
     [idgserpro]
