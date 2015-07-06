@@ -91,7 +91,7 @@ class ContentTypeTestCase(unittest.TestCase):
     def test_default_subjects(self):
         from brasil.gov.agenda.content.compromisso import default_subjects
         agendadiaria = self.agendadiaria
-        agendadiaria.subjects = ('Plone', )
+        agendadiaria.subjects = ('Plone',)
         # default_factory eh executado no container
         self.assertIn(
             'Plone',
@@ -221,7 +221,8 @@ class ContentTypeBrowserTestCase(unittest.TestCase):
         self.assertEqual(browser.headers['status'], '200 Ok')
 
     def test_compromisso_view(self):
-        from plone.app.testing import TEST_USER_NAME, TEST_USER_PASSWORD
+        from plone.app.testing import TEST_USER_NAME
+        from plone.app.testing import TEST_USER_PASSWORD
         app = self.layer['app']
         portal = self.portal
         self.setupContent(portal)

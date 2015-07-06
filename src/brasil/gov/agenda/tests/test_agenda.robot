@@ -1,8 +1,7 @@
 *** Settings ***
 
-Resource  plone/app/robotframework/keywords.robot
+Resource  brasil/gov/agenda/tests/keywords.robot
 Variables  plone/app/testing/interfaces.py
-Library  Remote  ${PLONE_URL}/RobotRemote
 
 Test Setup  Open test browser
 Test Teardown  Close all browsers
@@ -20,27 +19,11 @@ Test CRUD
     Enable Autologin as  Site Administrator
     Go to homepage
 
-    Create  Agenda do Presidente  Esta é a agenda do presidente  Machado de Assis
+    Create Agenda  Agenda do Presidente  Esta é a agenda do presidente  Machado de Assis
     Update  Agenda da Presidenta  Esta é a agenda da presidenta  Clarice Lispector
     Delete
 
 *** Keywords ***
-
-Click Adicionar Agenda
-    Open Add New Menu
-    Click Link  css=a#agenda
-    Page Should Contain  Adicionar Agenda
-
-Create
-    [arguments]  ${title}  ${description}  ${autoridade}
-
-    Click Adicionar Agenda
-    Input Text  css=${title_selector}  ${title}
-    Input Text  css=${description_selector}  ${description}
-    Input Text  css=${autoridade_selector}  ${autoridade}
-    Input Text  css=${orgao_selector}  Presidência da República
-    Click Button  Salvar
-    Page Should Contain  Item criado
 
 Update
     [arguments]  ${title}  ${description}  ${autoridade}

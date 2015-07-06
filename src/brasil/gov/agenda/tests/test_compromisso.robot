@@ -1,8 +1,7 @@
 *** Settings ***
 
-Resource  plone/app/robotframework/keywords.robot
+Resource  brasil/gov/agenda/tests/keywords.robot
 Variables  plone/app/testing/interfaces.py
-Library  Remote  ${PLONE_URL}/RobotRemote
 
 Test Setup  Open test browser
 Test Teardown  Close all browsers
@@ -63,11 +62,6 @@ Test Compromisso With Portlet
 
 *** Keywords ***
 
-Click Adicionar Agenda
-    Open Add New Menu
-    Click Link  css=a#agenda
-    Page Should Contain  Adicionar Agenda
-
 Click Adicionar Compromisso
     Open Add New Menu
     Click Link  css=a#compromisso
@@ -118,11 +112,3 @@ Delete
     Click Link  css=a#plone-contentmenu-actions-delete
     Click Button  Excluir
     Page Should Contain  Agenda
-
-Manage Portlets
-    Go to   ${PLONE_URL}/@@manage-portlets
-
-Add Right Portlet
-    [arguments]  ${portlet}
-    Manage Portlets
-    Select from list  xpath=//div[@id="portletmanager-plone-rightcolumn"]//select  ${portlet}
