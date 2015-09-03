@@ -1,7 +1,7 @@
 Alterações
 ----------
 
-1.0rc3 (unreleased)
+1.0 (2015-09-03)
 ^^^^^^^^^^^^^^^^^^^
 
 * Teste robot para navegação entre meses do portlet de calendário extendido.
