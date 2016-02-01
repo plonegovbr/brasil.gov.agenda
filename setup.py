@@ -52,7 +52,7 @@ setup(
         'plone.app.vocabularies',
         'plone.behavior',
         # FIXME: https://github.com/plonegovbr/brasil.gov.agenda/issues/32
-        'plone.dexterity<2.2.4',
+        'plone.dexterity',
         'plone.directives.form',
         'plone.portlets',
         'plone.supermodel >=1.2.3',
