@@ -93,10 +93,7 @@ class ContentTypeTestCase(unittest.TestCase):
         agendadiaria = self.agendadiaria
         agendadiaria.subjects = ('Plone',)
         # default_factory eh executado no container
-        self.assertIn(
-            'Plone',
-            default_subjects(agendadiaria),
-        )
+        self.assertIn('Plone', default_subjects(self.compromisso))
 
     def test_default_start_date(self):
         from brasil.gov.agenda.content.compromisso import default_start_date
