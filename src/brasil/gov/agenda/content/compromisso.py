@@ -4,6 +4,7 @@ from DateTime import DateTime
 from brasil.gov.agenda.interfaces import IAgendaDiaria
 from brasil.gov.agenda.interfaces import ICompromisso
 
+from Acquisition import aq_inner, aq_parent
 from five import grok
 from plone.dexterity.content import Container
 from plone.indexer.decorator import indexer
@@ -26,17 +27,17 @@ class Compromisso(Container):
 
 @provider(IContextAwareDefaultFactory)
 def default_autoridade(context):
-    return getattr(context, 'autoridade', u'')
+    return getattr(aq_inner(aq_parent(context)), 'autoridade', u'')
 
 
 @provider(IContextAwareDefaultFactory)
 def default_location(context):
-    return getattr(context, 'location', u'')
+    return getattr(aq_inner(aq_parent(context)), 'location', u'')
 
 
 @provider(IContextAwareDefaultFactory)
 def default_subjects(context):
-    return getattr(context, 'subjects', ())
+    return getattr(aq_inner(aq_parent(context)), 'subjects', ())
 
 
 @provider(IContextAwareDefaultFactory)
