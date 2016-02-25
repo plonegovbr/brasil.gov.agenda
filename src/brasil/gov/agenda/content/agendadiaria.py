@@ -9,7 +9,7 @@ from brasil.gov.agenda.config import TZ
 from brasil.gov.agenda.interfaces import IAgendaDiaria
 from brasil.gov.agenda.interfaces import ICompromisso
 
-from Acquisition import aq_inner, aq_parent
+from Acquisition import aq_parent
 from five import grok
 from plone import api
 from plone.dexterity.content import Container
@@ -76,17 +76,17 @@ def default_autoridade(context):
     """ Por padrao utilizamos a autoridade
         definida no objeto pai
     """
-    return getattr(aq_inner(aq_parent(context)), 'autoridade', u'')
+    return getattr(aq_parent(context), 'autoridade', u'')
 
 
 @provider(IContextAwareDefaultFactory)
 def default_location(context):
-    return getattr(aq_inner(aq_parent(context)), 'location', u'')
+    return getattr(aq_parent(context), 'location', u'')
 
 
 @provider(IContextAwareDefaultFactory)
 def default_subjects(context):
-    return getattr(aq_inner(aq_parent(context)), 'subjects', ())
+    return getattr(aq_parent(context), 'subjects', ())
 
 
 @provider(IDefaultFactory)
