@@ -51,11 +51,10 @@ setup(
         'plone.app.versioningbehavior',
         'plone.app.vocabularies',
         'plone.behavior',
-        # FIXME: https://github.com/plonegovbr/brasil.gov.agenda/issues/32
-        'plone.dexterity<2.2.4',
+        'plone.dexterity',
         'plone.directives.form',
         'plone.portlets',
-        'plone.supermodel >=1.2.3',
+        'plone.supermodel',
         'plone.uuid',
         'Products.CMFCore',
         'Products.CMFPlone >=4.3',
@@ -68,7 +67,7 @@ setup(
     extras_require={
         'test': [
             'plone.app.robotframework',
-            'plone.app.testing [robot] >=4.2.2',
+            'plone.app.testing [robot]',
             'plone.browserlayer',
             'plone.testing',
         ],

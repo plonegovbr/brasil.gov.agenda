@@ -13,6 +13,7 @@ from plone import api
 from plone.dexterity.content import Container
 from plone.indexer.decorator import indexer
 from plone.supermodel.interfaces import IDefaultFactory
+from Products.CMFPlone.utils import safe_hasattr
 
 from z3c.form.validator import SimpleFieldValidator
 from zope.component import getMultiAdapter
@@ -74,16 +75,25 @@ def default_autoridade(context):
     """ Por padrao utilizamos a autoridade
         definida no objeto pai
     """
+    # XXX: deal with testing issues https://stackoverflow.com/q/35799092/644075
+    if not safe_hasattr(context, 'aq_parent'):
+        return u''
     return getattr(context, 'autoridade', u'')
 
 
 @provider(IContextAwareDefaultFactory)
 def default_location(context):
+    # XXX: deal with testing issues https://stackoverflow.com/q/35799092/644075
+    if not safe_hasattr(context, 'aq_parent'):
+        return u''
     return getattr(context, 'location', u'')
 
 
 @provider(IContextAwareDefaultFactory)
 def default_subjects(context):
+    # XXX: deal with testing issues https://stackoverflow.com/q/35799092/644075
+    if not safe_hasattr(context, 'aq_parent'):
+        return ()
     return getattr(context, 'subjects', ())
 
 

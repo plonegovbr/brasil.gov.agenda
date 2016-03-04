@@ -6,6 +6,7 @@ from brasil.gov.agenda.interfaces import ICompromisso
 
 from plone.dexterity.content import Container
 from plone.indexer.decorator import indexer
+from Products.CMFPlone.utils import safe_hasattr
 from zope.interface import implementer
 from zope.interface import provider
 from zope.schema.interfaces import IContextAwareDefaultFactory
@@ -25,16 +26,25 @@ class Compromisso(Container):
 
 @provider(IContextAwareDefaultFactory)
 def default_autoridade(context):
+    # XXX: deal with testing issues https://stackoverflow.com/q/35799092/644075
+    if not safe_hasattr(context, 'aq_parent'):
+        return u''
     return getattr(context, 'autoridade', u'')
 
 
 @provider(IContextAwareDefaultFactory)
 def default_location(context):
+    # XXX: deal with testing issues https://stackoverflow.com/q/35799092/644075
+    if not safe_hasattr(context, 'aq_parent'):
+        return u''
     return getattr(context, 'location', u'')
 
 
 @provider(IContextAwareDefaultFactory)
 def default_subjects(context):
+    # XXX: deal with testing issues https://stackoverflow.com/q/35799092/644075
+    if not safe_hasattr(context, 'aq_parent'):
+        return ()
     return getattr(context, 'subjects', ())
 
 
