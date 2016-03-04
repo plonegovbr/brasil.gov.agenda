@@ -4,6 +4,9 @@ Alterações
 1.1 (unreleased)
 ^^^^^^^^^^^^^^^^
 
+- A lista de dependências do pacote foi atualizada.
+  [hvelarde]
+
 - Corrige problema de compatibilidade com o plone.dexterity > 2.2.3;
   o pacote agora é compatível com o Plone > 4.3.3 (closes `#32`_).
   [hvelarde]
