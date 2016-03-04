@@ -1,16 +1,15 @@
 # -*- coding: utf-8 -*-
 
-from DateTime import DateTime
-from Products.CMFCore.utils import getToolByName
-
 from brasil.gov.agenda import _
 from brasil.gov.agenda.config import AGENDADIARIAFMT
 from brasil.gov.agenda.interfaces import IAgenda
-
+from DateTime import DateTime
 from five import grok
+from Products.CMFCore.utils import getToolByName
 from zope.component import getMultiAdapter
 from zope.i18nmessageid import Message
 from zope.publisher.publish import mapply
+
 
 grok.templatedir('templates')
 

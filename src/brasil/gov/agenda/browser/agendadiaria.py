@@ -1,14 +1,13 @@
 # -*- coding: utf-8 -*-
 
 from Acquisition import aq_parent
-from Products.CMFCore.utils import getToolByName
-
 from brasil.gov.agenda import _
 from brasil.gov.agenda.interfaces import IAgendaDiaria
-
 from five import grok
+from Products.CMFCore.utils import getToolByName
 from zope.component import getMultiAdapter
 from zope.i18nmessageid import Message
+
 
 grok.templatedir('templates')
 

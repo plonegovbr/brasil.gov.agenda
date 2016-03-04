@@ -2,7 +2,6 @@
 
 from brasil.gov.agenda.config import PROJECTNAME
 from brasil.gov.agenda.interfaces import IAgenda
-
 from five import grok
 from plone.app.dexterity.behaviors.nextprevious import INextPreviousToggle
 from zope.lifecycleevent.interfaces import IObjectAddedEvent

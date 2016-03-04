@@ -1,20 +1,17 @@
 # -*- coding: utf-8 -*-
 
-from DateTime import DateTime
-
 from brasil.gov.agenda import _
 from brasil.gov.agenda import utils
 from brasil.gov.agenda.config import AGENDADIARIAFMT
 from brasil.gov.agenda.config import TZ
 from brasil.gov.agenda.interfaces import IAgendaDiaria
 from brasil.gov.agenda.interfaces import ICompromisso
-
+from DateTime import DateTime
 from plone import api
 from plone.dexterity.content import Container
 from plone.indexer.decorator import indexer
 from plone.supermodel.interfaces import IDefaultFactory
 from Products.CMFPlone.utils import safe_hasattr
-
 from z3c.form.validator import SimpleFieldValidator
 from zope.component import getMultiAdapter
 from zope.i18nmessageid import Message

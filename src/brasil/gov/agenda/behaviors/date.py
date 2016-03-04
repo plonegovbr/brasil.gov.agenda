@@ -1,13 +1,11 @@
 # -*- coding: utf-8 -*-
 
-from Products.CMFPlone.utils import safe_hasattr
-
 from brasil.gov.agenda.config import AGENDADIARIAFMT
-
 from plone.app.content.interfaces import INameFromTitle
+from Products.CMFPlone.utils import safe_hasattr
 from zope.component import adapts
-from zope.interface import Interface
 from zope.interface import implements
+from zope.interface import Interface
 
 import datetime
 

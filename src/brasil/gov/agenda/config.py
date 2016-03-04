@@ -4,6 +4,7 @@ from Products.CMFPlone import interfaces as plone_interfaces
 from Products.CMFQuickInstallerTool import interfaces as qi_interfaces
 from zope.interface import implements
 
+
 PROJECTNAME = 'brasil.gov.agenda'
 
 AGENDADIARIAFMT = '%Y-%m-%d'
