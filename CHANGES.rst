@@ -1,8 +1,8 @@
 Alterações
 ----------
 
-1.1 (unreleased)
-^^^^^^^^^^^^^^^^
+1.0.1 (2016-03-04)
+^^^^^^^^^^^^^^^^^^
 
 - A lista de dependências do pacote foi atualizada.
   [hvelarde]
@@ -13,7 +13,7 @@ Alterações
 
 
 1.0 (2015-09-03)
-^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^
 
 * Teste robot para navegação entre meses do portlet de calendário extendido.
   [idgserpro]
@@ -79,7 +79,7 @@ Alterações
   [ericof]
 
 1.0b3 (2014-02-28)
-^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^
 
 * Aumenta cobertura de testes para os tiles.
   [dbarbato]
