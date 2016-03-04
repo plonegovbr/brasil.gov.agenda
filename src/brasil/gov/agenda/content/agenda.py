@@ -1,14 +1,13 @@
 # -*- coding: utf-8 -*-
 from brasil.gov.agenda.interfaces import IAgenda
-from five import grok
 from plone.dexterity.content import Container
 from plone.indexer.decorator import indexer
+from zope.interface import implementer
 
 
+@implementer(IAgenda)
 class Agenda(Container):
     """Agenda de um membro do Governo Brasileiro"""
-
-    grok.implements(IAgenda)
 
 
 @indexer(IAgenda)

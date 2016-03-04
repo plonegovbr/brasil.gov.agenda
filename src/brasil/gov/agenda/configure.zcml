@@ -7,8 +7,10 @@
     i18n_domain="brasil.gov.agenda">
 
     <five:registerPackage package="." />
+
+    <include package="plone.app.contenttypes" />
+    <include package="plone.app.versioningbehavior" />
     <include package="collective.portlet.calendar" />
-    <includeDependencies package="." />
 
     <!-- Adiciona permissoes -->
     <include file="permissions.zcml" />

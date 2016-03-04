@@ -4,7 +4,12 @@ Alterações
 1.1 (unreleased)
 ^^^^^^^^^^^^^^^^
 
-- Nothing changed yet.
+- A lista de dependências do pacote foi atualizada.
+  [hvelarde]
+
+- Corrige problema de compatibilidade com o plone.dexterity > 2.2.3;
+  o pacote agora é compatível com o Plone > 4.3.3 (closes `#32`_).
+  [hvelarde]
 
 
 1.0 (2015-09-03)
@@ -172,4 +177,5 @@ Alterações
 .. _`#12`: https://github.com/plonegovbr/brasil.gov.agenda/issues/12
 .. _`#18`: https://github.com/plonegovbr/brasil.gov.agenda/issues/18
 .. _`#23`: https://github.com/plonegovbr/brasil.gov.agenda/issues/23
+.. _`#32`: https://github.com/plonegovbr/brasil.gov.agenda/issues/32
 .. _`#37`: https://github.com/plonegovbr/brasil.gov.agenda/issues/37

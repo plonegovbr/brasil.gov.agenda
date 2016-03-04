@@ -4,19 +4,19 @@ from DateTime import DateTime
 from brasil.gov.agenda.interfaces import IAgendaDiaria
 from brasil.gov.agenda.interfaces import ICompromisso
 
-from five import grok
 from plone.dexterity.content import Container
 from plone.indexer.decorator import indexer
+from Products.CMFPlone.utils import safe_hasattr
+from zope.interface import implementer
 from zope.interface import provider
 from zope.schema.interfaces import IContextAwareDefaultFactory
 
 import datetime
 
 
+@implementer(ICompromisso)
 class Compromisso(Container):
     """Compromisso."""
-
-    grok.implements(ICompromisso)
 
     def exclude_from_nav(self):
         """ Compromisso nao eh visivel na navegacao do portal
@@ -26,16 +26,25 @@ class Compromisso(Container):
 
 @provider(IContextAwareDefaultFactory)
 def default_autoridade(context):
+    # XXX: deal with testing issues https://stackoverflow.com/q/35799092/644075
+    if not safe_hasattr(context, 'aq_parent'):
+        return u''
     return getattr(context, 'autoridade', u'')
 
 
 @provider(IContextAwareDefaultFactory)
 def default_location(context):
+    # XXX: deal with testing issues https://stackoverflow.com/q/35799092/644075
+    if not safe_hasattr(context, 'aq_parent'):
+        return u''
     return getattr(context, 'location', u'')
 
 
 @provider(IContextAwareDefaultFactory)
 def default_subjects(context):
+    # XXX: deal with testing issues https://stackoverflow.com/q/35799092/644075
+    if not safe_hasattr(context, 'aq_parent'):
+        return ()
     return getattr(context, 'subjects', ())
 
 
