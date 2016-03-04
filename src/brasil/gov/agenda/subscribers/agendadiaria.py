@@ -1,15 +1,14 @@
 # -*- coding: utf-8 -*-
 
 from Acquisition import aq_parent
-
 from brasil.gov.agenda.config import PROJECTNAME
 from brasil.gov.agenda.interfaces import IAgendaDiaria
-
 from five import grok
 from zope.lifecycleevent.interfaces import IObjectAddedEvent
 
 import datetime
 import logging
+
 
 logger = logging.getLogger(PROJECTNAME)
 

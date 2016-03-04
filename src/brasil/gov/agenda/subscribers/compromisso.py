@@ -2,16 +2,14 @@
 
 from Acquisition import aq_base
 from Acquisition import aq_parent
-from OFS.event import ObjectWillBeMovedEvent
-from Products.CMFPlone.utils import _createObjectByType
-
 from brasil.gov.agenda.config import AGENDADIARIAFMT
 from brasil.gov.agenda.config import PROJECTNAME
 from brasil.gov.agenda.interfaces import IAgenda
 from brasil.gov.agenda.interfaces import IAgendaDiaria
 from brasil.gov.agenda.interfaces import ICompromisso
-
 from five import grok
+from OFS.event import ObjectWillBeMovedEvent
+from Products.CMFPlone.utils import _createObjectByType
 from zope.container.contained import notifyContainerModified
 from zope.event import notify
 from zope.lifecycleevent import ObjectMovedEvent
@@ -20,6 +18,7 @@ from zope.lifecycleevent.interfaces import IObjectModifiedEvent
 
 import datetime
 import logging
+
 
 logger = logging.getLogger(PROJECTNAME)
 

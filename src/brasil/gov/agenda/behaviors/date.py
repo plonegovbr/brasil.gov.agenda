@@ -1,13 +1,11 @@
 # -*- coding: utf-8 -*-
 
-from Products.CMFPlone.utils import safe_hasattr
-
 from brasil.gov.agenda.config import AGENDADIARIAFMT
-
 from plone.app.content.interfaces import INameFromTitle
-from zope.component import adapts
+from Products.CMFPlone.utils import safe_hasattr
+from zope.component import adapter
+from zope.interface import implementer
 from zope.interface import Interface
-from zope.interface import implements
 
 import datetime
 
@@ -16,9 +14,9 @@ class INameFromDate(Interface):
     """Marker interface to enable name from date behavior"""
 
 
+@adapter(INameFromDate)
+@implementer(INameFromTitle)
 class NameFromDate(object):
-    implements(INameFromTitle)
-    adapts(INameFromDate)
 
     def __new__(cls, context):
         date = getattr(context, 'date', None)

@@ -2,7 +2,8 @@
 
 from Products.CMFPlone import interfaces as plone_interfaces
 from Products.CMFQuickInstallerTool import interfaces as qi_interfaces
-from zope.interface import implements
+from zope.interface import implementer
+
 
 PROJECTNAME = 'brasil.gov.agenda'
 
@@ -11,8 +12,8 @@ AGENDADIARIAFMT = '%Y-%m-%d'
 TZ = 'Brazil/East'
 
 
+@implementer(qi_interfaces.INonInstallable)
 class HiddenProducts(object):
-    implements(qi_interfaces.INonInstallable)
 
     def getNonInstallableProducts(self):
         return [
@@ -25,8 +26,8 @@ class HiddenProducts(object):
         ]
 
 
+@implementer(plone_interfaces.INonInstallable)
 class HiddenProfiles(object):
-    implements(plone_interfaces.INonInstallable)
 
     def getNonInstallableProfiles(self):
         return [

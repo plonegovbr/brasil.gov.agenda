@@ -1,9 +1,7 @@
 # -*- coding: utf-8 -*-
-from DateTime import DateTime
-
 from brasil.gov.agenda.interfaces import IAgendaDiaria
 from brasil.gov.agenda.interfaces import ICompromisso
-
+from DateTime import DateTime
 from plone.dexterity.content import Container
 from plone.indexer.decorator import indexer
 from Products.CMFPlone.utils import safe_hasattr

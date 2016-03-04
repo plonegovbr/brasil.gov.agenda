@@ -2,12 +2,11 @@
 
 from brasil.gov.agenda.interfaces import IBrowserLayer
 from brasil.gov.agenda.testing import INTEGRATION_TESTING
-
 from collective.portlet.calendar import calendar
 from collective.portlet.calendar.browser.interfaces import ICalendarExLayer
 from plone import api
-from plone.app.testing import TEST_USER_ID
 from plone.app.testing import setRoles
+from plone.app.testing import TEST_USER_ID
 from plone.portlets.interfaces import IPortletManager
 from plone.portlets.interfaces import IPortletRenderer
 from zope.component import getMultiAdapter

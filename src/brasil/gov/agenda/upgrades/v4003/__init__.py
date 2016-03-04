@@ -19,7 +19,7 @@ def make_content_types_linkable(context):
         if t not in linkable:
             linkable.append(t)
             tinymce.linkable = u'\n'.join(linkable)
-            logger.info('{} added to linkable types in TinyMCE.'.format(t))
+            logger.info('{0} added to linkable types in TinyMCE.'.format(t))
 
 
 def update_effective_date_index(context):
@@ -29,4 +29,4 @@ def update_effective_date_index(context):
     for brain in results:
         o = brain.getObject()
         o.reindexObject(idxs=['EffectiveDate'])
-    logger.info('{:d} objects reindexed'.format(len(results)))
+    logger.info('{0} objects reindexed'.format(len(results)))

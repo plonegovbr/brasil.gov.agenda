@@ -2,6 +2,7 @@
 from brasil.gov.agenda.config import PROJECTNAME
 from plone.app.textfield.value import RichTextValue
 from plone.app.upgrade.utils import loadMigrationProfile
+from Products.CMFPlone.utils import safe_hasattr
 from zope.component.hooks import getSite
 
 import logging
@@ -28,7 +29,7 @@ def fix_agendadiaria_update(context):
         obj = brain.getObject()
         update = u'' if not obj.update else obj.update
 
-        if hasattr(update, 'raw'):
+        if safe_hasattr(update, 'raw'):
             continue
         update = update.replace('\n', '<br />')
         # Cria o valor RichText

@@ -1,17 +1,15 @@
 # -*- coding: utf-8 -*-
 
-from Products.GenericSetup.upgrade import listUpgradeSteps
-
 from brasil.gov.agenda.config import PROJECTNAME
 from brasil.gov.agenda.testing import FUNCTIONAL_TESTING
 from brasil.gov.agenda.testing import INTEGRATION_TESTING
-
 from plone import api
-from plone.app.testing import TEST_USER_ID
-from plone.app.testing import TEST_USER_NAME
 from plone.app.testing import login
 from plone.app.testing import setRoles
+from plone.app.testing import TEST_USER_ID
+from plone.app.testing import TEST_USER_NAME
 from plone.testing.z2 import Browser
+from Products.GenericSetup.upgrade import listUpgradeSteps
 from zope.site.hooks import setSite
 
 import datetime

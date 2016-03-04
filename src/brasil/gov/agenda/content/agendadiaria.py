@@ -1,20 +1,17 @@
 # -*- coding: utf-8 -*-
 
-from DateTime import DateTime
-
 from brasil.gov.agenda import _
 from brasil.gov.agenda import utils
 from brasil.gov.agenda.config import AGENDADIARIAFMT
 from brasil.gov.agenda.config import TZ
 from brasil.gov.agenda.interfaces import IAgendaDiaria
 from brasil.gov.agenda.interfaces import ICompromisso
-
+from DateTime import DateTime
 from plone import api
 from plone.dexterity.content import Container
 from plone.indexer.decorator import indexer
 from plone.supermodel.interfaces import IDefaultFactory
 from Products.CMFPlone.utils import safe_hasattr
-
 from z3c.form.validator import SimpleFieldValidator
 from zope.component import getMultiAdapter
 from zope.i18nmessageid import Message
@@ -142,7 +139,7 @@ def SearchableText_AgendaDiaria(obj):
         SearchableText.append(obj.location)
     # Alteracao da agenda
     update = obj.update
-    if hasattr(update, 'output'):
+    if safe_hasattr(update, 'output'):
         update = update.output
     SearchableText.append(update)
     return ' '.join([text for text in SearchableText
@@ -191,7 +188,7 @@ def end_date(obj):
 def exclude_from_nav(obj):
     # Agendas Diarias sempre serao ocultas da navegacao
     exclude_from_nav = obj.exclude_from_nav
-    if hasattr(exclude_from_nav, '__call__'):
+    if safe_hasattr(exclude_from_nav, '__call__'):
         exclude_from_nav = exclude_from_nav()
     return exclude_from_nav
 

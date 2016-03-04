@@ -1,16 +1,14 @@
 # -*- coding: utf-8 -*-
 
-from DateTime import DateTime
-
 from brasil.gov.agenda.config import TZ
 from brasil.gov.agenda.interfaces import IAgendaDiaria
 from brasil.gov.agenda.testing import INTEGRATION_TESTING
-
+from DateTime import DateTime
 from plone import api
 from plone.app.dexterity.behaviors.exclfromnav import IExcludeFromNavigation
 from plone.app.referenceablebehavior.referenceable import IReferenceable
-from plone.app.testing import TEST_USER_ID
 from plone.app.testing import setRoles
+from plone.app.testing import TEST_USER_ID
 from plone.app.textfield.value import RichTextValue
 from plone.dexterity.interfaces import IDexterityFTI
 from plone.namedfile.file import NamedBlobImage
@@ -23,6 +21,7 @@ from zope.lifecycleevent import ObjectModifiedEvent
 import datetime
 import os
 import unittest
+
 
 TEST_JPEG_FILE = open(
     os.path.sep.join(__file__.split(os.path.sep)[:-1] + ['brasil.jpg', ]),
