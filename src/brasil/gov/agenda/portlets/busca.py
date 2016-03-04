@@ -9,7 +9,7 @@ from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from zope import schema
 from zope.component import getMultiAdapter
 from zope.formlib import form
-from zope.interface import implements
+from zope.interface import implementer
 
 
 class IBuscaPortlet(IPortletDataProvider):
@@ -24,8 +24,8 @@ class IBuscaPortlet(IPortletDataProvider):
                                           default_query='path:'))
 
 
+@implementer(IBuscaPortlet)
 class Assignment(base.Assignment):
-    implements(IBuscaPortlet)
 
     root = None
 
