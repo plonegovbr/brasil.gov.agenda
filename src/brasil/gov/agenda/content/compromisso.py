@@ -4,19 +4,18 @@ from DateTime import DateTime
 from brasil.gov.agenda.interfaces import IAgendaDiaria
 from brasil.gov.agenda.interfaces import ICompromisso
 
-from five import grok
 from plone.dexterity.content import Container
 from plone.indexer.decorator import indexer
+from zope.interface import implementer
 from zope.interface import provider
 from zope.schema.interfaces import IContextAwareDefaultFactory
 
 import datetime
 
 
+@implementer(ICompromisso)
 class Compromisso(Container):
     """Compromisso."""
-
-    grok.implements(ICompromisso)
 
     def exclude_from_nav(self):
         """ Compromisso nao eh visivel na navegacao do portal

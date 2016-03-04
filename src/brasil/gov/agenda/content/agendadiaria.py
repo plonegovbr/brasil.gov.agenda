@@ -9,7 +9,6 @@ from brasil.gov.agenda.config import TZ
 from brasil.gov.agenda.interfaces import IAgendaDiaria
 from brasil.gov.agenda.interfaces import ICompromisso
 
-from five import grok
 from plone import api
 from plone.dexterity.content import Container
 from plone.indexer.decorator import indexer
@@ -18,15 +17,15 @@ from plone.supermodel.interfaces import IDefaultFactory
 from z3c.form.validator import SimpleFieldValidator
 from zope.component import getMultiAdapter
 from zope.i18nmessageid import Message
+from zope.interface import implementer
 from zope.interface import Invalid
 from zope.interface import provider
 from zope.schema.interfaces import IContextAwareDefaultFactory
 
 
+@implementer(IAgendaDiaria)
 class AgendaDiaria(Container):
     """Agenda Diaria."""
-
-    grok.implements(IAgendaDiaria)
 
     def Title(self):
         """ Retorna titulo calculado com autoridade e data
