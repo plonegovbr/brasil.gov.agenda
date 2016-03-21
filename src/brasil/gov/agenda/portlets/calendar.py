@@ -2,6 +2,7 @@
 
 from brasil.gov.agenda.interfaces import IAgenda
 from collective.portlet.calendar import calendar
+from plone import api
 from plone.memoize.compress import xhtml_compress
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 
@@ -25,8 +26,9 @@ class Renderer(calendar.Renderer):
             return xhtml_compress(self._template())
 
     def is_agenda(self):
-        root_path = self.root()
-        root = self.context.restrictedTraverse(root_path)
+        catalog = api.portal.getToolByName(self.context, 'portal_catalog')
+        root = catalog(path=self.root())
+        root = root[0].getObject() if root else None
         return IAgenda.providedBy(root)
 
     def root_url(self):
