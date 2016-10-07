@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 
+from DateTime import DateTime
 from datetime import date
 from datetime import datetime
-from DateTime import DateTime
 from datetime import timedelta
 from zope.i18nmessageid import MessageFactory
 
