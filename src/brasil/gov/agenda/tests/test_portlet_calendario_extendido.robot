@@ -17,10 +17,12 @@ ${id_agenda} =  agenda-do-presidente
 
     Create Agenda  Agenda do Presidente  Esta é a agenda do presidente  Machado de Assis
     Workflow Publish
+    Click Button  Confirm action
     # Deve ser criada a Agenda Diária para o dia de hoje para testar a
     # navegação do portlet após redirecionamento. Ver abaixo.
     Create AgendaDiaria  ${DIA_ATUAL}  ${MES_ATUAL}  ${ANO_ATUAL}
     Workflow Publish
+    Click Button  Confirm action
     Add Portlet Calendario Extendido  Portlet Calendario Extendido  /${id_agenda}
     Go to   ${PLONE_URL}/${id_agenda}
     # Verifica se há um link para agenda do dia atual
