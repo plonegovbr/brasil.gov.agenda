@@ -10,7 +10,9 @@
 
     <include package="plone.app.contenttypes" />
     <include package="plone.app.versioningbehavior" />
+    <include package="plone.app.referenceablebehavior" />
     <include package="collective.portlet.calendar" />
+
 
     <!-- Adiciona permissoes -->
     <include file="permissions.zcml" />
