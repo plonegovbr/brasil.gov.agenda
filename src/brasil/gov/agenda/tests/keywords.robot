@@ -70,10 +70,10 @@ Add Portlet Calendario Extendido
     Click Button  Salvar
 
 Click Mes Anterior
-    Click Link  css=${mes_anterior_selector}
+    Wait Until Keyword Succeeds  5 sec  1 sec  Click Link  css=${mes_anterior_selector}
 
 Click Mes Posterior
-    Click Link  css=${mes_posterior_selector}
+    Wait Until Keyword Succeeds  5 sec  1 sec  Click Link  css=${mes_posterior_selector}
 
 Test Navegacao Portlet Calendario Extendido
    [arguments]  ${url}
@@ -81,11 +81,11 @@ Test Navegacao Portlet Calendario Extendido
 
     # Testa navegação para o mês anterior
     Click Mes Anterior
-    Page Should Contain Element  css=#calendar-previous[data-month="${DOIS_MESES_ANTERIORES}"]
-    Page Should Contain Element  css=#calendar-next[data-month="${MES_ATUAL}"]
+    Wait Until Page Contains Element  css=#calendar-previous[data-month="${DOIS_MESES_ANTERIORES}"]
+    Wait Until Page Contains Element  css=#calendar-next[data-month="${MES_ATUAL}"]
 
     # Testa navegação para o mês posterior
     Click Mes Posterior
     Click Mes Posterior
-    Page Should Contain Element  css=#calendar-previous[data-month="${MES_ATUAL}"]
-    Page Should Contain Element  css=#calendar-next[data-month="${DOIS_MESES_POSTERIORES}"]
+    Wait Until Page Contains Element  css=#calendar-previous[data-month="${MES_ATUAL}"]
+    Wait Until Page Contains Element  css=#calendar-next[data-month="${DOIS_MESES_POSTERIORES}"]
