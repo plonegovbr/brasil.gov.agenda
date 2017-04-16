@@ -4,8 +4,8 @@ Alterações
 1.0.2 (unreleased)
 ^^^^^^^^^^^^^^^^^^
 
-- Nothing changed yet.
-
+- Corrige erro de exibição do portlet de calendário (closes `#58`_).
+  [winstonf88]
 
 1.0.1 (2016-03-04)
 ^^^^^^^^^^^^^^^^^^
