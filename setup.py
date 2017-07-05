@@ -44,7 +44,7 @@ setup(
         'collective.portlet.calendar',
         'plone.api',
         'plone.app.content',
-        'plone.app.contenttypes < 1.1a1',
+        'plone.app.contenttypes',
         'plone.app.dexterity [grok]',
         'plone.app.portlets',
         'plone.app.referenceablebehavior',

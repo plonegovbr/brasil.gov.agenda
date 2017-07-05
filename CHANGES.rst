@@ -4,7 +4,8 @@ Alterações
 1.0.2 (unreleased)
 ^^^^^^^^^^^^^^^^^^
 
-- Nothing changed yet.
+- plone.app.contenttypes usa a pinagem do Plone (atualmente 1.1.1)
+  [idgserpro]
 
 
 1.0.1 (2016-03-04)
