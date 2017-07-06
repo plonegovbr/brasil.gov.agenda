@@ -10,9 +10,9 @@ ${title_selector} =  input#form-widgets-IBasic-title
 ${description_selector} =  textarea#form-widgets-IBasic-description
 ${autoridade_selector} =  input#form-widgets-autoridade
 ${orgao_selector} =  input#form-widgets-orgao
-${date_day_selector} =  input#form-widgets-date-day
+${date_day_selector} =  select#form-widgets-date-day
 ${date_month_selector} =  select#form-widgets-date-month
-${date_year_selector} =  input#form-widgets-date-year
+${date_year_selector} =  select#form-widgets-date-year
 ${title_extended_calendar_selector} =  input#form\\.name
 ${mes_anterior_selector} =  a#calendar-previous
 ${mes_posterior_selector} =  a#calendar-next
@@ -44,8 +44,8 @@ Create AgendaDiaria
     [arguments]  ${dia}  ${mes}  ${ano}
 
     Click Adicionar AgendaDiaria
-    Input Text  css=${date_day_selector}  ${dia}
-    Input Text  css=${date_year_selector}  ${ano}
+    Select From List  css=${date_day_selector}  ${dia}
+    Select From List  css=${date_year_selector}  ${ano}
     Select From List  css=${date_month_selector}  ${mes}
     Click Button  Salvar
     Page Should Contain  ${dia}
