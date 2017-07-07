@@ -12,9 +12,9 @@ ${title_basic_selector} =  input#form-widgets-IBasic-title
 ${description_basic_selector} =  textarea#form-widgets-IBasic-description
 ${autoridade_selector} =  input#form-widgets-autoridade
 ${orgao_selector} =  input#form-widgets-orgao
-${date_day_selector} =  input#form-widgets-date-day
+${date_day_selector} =  select#form-widgets-date-day
 ${date_month_selector} =  select#form-widgets-date-month
-${date_year_selector} =  input#form-widgets-date-year
+${date_year_selector} =  select#form-widgets-date-year
 
 *** Test cases ***
 
@@ -48,8 +48,8 @@ Test Data Duplicada
     Click Link  Agenda da Presidenta
 
     Click Adicionar AgendaDiaria
-    Input Text  css=${date_day_selector}  05
-    Input Text  css=${date_year_selector}  2013
+    Select From List  css=${date_day_selector}  05
+    Select From List  css=${date_year_selector}  2013
     Select From List  css=${date_month_selector}  2
     Click Button  Salvar
     Page Should Contain  Existem alguns erros
@@ -81,8 +81,8 @@ Update
     [arguments]  ${dia}  ${mes}  ${ano}
 
     Click Link  link=Edição
-    Input Text  css=${date_day_selector}  ${dia}
-    Input Text  css=${date_year_selector}  ${ano}
+    Select From List  css=${date_day_selector}  ${dia}
+    Select From List  css=${date_year_selector}  ${ano}
     Select From List  css=${date_month_selector}  ${mes}
     Click Button  Salvar
     Page Should Contain  Alterações salvas
