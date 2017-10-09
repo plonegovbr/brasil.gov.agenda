@@ -32,9 +32,6 @@ O estado atual dos testes pode ser visto nas imagens a seguir:
 .. image:: https://img.shields.io/coveralls/plonegovbr/brasil.gov.agenda/master.svg
     :target: https://coveralls.io/r/plonegovbr/brasil.gov.agenda
 
-.. warning:: Neste momento utilizamos a versão 1.0 do plone.app.contenttypes.
-             A versão 1.1a1 introduziu mudanças na maneira como o Plone trabalha com Eventos.
-
 Instalação
 ------------
 
