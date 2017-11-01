@@ -58,7 +58,6 @@ Manage Portlets
 Add Right Portlet
     [arguments]  ${portlet}
     Manage Portlets
-    Click Button  Confirm action
     Select from list  xpath=//div[@id="portletmanager-plone-rightcolumn"]//select  ${portlet}
 
 Add Portlet Calendario Extendido
