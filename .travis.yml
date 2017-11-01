@@ -18,6 +18,8 @@ addons:
   # Mais referências: https://github.com/SeleniumHQ/selenium/issues/2739#issuecomment-249482533
   firefox: 46.0.1
 env:
+  global:
+  - PLONE_CSRF_DISABLED=true
   matrix:
     - MASTER=true
     - PENDING_RELEASE=true
