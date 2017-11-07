@@ -68,23 +68,22 @@ Add Portlet Calendario Extendido
     Click Button  Atualizar
     Click Button  Salvar
 
-Click Mes Anterior
-    Wait Until Keyword Succeeds  5 sec  1 sec  Click Link  css=${mes_anterior_selector}
-
-Click Mes Posterior
-    Wait Until Keyword Succeeds  5 sec  1 sec  Click Link  css=${mes_posterior_selector}
-
 Test Navegacao Portlet Calendario Extendido
-   [arguments]  ${url}
+    [arguments]  ${url}
     Go to  ${url}
 
+    # need to slow down Selenium here to avoid errors on calendar portlet
+    ${speed} =  Set Selenium Speed  2 seconds
+
     # Testa navegação para o mês anterior
-    Click Mes Anterior
+    Click Link  css=${mes_anterior_selector}
     Wait Until Page Contains Element  css=#calendar-previous[data-month="${DOIS_MESES_ANTERIORES}"]
     Wait Until Page Contains Element  css=#calendar-next[data-month="${MES_ATUAL}"]
 
     # Testa navegação para o mês posterior
-    Click Mes Posterior
-    Click Mes Posterior
+    Click Link  css=${mes_posterior_selector}
+    Click Link  css=${mes_posterior_selector}
     Wait Until Page Contains Element  css=#calendar-previous[data-month="${MES_ATUAL}"]
     Wait Until Page Contains Element  css=#calendar-next[data-month="${DOIS_MESES_POSTERIORES}"]
+
+    Set Selenium Speed  ${speed}
