@@ -12,12 +12,7 @@ addons:
 env:
   global:
   - PLONE_CSRF_DISABLED=true
-  matrix:
-  - MASTER=true
-  - LAST_RELEASE=true
 matrix:
-  allow_failures:
-  - env: LAST_RELEASE=true
   fast_finish: true
 install:
 - python bootstrap.py
