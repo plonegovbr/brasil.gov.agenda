@@ -1,14 +1,15 @@
-Alterações
-----------
+Changelog
+---------
 
-1.2 (unreleased)
-^^^^^^^^^^^^^^^^
+1.1.1 (unreleased)
+^^^^^^^^^^^^^^^^^^
 
-- Nothing changed yet.
+- Corrige testes de Robot Framework.
+  [hvelarde]
 
 
 1.1 (2017-07-07)
-^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^
 
 - plone.app.contenttypes usa a pinagem do Plone (atualmente 1.1.1)
   [idgserpro]
