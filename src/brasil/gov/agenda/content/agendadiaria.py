@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-
 from brasil.gov.agenda import _
 from brasil.gov.agenda import utils
 from brasil.gov.agenda.config import AGENDADIARIAFMT
@@ -9,6 +8,7 @@ from brasil.gov.agenda.interfaces import ICompromisso
 from DateTime import DateTime
 from plone import api
 from plone.dexterity.content import Container
+from plone.dexterity.utils import safe_utf8
 from plone.indexer.decorator import indexer
 from plone.supermodel.interfaces import IDefaultFactory
 from Products.CMFPlone.utils import safe_hasattr
@@ -112,10 +112,10 @@ class DateValidator(SimpleFieldValidator):
 
 @indexer(IAgendaDiaria)
 def tags(obj):
-    """Indexa tags de AgendaDiaria
-    """
-    tags = obj.subjects
-    return tags
+    """Indexa tags de AgendaDiaria."""
+    if obj.subjects is None:
+        return ()
+    return tuple(safe_utf8(s) for s in obj.subjects)
 
 
 @indexer(IAgendaDiaria)

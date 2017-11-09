@@ -79,23 +79,21 @@ class ContentTypeTestCase(unittest.TestCase):
 
     def test_subjects_catalog(self):
         agendadiaria = self.agendadiaria
-        agendadiaria.subjects = ('Brasil', 'Governo')
+        agendadiaria.subjects = (u'Brasil', u'México')
         agendadiaria.reindexObject(idxs=['Subject'])
         ct = self.portal.portal_catalog
         results = ct.searchResults(portal_type='AgendaDiaria')
         b = results[0]
         self.assertIn('Brasil', b.Subject)
-        self.assertIn('Governo', b.Subject)
+        self.assertIn('México', b.Subject)
 
     def test_default_subjects(self):
         from brasil.gov.agenda.content.agendadiaria import default_subjects
         agenda = self.agenda
-        agenda.subjects = ('Plone', )
-        # default_factory eh executado no container
-        self.assertIn(
-            'Plone',
-            default_subjects(agenda),
-        )
+        agenda.subjects = (u'Brasil', u'México')
+        # default_factory é executado no container
+        self.assertIn(u'Brasil', default_subjects(agenda))
+        self.assertIn(u'México', default_subjects(agenda))
 
     def test_datevalidator(self):
         from brasil.gov.agenda.content.agendadiaria import DateValidator

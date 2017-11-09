@@ -25,6 +25,8 @@
     </field>
     <field name="subjects" type="zope.schema.Tuple" indexer:searchable="true">
       <description i18n:translate="">Tags são utilizadas para organização de conteúdo</description>
+      <default_value>()</default_value>
+      <missing_value>()</missing_value>
       <required>False</required>
       <title>Tags</title>
       <value_type type="zope.schema.TextLine">

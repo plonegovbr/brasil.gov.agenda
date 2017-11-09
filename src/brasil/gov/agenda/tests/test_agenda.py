@@ -63,13 +63,13 @@ class ContentTypeTestCase(unittest.TestCase):
 
     def test_subjects_catalog(self):
         agenda = self.agenda
-        agenda.subjects = ('Brasil', 'Governo')
+        agenda.subjects = (u'Brasil', u'México')
         agenda.reindexObject(idxs=['Subject'])
         ct = self.portal.portal_catalog
         results = ct.searchResults(portal_type='Agenda')
         b = results[0]
         self.assertIn('Brasil', b.Subject)
-        self.assertIn('Governo', b.Subject)
+        self.assertIn('México', b.Subject)
 
     def test_agendadiaria_ordering(self):
         # Create two AgendaDiaria objects

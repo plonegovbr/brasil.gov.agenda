@@ -79,23 +79,21 @@ class ContentTypeTestCase(unittest.TestCase):
 
     def test_subjects_catalog(self):
         compromisso = self.compromisso
-        compromisso.subjects = ('Brasil', 'Governo')
+        compromisso.subjects = (u'Brasil', u'México')
         compromisso.reindexObject(idxs=['Subject'])
         ct = self.portal.portal_catalog
         results = ct.searchResults(portal_type='Compromisso')
         b = results[0]
         self.assertIn('Brasil', b.Subject)
-        self.assertIn('Governo', b.Subject)
+        self.assertIn('México', b.Subject)
 
     def test_default_subjects(self):
         from brasil.gov.agenda.content.compromisso import default_subjects
         agendadiaria = self.agendadiaria
-        agendadiaria.subjects = ('Plone',)
-        # default_factory eh executado no container
-        self.assertIn(
-            'Plone',
-            default_subjects(agendadiaria),
-        )
+        agendadiaria.subjects = (u'Brasil', u'México')
+        # default_factory é executado no container
+        self.assertIn(u'Brasil', default_subjects(agendadiaria))
+        self.assertIn(u'México', default_subjects(agendadiaria))
 
     def test_default_start_date(self):
         from brasil.gov.agenda.content.compromisso import default_start_date
