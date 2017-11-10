@@ -3,6 +3,7 @@ from brasil.gov.agenda.interfaces import IAgendaDiaria
 from brasil.gov.agenda.interfaces import ICompromisso
 from DateTime import DateTime
 from plone.dexterity.content import Container
+from plone.dexterity.utils import safe_utf8
 from plone.indexer.decorator import indexer
 from Products.CMFPlone.utils import safe_hasattr
 from zope.interface import implementer
@@ -88,10 +89,10 @@ def end_date(obj):
 
 @indexer(ICompromisso)
 def tags(obj):
-    """Indexa tags de Compromisso
-    """
-    tags = obj.subjects
-    return tags
+    """Indexa tags de Compromisso."""
+    if obj.subjects is None:
+        return ()
+    return tuple(safe_utf8(s) for s in obj.subjects)
 
 
 @indexer(ICompromisso)
