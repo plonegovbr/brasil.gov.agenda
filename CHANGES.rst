@@ -1,7 +1,7 @@
 Changelog
 ---------
 
-1.1.2 (unreleased)
+1.1.2 (2017-11-13)
 ^^^^^^^^^^^^^^^^^^
 
 - Corrige ``UnicodeDecodeError`` ao criar itens com tags que possuem caracteres estendidos (fecha `brasil.gov.portal#288 <https://github.com/plonegovbr/brasil.gov.portal/issues/288>`_).
