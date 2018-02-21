@@ -50,7 +50,7 @@ class TestInstall(BaseTestCase):
 
     def test_version(self):
         self.assertEqual(
-            self.st.getLastVersionForProfile(self.profile), (u'4003',))
+            self.st.getLastVersionForProfile(self.profile), (u'4004',))
 
     def test_static_resource_grokker(self):
         """Grok does not register automatically the static resources anymore see:
@@ -69,7 +69,13 @@ class TestInstall(BaseTestCase):
         cssreg = getattr(self.portal, 'portal_css')
         stylesheets_ids = cssreg.getResourceIds()
         self.assertIn(
-            '++resource++brasil.gov.agenda/agenda.css', stylesheets_ids)
+            '++resource++brasil.gov.agenda/brasilgovagenda.css', stylesheets_ids)
+
+    def test_js_registered(self):
+        jsreg = getattr(self.portal, 'portal_javascripts')
+        scripts_ids = jsreg.getResourceIds()
+        self.assertIn(
+            '++resource++brasil.gov.agenda/brasilgovagenda.js', scripts_ids)
 
     def test_agenda_not_searched(self):
         pp = getattr(self.portal, 'portal_properties')
@@ -386,6 +392,37 @@ class TestUpgrade(BaseTestCase):
         assert len(results) == 1
         after = results[0].EffectiveDate
         self.assertLess(before, after)
+
+    def test_4004_fix_resource_registration(self):
+        # simulate state on previous version
+        from brasil.gov.agenda.upgrades.v4004 import NEW_CSS
+        from brasil.gov.agenda.upgrades.v4004 import OLD_CSS
+        from brasil.gov.agenda.upgrades.v4004 import NEW_JS
+
+        css_tool = api.portal.get_tool('portal_css')
+        css_tool.getResource(NEW_CSS).setCompression('safe')
+        css_tool.renameResource(NEW_CSS, OLD_CSS)
+
+        ids = css_tool.getResourceIds()
+        self.assertNotIn(NEW_CSS, ids)
+        self.assertIn(OLD_CSS, ids)
+        self.assertEqual(css_tool.getResource(OLD_CSS).getCompression(), 'safe')
+
+        js_tool = api.portal.get_tool('portal_javascripts')
+        js_tool.unregisterResource(NEW_JS)
+
+        ids = js_tool.getResourceIds()
+        self.assertNotIn(NEW_JS, ids)
+
+        self.executa_upgrade(u'4003', u'4004')
+
+        ids = css_tool.getResourceIds()
+        self.assertNotIn(OLD_CSS, ids)
+        self.assertIn(NEW_CSS, ids)
+        self.assertEqual(css_tool.getResource(NEW_CSS).getCompression(), 'none')
+
+        ids = js_tool.getResourceIds()
+        self.assertIn(NEW_JS, ids)
 
     def test_hidden_upgrade_profiles(self):
         upgrades = [
