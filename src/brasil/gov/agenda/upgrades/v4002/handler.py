@@ -45,7 +45,7 @@ def aplica_behavior_agenda(context):
     """
     types_tool = api.portal.get_tool('portal_types')
     behavior = 'plone.app.dexterity.behaviors.exclfromnav.IExcludeFromNavigation'
-    types = ['Agenda', ]
+    types = ['Agenda']
     for pt in types:
         obj = types_tool[pt]
         behaviors = list(obj.behaviors)

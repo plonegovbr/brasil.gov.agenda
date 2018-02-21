@@ -153,11 +153,7 @@ def _start_date(obj):
     start_date = IAgendaDiaria(obj).date
     # Comeco do dia
     start_date = DateTime(
-        '{0} 00:00:00 {1}'.format(
-            start_date.strftime('%Y-%m-%d'),
-            TZ
-        )
-    )
+        '{0} 00:00:00 {1}'.format(start_date.strftime('%Y-%m-%d'), TZ))
     return start_date
 
 
@@ -176,11 +172,7 @@ def end_date(obj):
     end_date = IAgendaDiaria(obj).date
     # Final do dia
     end_date = DateTime(
-        '{0} 23:59:59 {1}'.format(
-            end_date.strftime('%Y-%m-%d'),
-            TZ
-        )
-    )
+        '{0} 23:59:59 {1}'.format(end_date.strftime('%Y-%m-%d'), TZ))
     return end_date
 
 

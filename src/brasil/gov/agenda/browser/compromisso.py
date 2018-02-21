@@ -36,9 +36,7 @@ class CompromissoView (grok.View):
         if not year or not month:
             url = self.context.absolute_url()
             url += '?month:int={0}&year:int={1}'.format(
-                self.date.month,
-                self.date.year
-            )
+                self.date.month, self.date.year)
             return self.context.REQUEST.RESPONSE.redirect(url)
 
     def _format_time(self, value):

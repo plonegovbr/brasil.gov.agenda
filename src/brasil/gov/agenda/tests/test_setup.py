@@ -46,14 +46,11 @@ class TestInstall(BaseTestCase):
     """Ensure product is properly installed."""
 
     def test_installed(self):
-        self.assertTrue(self.qi.isProductInstalled(PROJECTNAME),
-                        '%s not installed' % PROJECTNAME)
+        self.assertTrue(self.qi.isProductInstalled(PROJECTNAME))
 
     def test_version(self):
         self.assertEqual(
-            self.st.getLastVersionForProfile(self.profile),
-            (u'4003',)
-        )
+            self.st.getLastVersionForProfile(self.profile), (u'4003',))
 
     def test_static_resource_grokker(self):
         """Grok does not register automatically the static resources anymore see:
@@ -72,61 +69,41 @@ class TestInstall(BaseTestCase):
         cssreg = getattr(self.portal, 'portal_css')
         stylesheets_ids = cssreg.getResourceIds()
         self.assertIn(
-            '++resource++brasil.gov.agenda/agenda.css',
-            stylesheets_ids
-        )
+            '++resource++brasil.gov.agenda/agenda.css', stylesheets_ids)
 
     def test_agenda_not_searched(self):
         pp = getattr(self.portal, 'portal_properties')
         site_properties = pp.site_properties
         types_not_searched = site_properties.types_not_searched
-        self.assertIn(
-            'Agenda',
-            types_not_searched
-        )
+        self.assertIn('Agenda', types_not_searched)
 
     def test_compromisso_not_searched(self):
         pp = getattr(self.portal, 'portal_properties')
         site_properties = pp.site_properties
         types_not_searched = site_properties.types_not_searched
-        self.assertIn(
-            'Compromisso',
-            types_not_searched
-        )
+        self.assertIn('Compromisso', types_not_searched)
 
     def test_agendadiaria_not_listed(self):
         pp = getattr(self.portal, 'portal_properties')
         navtree_properties = pp.navtree_properties
         metaTypesNotToList = list(navtree_properties.metaTypesNotToList)
-        self.assertIn(
-            'AgendaDiaria',
-            metaTypesNotToList
-        )
+        self.assertIn('AgendaDiaria', metaTypesNotToList)
 
     def test_compromisso_not_listed(self):
         pp = getattr(self.portal, 'portal_properties')
         navtree_properties = pp.navtree_properties
         metaTypesNotToList = list(navtree_properties.metaTypesNotToList)
-        self.assertIn(
-            'Compromisso',
-            metaTypesNotToList
-        )
+        self.assertIn('Compromisso', metaTypesNotToList)
 
     def test_agendadiaria_in_calendar(self):
         calendar = getattr(self.portal, 'portal_calendar')
         calendar_types = calendar.calendar_types
-        self.assertIn(
-            'AgendaDiaria',
-            calendar_types
-        )
+        self.assertIn('AgendaDiaria', calendar_types)
 
     def test_compromisso_not_in_calendar(self):
         calendar = getattr(self.portal, 'portal_calendar')
         calendar_types = calendar.calendar_types
-        self.assertNotIn(
-            'Compromisso',
-            calendar_types
-        )
+        self.assertNotIn('Compromisso', calendar_types)
 
     def test_add_agenda_permission(self):
         permission = 'brasil.gov.agenda: Add Agenda'
@@ -134,8 +111,9 @@ class TestInstall(BaseTestCase):
         allowed = [x['name']
                    for x in portal.rolesOfPermission(permission)
                    if x['selected']]
-        self.assertEqual(allowed,
-                         ['Contributor', 'Manager', 'Owner', 'Site Administrator'])
+        self.assertEqual(
+            allowed,
+            ['Contributor', 'Manager', 'Owner', 'Site Administrator'])
 
     def test_add_agendadiaria_permission(self):
         permission = 'brasil.gov.agenda: Add AgendaDiaria'
@@ -143,8 +121,9 @@ class TestInstall(BaseTestCase):
         allowed = [x['name']
                    for x in portal.rolesOfPermission(permission)
                    if x['selected']]
-        self.assertEqual(allowed,
-                         ['Contributor', 'Manager', 'Owner', 'Site Administrator'])
+        self.assertEqual(
+            allowed,
+            ['Contributor', 'Manager', 'Owner', 'Site Administrator'])
 
     def test_add_compromisso_permission(self):
         permission = 'brasil.gov.agenda: Add Compromisso'
@@ -152,8 +131,9 @@ class TestInstall(BaseTestCase):
         allowed = [x['name']
                    for x in portal.rolesOfPermission(permission)
                    if x['selected']]
-        self.assertEqual(allowed,
-                         ['Contributor', 'Manager', 'Owner', 'Site Administrator'])
+        self.assertEqual(
+            allowed,
+            ['Contributor', 'Manager', 'Owner', 'Site Administrator'])
 
     def test_content_types_added_to_tinymce_linkables(self):
         tinymce = api.portal.get_tool('portal_tinymce')
@@ -170,13 +150,13 @@ class TestUpgrade(BaseTestCase):
         self.agenda = api.content.create(
             type='Agenda',
             id='agenda',
-            container=self.portal
+            container=self.portal,
         )
         # Criamos a agenda diaria
         self.agendadiaria = api.content.create(
             type='AgendaDiaria',
             id='2013-02-05',
-            container=self.agenda
+            container=self.agenda,
         )
         self.agendadiaria.date = datetime.datetime(2013, 2, 5)
         self.agendadiaria.update = u'Reuniao em Mirtilo\nVisita Eslovenia'
@@ -188,64 +168,48 @@ class TestUpgrade(BaseTestCase):
         # Setamos o profile para versao source
         self.st.setLastVersionForProfile(self.profile, source)
         # Pegamos os upgrade steps
-        upgradeSteps = listUpgradeSteps(self.st,
-                                        self.profile,
-                                        source)
+        upgradeSteps = listUpgradeSteps(self.st, self.profile, source)
         steps = [step for step in upgradeSteps
-                 if (step[0]['dest'] == (dest,))
-                 and (step[0]['source'] == (source,))][0]
+                 if (step[0]['dest'] == (dest,)) and (step[0]['source'] == (source,))][0]
         # Os executamos
         for step in steps:
             step['step'].doStep(self.st)
 
     def test_to2000_available(self):
-
-        upgradeSteps = listUpgradeSteps(self.st,
-                                        self.profile,
-                                        '1000')
-        step = [step for step in upgradeSteps
-                if (step[0]['dest'] == ('2000',))
-                and (step[0]['source'] == ('1000',))]
+        upgradeSteps = listUpgradeSteps(self.st, self.profile, '1000')
+        step = [
+            step for step in upgradeSteps
+            if (step[0]['dest'] == ('2000',)) and (step[0]['source'] == ('1000',))]
         self.assertEqual(len(step), 1)
 
     def test_to3000_available(self):
-
-        upgradeSteps = listUpgradeSteps(self.st,
-                                        self.profile,
-                                        '2000')
-        step = [step for step in upgradeSteps
-                if (step[0]['dest'] == ('3000',))
-                and (step[0]['source'] == ('2000',))]
+        upgradeSteps = listUpgradeSteps(self.st, self.profile, '2000')
+        step = [
+            step for step in upgradeSteps
+            if (step[0]['dest'] == ('3000',)) and (step[0]['source'] == ('2000',))]
         self.assertEqual(len(step), 1)
 
     def test_to4000_available(self):
-
-        upgradeSteps = listUpgradeSteps(self.st,
-                                        self.profile,
-                                        '3000')
-        step = [step for step in upgradeSteps
-                if (step[0]['dest'] == ('4000',))
-                and (step[0]['source'] == ('3000',))]
+        upgradeSteps = listUpgradeSteps(self.st, self.profile, '3000')
+        step = [
+            step for step in upgradeSteps
+            if (step[0]['dest'] == ('4000',)) and (step[0]['source'] == ('3000',))]
         self.assertEqual(len(step), 1)
 
     def test_to4001_available(self):
-
         upgradeSteps = listUpgradeSteps(self.st,
                                         self.profile,
                                         '4000')
-        step = [step for step in upgradeSteps
-                if (step[0]['dest'] == ('4001',))
-                and (step[0]['source'] == ('4000',))]
+        step = [
+            step for step in upgradeSteps
+            if (step[0]['dest'] == ('4001',)) and (step[0]['source'] == ('4000',))]
         self.assertEqual(len(step), 1)
 
     def test_to4002_available(self):
-
-        upgradeSteps = listUpgradeSteps(self.st,
-                                        self.profile,
-                                        '4001')
-        step = [step for step in upgradeSteps
-                if (step[0]['dest'] == ('4002',))
-                and (step[0]['source'] == ('4001',))]
+        upgradeSteps = listUpgradeSteps(self.st, self.profile, '4001')
+        step = [
+            step for step in upgradeSteps
+            if (step[0]['dest'] == ('4002',)) and (step[0]['source'] == ('4001',))]
         self.assertEqual(len(step), 1)
 
     def test_2000_fix_agendadiaria(self):
@@ -269,8 +233,7 @@ class TestUpgrade(BaseTestCase):
         self.agendadiaria.Title = Title
         self.agendadiaria.reindexObject()
         results = ct.searchResults(
-            path='/'.join(self.agendadiaria.getPhysicalPath())
-        )
+            path='/'.join(self.agendadiaria.getPhysicalPath()))
         self.assertEqual(results[0].Title, '05/02/2013')
 
         # Revertemos o monkey patch
@@ -279,10 +242,10 @@ class TestUpgrade(BaseTestCase):
         self.executa_upgrade(u'2000', u'3000')
 
         results = ct.searchResults(
-            path='/'.join(self.agendadiaria.getPhysicalPath())
-        )
-        self.assertEqual(results[0].Title,
-                         u'Agenda de Clarice Lispector para 05/02/2013')
+            path='/'.join(self.agendadiaria.getPhysicalPath()))
+        self.assertEqual(
+            results[0].Title,
+            u'Agenda de Clarice Lispector para 05/02/2013')
 
     def test_4000_tile_agenda(self):
         record = 'plone.app.tiles'
@@ -294,10 +257,7 @@ class TestUpgrade(BaseTestCase):
         self.executa_upgrade(u'3000', u'4000')
 
         tiles = list(api.portal.get_registry_record(record))
-        self.assertIn(
-            'agenda',
-            tiles
-        )
+        self.assertIn('agenda', tiles)
 
     def test_4001_corrige_campo_date(self):
         self.setup_content()
@@ -308,10 +268,7 @@ class TestUpgrade(BaseTestCase):
         self.executa_upgrade(u'4000', u'4001')
 
         data = self.agendadiaria.date
-        self.assertEqual(
-            data.strftime('%Y-%m-%d'),
-            self.agendadiaria.getId()
-        )
+        self.assertEqual(data.strftime('%Y-%m-%d'), self.agendadiaria.getId())
 
     def test_4002_remove_behavior(self):
         types_tool = self.portal.portal_types

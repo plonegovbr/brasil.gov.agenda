@@ -34,17 +34,17 @@ class CalendarPortletTestCase(unittest.TestCase):
         self.folder = api.content.create(
             type='Folder',
             id='test-folder',
-            container=self.portal
+            container=self.portal,
         )
         self.agenda = api.content.create(
             type='Agenda',
             id='agenda',
-            container=self.folder
+            container=self.folder,
         )
         self.agendadiaria = api.content.create(
             type='AgendaDiaria',
             id='2014-03-29',
-            container=self.agenda
+            container=self.agenda,
         )
         self.agendadiaria.date = datetime.date(2014, 3, 29)
         self.agendadiaria.reindexObject()

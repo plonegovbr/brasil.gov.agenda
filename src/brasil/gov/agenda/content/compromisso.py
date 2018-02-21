@@ -52,8 +52,7 @@ def default_start_date(context):
     if IAgendaDiaria.providedBy(context):
         date = context.date
         default_date = datetime.datetime(
-            *[int(i) for i in date.strftime('%Y-%m-%d').split('-')]
-        )
+            *[int(i) for i in date.strftime('%Y-%m-%d').split('-')])
     else:
         # Estamos no tipo agenda, a data padrao e o dia seguinte a criacao
         # do compromisso
@@ -68,8 +67,7 @@ def default_end_date(context):
         # agenda
         date = context.date
         default_date = datetime.datetime(
-            *[int(i) for i in date.strftime('%Y-%m-%d').split('-')]
-        )
+            *[int(i) for i in date.strftime('%Y-%m-%d').split('-')])
     else:
         # Estamos no tipo agenda, a data padrao e o dia seguinte a criacao
         # do compromisso + 60 minutos

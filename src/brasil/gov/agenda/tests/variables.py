@@ -15,6 +15,7 @@ def subtrai_mes(dt):
     """Retorna um dia do mês anterior"""
     return dt.replace(day=1) - timedelta(days=1)
 
+
 HOJE = date.today()
 DIA_ATUAL = str(HOJE.day)
 MES_ATUAL = str(HOJE.month)
