@@ -40,8 +40,7 @@ class BuscaPortletTestCase(unittest.TestCase):
         self.assertEqual(
             ['plone.app.portlets.interfaces.IColumn',
              'plone.app.portlets.interfaces.IDashboard'],
-            registered_interfaces
-        )
+            registered_interfaces)
 
     def test_interfaces(self):
         portlet = busca.Assignment()
@@ -55,9 +54,8 @@ class BuscaPortletTestCase(unittest.TestCase):
             del mapping[m]
         addview = mapping.restrictedTraverse('+/' + portlet.addview)
 
-        addview.createAndAdd(data={
-            'root': u'/'.join(self.agenda.getPhysicalPath())}
-        )
+        addview.createAndAdd(
+            data={'root': u'/'.join(self.agenda.getPhysicalPath())})
 
         self.assertEqual(len(mapping), 1)
         self.assertTrue(isinstance(mapping.values()[0], busca.Assignment))
@@ -68,9 +66,8 @@ class BuscaPortletTestCase(unittest.TestCase):
         for m in mapping.keys():
             del mapping[m]
         addview = mapping.restrictedTraverse('+/' + portlet.addview)
-        addview.createAndAdd(data={
-            'root': u'/'.join(self.agenda.getPhysicalPath())}
-        )
+        addview.createAndAdd(
+            data={'root': u'/'.join(self.agenda.getPhysicalPath())})
         title = mapping.values()[0].title
         root = mapping.values()[0].root
         self.assertEqual(title, u'Busca de Agenda')

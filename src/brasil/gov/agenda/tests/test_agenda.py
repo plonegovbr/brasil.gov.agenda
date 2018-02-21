@@ -106,14 +106,12 @@ class ContentTypeBrowserTestCase(unittest.TestCase):
         self.agendadiaria.date = datetime.datetime(2014, 2, 5)
         self.agendadiaria.reindexObject()
         # Criamos o compromisso
-        self.agendadiaria.invokeFactory('Compromisso',
-                                        'compromisso',
-                                        start_date=datetime.datetime(
-                                            2014, 2, 5, 10, 0, 0
-                                        ),
-                                        end_date=datetime.datetime(
-                                            2014, 2, 5, 12, 0, 0
-                                        ))
+        self.agendadiaria.invokeFactory(
+            'Compromisso',
+            'compromisso',
+            start_date=datetime.datetime(2014, 2, 5, 10, 0, 0),
+            end_date=datetime.datetime(2014, 2, 5, 12, 0, 0),
+        )
         self.compromisso = self.agendadiaria['compromisso']
         # Publicamos os conteudos
         self.wt.doActionFor(self.agenda, 'publish')
@@ -179,8 +177,7 @@ class ContentTypeBrowserTestCase(unittest.TestCase):
 
         # Nos autenticamos como admin
         browser.addHeader('Authorization', 'Basic %s:%s' % (
-            TEST_USER_NAME,
-            TEST_USER_PASSWORD,))
+            TEST_USER_NAME, TEST_USER_PASSWORD))
         # Vemos o conteudo da view de Agenda
         browser.open(agenda_url)
         self.assertEqual(browser.headers['status'], '200 Ok')

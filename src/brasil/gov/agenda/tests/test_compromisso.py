@@ -23,10 +23,8 @@ import os
 import unittest
 
 
-TEST_JPEG_FILE = open(
-    os.path.sep.join(__file__.split(os.path.sep)[:-1] + ['brasil.jpg', ]),
-    'rb'
-).read()
+TEST_JPEG_FILE = open(os.path.sep.join(
+    __file__.split(os.path.sep)[:-1] + ['brasil.jpg']), 'rb').read()
 
 
 class ContentTypeTestCase(unittest.TestCase):
@@ -261,7 +259,7 @@ class ContentTypeBrowserTestCase(unittest.TestCase):
         self.assertIn(agendadiaria_url, browser.url)
 
         # Nos autenticamos como admin
-        browser.addHeader('Authorization', 'Basic %s:%s' % (TEST_USER_NAME, TEST_USER_PASSWORD,))
+        browser.addHeader('Authorization', 'Basic %s:%s' % (TEST_USER_NAME, TEST_USER_PASSWORD))
         # Vemos o conteudo
         browser.open(compromisso_url)
         self.assertEqual(browser.headers['status'], '200 Ok')

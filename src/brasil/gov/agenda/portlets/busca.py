@@ -59,7 +59,7 @@ class Renderer(base.Renderer):
         return navigation_root_path
 
     def portal_types(self):
-        return ['AgendaDiaria', ]
+        return ['AgendaDiaria']
 
     def search_action(self):
         return '%s/@@search' % self.navigation_root_url

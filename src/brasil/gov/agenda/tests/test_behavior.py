@@ -22,9 +22,7 @@ class NameFromDateTestCase(unittest.TestCase):
         new_object = createObject(factory)
         new_object.date = None
         behavior = NameFromDate(new_object)
-        self.assertIsNone(
-            behavior,
-        )
+        self.assertIsNone(behavior)
 
     def test_behavior_agendadiaria_with_date(self):
         fti = queryUtility(IDexterityFTI, name='AgendaDiaria')
@@ -32,7 +30,4 @@ class NameFromDateTestCase(unittest.TestCase):
         new_object = createObject(factory)
         new_object.date = datetime.date(2012, 3, 29)
         behavior = NameFromDate(new_object)
-        self.assertEqual(
-            behavior.title,
-            '2012-03-29'
-        )
+        self.assertEqual(behavior.title, '2012-03-29')

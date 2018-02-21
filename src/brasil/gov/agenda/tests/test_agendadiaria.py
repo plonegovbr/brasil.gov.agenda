@@ -24,9 +24,7 @@ import unittest
 
 
 TEST_JPEG_FILE = open(
-    os.path.sep.join(__file__.split(os.path.sep)[:-1] + ['brasil.jpg', ]),
-    'rb'
-).read()
+    os.path.sep.join(__file__.split(os.path.sep)[:-1] + ['brasil.jpg']), 'rb').read()
 
 
 class ContentTypeTestCase(unittest.TestCase):
@@ -112,22 +110,19 @@ class ContentTypeTestCase(unittest.TestCase):
                           validator.validate,
                           datetime.date(2013, 2, 5))
         # Se usarmos outra data o validador retornara None
-        self.assertEqual(None,
-                         validator.validate(datetime.date(2013, 2, 6)))
+        self.assertIsNone(validator.validate(datetime.date(2013, 2, 6)))
 
     def test_title(self):
         agendadiaria = self.agendadiaria
-        self.assertEqual(agendadiaria.Title(),
-                         'Agenda de Clarice Lispector para 05/02/2013')
+        self.assertEqual(
+            agendadiaria.Title(),
+            'Agenda de Clarice Lispector para 05/02/2013')
 
     def test_effective_date_indexing(self):
         ct = self.ct
         with api.env.adopt_roles(['Manager']):
             # Conteudo publicado
-            api.content.transition(
-                self.agendadiaria,
-                'publish'
-            )
+            api.content.transition(self.agendadiaria, 'publish')
             # Data no passado
             self.agendadiaria.date = datetime.datetime(2013, 2, 5)
             self.agendadiaria.reindexObject()
@@ -135,9 +130,7 @@ class ContentTypeTestCase(unittest.TestCase):
         with api.env.adopt_roles(['Anonymous']):
             results = ct.searchResults(portal_type='AgendaDiaria')
             self.assertEqual(len(results), 1)
-            self.assertTrue(
-                results[0].EffectiveDate.startswith('2013-02')
-            )
+            self.assertTrue(results[0].EffectiveDate.startswith('2013-02'))
         # Manager
         with api.env.adopt_roles(['Manager']):
             self.agendadiaria.date = datetime.datetime(2029, 10, 17)
@@ -147,24 +140,17 @@ class ContentTypeTestCase(unittest.TestCase):
             # Para um conteudo no futuro, tambem devemos ver o conteudo
             results = ct.searchResults(portal_type='AgendaDiaria')
             self.assertEqual(len(results), 1)
-            self.assertTrue(
-                results[0].EffectiveDate.startswith('2029-10')
-            )
+            self.assertTrue(results[0].EffectiveDate.startswith('2029-10'))
         # Manager
         with api.env.adopt_roles(['Manager']):
-            api.content.transition(
-                self.agendadiaria,
-                'reject'
-            )
+            api.content.transition(self.agendadiaria, 'reject')
         # Anonimo Privado
         with api.env.adopt_roles(['Anonymous']):
             # Para um conteudo no futuro, tambem devemos ver o conteudo
             results = ct.searchResults(portal_type='AgendaDiaria')
             self.assertEqual(len(results), 1)
             today = datetime.date.today().strftime('%Y-%m')
-            self.assertTrue(
-                results[0].EffectiveDate.startswith(today)
-            )
+            self.assertTrue(results[0].EffectiveDate.startswith(today))
 
     def test_start_indexing(self):
         ct = self.ct

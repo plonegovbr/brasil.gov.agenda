@@ -36,5 +36,5 @@ class HiddenProfiles(object):
             u'brasil.gov.agenda.upgrades.v3000:default',
             u'brasil.gov.agenda.upgrades.v4000:default',
             u'collective.portlet.calendar:default',
-            u'collective.portlet.calendar:uninstall'
+            u'collective.portlet.calendar:uninstall',
         ]

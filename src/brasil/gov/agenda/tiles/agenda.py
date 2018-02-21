@@ -86,7 +86,7 @@ class AgendaTile(PersistentCoverTile):
                 'lastest_update': True,
                 'collection_events': True,
                 'agenda_tile_footer': True,
-                'uuid': uuid
+                'uuid': uuid,
             })
 
     def _last_modified(self):
@@ -165,7 +165,7 @@ class AgendaTile(PersistentCoverTile):
                 compr = brain.getObject()
                 compromisso = {
                     'time': compr.start_date.strftime('%Hh%M'),
-                    'description': compr.Title()
+                    'description': compr.Title(),
                 }
                 collection_events.append(compromisso)
         return collection_events

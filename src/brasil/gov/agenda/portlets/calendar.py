@@ -42,7 +42,7 @@ class Renderer(calendar.Renderer):
                     continue
                 date_ = day['date_string'].split('-')
                 date_ = [int(p) for p in date_]
-                day['date_string'] = '%04d-%02d-%02d' % (date_[0], date_[1], date_[2],)
+                day['date_string'] = '%04d-%02d-%02d' % (date_[0], date_[1], date_[2])
         return weeks
 
     def get_agendasdiarias(self):
