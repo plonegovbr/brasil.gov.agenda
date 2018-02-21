@@ -1,0 +1,134 @@
+@media print {
+  .portaltype-agendadiaria {
+    /* Objetos que não devem ser exibidos */
+    #barra-brasil,
+    #accessibility,
+    #portal-siteactions,
+    #portal-searchbox,
+    #social-icons,
+    #sobre,
+    #viewlet-below-content-title,
+    #navigation,
+    #footer,
+    #voltar-topo,
+    #extra-footer,
+    .download-compromisso,
+    .footer-actions {
+      display: none;
+    }
+    /* Estilização para impressão */
+    #wrapper {
+      width: 420px;
+    }
+    #portal-column-content {
+      width: 100%;
+    }
+    /* Cabeçalho */
+    #header {
+      font-size: 90%;
+
+      padding: 0;
+
+      color: #000;
+      background: #FFF;
+    }
+    #logo,
+    #portal-logo {
+      display: block !important;
+
+      color: #000 !important;
+    }
+    #content {
+      .comprimisso-pauta,
+      .comprimisso-local {
+        color: #000 !important;
+      }
+    }
+    #portal-title {
+      color: #000 !important;
+    }
+    #logo {
+      padding: 0;
+      span {
+        line-height: 1em;
+
+        display: block;
+      }
+    }
+    #portal-logo {
+      display: block;
+
+      margin: 0;
+
+      border-bottom: none !important;
+    }
+    #portal-title {
+      font-size: 3.35em;
+      font-weight: bold;
+      line-height: 1em;
+
+      margin: 0;
+    }
+    #logo .logo {
+      font-size: 3em !important;
+      line-height: 1.1em;
+
+      margin-bottom: .2em;
+    }
+    #portal-title-1 {
+      top: 30px;
+    }
+    #portal-description {
+      font-size: 1.2em;
+
+      text-transform: uppercase;
+    }
+    /* Agenda */
+    .documentFirstHeading {
+      font-size: 150%;
+    }
+    #content .documentFirstHeading {
+      border-bottom: 1px solid #000 !important;
+    }
+  }
+
+  .brasao-agenda {
+    margin-top: 0;
+  }
+
+  .dados-agenda {
+    font-size: 80%;
+  }
+
+  .agenda-orgao,
+  .agenda-autoridade {
+    margin: 5px 0;
+  }
+
+  .comprimisso-dados {
+    font-size: 90%;
+
+    width: 320px;
+  }
+
+  .list-compromissos {
+    padding-left: 0;
+  }
+
+  .comprimisso-horarios .horario {
+    font-size: 80%;
+
+    width: 60px;
+    padding: 0;
+
+    background: none;
+  }
+
+  .comprimisso-titulo {
+    margin-top: 0;
+  }
+
+  .portaltype-agendadiaria label {
+    font-weight: bold;
+  }
+}

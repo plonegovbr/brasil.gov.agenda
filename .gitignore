@@ -34,3 +34,5 @@ htmlcov/
 # OSX
 .DS_Store
 /.settings/*
+
+src/brasil/gov/agenda/static/*

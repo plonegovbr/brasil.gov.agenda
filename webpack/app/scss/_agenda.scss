@@ -1,0 +1,596 @@
+.portaltype-agendadiaria {
+  /* Title */
+  #content .documentFirstHeading {
+    margin-bottom: .5em;
+    padding: 0 0 .5em;
+
+    border-bottom: 1px dotted #BFC0C2;
+  }
+  /* Esconder Document By Line */
+  #plone-document-byline {
+    display: none !important;
+  }
+  /* Social Like */
+  #viewlet-social-like,
+  div.width-1\3a 2 #viewlet-social-like {
+    right: -25px;
+
+    width: 100%;
+    padding: .5em 0;
+
+    text-align: right;
+
+    border: none;
+  }
+}
+
+/* ==========================================================================
+   Dados Agenda
+   ========================================================================== */
+.dados-agenda {
+  font-family: Arial, Helvetica, sans-serif;
+
+  text-align: center;
+}
+
+.brasao-agenda {
+  margin-top: 20px;
+}
+
+.agenda-orgao {
+  font-size: 1.2em;
+  font-weight: normal;
+
+  margin-bottom: .2em;
+}
+
+.agenda-autoridade {
+  font-size: 1.2em;
+  font-weight: normal;
+
+  margin-bottom: 1em;
+
+  text-transform: uppercase;
+}
+
+.agenda-dia {
+  font-size: 1.7em;
+  font-weight: bold;
+}
+
+#content {
+  .portalMessage {
+    margin-top: 30px;
+
+    text-align: left;
+
+    color: #596E7F;
+  }
+  /*
+   * Lista dos compromissos
+   */
+  .list-compromissos {
+    margin-left: 0;
+
+    border-bottom: 1px solid #D6DCD7;
+  }
+  .item-compromisso {
+    overflow: hidden;
+
+    margin-top: 10px;
+    padding: 24px 0 14px;
+
+    list-style: none;
+
+    border-top: 1px solid #D6DCD7;
+  }
+}
+
+
+/* ==========================================================================
+   Dados Compromisso
+   ========================================================================== */
+
+.comprimisso-horarios {
+  font-family: Arial, Helvetica, sans-serif;
+
+  float: left;
+
+  width: 68px;
+  .horario {
+    line-height: 14px !important;
+
+    display: block;
+
+    height: 14px;
+    padding: 0 0 10px 20px;
+
+    background: url('./img/icon-horarios.png') no-repeat;
+  }
+  .comprimisso-inicio {
+    background-position: 0 0;
+  }
+  .comprimisso-fim {
+    background-position: 0 -25px;
+  }
+}
+
+.comprimisso-dados {
+  font-family: Arial, Helvetica, sans-serif;
+
+  float: left;
+
+  width: 400px;
+  padding-left: 19px;
+
+  border-left: 1px dotted #D6DCD7;
+}
+
+.comprimisso-titulo {
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: bold;
+
+  margin-bottom: 20px;
+}
+
+.comprimisso-participantes {
+  line-height: 1.25em;
+}
+
+#content {
+  .comprimisso-pauta,
+  .comprimisso-local {
+    font-size: 1em;
+    line-height: 1.25em;
+
+    color: #596E7F;
+  }
+}
+
+/*
+ * Sem compromisso
+ */
+
+.sem-compromisso {
+  font-size: 1.2em;
+  font-weight: bold;
+
+  color: #464A55;
+}
+
+/* Botões de editar e remover
+   ========================================================================== */
+
+.compromisso-acoes {
+  margin: 10px 0 !important;
+  li {
+    display: inline-block !important;
+  }
+}
+
+.adicionar_compromisso {
+  line-height: 30px;
+}
+
+/* vCal iCal
+   ========================================================================== */
+
+.download-compromisso {
+  line-height: 20px;
+}
+
+.add-agenda {
+  display: block;
+  float: left;
+  overflow: hidden;
+
+  width: 20px;
+  height: 20px;
+  margin-right: 8px;
+
+  white-space: nowrap;
+  text-indent: 100%;
+
+  background: url('./img/icon-file-agenda.png') no-repeat;
+}
+
+/* ==========================================================================
+   Rodape Agenda
+   ========================================================================== */
+
+.footer-actions {
+  margin: 45px 0 0 0;
+  padding: 12px 0;
+
+  border-top: 4px solid #172938;
+  border-bottom: 2px solid #8B949B;
+}
+
+.list-actions {
+  display: inline-block;
+  .item {
+    display: block !important;
+    float: left;
+    clear: none !important;
+
+    width: 100px;
+    height: 20px;
+    margin-bottom: 0 !important;
+
+    list-style: none !important;
+  }
+}
+
+#content .print a .texto {
+  font-size: .917em;
+  line-height: 1.909em;
+
+  display: block;
+
+  height: 1.909em;
+  margin-left: 2.273em;
+
+  color: #172938;
+}
+
+/*
+ * Print Icon
+ */
+
+.list-actions .print {
+  background: url('./img/print-icon.png') no-repeat;
+}
+
+/* ==========================================================================
+   Portlet laterais
+   ========================================================================== */
+
+.portletSearch,
+.portletCalendar,
+.portletSearch .portletItem,
+.portletCalendar .portletItem,
+.portletSearch .portletHeader,
+.portletCalendar .portletHeader,
+.portletSearch .portletFooter,
+.portletCalendar .portletFooter {
+  background: #EDEFF1 !important;
+}
+
+.portletSearch .portletHeader,
+.portletCalendar .portletHeader {
+  font-family: 'open_sansbold', Arial, Helvetica, sans-serif;
+  font-size: 1.3em;
+  font-weight: normal;
+
+  padding: 15px 12px;
+
+  background: #EDEFF1 !important;
+}
+
+/* Portlet de Calendario
+   ========================================================================== */
+
+.portletCalendarEx tr.month {
+  background: none !important;
+}
+
+.ploneCalendar {
+  .event {
+    background: none !important;
+  }
+  .activeevent {
+    background: #444 !important;
+  }
+}
+
+#portal-column-two dl.portlet .activeevent a {
+  &:link,
+  &:visited {
+    color: #FFF !important;
+  }
+}
+
+.portletCalendar {
+  .weekdays th {
+    font-weight: normal;
+  }
+  .ploneCalendar td {
+    font-weight: bold;
+  }
+}
+
+.ploneCalendar .weekdays th {
+  background: none;
+}
+
+/* Portlet de Busca
+   ========================================================================== */
+
+.portletSearch {
+  .portletHeader .tile {
+    margin-bottom: 0 !important;
+  }
+  .portletItem {
+    font-size: 80%;
+
+    margin: 10px 12px !important;
+    padding: 2px !important;
+    padding: 2px;
+
+    border-radius: 5px;
+    background: #FFF !important;
+    .searchField {
+      font-family: 'open_sansregular', Arial, Helvetica, sans-serif;
+      font-size: 1.2em;
+
+      width: 170px;
+      padding: .3em .35em;
+
+      border: none;
+      border-right: none;
+    }
+    .searchButton {
+      padding: 4px 15px;
+      padding-right: 5px;
+
+      text-indent: -100px;
+
+      border: none;
+      background: transparent;
+      background-image: url('./img/icon-search-agenda.png');
+      background-repeat: no-repeat;
+      background-position: 0 2px;
+    }
+  }
+  .portletText {
+    margin: 10px 13px;
+  }
+  .portletFooter {
+    display: none;
+  }
+}
+
+/* ==========================================================================
+   Tile de agenda
+   ========================================================================== */
+#content .agenda-tile {
+  border: 1px solid #C1C1C1;
+  border-radius: 3px;
+  .title {
+    font-family: 'open_sansbold', Arial, Helvetica, sans-serif;
+    font-size: 1.2em;
+    font-weight: normal;
+
+    margin: 0;
+    padding: 1em 1em 1em 1em;
+
+    letter-spacing: normal;
+    text-transform: uppercase;
+
+    color: #444;
+    border-bottom: 1px solid #C1C1C1;
+  }
+  .period {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 1.3em;
+
+    padding: .6em 0 .0em .75em;
+
+    color: #162938;
+  }
+  .period {
+    margin-bottom: 0;
+  }
+  .latest-update p {
+    font-size: 1.1em;
+
+    margin-bottom: 0;
+
+    color: #172734 !important;
+  }
+  .latest-update {
+    padding: .2em 0 1em .9em;
+
+    border-bottom: 1px solid #C1C1C1;
+  }
+  .agenda-tile-footer {
+    padding: .9em .6em;
+
+    text-align: right;
+
+    border-top: 1px solid #C1C1C1;
+  }
+  .agenda-tile-footer a {
+    font-family: 'open_sansregular', Arial, Helvetica, sans-serif;
+    font-size: .9em;
+    font-weight: normal;
+
+    margin: 0;
+    padding: 0;
+    padding-right: 0;
+
+    text-transform: uppercase;
+
+    color: #172734 !important;
+  }
+}
+
+
+#content .no-events {
+  height: 12.2em;
+  padding-top: 12.2em;
+
+  text-align: center;
+}
+#content .collection-events {
+  margin: 0;
+  padding: 0;
+  li {
+    display: table;
+    float: left;
+    overflow: hidden;
+
+    width: 95%;
+    margin: 0;
+    padding: .5em 0 .5em 1.1em;
+
+    list-style: outside none;
+
+    border-bottom: 1px dotted #C1C1C1;
+    &:last-child {
+      border-bottom: none;
+    }
+  }
+  .timestamp-cell {
+    display: table-cell;
+
+    width: 15%;
+
+    vertical-align: middle;
+  }
+  .timestamp {
+    font-family: 'open_sansregular', Arial, Helvetica, sans-serif;
+    font-size: 1em;
+    font-weight: normal;
+
+    float: left;
+
+    width: 100%;
+    height: 15px;
+    margin: 0 0 0 0;
+    padding: 0 0 0 3px;
+
+    text-align: center;
+
+    color: #5C6F7E;
+    background-image: url('./img/icon-clock.png');
+    background-repeat: no-repeat;
+    background-position: 0 1px;
+  }
+  .title-item {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 1.1em;
+    font-weight: bold;
+
+    display: table-cell;
+
+    width: 90%;
+    padding: 0 1.1em 0 20px;
+    padding-left: .9em;
+
+    vertical-align: middle;
+
+    color: #305373 !important;
+    border-left: 1px solid #C1C1C1;
+  }
+}
+
+/* 1 coluna  */
+.width-15 .collection-events,
+.width-16 .collection-events {
+  overflow: auto;
+
+  max-height: 21.3em;
+  .timestamp-cell {
+    line-height: 1.2em !important;
+
+    width: 9.3%;
+  }
+}
+
+
+/* 2 colunas  */
+.width-8 .collection-events {
+  overflow: auto;
+
+  height: 21.3em;
+  .timestamp-cell {
+    width: 20%;
+  }
+}
+.width-10 .collection-events {
+  overflow: auto;
+
+  height: 21.3em;
+}
+.width-8 .collection-events,
+.width-10 .collection-events {
+  .timestamp {
+    line-height: 1.2em !important;
+
+    border-right: none;
+  }
+  .title-item {
+    width: 87%;
+    padding-left: .9em;
+
+    border-left: 1px solid #C1C1C1;
+  }
+}
+
+/* 3 colunas */
+#content .width-5 {
+  .collection-events {
+    overflow: auto;
+
+    height: 21.3em;
+  }
+  .collection-events li {
+    display: inline-block;
+
+    width: 92%;
+    .timestamp-cel,
+    a {
+      display: inline-block;
+      overflow: hidden;
+    }
+  }
+  .agenda-tile .collection-events .title-item {
+    width: 100%;
+    padding: 0;
+
+    border: 0;
+  }
+  .agenda-tile .collection-events .timestamp {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 1em;
+    line-height: 14px;
+
+    margin-bottom: 5px;
+    padding: 0 0 0 19px;
+
+    text-align: left;
+
+    color: #305373;
+    border: none;
+    background-position: 0 0;
+  }
+}
+
+/* ==========================================================================
+   Contraste Agenda
+   ========================================================================== */
+body.contraste #content {
+  .list-actions .print {
+    background: url('./img/print-icon-altocontraste.png') no-repeat;
+  }
+  .comprimisso-pauta,
+  .comprimisso-local,
+  .print a .texto,
+  .collection-events .timestamp {
+    color: white;
+  }
+  .footer-actions {
+    border-top: 4px solid #FFF;
+    border-bottom: 2px solid #FFF;
+  }
+  .list-compromissos {
+    border-bottom: 1px solid #FFF;
+  }
+  .item-compromisso {
+    border-top: 1px solid #D6DCD7;
+  }
+  .collection-events .timestamp {
+    background-position: 0 -15px;
+  }
+}
