@@ -13,7 +13,7 @@
     <genericsetup:upgradeStep
         title="Cook CSS resources"
         description=""
-        handler=".cook_css_resources"
+        handler="..cook_css_resources"
         />
     <genericsetup:upgradeStep
         title="Make content types linkable on TinyMCE"

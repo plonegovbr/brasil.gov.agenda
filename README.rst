@@ -78,3 +78,40 @@ Exemplo: você clonou o repositório do brasil.gov.portal na sua máquina, e deu
         https://raw.githubusercontent.com/plonegovbr/portalpadrao.release/master/1.0.5/versions.cfg
         
 Para saber qual arquivo de versões é compatível, no caso do brasil.gov.portal, é simples pois é a mesma versão (no máximo um bug fix, por exemplo, brasil.gov.portal é 1.1.3 e o arquivo de versão é 1.1.3.1). Para os demais pacotes, recomendamos comparar a data da tag do pacote e a data nos changelog entre uma versão e outra para adivinhar a versão compatível.
+
+Desenvolvimento
+---------------
+
+Utilizamos `webpack <https://webpack.js.org/>`_ para gerenciar o conteúdo estático do tema,
+tomando vantagem das diversas ferramentas e plugins disponíveis para suprir nossas necessidades.
+
+Utilizamos a receita de buildout `sc.recipe.staticresources <https://github.com/simplesconsultoria/sc.recipe.staticresources>`_ para integrar o `webpack`_ no Plone.
+
+Ao desenvolver os temas iniciamos o watcher do `webpack`_ e trabalhamos somente na pasta "webpack" alterando os arquivos;
+o `webpack`_ se encarrega de processar e gerar os arquivos em seu endereço final.
+
+Este pacote adiciona os seguintes comandos na pasta bin do buildout para processar automaticamente os recursos estáticos:
+
+.. code-block:: console
+
+    $ bin/env-brasilgovagenda
+
+Este comando adiciona no terminal o node do buildout no PATH do sistema, dessa forma voce pode trabalhar com webpack conforme a documentação oficial.
+
+.. code-block:: console
+
+    $ bin/watch-brasilgovagenda
+
+Este comando instrui ao Webpack para esperar por qualquer mudança nos arquivos SASS e gera a versão minificada do CSS para a aplicação.
+
+.. code-block:: console
+
+    $ bin/debug-brasilgovagenda
+
+Este comando faz o mesmo que o comando watch, mas não minifica o CSS final.  Utilizado para debugar a geração do CSS.
+
+.. code-block:: console
+
+    $ bin/build-brasilgovagenda
+
+Este comando cria o CSS minificado, mas não espera por mudanças.
