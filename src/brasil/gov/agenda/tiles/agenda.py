@@ -1,12 +1,13 @@
 # -*- coding: utf-8 -*-
-
 from collective.cover import _
 from collective.cover.tiles.base import IPersistentCoverTile
 from collective.cover.tiles.base import PersistentCoverTile
 from collective.cover.tiles.configuration_view import IDefaultConfigureForm
+from datetime import datetime
+from datetime import timedelta
 from plone.app.uuid.utils import uuidToObject
 from plone.directives import form
-from plone.memoize import forever
+# from plone.memoize import forever
 from plone.tiles.interfaces import ITileDataManager
 from plone.uuid.interfaces import IUUID
 from Products.CMFCore.utils import getToolByName
@@ -25,16 +26,16 @@ class IAgendaTile(IPersistentCoverTile):
         title=_(u'Title'),
         required=False,
     )
-    form.omitted('period')
-    form.no_omit(IDefaultConfigureForm, 'period')
-    period = schema.Text(
-        title=_(u'Data'),
+    form.omitted('monthpicker')
+    form.no_omit(IDefaultConfigureForm, 'monthpicker')
+    monthpicker = schema.Text(
+        title=_(u'Seletor Mês'),
         required=False,
     )
-    form.omitted('lastest_update')
-    form.no_omit(IDefaultConfigureForm, 'lastest_update')
-    lastest_update = schema.Text(
-        title=_(u'Última atualização'),
+    form.omitted('daypicker')
+    form.no_omit(IDefaultConfigureForm, 'daypicker')
+    daypicker = schema.Text(
+        title=_(u'Seletor Dia'),
         required=False,
     )
     form.omitted('collection_events')
@@ -49,7 +50,6 @@ class IAgendaTile(IPersistentCoverTile):
         title=_(u'Rodapé da Agenda'),
         required=False,
     )
-
     form.no_omit('link_text')
     form.omitted(IDefaultConfigureForm, 'link_text')
     link_text = schema.TextLine(
@@ -65,7 +65,7 @@ class IAgendaTile(IPersistentCoverTile):
 
 
 class AgendaTile(PersistentCoverTile):
-    index = ViewPageTemplateFile('templates/agenda.pt')
+    index = ViewPageTemplateFile('agenda.pt')
     is_configurable = True
     limit = 1
 
@@ -75,15 +75,15 @@ class AgendaTile(PersistentCoverTile):
         if obj.portal_type in self.accepted_ct():
             title = _(u'Agenda do {0}').format(obj.autoridade)
             link_url = obj.absolute_url()
-            link_text = _(u'Acesse a agenda do {0}').format(obj.autoridade)
+            link_text = _(u'Agenda completa')
             uuid = IUUID(obj, None)
             data_mgr = ITileDataManager(self)
             data_mgr.set({
                 'title': title,
                 'link_url': link_url,
                 'link_text': link_text,
-                'period': True,
-                'lastest_update': True,
+                'monthpicker': True,
+                'daypicker': True,
                 'collection_events': True,
                 'agenda_tile_footer': True,
                 'uuid': uuid,
@@ -119,38 +119,46 @@ class AgendaTile(PersistentCoverTile):
                               context=self.context,
                               target_language=target_language)
 
-    def _month(self):
+    def month(self):
         tool = getToolByName(self.context, 'translation_service')
-        return self._translate(tool.month_msgid(time.strftime('%m')))
+        today = datetime.now()
+        strmonth = self._translate(tool.month_msgid(today.strftime('%m')))
+        return {
+            'strmonth': strmonth[:3].upper(),
+            'month': today.month,
+            'year': today.year,
+        }
 
-    @forever.memoize
-    def _period(self, last_modified=None):
-        parts = {}
-        parts['day'] = time.strftime('%d')
-        parts['month'] = self._month().lower()
-        parts['year'] = time.strftime('%Y')
-        return '%(day)s de %(month)s de %(year)s' % parts
-
-    def period(self):
-        return self._period(self._last_modified())
-
-    @forever.memoize
-    def _lastest_update(self, last_modified=None):
+    def days(self):
         agenda = uuidToObject(self.data['uuid'])
-        agenda_diaria = agenda.get(time.strftime('%Y-%m-%d'), None)
-        if agenda_diaria:
-            update_info = agenda_diaria.update
-            return getattr(update_info, 'output', '')
-
-    def lastest_update(self):
-        return self._lastest_update(self._last_modified())
+        tool = getToolByName(self.context, 'translation_service')
+        today = datetime.now()
+        today = datetime(2018, 02, 24)
+        # get a list with 3 days before and 3 days after today
+        days = [(today + timedelta(i)) for i in xrange(-3, 4)]
+        weekdays = []
+        for day in days:
+            cssclass = ['day']
+            if day == today:
+                cssclass.append('is-selected')
+            if agenda.get(day.strftime('%Y-%m-%d'), False):
+                cssclass.append('has-appointment')
+            strweek = self._translate(tool.day_msgid(day.weekday()))
+            weekdays.append({
+                'day': day.day,
+                'weekday': strweek[:3],
+                'iso': day.isoformat(),
+                'cssclass': ' '.join(cssclass),
+            })
+        return weekdays
 
     def agenda_diaria(self):
         agenda = uuidToObject(self.data['uuid'])
         agenda_diaria = agenda.get(time.strftime('%Y-%m-%d'), None)
+        agenda_diaria = agenda.get(time.strftime('2018-02-24'), None)
         return agenda_diaria
 
-    @forever.memoize
+    # @forever.memoize
     def _collection_events(self, last_modified=None):
         agenda_diaria = self.agenda_diaria()
         collection_events = []
@@ -173,7 +181,7 @@ class AgendaTile(PersistentCoverTile):
     def collection_events(self):
         return self._collection_events(self._last_modified())
 
-    @forever.memoize
+    # @forever.memoize
     def _url_agenda(self, last_modified=None):
         agenda = uuidToObject(self.data['uuid'])
         agenda_diaria = agenda.get(time.strftime('%Y-%m-%d'), None)

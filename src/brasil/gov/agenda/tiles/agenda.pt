@@ -1,0 +1,118 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      i18n:domain="brasil.gov.agenda">
+  <body tal:define="tile_id view/id;
+                    is_empty nocall:view/is_empty;">
+    <p tal:condition="is_empty" i18n:translate="">
+    Adicione uma agenda a este tile.
+    </p>
+
+    <div class="agenda-tile tile-content"
+         tal:attributes="id string:agenda-$tile_id">
+      <tal:fields repeat="field view/get_configured_fields">
+        <tal:title define="htmltag python:field.get('htmltag', 'h1')"
+                     condition="python:field['id']=='title'">
+          <h1 tal:condition="python:htmltag=='h1'"
+                     tal:content="view/data/title"
+                     class="title">
+            Title
+          </h1>
+          <h2 tal:condition="python:htmltag=='h2'"
+                     tal:content="view/data/title"
+                     class="title">
+            ${view/data/title}
+          </h2>
+          <h3 tal:condition="python:htmltag=='h3'"
+                     tal:content="view/data/title"
+                     class="title">
+            ${view/data/title}
+          </h3>
+          <h4 tal:condition="python:htmltag=='h4'"
+                     tal:content="view/data/title"
+                     class="title">
+            ${view/data/title}
+          </h4>
+        </tal:title>
+        <tal:monthpicker
+            condition="python:field['id']=='monthpicker'">
+          <div class="monthpicker-wrapper">
+            <div class="monthpicker"
+                 tal:define="month view/month"
+                 tal:attributes="data-month month/month;
+                                 data-year month/year;">
+              <span class="month" tal:content="month/strmonth" />
+              <span class="year" tal:content="month/year" />
+              <input name="monthpicker" />
+            </div>
+          </div>
+        </tal:monthpicker>
+        <tal:daypicker
+            condition="python:field['id']=='daypicker'">
+          <div class="daypicker-wrapper">
+            <ul class="daypicker"
+                tal:condition="view/days">
+              <tal:event repeat="day view/days">
+                <li tal:attributes="data-day day/iso;
+                                    class day/cssclass;">
+                  <div class="daypicker-day"
+                       tal:content="day/day" />
+                  <div class="daypicker-weekday"
+                       tal:content="day/weekday" />
+                </li>
+              </tal:event>
+            </ul>
+          </div>
+        </tal:daypicker>
+        <tal:collection_events
+            condition="python:field['id']=='collection_events'">
+          <div class="collectionevents-wrapper">
+            <div class="collectionevents-title-wrapper">
+              <div class="collectionevents-title"
+                   i18n:translate="">
+                Compromissos do dia
+              </div>
+              <div class="collectionevents-stroke"></div>
+            </div>
+            <tal:agendadiaria tal:condition="view/agenda_diaria">
+              <ul class="collection-events"
+                  tal:condition="view/collection_events">
+                <tal:event repeat="event view/collection_events">
+                  <li>
+                    <div class="timestamp-cell">
+                      <span class="timestamp" tal:content="event/time">${event/time}</span>
+                    </div>
+                    <a class="title-item"
+                       href="${view/url_agenda}"
+                       tal:attributes="href view/url_agenda"
+                       tal:content="event/description">${event/description}</a>
+                  </li>
+                </tal:event>
+              </ul>
+              <div class="no-events"
+                   i18n:translate="label_agendadiaria_sem_compromissos"
+                   tal:condition="not:view/collection_events">
+                Sem compromissos oficiais.
+              </div>
+            </tal:agendadiaria>
+            <tal:semagendadiaria tal:condition="not:view/agenda_diaria">
+              <div class="no-events"
+                   i18n:translate="label_agendadiaria_nao_criada">
+                Atualmente n&atilde;o existem compromissos agendados.
+              </div>
+            </tal:semagendadiaria>
+          </div>
+        </tal:collection_events>
+        <tal:agenda_tile_footer condition="python:field['id']=='agenda_tile_footer'">
+          <div class="agenda-tile-footer">
+            <a
+               tal:attributes="href view/data/link_url"
+               tal:content="view/data/link_text"
+               href="${view/data/link_url}">${view/data/link_text}</a>
+          </div>
+        </tal:agenda_tile_footer>
+      </tal:fields>
+    </div>
+  </body>
+</html>
