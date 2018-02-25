@@ -86,6 +86,7 @@ class AgendaTile(PersistentCoverTile):
                 'daypicker': True,
                 'collection_events': True,
                 'agenda_tile_footer': True,
+                'agenda_url': obj.absolute_url(),
                 'uuid': uuid,
             })
 

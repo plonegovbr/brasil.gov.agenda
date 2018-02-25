@@ -1,9 +1,11 @@
 let range = (start, stop, step=1) => Array(stop - start).fill(start).map((x, y) => x + y * step);
+let zfill = (number, size=2) => (Array(size).fill('0').join('') + number).slice(-1 * size);
 
 
 export default class DatePicker {
   constructor(container, callback) {
     this.container = container;
+    this.agendaURL = container.getAttribute('data-url');
     this.callback = callback;
     this.$month = this.$('.monthpicker .month');
     this.$year = this.$('.monthpicker .year');
@@ -23,8 +25,13 @@ export default class DatePicker {
     this.updateMonthPicker();
     this.updateDayPicker();
     if (typeof this.callback === 'function') {
-      // ajax
-      this.callback();
+      let agendaDiaria = `${this.year}-${zfill(this.month + 1)}-${zfill(this.day)}`;
+      $.ajax({
+        headers: {
+          Accept: 'application/json'
+        },
+        url: `${this.agendaURL}/${agendaDiaria}`,
+      }).done(this.callback);
     }
   }
   updateMonthPicker() {
@@ -36,6 +43,7 @@ export default class DatePicker {
   }
   updateDayPicker() {
     let dayNamesShort = this.$monthInput.datepicker('option', 'dayNamesShort');
+    // get a list with 3 days before and 3 days after current day
     let days = range(-3, 4).map(i => new Date(this.year, this.month, this.day + i))
     this.$day.html('');
     for (let day of days) {
@@ -45,12 +53,26 @@ export default class DatePicker {
           day.getDate()     === this.day)  {
         cssclass.push('is-selected');
       }
-      this.$day.append(`
+
+      let $day = $(`
         <li data-day="${day.toISOString()}" class="${cssclass.join(' ')}">
           <div class="daypicker-day">${day.getDate()}</div>
           <div class="daypicker-weekday">${dayNamesShort[day.getDay()]}</div>
         </li>
       `);
+
+      let agendaDiaria = `${day.getFullYear()}-${zfill(day.getMonth() + 1)}-${zfill(day.getDate())}`;
+      $.ajax({
+        headers: {
+          Accept: 'application/json'
+        },
+        url: `${this.agendaURL}/${agendaDiaria}`,
+        context: $day,
+      }).done(function(result) {
+        this.addClass('has-appointment');
+      });
+
+      this.$day.append($day);
     }
   }
   initMonthPicker() {
