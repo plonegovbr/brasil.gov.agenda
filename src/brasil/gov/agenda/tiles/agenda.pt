@@ -22,17 +22,17 @@
           <h2 tal:condition="python:htmltag=='h2'"
                      tal:content="view/data/title"
                      class="title">
-            ${view/data/title}
+            Title
           </h2>
           <h3 tal:condition="python:htmltag=='h3'"
                      tal:content="view/data/title"
                      class="title">
-            ${view/data/title}
+            Title
           </h3>
           <h4 tal:condition="python:htmltag=='h4'"
                      tal:content="view/data/title"
                      class="title">
-            ${view/data/title}
+            Title
           </h4>
         </tal:title>
         <tal:monthpicker
