@@ -134,7 +134,6 @@ class AgendaTile(PersistentCoverTile):
         agenda = uuidToObject(self.data['uuid'])
         tool = getToolByName(self.context, 'translation_service')
         today = datetime.now()
-        today = datetime(2018, 02, 24)
         # get a list with 3 days before and 3 days after today
         days = [(today + timedelta(i)) for i in xrange(-3, 4)]
         weekdays = []
@@ -156,8 +155,11 @@ class AgendaTile(PersistentCoverTile):
     def agenda_diaria(self):
         agenda = uuidToObject(self.data['uuid'])
         agenda_diaria = agenda.get(time.strftime('%Y-%m-%d'), None)
-        agenda_diaria = agenda.get(time.strftime('2018-02-24'), None)
         return agenda_diaria
+
+    @property
+    def agenda_url(self):
+        return self.data.get('agenda_url', None)
 
     # @forever.memoize
     def _collection_events(self, last_modified=None):
@@ -173,8 +175,9 @@ class AgendaTile(PersistentCoverTile):
             for brain in results:
                 compr = brain.getObject()
                 compromisso = {
-                    'time': compr.start_date.strftime('%Hh%M'),
+                    'location': compr.location,
                     'description': compr.Title(),
+                    'time': compr.start_date.strftime('%Hh%M'),
                 }
                 collection_events.append(compromisso)
         return collection_events

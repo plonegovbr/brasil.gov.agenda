@@ -11,7 +11,7 @@
 
     <div class="agenda-tile tile-content"
          tal:attributes="id string:agenda-$tile_id;
-                         data-url view/data/agenda_url">
+                         data-url view/agenda_url">
       <tal:fields repeat="field view/get_configured_fields">
         <tal:title define="htmltag python:field.get('htmltag', 'h1')"
                      condition="python:field['id']=='title'">
@@ -81,13 +81,16 @@
                   tal:condition="view/collection_events">
                 <tal:event repeat="event view/collection_events">
                   <li>
-                    <div class="timestamp-cell">
-                      <span class="timestamp" tal:content="event/time">${event/time}</span>
-                    </div>
                     <a class="title-item"
                        href="${view/url_agenda}"
                        tal:attributes="href view/url_agenda"
                        tal:content="event/description">${event/description}</a>
+                    <div class="location-item">
+                      <span class="location" tal:content="event/location">${event/location}</span>
+                    </div>
+                    <div class="timestamp-cell">
+                      <span class="timestamp" tal:content="event/time">${event/time}</span>
+                    </div>
                   </li>
                 </tal:event>
               </ul>
