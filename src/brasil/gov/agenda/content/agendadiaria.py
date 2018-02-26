@@ -32,9 +32,16 @@ class AgendaDiaria(Container):
         fmt_date = date.strftime('%d/%m/%Y')
         autoridade = self.autoridade
         mapping = {'autoridade': autoridade, 'fmt_date': fmt_date}
-        portal_state = getMultiAdapter((self, self.REQUEST),
-                                       name=u'plone_portal_state')
-        current_language = portal_state.language()
+        if type(self.REQUEST) is str:
+            # this happens with plone.restapi, we lose reference of REQUEST object when
+            # it adapts to plone.app.contentlisting so there is no way to do get portal_state
+            # https://github.com/plone/plone.restapi/blob/master/src/plone/restapi/serializer/summary.py#L25
+            # https://github.com/plone/plone.app.contentlisting/blob/1.0.5/plone/app/contentlisting/realobject.py#L38
+            current_language = 'pt-br'
+        else:
+            portal_state = getMultiAdapter((self, self.REQUEST),
+                                           name=u'plone_portal_state')
+            current_language = portal_state.language()
         tool = api.portal.get_tool('translation_service')
         # FIXME: Ao trocar a língua de um portal, o título de uma agenda não
         # será alterado no folder_contents. Como a recomendação atual de sites

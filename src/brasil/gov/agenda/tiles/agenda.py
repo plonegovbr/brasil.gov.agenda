@@ -134,7 +134,6 @@ class AgendaTile(PersistentCoverTile):
         agenda = uuidToObject(self.data['uuid'])
         tool = getToolByName(self.context, 'translation_service')
         today = datetime.now()
-        # today = datetime(2018, 02, 24)
         # get a list with 3 days before and 3 days after today
         days = [(today + timedelta(i)) for i in xrange(-3, 4)]
         weekdays = []
@@ -156,7 +155,6 @@ class AgendaTile(PersistentCoverTile):
     def agenda_diaria(self):
         agenda = uuidToObject(self.data['uuid'])
         agenda_diaria = agenda.get(time.strftime('%Y-%m-%d'), None)
-        # agenda_diaria = agenda.get(time.strftime('2018-02-24'), None)
         return agenda_diaria
 
     @property
@@ -169,7 +167,6 @@ class AgendaTile(PersistentCoverTile):
         page = []
         if agenda_diaria:
             now = datetime.now()
-            # now = datetime(2018, 2, 24, 10, 33)
             catalog = getToolByName(self.context, 'portal_catalog')
             query = {}
             query['portal_type'] = 'Compromisso'

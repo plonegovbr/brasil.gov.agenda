@@ -31,7 +31,7 @@ export default class DatePicker {
           Accept: 'application/json'
         },
         url: `${this.agendaURL}/${agendaDiaria}`,
-      }).done(this.callback);
+      }).always(this.callback);
     }
   }
   updateMonthPicker() {
