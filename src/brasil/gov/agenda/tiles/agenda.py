@@ -134,6 +134,7 @@ class AgendaTile(PersistentCoverTile):
         agenda = uuidToObject(self.data['uuid'])
         tool = getToolByName(self.context, 'translation_service')
         today = datetime.now()
+        # today = datetime(2018, 02, 24)
         # get a list with 3 days before and 3 days after today
         days = [(today + timedelta(i)) for i in xrange(-3, 4)]
         weekdays = []
@@ -155,6 +156,7 @@ class AgendaTile(PersistentCoverTile):
     def agenda_diaria(self):
         agenda = uuidToObject(self.data['uuid'])
         agenda_diaria = agenda.get(time.strftime('%Y-%m-%d'), None)
+        # agenda_diaria = agenda.get(time.strftime('2018-02-24'), None)
         return agenda_diaria
 
     @property
@@ -164,23 +166,33 @@ class AgendaTile(PersistentCoverTile):
     # @forever.memoize
     def _collection_events(self, last_modified=None):
         agenda_diaria = self.agenda_diaria()
-        collection_events = []
+        page = []
         if agenda_diaria:
+            now = datetime.now()
+            # now = datetime(2018, 2, 24, 10, 33)
             catalog = getToolByName(self.context, 'portal_catalog')
             query = {}
             query['portal_type'] = 'Compromisso'
             query['sort_on'] = 'start'
             query['path'] = '/'.join(agenda_diaria.getPhysicalPath())
             results = catalog.searchResults(**query)
-            for brain in results:
+            for i, brain in enumerate(results):
                 compr = brain.getObject()
+                timestamp_class = ['timestamp-cell']
+                if compr.start_date < now < compr.end_date:
+                    timestamp_class.append('is-now')
                 compromisso = {
                     'location': compr.location,
                     'description': compr.Title(),
                     'time': compr.start_date.strftime('%Hh%M'),
+                    'timestamp_class': ' '.join(timestamp_class),
                 }
-                collection_events.append(compromisso)
-        return collection_events
+                page.append(compromisso)
+                if (i + 1) % 3 == 0:
+                    yield page
+                    page = []
+            if page:
+                yield page
 
     def collection_events(self):
         return self._collection_events(self._last_modified())

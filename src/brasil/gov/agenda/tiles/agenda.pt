@@ -77,27 +77,35 @@
               <div class="collectionevents-stroke"></div>
             </div>
             <tal:agendadiaria tal:condition="view/agenda_diaria">
-              <ul class="collection-events"
-                  tal:condition="view/collection_events">
-                <tal:event repeat="event view/collection_events">
-                  <li>
-                    <a class="title-item"
-                       href="${view/url_agenda}"
-                       tal:attributes="href view/url_agenda"
-                       tal:content="event/description">${event/description}</a>
-                    <div class="location-item">
-                      <span class="location" tal:content="event/location">${event/location}</span>
+              <div class="swiper-container collection-events">
+                <div class="swiper-wrapper">
+                  <tal:page repeat="page view/collection_events">
+                    <div class="swiper-slide">
+                      <tal:event repeat="event page">
+                        <div class="collection-events-item">
+                          <a class="title-item"
+                             href="${view/url_agenda}"
+                             tal:attributes="href view/url_agenda"
+                             tal:content="event/description">${event/description}</a>
+                          <div class="location-item">
+                            <span class="location" tal:content="event/location">${event/location}</span>
+                          </div>
+                          <div tal:attributes="class event/timestamp_class">
+                            <span class="timestamp" tal:content="event/time">${event/time}</span>
+                          </div>
+                        </div>
+                      </tal:event>
                     </div>
-                    <div class="timestamp-cell">
-                      <span class="timestamp" tal:content="event/time">${event/time}</span>
-                    </div>
-                  </li>
-                </tal:event>
-              </ul>
-              <div class="no-events"
-                   i18n:translate="label_agendadiaria_sem_compromissos"
-                   tal:condition="not:view/collection_events">
-                Sem compromissos oficiais.
+                  </tal:page>
+                  <div class="swiper-slide no-events"
+                       i18n:translate="label_agendadiaria_sem_compromissos"
+                       tal:condition="not:view/collection_events">
+                    Sem compromissos oficiais.
+                  </div>
+                </div>
+                <div class="swiper-button-next swiper-button-black"></div>
+                <div class="swiper-button-prev swiper-button-black"></div>
+                <div class="swiper-pagination"></div>
               </div>
             </tal:agendadiaria>
             <tal:semagendadiaria tal:condition="not:view/agenda_diaria">
