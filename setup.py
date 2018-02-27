@@ -54,9 +54,9 @@ setup(
         'plone.app.uuid',
         'plone.app.versioningbehavior',
         'plone.app.vocabularies',
+        'plone.autoform',
         'plone.behavior',
         'plone.dexterity',
-        'plone.directives.form',  # FIXME: five.grok
         'plone.indexer',
         'plone.memoize',
         'plone.portlets',
