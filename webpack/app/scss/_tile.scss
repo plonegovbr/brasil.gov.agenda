@@ -1,18 +1,28 @@
 #content .agenda-tile {
+  position: relative;
   background: #f9f9f9;
+  overflow: hidden;
+  .agenda-image {
+    position: absolute;
+    top: 0;
+  }
+  .agenda-wrapper {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+  }
+  .agenda-wrapper > * {
+    margin-bottom: 2rem;
+  }
   .title {
     text-align: center;
     text-transform: uppercase;
     font-size: 24px;
     font-weight: 900;
-    font-style: normal;
-    font-stretch: normal;
-    line-height: normal;
-    letter-spacing: normal;
     color: #222222;
-  }
-  > * {
-    margin-bottom: 2rem;
+    margin-top: 1rem;
+    order: -1;
   }
   .collectionevents-wrapper {
     display: flex;
@@ -22,34 +32,25 @@
   .collectionevents-title-wrapper {
     width: 100%;
     display: flex;
-    flex-direction: column;
     align-items: center;
-    position: relative;
     margin-bottom: 2.5rem;
   }
   .collectionevents-stroke {
     border-bottom: 1px solid rgba(0, 0, 0, 0.2);
-    width: 100%;
-    position: absolute;
-    top: 50%;
+    flex: 2 auto;
   }
   .collectionevents-title {
     font-size: 16px;
     font-weight: 500;
-    font-style: normal;
-    font-stretch: normal;
-    line-height: normal;
-    letter-spacing: normal;
     color: #222;
     text-transform: uppercase;
-    background: #f9f9f9;
     padding: 0 2rem;
-    z-index: 1;
+    z-index: 2;
   }
   .collection-events {
     width: 1060px !important;
     box-sizing: border-box;
-    padding: 0 0 30px 0;
+    padding: 0 0 4rem 0;
   }
   .swiper-slide {
     display: flex;
@@ -68,11 +69,7 @@
   }
   .title-item {
     font-size: 24px;
-    font-weight: bold;
-    font-style: normal;
-    font-stretch: normal;
     line-height: 1.29;
-    letter-spacing: normal;
     color: #222222;
     cursor: pointer;
   }
@@ -83,10 +80,7 @@
   .timestamp {
     font-size: 14px;
     font-weight: 500;
-    font-style: normal;
-    font-stretch: normal;
     line-height: 1.79;
-    letter-spacing: normal;
     color: #222222;
   }
   .location-item::before {
@@ -151,5 +145,34 @@
   }
   .agenda-tile-footer > a:hover {
     color: #222 !important;
+  }
+  .swiper-slide.no-events {
+    height: 15rem;
+    align-items: center;
+  }
+}
+#content .agenda-tile.has-image {
+  .title {
+    color: #fff;
+  }
+  .collectionevents-title-wrapper {
+    display: none;
+  }
+  .swiper-pagination-bullet,
+  .swiper-pagination-bullet-active {
+    background: #fff;
+  }
+  .swiper-pagination-bullet {
+    opacity: .4;
+  }
+  .swiper-pagination-bullet-active {
+    opacity: 1;
+  }
+  .agenda-tile-footer > a {
+    border: 2px solid #fff;
+    color: #fff;
+  }
+  .agenda-tile-footer > a:hover {
+    color: #fff !important;
   }
 }

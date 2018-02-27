@@ -15,6 +15,12 @@ export default class AgendaTile {
   onDateChange(agendaDiaria) {
     this.swiper.removeAllSlides();
     this._$slide = $('<div class="swiper-slide"></div>');
+    if (typeof agendaDiaria.items === 'undefined') {
+      this._$slide.addClass('no-events');
+      this._$slide.html('Sem compromissos oficiais.');
+      this.swiper.appendSlide(this._$slide);
+      return;
+    }
     for (let item of agendaDiaria.items) {
       $.ajax({
         headers: {
@@ -51,7 +57,6 @@ export default class AgendaTile {
     }
     if (this._$slide.children().length > 0) {
       this.swiper.appendSlide(this._$slide);
-      this._$slide = $('<div class="swiper-slide"></div>');
     }
   }
   initSwiper() {

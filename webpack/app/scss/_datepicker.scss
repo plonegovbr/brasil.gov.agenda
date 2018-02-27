@@ -1,10 +1,21 @@
-#content .monthpicker-wrapper {
+#content .monthpicker-stroke-wrapper {
+  width: 100%;
   display: flex;
-  overflow: hidden;
-
-  justify-content: center;
   align-items: center;
+  margin-bottom: 2.5rem;
+  .monthpicker-stroke {
+    display: none;
+  }
+  .monthpicker-wrapper {
+    display: flex;
+    overflow: hidden;
 
+    justify-content: center;
+    align-items: center;
+
+    padding: 0 2rem;
+    z-index: 2;
+  }
   .monthpicker {
     font-size: 14px;
     font-weight: bold;
@@ -22,7 +33,7 @@
   .year {
     font-size: 12px;
   }
-  &::after {
+  .monthpicker-wrapper::after {
     @include sprite($monthpicker-arrow);
     content: '';
     margin-left: .5rem;
@@ -38,6 +49,20 @@
     cursor: pointer;
 
     opacity: 0;
+  }
+}
+#content .has-image .monthpicker-stroke-wrapper {
+  margin-bottom: 5rem !important;
+  .monthpicker-stroke {
+    display: block;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    flex: 2 auto;
+  }
+  .monthpicker {
+    color: #fff;
+  }
+  .monthpicker-wrapper::after {
+    filter: invert(100%);
   }
 }
 .ui-monthpicker .ui-datepicker-calendar {
@@ -98,5 +123,15 @@
 
     letter-spacing: normal;
     text-transform: uppercase;
+  }
+}
+#content .has-image .daypicker-wrapper {
+  order: -1;
+  .day {
+    color: rgba(255, 255, 255, 0.6);
+  }
+  .day.has-appointment,
+  .day.is-selected {
+    color: #fff;
   }
 }

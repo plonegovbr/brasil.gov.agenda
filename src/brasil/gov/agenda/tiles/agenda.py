@@ -1,13 +1,15 @@
 # -*- coding: utf-8 -*-
 from collective.cover import _
+from collective.cover.browser.scaling import ImageScale
 from collective.cover.tiles.base import IPersistentCoverTile
 from collective.cover.tiles.base import PersistentCoverTile
 from collective.cover.tiles.configuration_view import IDefaultConfigureForm
 from datetime import datetime
 from datetime import timedelta
+from plone.app.imaging.utils import getAllowedSizes
 from plone.app.uuid.utils import uuidToObject
 from plone.directives import form
-# from plone.memoize import forever
+from plone.namedfile import field
 from plone.tiles.interfaces import ITileDataManager
 from plone.uuid.interfaces import IUUID
 from Products.CMFCore.utils import getToolByName
@@ -21,6 +23,17 @@ import time
 class IAgendaTile(IPersistentCoverTile):
     """
     """
+
+    image = field.NamedBlobImage(
+        title=_(u'Image'),
+        required=False,
+    )
+
+    image_description = schema.TextLine(
+        title=_(u'Image description'),
+        required=False,
+        default=u'',
+    )
 
     title = schema.TextLine(
         title=_(u'Title'),
@@ -161,7 +174,6 @@ class AgendaTile(PersistentCoverTile):
     def agenda_url(self):
         return self.data.get('agenda_url', None)
 
-    # @forever.memoize
     def _collection_events(self, last_modified=None):
         agenda_diaria = self.agenda_diaria()
         page = []
@@ -194,7 +206,6 @@ class AgendaTile(PersistentCoverTile):
     def collection_events(self):
         return self._collection_events(self._last_modified())
 
-    # @forever.memoize
     def _url_agenda(self, last_modified=None):
         agenda = uuidToObject(self.data['uuid'])
         agenda_diaria = agenda.get(time.strftime('%Y-%m-%d'), None)
@@ -219,3 +230,15 @@ class AgendaTile(PersistentCoverTile):
     def is_empty(self):
         data = self.results()
         return data['title'] is None
+
+    def get_srcset(self):
+        data = self.data.get('image')
+        scale_view = ImageScale(self, self.request, data=data, fieldname='')
+        base_url, ext = scale_view.url.rsplit('.', 1)
+        sizes = [(s, w, h) for s, (w, h) in getAllowedSizes().iteritems()]
+        srcset = ''
+        for i, (scale, width, height) in enumerate(sorted(sizes, key=lambda x: x[1])):
+            srcset += '{0}image/{1} {2}w'.format(base_url, scale, width)
+            if i + 1 < len(sizes):
+                srcset += ', '
+        return srcset
