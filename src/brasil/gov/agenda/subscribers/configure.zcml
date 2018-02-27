@@ -1,0 +1,29 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:zcml="http://namespaces.zope.org/zcml">
+
+  <subscriber
+      for="brasil.gov.agenda.interfaces.IAgenda
+           zope.lifecycleevent.IObjectAddedEvent"
+      handler=".habilita_next_previous"
+      />
+
+  <subscriber
+      for="brasil.gov.agenda.interfaces.IAgendaDiaria
+           zope.lifecycleevent.IObjectAddedEvent"
+      handler=".ordenacao_agenda"
+      />
+
+  <subscriber
+      for="brasil.gov.agenda.interfaces.ICompromisso
+           zope.lifecycleevent.IObjectAddedEvent"
+      handler=".move_compromisso_para_agendadiaria"
+      />
+
+  <subscriber
+      for="brasil.gov.agenda.interfaces.ICompromisso
+           zope.lifecycleevent.IObjectModifiedEvent"
+      handler=".move_compromisso_para_agendadiaria"
+      />
+
+</configure>

@@ -31,6 +31,7 @@
     <include package=".caching" />
     <include package=".content" />
     <include package=".portlets" />
+    <include package=".subscribers" />
 
     <grok:grok package="." />
 
