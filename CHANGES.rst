@@ -4,6 +4,9 @@ Changelog
 2.0a1 (unreleased)
 ^^^^^^^^^^^^^^^^^^
 
+- Remove dependência no five.grok da declaração de subscribers.
+  [hvelarde]
+
 - Atualiza layout e funcionalidades do tile de Agenda.
   [rodfersou]
 

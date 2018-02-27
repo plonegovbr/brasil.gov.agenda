@@ -1,20 +1,15 @@
 # -*- coding: utf-8 -*-
-
 from Acquisition import aq_base
 from Acquisition import aq_parent
 from brasil.gov.agenda.config import AGENDADIARIAFMT
 from brasil.gov.agenda.config import PROJECTNAME
 from brasil.gov.agenda.interfaces import IAgenda
 from brasil.gov.agenda.interfaces import IAgendaDiaria
-from brasil.gov.agenda.interfaces import ICompromisso
-from five import grok
 from OFS.event import ObjectWillBeMovedEvent
 from Products.CMFPlone.utils import _createObjectByType
 from zope.container.contained import notifyContainerModified
 from zope.event import notify
 from zope.lifecycleevent import ObjectMovedEvent
-from zope.lifecycleevent.interfaces import IObjectAddedEvent
-from zope.lifecycleevent.interfaces import IObjectModifiedEvent
 
 import datetime
 import logging
@@ -23,19 +18,10 @@ import logging
 logger = logging.getLogger(PROJECTNAME)
 
 
-@grok.subscribe(IObjectAddedEvent)
-@grok.subscribe(IObjectModifiedEvent)
-def move_compromisso_para_agendadiaria(event, obj=None):
-    """ Toda vez que um tipo compromisso for criado ou tiver sua
-        data alterada
-        ele sera movido para dentro de uma agenda diaria
+def move_compromisso_para_agendadiaria(obj, event):
+    """Toda vez que um tipo compromisso for criado ou tiver sua data
+    alterada ele sera movido para dentro de uma agenda diaria.
     """
-    if not obj:
-        obj = event.object
-
-    if not ICompromisso.providedBy(obj):  # nao eh um compromisso
-        return
-
     start_date = getattr(obj, 'start_date', None)
     if not start_date:
         return
