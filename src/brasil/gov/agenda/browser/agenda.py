@@ -1,25 +1,17 @@
 # -*- coding: utf-8 -*-
 from brasil.gov.agenda import _
 from brasil.gov.agenda.config import AGENDADIARIAFMT
-from brasil.gov.agenda.interfaces import IAgenda
 from brasil.gov.agenda.utils import AgendaMixin
 from DateTime import DateTime
-from five import grok
 from Products.CMFCore.utils import getToolByName
+from Products.Five.browser import BrowserView
 from zope.component import getMultiAdapter
 from zope.i18nmessageid import Message
 from zope.publisher.publish import mapply
 
 
-grok.templatedir('templates')
-
-
-class AgendaView (grok.View, AgendaMixin):
-    """ Visao padrao da agenda
-    """
-
-    grok.name('view')
-    grok.context(IAgenda)
+class AgendaView(BrowserView, AgendaMixin):
+    """Visao padrao da agenda."""
 
     def update(self):
         plone_tools = getMultiAdapter((self.context, self.request),

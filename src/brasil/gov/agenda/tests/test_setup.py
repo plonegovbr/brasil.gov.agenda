@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-
 from brasil.gov.agenda.config import PROJECTNAME
 from brasil.gov.agenda.testing import FUNCTIONAL_TESTING
 from brasil.gov.agenda.testing import INTEGRATION_TESTING
@@ -8,7 +7,6 @@ from plone.app.testing import login
 from plone.app.testing import setRoles
 from plone.app.testing import TEST_USER_ID
 from plone.app.testing import TEST_USER_NAME
-from plone.testing.z2 import Browser
 from Products.GenericSetup.upgrade import listUpgradeSteps
 from zope.site.hooks import setSite
 
@@ -51,19 +49,6 @@ class TestInstall(BaseTestCase):
     def test_version(self):
         self.assertEqual(
             self.st.getLastVersionForProfile(self.profile), (u'4004',))
-
-    def test_static_resource_grokker(self):
-        """Grok does not register automatically the static resources anymore see:
-        http://svn.zope.org/five.grok/trunk/src/five/grok/meta.py?rev=123298&r1=112163&r2=123298
-        """
-        portal = self.layer['portal']
-        app = self.layer['app']
-
-        browser = Browser(app)
-        portal_url = portal.absolute_url()
-
-        browser.open('%s/++resource++brasil.gov.agenda' % portal_url)
-        self.assertEqual(browser.headers['status'], '200 Ok')
 
     def test_css_registered(self):
         cssreg = getattr(self.portal, 'portal_css')

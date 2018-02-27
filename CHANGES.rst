@@ -10,6 +10,8 @@ Changelog
 - Corrige tratamento de fuso horário na view padrão do tipo de conteúdo ``AgendaDiaria``;
   isso evita mudanças na hora dos compromissos em browsers com um fuso horário diferente do vigente no Brasil.
   [rodfersou, hvelarde]
+- Remove dependência no five.grok.
+  [hvelarde]
 
 
 2.0a1 (2018-06-06)

@@ -1,15 +1,13 @@
 # -*- coding: utf-8 -*-
-
 from brasil.gov.agenda.config import PROJECTNAME
-from brasil.gov.agenda.interfaces import ICompromisso
 from brasil.gov.agenda.utils import rfc2445dt
 from cStringIO import StringIO
 from DateTime import DateTime
-from five import grok
 from plone.uuid.interfaces import IUUID
 from Products.ATContentTypes.lib.calendarsupport import foldLine
 from Products.ATContentTypes.lib.calendarsupport import n2rn
 from Products.ATContentTypes.lib.calendarsupport import vformat
+from Products.Five.browser import BrowserView
 
 
 # iCal header and footer
@@ -42,11 +40,8 @@ END:VEVENT
 """
 
 
-class ICSView (grok.View):
-    """ Visao vCal
-    """
-    grok.name('ical_view')
-    grok.context(ICompromisso)
+class ICSView(BrowserView):
+    """Visao vCal."""
 
     def getICal(self):
         """get iCal data

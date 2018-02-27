@@ -1,22 +1,14 @@
 # -*- coding: utf-8 -*-
-
 from Acquisition import aq_parent
 from brasil.gov.agenda import _
-from brasil.gov.agenda.interfaces import ICompromisso
-from five import grok
 from Products.CMFCore.utils import getToolByName
+from Products.Five.browser import BrowserView
 from zope.component import getMultiAdapter
 from zope.i18nmessageid import Message
 
 
-grok.templatedir('templates')
-
-
-class CompromissoView (grok.View):
-    """ Visao padrao do tipo compromisso
-    """
-    grok.name('view')
-    grok.context(ICompromisso)
+class CompromissoView(BrowserView):
+    """Visao padrao do tipo compromisso."""
 
     def update(self):
         self._ts = getToolByName(self.context, 'translation_service')

@@ -46,7 +46,7 @@ setup(
         'plone.api',
         'plone.app.content',
         'plone.app.contenttypes',
-        'plone.app.dexterity [grok]',
+        'plone.app.dexterity',
         'plone.app.portlets',
         'plone.app.referenceablebehavior',
         'plone.app.textfield',
@@ -56,7 +56,7 @@ setup(
         'plone.app.vocabularies',
         'plone.behavior',
         'plone.dexterity',
-        'plone.directives.form',
+        'plone.directives.form',  # FIXME: five.grok
         'plone.indexer',
         'plone.memoize',
         'plone.portlets',
