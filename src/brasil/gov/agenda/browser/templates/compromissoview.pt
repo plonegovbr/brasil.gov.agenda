@@ -1,81 +1,84 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
-    xmlns:metal="http://xml.zope.org/namespaces/metal"
-    xmlns:tal="http://xml.zope.org/namespaces/tal"
-    xmlns:i18n="http://xml.zope.org/namespaces/i18n"
-    metal:use-macro="context/main_template/macros/master"
-    i18n:domain="brasil.gov.agenda">
-
-    <metal:header fill-slot="header">
-        <dl class="portalMessage info"
-            tal:condition="view/editable">
-            <dt i18n:translate="">Info</dt>
-            <dd i18n:translate="">
-              Voce ve esta pagina porque possui permissao para edita-la. Outros usuarios serao redirecionados para a
-              visao da Agenda Diaria
-            </dd>
-        </dl>
-    </metal:header>
-
-    <metal:block fill-slot="content-core">
-
-        <div class="dados-agenda">
-
-            <h3 i18n:translate="">Detalhe do compromisso</h3>
-
-            <tal:image condition="view/imagem">
-                <img class="brasao-agenda"
-                   tal:define="scale context/@@images"
-                   tal:replace="structure python: scale.scale('image',
-                                scale='mini').tag(css_class='brasao-agenda')" />
-
-            </tal:image>
-
-            <h2 class="agenda-orgao" tal:content="view/orgao">Presidencia da Republica</h2>
-            <h3 class="agenda-autoridade" tal:content="view/autoridade">Autoridade</h3>
-
-            <span class="agenda-dia">
-                <span tal:replace="view/weekday">Segunda-Feira</span>, <span tal:replace="view/long_date">14 de Outubro de 2013</span>
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      metal:use-macro="context/main_template/macros/master"
+      i18n:domain="brasil.gov.agenda">
+  <metal:header fill-slot="header">
+    <dl class="portalMessage info"
+        tal:condition="view/editable">
+      <dt i18n:translate="">
+        Info
+      </dt>
+      <dd i18n:translate="">
+        Voce ve esta pagina porque possui permissao para edita-la. Outros usuarios serao redirecionados para a
+        visao da Agenda Diaria
+      </dd>
+    </dl>
+  </metal:header>
+  <metal:block fill-slot="content-core">
+    <div class="dados-agenda">
+      <h3 i18n:translate="">
+        Detalhe do compromisso
+      </h3>
+      <tal:image condition="view/imagem">
+        <img class="brasao-agenda"
+             tal:define="scale context/@@images"
+             tal:replace="structure python: scale.scale('image',
+             scale='mini').tag(css_class='brasao-agenda')" />
+      </tal:image>
+      <h2 class="agenda-orgao"
+          tal:content="view/orgao">
+        Presidencia da Republica
+      </h2>
+      <h3 class="agenda-autoridade"
+          tal:content="view/autoridade">
+        Autoridade
+      </h3>
+      <span class="agenda-dia">
+        <span tal:replace="view/weekday">Segunda-Feira</span>, <span tal:replace="view/long_date">14 de Outubro de 2013</span>
+      </span>
+    </div>
+    <ul class="list-compromissos">
+      <div id='compromisso'
+           tal:define="comp view/compromisso">
+        <li class="item-compromisso last-item">
+          <div class="comprimisso-horarios">
+            <time class="horario comprimisso-inicio"
+                  tal:attributes="datetime comp/start_date"
+                  tal:content="comp/start_time">16h20</time>
+          </div>
+          <div class="comprimisso-dados">
+            <h4 class="comprimisso-titulo"
+                tal:content="comp/title">
+              Reuniao com Dorneles Tremea
+            </h4>
+            <p class="comprimisso-participantes"
+               tal:condition="comp/attendees"
+               tal:content="structure comp/attendees_formatted">
+              Dorneles Tremea
+            </p>
+            <p class="comprimisso-pauta"
+               tal:condition="comp/description">
+              <label i18n:translate="">Pauta:</label>
+              <span tal:replace="comp/description">Assunto a ser tratado</span>
+            </p>
+            <p class="comprimisso-local"
+               tal:condition="comp/location">
+              <label i18n:translate="">Local:</label>
+              <span tal:replace="comp/location">Palacio do Planalto</span>
+            </p>
+            <span class="download-compromisso">
+              <a class="add-agenda vcal"
+                 tal:attributes="href string:${comp/url}/vcal_view"
+                 i18n:translate="">
+                VCAL
+              </a>
+              <span i18n:translate="">Adicionar ao meu calendario</span>
             </span>
-
-        </div>
-
-        <ul class="list-compromissos">
-            <div id='compromisso' tal:define="comp view/compromisso">
-
-                <li class="item-compromisso last-item">
-
-                    <div class="comprimisso-horarios">
-                      <time class="horario comprimisso-inicio"
-                        tal:attributes="datetime comp/start_date"
-                        tal:content="comp/start_time">16h20</time>
-                    </div>
-
-                    <div class="comprimisso-dados">
-
-                      <h4 class="comprimisso-titulo" tal:content="comp/title">Reuniao com Dorneles Tremea</h4>
-
-                      <p class="comprimisso-participantes"
-                        tal:condition="comp/attendees"
-                        tal:content="structure comp/attendees_formatted">Dorneles Tremea</p>
-
-                      <p class="comprimisso-pauta"
-                        tal:condition="comp/description">
-                        <label i18n:translate="">Pauta:</label> <span tal:replace="comp/description">Assunto a ser tratado</span></p>
-
-                      <p class="comprimisso-local"
-                        tal:condition="comp/location">
-                        <label i18n:translate="">Local:</label> <span tal:replace="comp/location">Palacio do Planalto</span></p>
-
-                      <span class="download-compromisso">
-                        <a class="add-agenda vcal"
-                         tal:attributes="href string:${comp/url}/vcal_view"
-                         i18n:translate="">VCAL</a> <span i18n:translate="">Adicionar ao meu calendario</span>
-                      </span>
-
-                     </div>
-                </li>
-            </div>
-         </ul>
-    </metal:block>
-
+          </div>
+        </li>
+      </div>
+    </ul>
+  </metal:block>
 </html>
