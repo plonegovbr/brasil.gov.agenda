@@ -81,6 +81,7 @@ class AgendaTile(PersistentCoverTile):
     index = ViewPageTemplateFile('agenda.pt')
     is_configurable = True
     limit = 1
+    page_size = 3  # items by swiper slide
 
     def populate_with_object(self, obj):
         super(AgendaTile, self).populate_with_object(obj)  # check permissions
@@ -197,7 +198,8 @@ class AgendaTile(PersistentCoverTile):
                     'timestamp_class': ' '.join(timestamp_class),
                 }
                 page.append(compromisso)
-                if (i + 1) % 3 == 0:
+                is_third_item = (i + 1) % self.page_size == 0
+                if is_third_item:
                     yield page
                     page = []
             if page:
