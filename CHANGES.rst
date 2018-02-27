@@ -4,6 +4,9 @@ Changelog
 1.1.3 (unreleased)
 ^^^^^^^^^^^^^^^^^^
 
+- Review Agenda Tile.
+  [rodfersou]
+
 - Add webpack.
   [rodfersou]
 
