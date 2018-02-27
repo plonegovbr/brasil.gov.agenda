@@ -1,5 +1,17 @@
-import { getSpecialValue } from './js/filea';
+import AgendaTile from './js/tile.js';
 
-export function getValue() {
-    return getSpecialValue() * 2;
-}
+
+// https://hacks.mozilla.org/2015/04/es6-in-depth-iterators-and-the-for-of-loop/
+jQuery.prototype[Symbol.iterator] = Array.prototype[Symbol.iterator];
+
+
+$(() => {
+  for (let tile of $('.agenda-tile')) {
+    new AgendaTile(tile);
+  }
+});
+
+
+export default {
+  AgendaTile,
+};

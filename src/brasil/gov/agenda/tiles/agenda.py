@@ -1,12 +1,15 @@
 # -*- coding: utf-8 -*-
-
 from collective.cover import _
+from collective.cover.browser.scaling import ImageScale
 from collective.cover.tiles.base import IPersistentCoverTile
 from collective.cover.tiles.base import PersistentCoverTile
 from collective.cover.tiles.configuration_view import IDefaultConfigureForm
+from datetime import datetime
+from datetime import timedelta
+from plone.app.imaging.utils import getAllowedSizes
 from plone.app.uuid.utils import uuidToObject
 from plone.directives import form
-from plone.memoize import forever
+from plone.namedfile import field
 from plone.tiles.interfaces import ITileDataManager
 from plone.uuid.interfaces import IUUID
 from Products.CMFCore.utils import getToolByName
@@ -21,20 +24,31 @@ class IAgendaTile(IPersistentCoverTile):
     """
     """
 
+    image = field.NamedBlobImage(
+        title=_(u'Image'),
+        required=False,
+    )
+
+    image_description = schema.TextLine(
+        title=_(u'Image description'),
+        required=False,
+        default=u'',
+    )
+
     title = schema.TextLine(
         title=_(u'Title'),
         required=False,
     )
-    form.omitted('period')
-    form.no_omit(IDefaultConfigureForm, 'period')
-    period = schema.Text(
-        title=_(u'Data'),
+    form.omitted('monthpicker')
+    form.no_omit(IDefaultConfigureForm, 'monthpicker')
+    monthpicker = schema.Text(
+        title=_(u'Seletor Mês'),
         required=False,
     )
-    form.omitted('lastest_update')
-    form.no_omit(IDefaultConfigureForm, 'lastest_update')
-    lastest_update = schema.Text(
-        title=_(u'Última atualização'),
+    form.omitted('daypicker')
+    form.no_omit(IDefaultConfigureForm, 'daypicker')
+    daypicker = schema.Text(
+        title=_(u'Seletor Dia'),
         required=False,
     )
     form.omitted('collection_events')
@@ -49,7 +63,6 @@ class IAgendaTile(IPersistentCoverTile):
         title=_(u'Rodapé da Agenda'),
         required=False,
     )
-
     form.no_omit('link_text')
     form.omitted(IDefaultConfigureForm, 'link_text')
     link_text = schema.TextLine(
@@ -65,9 +78,10 @@ class IAgendaTile(IPersistentCoverTile):
 
 
 class AgendaTile(PersistentCoverTile):
-    index = ViewPageTemplateFile('templates/agenda.pt')
+    index = ViewPageTemplateFile('agenda.pt')
     is_configurable = True
     limit = 1
+    page_size = 3  # items by swiper slide
 
     def populate_with_object(self, obj):
         super(AgendaTile, self).populate_with_object(obj)  # check permissions
@@ -75,17 +89,18 @@ class AgendaTile(PersistentCoverTile):
         if obj.portal_type in self.accepted_ct():
             title = _(u'Agenda do {0}').format(obj.autoridade)
             link_url = obj.absolute_url()
-            link_text = _(u'Acesse a agenda do {0}').format(obj.autoridade)
+            link_text = _(u'Agenda completa')
             uuid = IUUID(obj, None)
             data_mgr = ITileDataManager(self)
             data_mgr.set({
                 'title': title,
                 'link_url': link_url,
                 'link_text': link_text,
-                'period': True,
-                'lastest_update': True,
+                'monthpicker': True,
+                'daypicker': True,
                 'collection_events': True,
                 'agenda_tile_footer': True,
+                'agenda_url': obj.absolute_url(),
                 'uuid': uuid,
             })
 
@@ -119,61 +134,80 @@ class AgendaTile(PersistentCoverTile):
                               context=self.context,
                               target_language=target_language)
 
-    def _month(self):
+    def month(self):
         tool = getToolByName(self.context, 'translation_service')
-        return self._translate(tool.month_msgid(time.strftime('%m')))
+        today = datetime.now()
+        strmonth = self._translate(tool.month_msgid(today.strftime('%m')))
+        return {
+            'strmonth': strmonth[:3].upper(),
+            'month': today.month,
+            'year': today.year,
+        }
 
-    @forever.memoize
-    def _period(self, last_modified=None):
-        parts = {}
-        parts['day'] = time.strftime('%d')
-        parts['month'] = self._month().lower()
-        parts['year'] = time.strftime('%Y')
-        return '%(day)s de %(month)s de %(year)s' % parts
-
-    def period(self):
-        return self._period(self._last_modified())
-
-    @forever.memoize
-    def _lastest_update(self, last_modified=None):
+    def days(self):
         agenda = uuidToObject(self.data['uuid'])
-        agenda_diaria = agenda.get(time.strftime('%Y-%m-%d'), None)
-        if agenda_diaria:
-            update_info = agenda_diaria.update
-            return getattr(update_info, 'output', '')
-
-    def lastest_update(self):
-        return self._lastest_update(self._last_modified())
+        tool = getToolByName(self.context, 'translation_service')
+        today = datetime.now()
+        # get a list with 3 days before and 3 days after today
+        days = [(today + timedelta(i)) for i in xrange(-3, 4)]
+        weekdays = []
+        for day in days:
+            cssclass = ['day']
+            if day == today:
+                cssclass.append('is-selected')
+            if agenda.get(day.strftime('%Y-%m-%d'), False):
+                cssclass.append('has-appointment')
+            strweek = self._translate(tool.day_msgid(day.weekday()))
+            weekdays.append({
+                'day': day.day,
+                'weekday': strweek[:3],
+                'iso': day.isoformat(),
+                'cssclass': ' '.join(cssclass),
+            })
+        return weekdays
 
     def agenda_diaria(self):
         agenda = uuidToObject(self.data['uuid'])
         agenda_diaria = agenda.get(time.strftime('%Y-%m-%d'), None)
         return agenda_diaria
 
-    @forever.memoize
+    @property
+    def agenda_url(self):
+        return self.data.get('agenda_url', None)
+
     def _collection_events(self, last_modified=None):
         agenda_diaria = self.agenda_diaria()
-        collection_events = []
+        page = []
         if agenda_diaria:
+            now = datetime.now()
             catalog = getToolByName(self.context, 'portal_catalog')
             query = {}
             query['portal_type'] = 'Compromisso'
             query['sort_on'] = 'start'
             query['path'] = '/'.join(agenda_diaria.getPhysicalPath())
             results = catalog.searchResults(**query)
-            for brain in results:
+            for i, brain in enumerate(results):
                 compr = brain.getObject()
+                timestamp_class = ['timestamp-cell']
+                if compr.start_date < now < compr.end_date:
+                    timestamp_class.append('is-now')
                 compromisso = {
-                    'time': compr.start_date.strftime('%Hh%M'),
+                    'location': compr.location,
                     'description': compr.Title(),
+                    'time': compr.start_date.strftime('%Hh%M'),
+                    'timestamp_class': ' '.join(timestamp_class),
                 }
-                collection_events.append(compromisso)
-        return collection_events
+                page.append(compromisso)
+                is_third_item = (i + 1) % self.page_size == 0
+                if is_third_item:
+                    yield page
+                    page = []
+            if page:
+                yield page
 
     def collection_events(self):
         return self._collection_events(self._last_modified())
 
-    @forever.memoize
     def _url_agenda(self, last_modified=None):
         agenda = uuidToObject(self.data['uuid'])
         agenda_diaria = agenda.get(time.strftime('%Y-%m-%d'), None)
@@ -198,3 +232,15 @@ class AgendaTile(PersistentCoverTile):
     def is_empty(self):
         data = self.results()
         return data['title'] is None
+
+    def get_srcset(self):
+        data = self.data.get('image')
+        scale_view = ImageScale(self, self.request, data=data, fieldname='')
+        base_url, ext = scale_view.url.rsplit('.', 1)
+        sizes = [(s, w, h) for s, (w, h) in getAllowedSizes().iteritems()]
+        srcset = ''
+        for i, (scale, width, height) in enumerate(sorted(sizes, key=lambda x: x[1])):
+            srcset += '{0}image/{1} {2}w'.format(base_url, scale, width)
+            if i + 1 < len(sizes):
+                srcset += ', '
+        return srcset

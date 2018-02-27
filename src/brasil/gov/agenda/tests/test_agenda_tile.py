@@ -79,7 +79,15 @@ class AgendaTileTestCase(unittest.TestCase):
         # we call collection events for this tile
         collection_events = AgendaTile._collection_events(tile)
         # check if lists the compromisso
-        self.assertEqual(collection_events, [{'description': '', 'time': '00h00'}])
+        self.assertEqual(
+            collection_events.next(),
+            [{
+                'timestamp_class': 'timestamp-cell is-now',
+                'time': '00h00',
+                'location': u'',
+                'description': '',
+            }],
+        )
 
     def test_crud(self):
         # we start with an empty tile

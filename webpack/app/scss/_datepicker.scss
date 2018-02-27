@@ -1,0 +1,137 @@
+#content .monthpicker-stroke-wrapper {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  margin-bottom: 2.5rem;
+  .monthpicker-stroke {
+    display: none;
+  }
+  .monthpicker-wrapper {
+    display: flex;
+    overflow: hidden;
+
+    justify-content: center;
+    align-items: center;
+
+    padding: 0 2rem;
+    z-index: 2;
+  }
+  .monthpicker {
+    font-size: 14px;
+    font-weight: bold;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 1.79;
+
+    position: relative;
+
+    text-align: left;
+    letter-spacing: normal;
+
+    color: #222;
+  }
+  .year {
+    font-size: 12px;
+  }
+  .monthpicker-wrapper::after {
+    @include sprite($monthpicker-arrow);
+    content: '';
+    margin-left: .5rem;
+  }
+  .monthpicker input {
+    position: absolute;
+    z-index: 2;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+
+    cursor: pointer;
+
+    opacity: 0;
+  }
+}
+#content .has-image .monthpicker-stroke-wrapper {
+  margin-bottom: 5rem !important;
+  .monthpicker-stroke {
+    display: block;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    flex: 2 auto;
+  }
+  .monthpicker {
+    color: #fff;
+  }
+  .monthpicker-wrapper::after {
+    filter: invert(100%);
+  }
+}
+.ui-monthpicker .ui-datepicker-calendar {
+  display: none;
+}
+
+#content .daypicker-wrapper {
+  display: flex;
+
+  justify-content: center;
+
+  .daypicker {
+    display: flex;
+
+    margin: 0;
+
+    list-style-type: none;
+  }
+  .day {
+    display: flex;
+    flex-direction: column;
+
+    width: 95px;
+    height: 95px;
+
+    cursor: pointer;
+
+    color: #DBDBDB;
+
+    align-items: center;
+    justify-content: center;
+  }
+  .day.has-appointment {
+    color: #222;
+  }
+  .day.is-selected {
+    color: #FFF;
+    background-color: #56C75F;
+  }
+  .day:last-child {
+    margin: 0;
+  }
+  .daypicker-day {
+    font-size: 50px;
+    font-weight: 800;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 50px;
+
+    letter-spacing: normal;
+  }
+  .daypicker-weekday {
+    font-size: 20px;
+    font-weight: 800;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 20px;
+
+    letter-spacing: normal;
+    text-transform: uppercase;
+  }
+}
+#content .has-image .daypicker-wrapper {
+  order: -1;
+  .day {
+    color: rgba(255, 255, 255, 0.6);
+  }
+  .day.has-appointment,
+  .day.is-selected {
+    color: #fff;
+  }
+}

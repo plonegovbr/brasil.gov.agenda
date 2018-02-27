@@ -1,4 +1,5 @@
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const SpritesmithPlugin = require('webpack-spritesmith');
 
 module.exports = {
   entry: [
@@ -65,6 +66,19 @@ module.exports = {
     new ExtractTextPlugin({
       filename: 'brasilgovagenda.css',
       allChunks: true
+    }),
+    new SpritesmithPlugin({
+      src: {
+        cwd: 'app/sprite',
+        glob: '*.png'
+      },
+      target: {
+        image: 'app/img/sprite.png',
+        css: 'app/scss/_sprite.scss'
+      },
+      apiOptions: {
+        cssImageRef: './img/sprite.png'
+      }
     }),
   ]
 }
