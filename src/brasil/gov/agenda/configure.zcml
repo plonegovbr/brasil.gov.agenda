@@ -4,6 +4,7 @@
     xmlns:five="http://namespaces.zope.org/five"
     xmlns:grok="http://namespaces.zope.org/grok"
     xmlns:i18n="http://namespaces.zope.org/i18n"
+    xmlns:zcml="http://namespaces.zope.org/zcml"
     i18n_domain="brasil.gov.agenda">
 
     <five:registerPackage package="." />
@@ -31,7 +32,10 @@
     <include package=".caching" />
     <include package=".content" />
     <include package=".portlets" />
-    <include package=".subscribers" />
+    <include
+        zcml:condition="not installed transmogrify.dexterity"
+        package=".subscribers"
+        />
 
     <grok:grok package="." />
 

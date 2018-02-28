@@ -4,6 +4,10 @@ Changelog
 2.0a1 (unreleased)
 ^^^^^^^^^^^^^^^^^^
 
+- Remove registro de subscribers durante migração de conteúdo;
+  isso evita erros na importação dos compromissos de uma agenda.
+  [hvelarde]
+
 - Remove dependência no five.grok da declaração de subscribers.
   [hvelarde]
 
