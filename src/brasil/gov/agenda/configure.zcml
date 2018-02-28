@@ -33,7 +33,7 @@
     <include package=".content" />
     <include package=".portlets" />
     <include
-        zcml:condition="not installed transmogrify.dexterity"
+        zcml:condition="not-installed transmogrify.dexterity"
         package=".subscribers"
         />
 
