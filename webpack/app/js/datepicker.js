@@ -80,22 +80,13 @@ export default class DatePicker {
       changeMonth: true,
       changeYear: true,
       showButtonPanel: true,
-      onChangeMonthYear: (month, year, inst) => {
-        $('#ui-datepicker-div').addClass('ui-selected');
-      },
-      onClose: function(dateText, inst) { 
-        if (!$('#ui-datepicker-div').hasClass('ui-selected')) {
-          return;
-        }
-        $('#ui-datepicker-div').removeClass('ui-selected');
+      onSelect: function(dateText, inst) { 
         this.year = inst.selectedYear;
         this.month = inst.selectedMonth;
+        this.day = parseInt(inst.selectedDay);
         this.$monthInput.datepicker('setDate', new Date(this.year, this.month, this.day));
         this.update();
       }.bind(this),
-      beforeShow: (input, inst) => {
-        $('#ui-datepicker-div').addClass('ui-monthpicker');
-      }
     });
   }
   onDayClick(e) {

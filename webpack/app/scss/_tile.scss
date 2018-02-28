@@ -79,6 +79,9 @@
     line-height: 1.29;
     color: #222222;
     cursor: pointer;
+    overflow: hidden;
+    max-height: 5.16em;  // 1.29 * 4 = 5.16
+    border: none;
   }
   a.title-item:hover {
     color: #222222 !important;
