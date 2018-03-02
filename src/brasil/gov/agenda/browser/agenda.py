@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
-
 from brasil.gov.agenda import _
 from brasil.gov.agenda.config import AGENDADIARIAFMT
 from brasil.gov.agenda.interfaces import IAgenda
+from brasil.gov.agenda.utils import AgendaMixin
 from DateTime import DateTime
 from five import grok
 from Products.CMFCore.utils import getToolByName
@@ -14,7 +14,7 @@ from zope.publisher.publish import mapply
 grok.templatedir('templates')
 
 
-class AgendaView (grok.View):
+class AgendaView (grok.View, AgendaMixin):
     """ Visao padrao da agenda
     """
 
@@ -26,16 +26,15 @@ class AgendaView (grok.View):
                                       name='plone_tools')
         context_state = getMultiAdapter((self.context, self.request),
                                         name=u'plone_context_state')
-        portal_state = getMultiAdapter((self.context, self.request),
-                                       name=u'plone_portal_state')
-        self.current_language = portal_state.language()
         self._ts = getToolByName(self.context, 'translation_service')
         self.catalog = plone_tools.catalog()
+        self.agenda = self.context
         self.workflow = plone_tools.workflow()
         self.editable = context_state.is_editable()
 
     def __call__(self):
         mapply(self.update, (), self.request)
+        # return super(AgendaView, self).__call__()
         agenda_recente = self.agenda_recente()
         if agenda_recente and not self.editable:
             return agenda_recente.restrictedTraverse('@@view')()
@@ -59,19 +58,6 @@ class AgendaView (grok.View):
     def _format_time(self, value):
         return value.strftime('%Hh%M')
 
-    def _translate(self, msgid, locale='plonelocales', mapping=None):
-        tool = self._ts
-        # XXX: Por que é retornado 'pt-br' do portal_state ao invés de 'pt_BR'?
-        # Quando uso 'pt-br' ao invés de 'pt_BR', não pega a tradução quando
-        # feita de forma manual.
-        target_language = ('pt_BR' if self.current_language == 'pt-br'
-                           else self.current_language)
-        return tool.translate(msgid,
-                              locale,
-                              mapping=mapping,
-                              context=self.context,
-                              target_language=target_language)
-
     def get_link_erros(self):
         portal_obj = self.context.portal_url.getPortalObject()
         if (hasattr(portal_obj, 'relatar-erros')):
@@ -88,15 +74,12 @@ class AgendaView (grok.View):
         date = self.date
         return self._translate(self._ts.day_msgid(date.strftime('%w')))
 
-    def month(self):
-        date = self.date
-        return self._translate(self._ts.month_msgid(date.strftime('%m')))
-
     def long_date(self):
+        month = self.month()
         date = self.date
         parts = {}
         parts['day'] = date.strftime('%d')
-        parts['month'] = self.month()
+        parts['month'] = month['strmonthcomplete']
         parts['year'] = date.strftime('%Y')
         return self.context.translate(Message(_(u'long_date_agenda'),
                                               mapping=parts))

@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*-
+from brasil.gov.agenda.utils import AgendaMixin
 from collective.cover import _
 from collective.cover.browser.scaling import ImageScale
 from collective.cover.tiles.base import IPersistentCoverTile
 from collective.cover.tiles.base import PersistentCoverTile
 from collective.cover.tiles.configuration_view import IDefaultConfigureForm
 from datetime import datetime
-from datetime import timedelta
 from plone.app.imaging.utils import getAllowedSizes
 from plone.app.uuid.utils import uuidToObject
 from plone.directives import form
@@ -15,7 +15,6 @@ from plone.uuid.interfaces import IUUID
 from Products.CMFCore.utils import getToolByName
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from zope import schema
-from zope.component import getMultiAdapter
 
 import time
 
@@ -77,7 +76,7 @@ class IAgendaTile(IPersistentCoverTile):
     )
 
 
-class AgendaTile(PersistentCoverTile):
+class AgendaTile(PersistentCoverTile, AgendaMixin):
     index = ViewPageTemplateFile('agenda.pt')
     is_configurable = True
     limit = 1
@@ -118,53 +117,9 @@ class AgendaTile(PersistentCoverTile):
                     last_modified = modified
         return last_modified
 
-    def _translate(self, msgid):
-        tool = getToolByName(self.context, 'translation_service')
-        portal_state = getMultiAdapter((self.context, self.request),
-                                       name=u'plone_portal_state')
-        current_language = portal_state.language()
-        # XXX: Por que é retornado 'pt-br' do portal_state ao invés de 'pt_BR'?
-        # Quando uso 'pt-br' ao invés de 'pt_BR', não pega a tradução quando
-        # feita de forma manual.
-        target_language = ('pt_BR' if current_language == 'pt-br'
-                           else current_language)
-        return tool.translate(msgid,
-                              'plonelocales',
-                              {},
-                              context=self.context,
-                              target_language=target_language)
-
-    def month(self):
-        tool = getToolByName(self.context, 'translation_service')
-        today = datetime.now()
-        strmonth = self._translate(tool.month_msgid(today.strftime('%m')))
-        return {
-            'strmonth': strmonth[:3].upper(),
-            'month': today.month,
-            'year': today.year,
-        }
-
-    def days(self):
-        agenda = uuidToObject(self.data['uuid'])
-        tool = getToolByName(self.context, 'translation_service')
-        today = datetime.now()
-        # get a list with 3 days before and 3 days after today
-        days = [(today + timedelta(i)) for i in xrange(-3, 4)]
-        weekdays = []
-        for day in days:
-            cssclass = ['day']
-            if day == today:
-                cssclass.append('is-selected')
-            if agenda.get(day.strftime('%Y-%m-%d'), False):
-                cssclass.append('has-appointment')
-            strweek = self._translate(tool.day_msgid(day.weekday()))
-            weekdays.append({
-                'day': day.day,
-                'weekday': strweek[:3],
-                'iso': day.isoformat(),
-                'cssclass': ' '.join(cssclass),
-            })
-        return weekdays
+    @property
+    def agenda(self):
+        return uuidToObject(self.data['uuid'])
 
     def agenda_diaria(self):
         agenda = uuidToObject(self.data['uuid'])

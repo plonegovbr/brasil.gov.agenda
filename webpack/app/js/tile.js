@@ -1,6 +1,9 @@
 import DatePicker from './datepicker.js';
 
 
+let zfill = (number, size=2) => (Array(size).fill('0').join('') + number).slice(-1 * size);
+
+
 export default class AgendaTile {
   constructor(tile) {
     this.tile = tile;
@@ -27,6 +30,7 @@ export default class AgendaTile {
           Accept: 'application/json'
         },
         url: item['@id'],
+        global: false,
         async: false,
         context: this,
       }).done((compromisso) => {
@@ -44,7 +48,9 @@ export default class AgendaTile {
               <span class="location">${compromisso.location}</span>
             </div>
             <div class="timestamp-cell">
-              <span class="timestamp">${start_date.getHours()}h${start_date.getMinutes()}</span>
+              <span class="timestamp">
+                ${zfill(start_date.getHours())}h${zfill(start_date.getMinutes())}
+              </span>
             </div>
           </div>
         `);

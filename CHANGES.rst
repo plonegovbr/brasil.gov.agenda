@@ -4,6 +4,9 @@ Changelog
 2.0a1 (unreleased)
 ^^^^^^^^^^^^^^^^^^
 
+- Atualiza layout e funcionalidades da view de Agenda.
+  [rodfersou]
+
 - Remove registro de subscribers durante migração de conteúdo;
   isso evita erros na importação dos compromissos de uma agenda.
   [hvelarde]

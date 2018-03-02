@@ -1,8 +1,9 @@
 # -*- coding: utf-8 -*-
-
 from Acquisition import aq_parent
 from brasil.gov.agenda import _
 from brasil.gov.agenda.interfaces import IAgendaDiaria
+from brasil.gov.agenda.utils import AgendaMixin
+from datetime import datetime
 from five import grok
 from Products.CMFCore.utils import getToolByName
 from zope.component import getMultiAdapter
@@ -12,7 +13,7 @@ from zope.i18nmessageid import Message
 grok.templatedir('templates')
 
 
-class AgendaDiariaView (grok.View):
+class AgendaDiariaView (grok.View, AgendaMixin):
     """ Visao padrao da agenda
     """
 
@@ -24,9 +25,6 @@ class AgendaDiariaView (grok.View):
                                       name='plone_tools')
         context_state = getMultiAdapter((self.context, self.request),
                                         name=u'plone_context_state')
-        portal_state = getMultiAdapter((self.context, self.request),
-                                       name=u'plone_portal_state')
-        self.current_language = portal_state.language()
         self._ts = getToolByName(self.context, 'translation_service')
         self.catalog = plone_tools.catalog()
         self.agenda = aq_parent(self.context)
@@ -42,19 +40,6 @@ class AgendaDiariaView (grok.View):
     def _format_time(self, value):
         return value.strftime('%Hh%M')
 
-    def _translate(self, msgid, locale='plonelocales', mapping=None):
-        tool = self._ts
-        # XXX: Por que é retornado 'pt-br' do portal_state ao invés de 'pt_BR'?
-        # Quando uso 'pt-br' ao invés de 'pt_BR', não pega a tradução quando
-        # feita de forma manual.
-        target_language = ('pt_BR' if self.current_language == 'pt-br'
-                           else self.current_language)
-        return tool.translate(msgid,
-                              locale,
-                              mapping=mapping,
-                              context=self.context,
-                              target_language=target_language)
-
     @property
     def date(self):
         context = self.context
@@ -65,15 +50,12 @@ class AgendaDiariaView (grok.View):
         date = self.date
         return self._translate(self._ts.day_msgid(date.strftime('%w')))
 
-    def month(self):
-        date = self.date
-        return self._translate(self._ts.month_msgid(date.strftime('%m')))
-
     def long_date(self):
+        month = self.month()
         date = self.date
         parts = {}
         parts['day'] = date.strftime('%d')
-        parts['month'] = self.month()
+        parts['month'] = month['strmonthcomplete']
         parts['year'] = date.strftime('%Y')
         return self.context.translate(Message(_(u'long_date_agenda'),
                                               mapping=parts))
@@ -115,6 +97,7 @@ class AgendaDiariaView (grok.View):
 
     def compromissos(self):
         catalog = self.catalog
+        now = datetime.now()
         compromissos = []
         query = {}
         query['portal_type'] = 'Compromisso'
@@ -133,6 +116,7 @@ class AgendaDiariaView (grok.View):
             comp['end_date'] = obj.end_date
             comp['end_time'] = self._format_time(comp['end_date'])
             comp['end_date'] = obj.end_date.strftime('%Y-%m-%d %H:%M')
+            comp['is_now'] = obj.start_date < now < obj.end_date
             comp['location'] = obj.location
             comp['attendees'] = obj.attendees
             # XXX: Preciso formatar esses dados pela view, uma vez que na
@@ -150,8 +134,10 @@ class AgendaDiariaView (grok.View):
 
     def TitleAgenda(self):
         context = self.context
-        ctx_parent = context.aq_parent
-        title = ctx_parent.Title()
+        agenda = context.aq_parent
+        title = agenda.Title()
+        if agenda.autoridade:
+            title += ' ' + agenda.autoridade
         return title
 
     def get_link_erros(self):
