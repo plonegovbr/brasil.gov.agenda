@@ -1,10 +1,16 @@
-.portaltype-agendadiaria {
+.portaltype-agenda #content,
+.portaltype-agendadiaria #content {
+  background-color: #f9f9f9;
   /* Title */
-  #content .documentFirstHeading {
+  .documentFirstHeading {
     margin-bottom: .5em;
     padding: 0 0 .5em;
-
-    border-bottom: 1px dotted #BFC0C2;
+    font-size: 36px;
+    font-weight: 900;
+    line-height: 1.5;
+    text-align: center;
+    color: #333333;
+    width: 100%;
   }
   /* Esconder Document By Line */
   #plone-document-byline {
@@ -22,130 +28,134 @@
 
     border: none;
   }
-}
-
-/* ==========================================================================
-   Dados Agenda
-   ========================================================================== */
-.dados-agenda {
-  font-family: Arial, Helvetica, sans-serif;
-
-  text-align: center;
-}
-
-.brasao-agenda {
-  margin-top: 20px;
-}
-
-.agenda-orgao {
-  font-size: 1.2em;
-  font-weight: normal;
-
-  margin-bottom: .2em;
-}
-
-.agenda-autoridade {
-  font-size: 1.2em;
-  font-weight: normal;
-
-  margin-bottom: 1em;
-
-  text-transform: uppercase;
-}
-
-.agenda-dia {
-  font-size: 1.7em;
-  font-weight: bold;
-}
-
-#content {
-  .portalMessage {
-    margin-top: 30px;
-
-    text-align: left;
-
-    color: #596E7F;
+  .dados-agenda > *,
+  .calendar-title {
+    margin-bottom: 2rem;
   }
-  /*
-   * Lista dos compromissos
-   */
+  .search-form {
+    display: flex;
+    justify-content: center;
+  }
+  .search-form .LSBox {
+    display: flex;
+    align-items: center;
+    border: solid 1px #cccccc;
+    background: #fff;
+    width: 960px;
+    height: 60px;
+    max-width: 100%;
+    margin: 0;
+  }
+  .search-form .searchField {
+    border: none;
+    flex: 2 auto;
+    margin: 0 0 0 2rem;
+    height: 2rem;
+  }
+  .search-form .searchButton {
+    @include sprite($agenda-magnifying);
+    border: none;
+    background-color: transparent;
+    text-indent: -3000px;
+    margin: 1rem;
+  }
   .list-compromissos {
-    margin-left: 0;
-
-    border-bottom: 1px solid #D6DCD7;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    list-style-type: none;
+    margin: 0;
+    padding-bottom: 6rem;
+  }
+  .item-compromisso-wrapper {
+    background: #fff;
+    width: 960px;
+    padding: 2rem;
+    margin-bottom: 1rem;
   }
   .item-compromisso {
-    overflow: hidden;
-
-    margin-top: 10px;
-    padding: 24px 0 14px;
-
-    list-style: none;
-
-    border-top: 1px solid #D6DCD7;
+    display: flex;
   }
-}
-
-
-/* ==========================================================================
-   Dados Compromisso
-   ========================================================================== */
-
-.comprimisso-horarios {
-  font-family: Arial, Helvetica, sans-serif;
-
-  float: left;
-
-  width: 68px;
+  .compromisso-horarios {
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-right: 1px solid #ddd;
+    margin-right: 2rem;
+    padding-right: 2rem;
+  }
   .horario {
-    line-height: 14px !important;
-
-    display: block;
-
-    height: 14px;
-    padding: 0 0 10px 20px;
-
-    background: url('./img/icon-horarios.png') no-repeat;
+    display: flex;
+    align-items: center;
+    margin-bottom: .2rem;
+    font-size: 20px;
+    font-weight: 500;
+    line-height: 1.25;
+    color: #222222;
   }
-  .comprimisso-inicio {
-    background-position: 0 0;
+  .horario::before {
+    @include sprite($agenda-timestamp);
+    display: inline-block;
+    content: '';
+    margin: 0 .3rem;
   }
-  .comprimisso-fim {
-    background-position: 0 -25px;
+  .now {
+    background-color: #56c75f;
+    font-size: 14px;
+    font-weight: bold;
+    color: #fff;
+    padding: .1rem .5rem;
+    text-transform: uppercase;
+  }
+  .compromisso-dados {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  .compromisso-titulo {
+    flex: 1 100%;
+    font-size: 24px;
+    font-weight: bold;
+    line-height: 1.29;
+    color: #222222;
+    margin-bottom: .5rem;
+  }
+  .compromisso-local,
+  .download-compromisso > span {
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 1.79;
+    color: #222222;
+  }
+  .compromisso-local::before {
+    @include sprite($agenda-location);
+    display: inline-block;
+    content: '';
+    margin: 0 .3rem;
+  }
+  .compromisso-local {
+    border-right: 1px solid #ddd;
+    margin-right: 1rem;
+    padding-right: 1rem;
+  }
+  .add-agenda {
+    @include sprite($agenda-calendar);
+    display: inline-block;
+    margin: 0 .3rem;
+    overflow: hidden;
+    text-indent: -3000px;
+    border: none;
   }
 }
 
-.comprimisso-dados {
-  font-family: Arial, Helvetica, sans-serif;
+#content .portalMessage {
+  margin-top: 30px;
 
-  float: left;
+  text-align: left;
 
-  width: 400px;
-  padding-left: 19px;
-
-  border-left: 1px dotted #D6DCD7;
+  color: #596E7F;
 }
 
-.comprimisso-titulo {
-  font-family: Arial, Helvetica, sans-serif;
-  font-weight: bold;
-
-  margin-bottom: 20px;
-}
-
-.comprimisso-participantes {
-  line-height: 1.25em;
-}
-
-#content {
-  .comprimisso-pauta,
-  .comprimisso-local {
-    font-size: 1em;
-    line-height: 1.25em;
-
-    color: #596E7F;
-  }
-}
 
 /*
  * Sem compromisso
@@ -170,75 +180,6 @@
 
 .adicionar_compromisso {
   line-height: 30px;
-}
-
-/* vCal iCal
-   ========================================================================== */
-
-.download-compromisso {
-  line-height: 20px;
-}
-
-.add-agenda {
-  display: block;
-  float: left;
-  overflow: hidden;
-
-  width: 20px;
-  height: 20px;
-  margin-right: 8px;
-
-  white-space: nowrap;
-  text-indent: 100%;
-
-  background: url('./img/icon-file-agenda.png') no-repeat;
-}
-
-/* ==========================================================================
-   Rodape Agenda
-   ========================================================================== */
-
-.footer-actions {
-  margin: 45px 0 0 0;
-  padding: 12px 0;
-
-  border-top: 4px solid #172938;
-  border-bottom: 2px solid #8B949B;
-}
-
-.list-actions {
-  display: inline-block;
-  .item {
-    display: block !important;
-    float: left;
-    clear: none !important;
-
-    width: 100px;
-    height: 20px;
-    margin-bottom: 0 !important;
-
-    list-style: none !important;
-  }
-}
-
-#content .print a .texto {
-  font-size: .917em;
-  line-height: 1.909em;
-
-  display: block;
-
-  height: 1.909em;
-  margin-left: 2.273em;
-
-  color: #172938;
-}
-
-/*
- * Print Icon
- */
-
-.list-actions .print {
-  background: url('./img/print-icon.png') no-repeat;
 }
 
 /* ==========================================================================
@@ -357,8 +298,8 @@ body.contraste #content {
   .list-actions .print {
     background: url('./img/print-icon-altocontraste.png') no-repeat;
   }
-  .comprimisso-pauta,
-  .comprimisso-local,
+  .compromisso-pauta,
+  .compromisso-local,
   .print a .texto,
   .collection-events .timestamp {
     color: white;

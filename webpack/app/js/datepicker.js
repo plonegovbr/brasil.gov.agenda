@@ -7,16 +7,26 @@ export default class DatePicker {
     this.container = container;
     this.agendaURL = container.getAttribute('data-url');
     this.callback = callback;
-    this.$month = this.$('.monthpicker .month');
-    this.$year = this.$('.monthpicker .year');
+    this.$month = this.$('.monthpicker .month, .calendar-title .strmonth');
+    this.$year = this.$('.monthpicker .year, .calendar-title .year');
     this.$day = this.$('.daypicker')
-    this.$monthInput = this.$('.monthpicker input');
+    this.$datePicker = this.$('.monthpicker input');
+    this.$datePicker3 = this.$('.calendar');
+    this.$currentPicker = this.$datePicker.length > 0 ? this.$datePicker : this.$datePicker3;
     this.initMonthPicker();
     let today = new Date();
     this.year = today.getFullYear();
     this.month = today.getMonth();
     this.day = today.getDate();
     this.$('.daypicker').on('click', '.day', this.onDayClick.bind(this));
+    if ($('.portaltype-agendadiaria').length > 0) {
+      let pathDate = location.pathname.split('/').pop();
+      let [year, month, day] = pathDate.split('-').map(x => parseInt(x));
+      let date = new Date(year, month - 1, day);
+      this.year = date.getFullYear();
+      this.month = date.getMonth();
+      this.day = date.getDate();
+    }
   }
   $(selector) {
     return $(selector, this.container);
@@ -30,19 +40,32 @@ export default class DatePicker {
         headers: {
           Accept: 'application/json'
         },
+        global: false,
         url: `${this.agendaURL}/${agendaDiaria}`,
       }).always(this.callback);
     }
   }
   updateMonthPicker() {
-    let monthNamesShort = this.$monthInput.datepicker('option', 'monthNamesShort');
-    this.$month.html(monthNamesShort[this.month].toUpperCase());
-    this.$year.html(this.year);
-    $('.monthpicker').attr('data-month', this.month);
-    $('.monthpicker').attr('data-year', this.year);
+    this.$currentPicker.datepicker('setDate', new Date(this.year, this.month, this.day));
+    if (this.$datePicker.length > 0) {
+      let monthNamesShort = this.$currentPicker.datepicker('option', 'monthNamesShort');
+      this.$month.html(monthNamesShort[this.month].toUpperCase());
+      this.$year.html(this.year);
+      $('.monthpicker').attr('data-month', this.month);
+      $('.monthpicker').attr('data-year', this.year);
+    }
+    if (this.$datePicker3.length > 0) {
+      let monthNames = this.$currentPicker.datepicker('option', 'monthNames');
+      this.$currentPicker.datepicker('option', 'showCurrentAtPos', 1);
+      setTimeout(function() {
+        this.$currentPicker.datepicker('option', 'showCurrentAtPos', 1);
+      }.bind(this), 1);
+      this.$month.html(monthNames[this.month].toUpperCase());
+      this.$year.html(this.year);
+    }
   }
   updateDayPicker() {
-    let dayNamesShort = this.$monthInput.datepicker('option', 'dayNamesShort');
+    let dayNamesShort = this.$currentPicker.datepicker('option', 'dayNamesShort');
     // get a list with 3 days before and 3 days after current day
     let days = range(-3, 4).map(i => new Date(this.year, this.month, this.day + i))
     this.$day.html('');
@@ -67,6 +90,7 @@ export default class DatePicker {
           Accept: 'application/json'
         },
         url: `${this.agendaURL}/${agendaDiaria}`,
+        global: false,
         context: $day,
       }).done(function(result) {
         this.addClass('has-appointment');
@@ -76,18 +100,23 @@ export default class DatePicker {
     }
   }
   initMonthPicker() {
-    this.$monthInput.datepicker( {
-      changeMonth: true,
-      changeYear: true,
-      showButtonPanel: true,
-      onSelect: function(dateText, inst) { 
+    // this event is needed to get right translation
+    $(window).on('load', function() {
+      let onSelect = function(dateText, inst) { 
         this.year = inst.selectedYear;
         this.month = inst.selectedMonth;
         this.day = parseInt(inst.selectedDay);
-        this.$monthInput.datepicker('setDate', new Date(this.year, this.month, this.day));
         this.update();
-      }.bind(this),
-    });
+      }.bind(this);
+      this.$datePicker.datepicker( {
+        onSelect: onSelect,
+      });
+      this.$datePicker3.datepicker( {
+        numberOfMonths: 3,
+        onSelect: onSelect,
+      });
+      this.update();
+    }.bind(this));
   }
   onDayClick(e) {
     e.preventDefault();
@@ -99,7 +128,7 @@ export default class DatePicker {
     this.year = date.getFullYear();
     this.month = date.getMonth();
     this.day = date.getDate();
-    this.$monthInput.datepicker('setDate', date);
+    this.$currentPicker.datepicker('setDate', date);
     this.update();
   }
 }

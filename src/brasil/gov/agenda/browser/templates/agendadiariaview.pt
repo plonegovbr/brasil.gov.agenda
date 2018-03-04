@@ -1,186 +1,199 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
-    xmlns:metal="http://xml.zope.org/namespaces/metal"
-    xmlns:tal="http://xml.zope.org/namespaces/tal"
-    xmlns:i18n="http://xml.zope.org/namespaces/i18n"
-    metal:use-macro="context/main_template/macros/master"
-    i18n:domain="brasil.gov.agenda">
-
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      metal:use-macro="context/main_template/macros/master"
+      i18n:domain="brasil.gov.agenda"
+      tal:define="portal_state context/@@plone_portal_state;
+                  portal_url portal_state/portal_url;">
   <metal:slot metal:fill-slot="content-title">
-    <h1 class="documentFirstHeading" tal:content="view/TitleAgenda"></h1>
+    <h1 class="documentFirstHeading"
+        tal:content="view/TitleAgenda"></h1>
   </metal:slot>
-
   <metal:block fill-slot="content-core">
-
-    <div class="dados-agenda">
-
-      <tal:image condition="view/imagem">
-        <img class="brasao-agenda"
-             tal:define="scale context/@@images"
-             tal:replace="structure python: scale.scale('image',
-                          scale='mini').tag(css_class='brasao-agenda')" />
-      </tal:image>
-
-      <h2 class="agenda-orgao" tal:content="view/orgao">Presidência da República</h2>
-      <h3 class="agenda-autoridade" tal:content="view/autoridade">Autoridade</h3>
-
-      <span class="agenda-dia">
-        <span tal:replace="view/weekday">Segunda-Feira</span>, <span tal:replace="view/long_date">14 de Outubro de 2013</span>
-      </span>
-
-      <div class="portalMessage info"
-          tal:condition="view/update_info"
-          tal:content="structure view/update_info"
-          i18n:translate="">
-          Agenda alterada
+    <div class="dados-agenda"
+         tal:attributes="data-url view/agenda/absolute_url">
+      <div class="search-compromisso">
+        <form class="search-form"
+              tal:attributes="action string:${portal_url}/@@search">
+          <div class="LSBox">
+            <input class="searchField"
+                   name="SearchableText"
+                   type="text"
+                   size="15"
+                   title="Busca em agenda"
+                   placeholder="Buscar em agenda"
+                   autocomplete="off" />
+            <input class="searchButton" type="submit" value="Buscar" />
+            <input type="checkbox"
+                   name="portal_type:list"
+                   value="Compromisso"
+                   class="hiddenStructure"
+                   checked="checked"
+                   id="portal_type_1_3" />
+          </div>
+        </form>
       </div>
-
+      <div class="calendar-wrapper">
+        <div class="calendar-title"
+             tal:define="month view/month">
+          <span class="strmonth" tal:content="month/strmonthcomplete" />
+          <span class="from" i18n:translate="">de</span>
+          <span class="year" tal:content="month/year" />
+        </div>
+        <div class="calendar"></div>
+      </div>
+      <div class="daypicker-wrapper">
+        <ul class="daypicker"
+            tal:condition="view/days">
+          <tal:event repeat="day view/days">
+            <li tal:attributes="data-day day/iso;
+                                class day/cssclass;">
+              <div class="daypicker-day"
+                   tal:content="day/day" />
+              <div class="daypicker-weekday"
+                   tal:content="day/weekday" />
+            </li>
+          </tal:event>
+        </ul>
+      </div>
+      <div class="portalMessage info"
+           tal:condition="view/update_info"
+           tal:content="structure view/update_info"
+           i18n:translate="">
+        Agenda alterada
+      </div>
+      <div class="collectionevents-title-wrapper">
+        <div class="collectionevents-stroke"></div>
+        <div class="collectionevents-title"
+             i18n:translate="">
+          Compromissos do dia
+        </div>
+        <div class="collectionevents-stroke"></div>
+      </div>
     </div>
-
     <ul class="list-compromissos">
-
-      <li class="item-compromisso" tal:repeat="comp view/compromissos">
-
-        <div class="comprimisso-horarios">
-          <time class="horario comprimisso-inicio"
-            tal:attributes="datetime comp/start_date"
-            tal:content="comp/start_time">16h20</time>
+      <li class="item-compromisso-wrapper"
+          tal:repeat="comp view/compromissos">
+        <div class="item-compromisso">
+          <div class="compromisso-horarios">
+            <time class="horario compromisso-inicio"
+                  tal:attributes="datetime comp/start_date"
+                  tal:content="comp/start_time">16h20</time>
+            <div class="now"
+                 tal:condition="comp/is_now"
+                 i18n:translate="">Agora</div>
+          </div>
+          <div class="compromisso-dados">
+            <h4 class="compromisso-titulo"
+                tal:content="comp/title">
+              Reunião com Dorneles Treméa
+            </h4>
+            <p class="compromisso-participantes"
+               tal:condition="comp/attendees"
+               tal:content="structure comp/attendees_formatted">
+              Dorneles Treméa
+            </p>
+            <p class="compromisso-pauta"
+               tal:condition="comp/description">
+              <label i18n:translate="">Pauta:</label>
+              <span tal:replace="comp/description">Assunto a ser tratado</span>
+            </p>
+            <p class="compromisso-local"
+               tal:condition="comp/location"
+               tal:content="comp/location">
+              Palácio do Planalto
+            </p>
+            <span class="download-compromisso">
+              <a class="add-agenda vcal"
+                 tal:attributes="href string:${comp/url}/vcal_view"
+                 i18n:translate="">VCAL</a>
+              <span i18n:translate="">Adicionar ao meu calendario</span>
+            </span>
+            <ul class="compromisso-acoes"
+                tal:condition="view/editable">
+              <li class="compromisso-acao">
+                <a class="compromisso editar_compromisso acao"
+                   tal:attributes="href string:${comp/url}/edit"
+                   i18n:translate="">Editar</a>
+              </li>
+              <li class="compromisso-acao">
+                <a class="compromisso remover_compromisso acao"
+                   tal:attributes="href string:${comp/url}/delete_confirmation"
+                   i18n:translate="">Remover</a>
+              </li>
+            </ul>
+          </div>
         </div>
-
-        <div class="comprimisso-dados">
-
-          <h4 class="comprimisso-titulo" tal:content="comp/title">Reunião com Dorneles Treméa</h4>
-
-          <p class="comprimisso-participantes"
-            tal:condition="comp/attendees"
-            tal:content="structure comp/attendees_formatted">Dorneles Treméa</p>
-
-          <p class="comprimisso-pauta"
-            tal:condition="comp/description">
-            <label i18n:translate="">Pauta:</label> <span tal:replace="comp/description">Assunto a ser tratado</span></p>
-
-          <p class="comprimisso-local"
-            tal:condition="comp/location">
-            <label i18n:translate="">Local:</label> <span tal:replace="comp/location">Palácio do Planalto</span></p>
-
-          <!-- <a class="add-agenda ical"
-             tal:attributes="href string:${comp/url}/ical_view"
-             i18n:translate="">ICAL</a> <br /> -->
-          <span class="download-compromisso">
-            <a class="add-agenda vcal"
-             tal:attributes="href string:${comp/url}/vcal_view"
-             i18n:translate="">VCAL</a> <span i18n:translate="">Adicionar ao meu calendario</span>
-          </span>
-
-          <ul class="compromisso-acoes" tal:condition="view/editable">
-            <li class="compromisso-acao">
-              <a class="compromisso editar_compromisso acao"
-                 tal:attributes="href string:${comp/url}/edit"
-                 i18n:translate="">Editar</a>
-            </li>
-            <li class="compromisso-acao">
-              <a class="compromisso remover_compromisso acao"
-                 tal:attributes="href string:${comp/url}/delete_confirmation"
-                 i18n:translate="">Remover</a>
-            </li>
-          </ul>
-
-        </div>
-
       </li>
-
-      <li class="sem-compromisso item-compromisso"  tal:condition="view/exibe_sem_compromissos">
-          <span i18n:translate="label_agendadiaria_sem_compromissos">Sem compromissos oficiais.</span>
+      <li class="sem-compromisso item-compromisso"
+          tal:condition="view/exibe_sem_compromissos">
+        <span i18n:translate="label_agendadiaria_sem_compromissos">Sem compromissos oficiais.</span>
       </li>
-
     </ul>
-
     <a tal:condition="view/editable"
-         class="adicionar_compromisso"
-         tal:attributes="href string:${context/absolute_url}/++add++Compromisso"
-         i18n:translate="">Adicionar Compromisso</a>
-
-    <div class="footer-actions">
-      <ul class="list-actions">
-        <li class="item print">
-          <a href="javascript:window.print();">
-            <span class="texto" i18n:translate="">Imprimir</span>
-          </a>
-        </li>
-        <tal:reporterros tal:define="urlerros view/get_link_erros">
-        <li class="item relatar-erros">
-          <a tal:attributes="href urlerros">
-            <span class="texto" i18n:translate="">Reportar erro</span>
-          </a>
-        </li>
-        </tal:reporterros>
-      </ul>
-    </div>
-
+       class="adicionar_compromisso"
+       tal:attributes="href string:${context/absolute_url}/++add++Compromisso"
+       i18n:translate="">
+      Adicionar Compromisso
+    </a>
     <script>
-    // <![CDATA[
+      // <![CDATA[
       jQuery(function($){
-        $('.compromisso-acao a.acao').prepOverlay(
-            {
-                subtype: 'ajax',
-                filter: common_content_filter,
-                formselector: '#delete_confirmation',
-                cssclass: 'overlay-compromisso',
-                noform: function(el) {return $.plonepopups.noformerrorshow(el, 'redirect');},
-                redirect: $.plonepopups.redirectbasehref,
-                closeselector: '[name="form.button.Cancel"]',
-                width:'50%'
-            }
-        );
+        $('.compromisso-acao a.acao').prepOverlay({
+          subtype: 'ajax',
+          filter: common_content_filter,
+          formselector: '#delete_confirmation',
+          cssclass: 'overlay-compromisso',
+          noform: function(el) {return $.plonepopups.noformerrorshow(el, 'redirect');},
+          redirect: $.plonepopups.redirectbasehref,
+          closeselector: '[name="form.button.Cancel"]',
+          width:'50%'
+        });
       });
-
       // add style to mark active event on calendar portlet
       $(document).ready(function () {
-          'use strict';
-          var url = window.location.href;
-          url = url.substring(0, url.indexOf("?"));
-          var active = $('.ploneCalendar a[href="' + url + '"]');
-          active.parents('td').addClass('activeevent');
+        'use strict';
+        var url = window.location.href;
+        url = url.substring(0, url.indexOf("?"));
+        var active = $('.ploneCalendar a[href="' + url + '"]');
+        active.parents('td').addClass('activeevent');
       });
-
       // Fixes the change between months in the extended calendar portlet
       (function ($) {
-          function load_portlet_calendar(event, elem) {
-              event.preventDefault();
-              event.stopPropagation();
-              var pw, elem_data, portlethash, url;
-              pw = elem.closest('.portletWrapper');
-              elem_data = elem.data();
-              portlethash = pw.attr('id');
-              portlethash = portlethash.substring(15, portlethash.length);
-              url = portal_url +
-                    '/@@render-portlet?portlethash=' + portlethash +
-                    '&year=' + elem_data.year +
-                    '&month=' + elem_data.month;
-              $.ajax({
-                  url: url,
-                  success: function (data) {
-                      pw.html(data);
-                      rebind_portlet_calendar();
-                  }
-              });
-          }
-
-          function rebind_portlet_calendar() {
-              $('.portletCalendar a.calendarNext').click(function (event) {
-                  load_portlet_calendar(event, $(this));
-              });
-              $('.portletCalendar a.calendarPrevious').click(function (event) {
-                  load_portlet_calendar(event, $(this));
-              });
-          }
-
-          $(document).ready(function () {
+        function load_portlet_calendar(event, elem) {
+          event.preventDefault();
+          event.stopPropagation();
+          var pw, elem_data, portlethash, url;
+          pw = elem.closest('.portletWrapper');
+          elem_data = elem.data();
+          portlethash = pw.attr('id');
+          portlethash = portlethash.substring(15, portlethash.length);
+          url = portal_url +
+            '/@@render-portlet?portlethash=' + portlethash +
+            '&year=' + elem_data.year +
+            '&month=' + elem_data.month;
+          $.ajax({
+            url: url,
+            success: function (data) {
+              pw.html(data);
               rebind_portlet_calendar();
+            }
           });
-
+        }
+        function rebind_portlet_calendar() {
+          $('.portletCalendar a.calendarNext').click(function (event) {
+            load_portlet_calendar(event, $(this));
+          });
+          $('.portletCalendar a.calendarPrevious').click(function (event) {
+            load_portlet_calendar(event, $(this));
+          });
+        }
+        $(document).ready(function () {
+          rebind_portlet_calendar();
+        });
       }(jQuery));
-    // ]]>
+      // ]]>
     </script>
   </metal:block>
-
 </html>
