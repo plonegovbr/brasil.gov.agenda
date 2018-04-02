@@ -10,9 +10,6 @@ addons:
   # XXX: use an older Firefox ESR as we are stuck with selenium = 2.53.5
   #      https://github.com/SeleniumHQ/selenium/issues/2739#issuecomment-249482533
   firefox: 45.9.0esr
-env:
-  global:
-  - PLONE_CSRF_DISABLED=true
 matrix:
   fast_finish: true
 before_install:

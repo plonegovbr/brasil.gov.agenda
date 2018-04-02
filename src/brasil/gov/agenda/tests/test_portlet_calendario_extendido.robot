@@ -11,7 +11,7 @@ ${id_agenda} =  agenda-do-presidente
 
 *** Test cases ***
 
- Test Navegacao Portlet Calendario
+Test Navegacao Portlet Calendario
     Enable Autologin as  Site Administrator
     Go to homepage
 
