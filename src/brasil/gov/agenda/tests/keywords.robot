@@ -54,6 +54,9 @@ Create AgendaDiaria
 
 Manage Portlets
     Go to   ${PLONE_URL}/@@manage-portlets
+    # Clica no botão para confirmar ação caso aparecer
+    ${present}=  Run Keyword And Return Status  Element Should Be Visible  name=form.button.confirm
+    Run Keyword If  ${present}  Click Button  form.button.confirm
 
 Add Right Portlet
     [arguments]  ${portlet}

@@ -4,6 +4,9 @@ Changelog
 2.0a1 (unreleased)
 ^^^^^^^^^^^^^^^^^^
 
+- Revisa testes habilitando proteção CSRF.
+  [rodfersou]
+
 - Atualiza layout e funcionalidades da view de Agenda.
   [rodfersou]
 
