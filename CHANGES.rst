@@ -4,6 +4,9 @@ Changelog
 2.0a1 (unreleased)
 ^^^^^^^^^^^^^^^^^^
 
+- Adiciona dependência no plone4.csrffixes e corrige testes.
+  [rodfersou]
+
 - Atualiza layout e funcionalidades da view de Agenda.
   [rodfersou]
 
