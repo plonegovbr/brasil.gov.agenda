@@ -16,6 +16,7 @@ ${date_year_selector} =  select#form-widgets-date-year
 ${title_extended_calendar_selector} =  input#form\\.name
 ${mes_anterior_selector} =  a#calendar-previous
 ${mes_posterior_selector} =  a#calendar-next
+${csrf_button_selector} =  form.button.confirm
 
 *** Keywords ***
 
@@ -54,9 +55,10 @@ Create AgendaDiaria
 
 Manage Portlets
     Go to   ${PLONE_URL}/@@manage-portlets
-    # Clica no botão para confirmar ação caso aparecer
-    ${present}=  Run Keyword And Return Status  Element Should Be Visible  name=form.button.confirm
-    Run Keyword If  ${present}  Click Button  form.button.confirm
+    # HACK: in case CSRF protection is activated, confirm and continue
+    #       we have absolutely no idea why this happens
+    ${present}=  Run Keyword And Return Status  Element Should Be Visible  name=${csrf_button_selector}
+    Run Keyword If  ${present}  Click Button  ${csrf_button_selector}
 
 Add Right Portlet
     [arguments]  ${portlet}
