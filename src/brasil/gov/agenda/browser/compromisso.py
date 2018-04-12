@@ -89,9 +89,9 @@ class CompromissoView (grok.View):
         return autoridade
 
     def imagem(self):
-        imagem = self.agenda.image
+        imagem = self.context.image
         if imagem:
-            view = self.agenda.restrictedTraverse('@@images')
+            view = self.context.restrictedTraverse('@@images')
             scale = view.scale(fieldname='image', scale='large')
             tag = scale.tag()
             return tag
