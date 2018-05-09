@@ -1,0 +1,20 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:browser="http://namespaces.zope.org/browser">
+
+  <include package="z3c.unconfigure" file="meta.zcml" />
+
+  <unconfigure>
+    <!-- Referencio o meu próprio arquivo js aqui pra evitar erro do zcml
+         (reclamando que esse recurso não existe) afinal de contas, o que
+         importa é o nome do resource. -->
+    <browser:resource
+      name="plone.app.event.portlet_calendar.js"
+      file="overrides/portlet_calendar.js"
+      permission="zope.Public"
+      layer="plone.app.event.interfaces.IBrowserLayer"
+      />
+
+  </unconfigure>
+
+</configure>

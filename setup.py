@@ -67,6 +67,7 @@ setup(
         'Products.CMFQuickInstallerTool',
         'Products.GenericSetup',
         'setuptools',
+        'z3c.unconfigure',
         'zope.component',
         'zope.container',
         'zope.event',

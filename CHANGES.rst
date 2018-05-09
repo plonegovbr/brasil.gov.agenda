@@ -4,7 +4,8 @@ Changelog
 1.1.3 (unreleased)
 ^^^^^^^^^^^^^^^^^^
 
-- Nothing changed yet.
+- Corrige layout do portlet de agenda após atualização de plone.app.contenttypes 1.1.x. (relacionado a `#82`_).
+  [idgserpro]
 
 
 1.1.2 (2017-11-13)
@@ -206,3 +207,4 @@ Changelog
 .. _`#23`: https://github.com/plonegovbr/brasil.gov.agenda/issues/23
 .. _`#32`: https://github.com/plonegovbr/brasil.gov.agenda/issues/32
 .. _`#37`: https://github.com/plonegovbr/brasil.gov.agenda/issues/37
+.. _`#82`: https://github.com/plonegovbr/brasil.gov.agenda/issues/82

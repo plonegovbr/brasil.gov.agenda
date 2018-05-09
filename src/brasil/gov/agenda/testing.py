@@ -18,6 +18,12 @@ class Fixture(PloneSandboxLayer):
         self.loadZCML(package=collective.cover)
         import brasil.gov.agenda
         self.loadZCML(name='testing.zcml', package=brasil.gov.agenda)
+        # Necessário para teste test_custom_js_portlet_calendar. Ver também
+        # https://github.com/plone/plone.app.event/issues/81
+        z2.installProduct(app, 'Products.DateRecurringIndex')
+
+    def tearDownZope(self, app):
+        z2.uninstallProduct(app, 'Products.DateRecurringIndex')
 
     def setUpPloneSite(self, portal):
         self.applyProfile(portal, 'brasil.gov.agenda:default')

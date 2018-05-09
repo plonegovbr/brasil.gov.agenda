@@ -5,10 +5,12 @@ from brasil.gov.agenda.testing import INTEGRATION_TESTING
 from collective.portlet.calendar import calendar
 from collective.portlet.calendar.browser.interfaces import ICalendarExLayer
 from plone import api
+from plone.app.testing import applyProfile
 from plone.app.testing import setRoles
 from plone.app.testing import TEST_USER_ID
 from plone.portlets.interfaces import IPortletManager
 from plone.portlets.interfaces import IPortletRenderer
+from plone.testing.z2 import Browser
 from zope.component import getMultiAdapter
 from zope.component import getUtility
 from zope.interface import alsoProvides
@@ -25,6 +27,7 @@ class CalendarPortletTestCase(unittest.TestCase):
     def setUp(self):
         self.portal = self.layer['portal']
         self.request = self.layer['request']
+        self.browser = Browser(self.layer['app'])
         # Marca o request
         noLongerProvides(self.request, ICalendarExLayer)
         alsoProvides(self.request, IBrowserLayer)
@@ -63,3 +66,18 @@ class CalendarPortletTestCase(unittest.TestCase):
         self.assertTrue(renderer.is_agenda())
         self.assertEqual(renderer.root_url(), 'http://nohost/plone/test-folder/agenda')
         self.assertEqual(len(renderer.get_agendasdiarias()), 1)
+
+    def test_custom_js_portlet_calendar(self):
+        applyProfile(self.portal, 'plone.app.contenttypes:default')
+        resource_url = '{0}/{1}'.format(
+            self.portal.absolute_url(),
+            '++resource++plone.app.event.portlet_calendar.js',
+        )
+        # Customizamos o js em
+        # https://github.com/plone/plone.app.event/blob/1.1.8/plone/app/event/portlets/portlet_calendar.js
+        # justamente para remover o 'tooltip': portanto, fazemos um teste
+        # simples verificando que ele foi removido.
+        removed_word = 'tooltip'
+        self.browser.open(resource_url)
+        contents = self.browser.contents
+        self.assertNotIn(removed_word, contents)
