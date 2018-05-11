@@ -4,6 +4,9 @@ Changelog
 1.1.3 (unreleased)
 ^^^^^^^^^^^^^^^^^^
 
+- Corrige (via patch) navegação entre os meses de um calendário estendido. (fecha `#82`_).
+  [idgserpro]
+
 - Corrige layout do portlet de agenda após atualização de plone.app.contenttypes 1.1.x. (relacionado a `#82`_).
   [idgserpro]
 
