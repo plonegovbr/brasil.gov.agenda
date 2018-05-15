@@ -7,7 +7,7 @@
 
   <genericsetup:upgradeSteps
       source="4003"
-      destination="4003r01"
+      destination="4004"
       profile="brasil.gov.agenda:default">
 
     <genericsetup:upgradeStep
