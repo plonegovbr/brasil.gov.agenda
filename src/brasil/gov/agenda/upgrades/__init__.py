@@ -15,3 +15,18 @@ def cook_javascript_resources(context):
     js_tool = api.portal.get_tool('portal_javascripts')
     js_tool.cookResources()
     logger.info('JavaScript resources were cooked')
+
+
+def get_valid_objects(brains):
+    """Generate a list of objects associated with valid brains."""
+    for b in brains:
+        try:
+            obj = b.getObject()
+        except (AttributeError, KeyError):
+            obj = None
+
+        if obj is None:  # warn on broken entries in the catalog
+            logger.warn(
+                u'Invalid reference in the catalog: {0}'.format(b.getPath()))
+            continue
+        yield obj

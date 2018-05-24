@@ -4,6 +4,9 @@ Changelog
 2.0a1 (unreleased)
 ^^^^^^^^^^^^^^^^^^
 
+- Corrige ``WrongType`` ao tentar editar agendas sem tags (fecha `#85 <https://github.com/plonegovbr/brasil.gov.agenda/issues/85>`_).
+  [hvelarde]
+
 - Adiciona dependência no plone4.csrffixes e corrige testes.
   [rodfersou]
 

@@ -6,15 +6,22 @@
     i18n_domain="brasil.gov.agenda">
 
   <genericsetup:upgradeSteps
-      source="4003"
-      destination="4004"
+      source="*"
+      destination="5000"
       profile="brasil.gov.agenda:default">
+
+    <genericsetup:upgradeStep
+        title="Fix resource references"
+        description="Fix resource references after add webpack."
+        handler=".fix_resources_references"
+        />
 
     <genericsetup:upgradeStep
         title="Cook CSS resources"
         description="There were changes in the CSS files, so we need to cook the resources."
         handler="..cook_css_resources"
         />
+
     <genericsetup:upgradeStep
         title="Cook JS resources"
         description="There were changes in the JS files, so we need to cook the resources."
