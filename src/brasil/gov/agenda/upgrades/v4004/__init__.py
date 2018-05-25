@@ -11,17 +11,16 @@ def fix_subjects_on_agendas(setup_tool):
     Refs. https://github.com/plonegovbr/brasil.gov.agenda/issues/85
     """
     test = 'test' in setup_tool.REQUEST  # used to ignore transactions on tests
-    logger.info('Reindexing the catalog')
+    logger.info('Fixing subject field values in agendas')
     catalog = api.portal.get_tool('portal_catalog')
-    results = catalog(portal_type='Agenda')
-    logger.info(u'Found {0} agendas'.format(len(results)))
+    results = catalog(portal_type=['Agenda', 'AgendaDiaria', 'Compromisso'])
+    logger.info('{0} items will be analyzed'.format(len(results)))
     n = 0
     for obj in get_valid_objects(results):
         if obj.subjects is not None:
             continue
 
         obj.subjects = ()
-        catalog.catalog_object(obj, idxs=['Subject'])
         n += 1
         if n % 1000 == 0 and not test:
             transaction.commit()

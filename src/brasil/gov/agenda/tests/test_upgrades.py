@@ -57,12 +57,23 @@ class to4004TestCase(UpgradeTestCaseBase):
         step = self.get_upgrade_step(title)
         self.assertIsNotNone(step)
 
+        import datetime
+        date = datetime.datetime(2018, 5, 25)
         with api.env.adopt_roles(['Manager']):
-            obj = api.content.create(self.portal, 'Agenda', 'foo')
+            agenda = api.content.create(self.portal, 'Agenda', 'foo')
+            agendadiaria = api.content.create(
+                agenda, 'AgendaDiaria', '2018-05-25', date=date)
+            compromisso = api.content.create(
+                agendadiaria, 'Compromisso', 'bar', start_date=date)
 
         # simulate issue
-        obj.subjects = None
+        agenda.subjects = None
+        agendadiaria.subjects = None
+        compromisso.subjects = None
 
         # run the upgrade step to validate the update
         self.execute_upgrade_step(step)
-        self.assertEqual(obj.subjects, ())
+
+        self.assertEqual(agenda.subjects, ())
+        self.assertEqual(agendadiaria.subjects, ())
+        self.assertEqual(compromisso.subjects, ())
