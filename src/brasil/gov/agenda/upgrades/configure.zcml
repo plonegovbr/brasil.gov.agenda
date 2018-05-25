@@ -1,11 +1,3 @@
 <configure xmlns="http://namespaces.zope.org/zope">
-
-    <include package=".v2000" />
-    <include package=".v3000" />
-    <include package=".v4000" />
-    <include package=".v4001" />
-    <include package=".v4002" />
-    <include package=".v4003" />
-    <include package=".v4004" />
-
+  <include package=".v5000" />
 </configure>
