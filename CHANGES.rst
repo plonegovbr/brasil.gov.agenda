@@ -4,6 +4,9 @@ Changelog
 1.1.3 (unreleased)
 ^^^^^^^^^^^^^^^^^^
 
+- Corrige ``WrongType`` ao tentar editar agendas sem tags (fecha `#85 <https://github.com/plonegovbr/brasil.gov.agenda/issues/85>`_).
+  [hvelarde]
+
 - Corrige (via patch) navegação entre os meses de um calendário estendido. (fecha `#82`_).
   [idgserpro]
 

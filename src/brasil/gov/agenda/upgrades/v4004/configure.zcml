@@ -16,6 +16,12 @@
         handler="..cook_javascript_resources"
         />
 
+    <genericsetup:upgradeStep
+        title="Fix None subjects on agendas"
+        description="Refs. https://github.com/plonegovbr/brasil.gov.agenda/issues/85"
+        handler=".fix_subjects_on_agendas"
+        />
+
   </genericsetup:upgradeSteps>
 
 </configure>

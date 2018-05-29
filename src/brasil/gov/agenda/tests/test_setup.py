@@ -50,7 +50,7 @@ class TestInstall(BaseTestCase):
 
     def test_version(self):
         self.assertEqual(
-            self.st.getLastVersionForProfile(self.profile), (u'4003',))
+            self.st.getLastVersionForProfile(self.profile), (u'4004',))
 
     def test_static_resource_grokker(self):
         """Grok does not register automatically the static resources anymore see:
