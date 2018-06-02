@@ -34,16 +34,24 @@ export default class DatePicker {
   update() {
     this.updateMonthPicker();
     this.updateDayPicker();
+    let agendaDiaria = `${zfill(this.day)}/${zfill(this.month + 1)}/${this.year}`;
+    let agendaDiariaURL = `${this.year}-${zfill(this.month + 1)}-${zfill(this.day)}`;
     if (typeof this.callback === 'function') {
-      let agendaDiaria = `${this.year}-${zfill(this.month + 1)}-${zfill(this.day)}`;
       $.ajax({
         headers: {
           Accept: 'application/json'
         },
         global: false,
-        url: `${this.agendaURL}/${agendaDiaria}`,
+        url: `${this.agendaURL}/${agendaDiariaURL}`,
       }).always(this.callback);
     }
+    let title = `Agenda de ${$('.documentFirstHeading').text().trim()} para ${agendaDiaria}`;
+    window.history.pushState(
+      {day: this.day, month: this.month, year: this.year},
+      title,
+      `${this.agendaURL}/${agendaDiariaURL}?month:int=${this.month + 1}&year:int=${this.year}`
+    );
+    document.title = title;
   }
   updateMonthPicker() {
     this.$currentPicker.datepicker('setDate', new Date(this.year, this.month, this.day));
@@ -98,6 +106,7 @@ export default class DatePicker {
 
       this.$day.append($day);
     }
+    // rfs
   }
   initMonthPicker() {
     // this event is needed to get right translation
