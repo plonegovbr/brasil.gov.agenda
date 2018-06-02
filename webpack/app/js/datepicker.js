@@ -3,10 +3,11 @@ let zfill = (number, size=2) => (Array(size).fill('0').join('') + number).slice(
 
 
 export default class DatePicker {
-  constructor(container, callback) {
+  constructor(container, callback, updateTitle=false) {
     this.container = container;
     this.agendaURL = container.getAttribute('data-url');
     this.callback = callback;
+    this.updateTitle = updateTitle;
     this.$month = this.$('.monthpicker .month, .calendar-title .strmonth');
     this.$year = this.$('.monthpicker .year, .calendar-title .year');
     this.$day = this.$('.daypicker')
@@ -34,7 +35,6 @@ export default class DatePicker {
   update() {
     this.updateMonthPicker();
     this.updateDayPicker();
-    let agendaDiaria = `${zfill(this.day)}/${zfill(this.month + 1)}/${this.year}`;
     let agendaDiariaURL = `${this.year}-${zfill(this.month + 1)}-${zfill(this.day)}`;
     if (typeof this.callback === 'function') {
       $.ajax({
@@ -45,13 +45,16 @@ export default class DatePicker {
         url: `${this.agendaURL}/${agendaDiariaURL}`,
       }).always(this.callback);
     }
-    let title = `Agenda de ${$('.documentFirstHeading').text().trim()} para ${agendaDiaria}`;
-    window.history.pushState(
-      {day: this.day, month: this.month, year: this.year},
-      title,
-      `${this.agendaURL}/${agendaDiariaURL}?month:int=${this.month + 1}&year:int=${this.year}`
-    );
-    document.title = title;
+    if (this.updateTitle) {
+      let agendaDiaria = `${zfill(this.day)}/${zfill(this.month + 1)}/${this.year}`;
+      let title = `Agenda de ${$('.documentFirstHeading').text().trim()} para ${agendaDiaria}`;
+      window.history.pushState(
+        {day: this.day, month: this.month, year: this.year},
+        title,
+        `${this.agendaURL}/${agendaDiariaURL}?month:int=${this.month + 1}&year:int=${this.year}`
+      );
+      document.title = title;
+    }
   }
   updateMonthPicker() {
     this.$currentPicker.datepicker('setDate', new Date(this.year, this.month, this.day));

@@ -7,7 +7,7 @@ let zfill = (number, size=2) => (Array(size).fill('0').join('') + number).slice(
 export default class AgendaView {
   constructor(container) {
     this.container = container;
-    this.datepicker = new DatePicker(container, this.onDateChange.bind(this));
+    this.datepicker = new DatePicker(container, this.onDateChange.bind(this), true);
     this.$appointments = this.$('.list-compromissos');
   }
   $(selector) {
