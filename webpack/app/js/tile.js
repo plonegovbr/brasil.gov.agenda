@@ -51,11 +51,11 @@ export default class AgendaTile {
       let end_date = new Date(compromisso.end_date);
       let $item = $(`
         <div class="collection-events-item">
-          <a class="title-item" href="${compromisso['@id']}">${compromisso.title}</a>
-          <div class="location-item">
+          <a class="title-item" href="${compromisso['@id']}">${compromisso.title}</a>` +
+          (compromisso.location == null? '' : `<div class="location-item">
             <span class="location">${compromisso.location}</span>
-          </div>
-          <div class="timestamp-cell">
+          </div>`) +
+          `<div class="timestamp-cell">
             <span class="timestamp">
               ${zfill(start_date.getHours())}h${zfill(start_date.getMinutes())}
             </span>

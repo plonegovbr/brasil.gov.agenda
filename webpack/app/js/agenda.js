@@ -54,9 +54,9 @@ export default class AgendaView {
               </time>
             </div>
             <div class="compromisso-dados">
-              <h4 class="compromisso-titulo">${compromisso.title}</h4>
-              <p class="compromisso-local">${compromisso.location}</p>
-              <span class="download-compromisso">
+              <h4 class="compromisso-titulo">${compromisso.title}</h4>` +
+              (compromisso.location == null? '' : `<p class="compromisso-local">${compromisso.location}</p>`) +
+              `<span class="download-compromisso">
                 <a class="add-agenda vcal" href="${compromisso['@id']}/vcal_view">VCAL</a>
                 <span>Adicionar ao meu calendário</span>
               </span>
