@@ -12,7 +12,8 @@
     <div class="agenda-tile tile-content"
          tal:attributes="id string:agenda-$tile_id;
                          class python: 'agenda-tile tile-content' + (' has-image' if view.has_image else '');
-                         data-url view/agenda_url">
+                         data-url view/agenda_url"
+         tal:condition="not:is_empty">
       <tal:image condition="view/has_image">
         <img class="agenda-image"
              sizes="100vw"
