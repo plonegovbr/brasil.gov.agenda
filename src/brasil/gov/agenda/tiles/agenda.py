@@ -99,14 +99,12 @@ class AgendaTile(PersistentCoverTile, AgendaMixin):
                 'daypicker': True,
                 'collection_events': True,
                 'agenda_tile_footer': True,
-                'agenda_url': obj.absolute_url(),
                 'uuid': uuid,
             })
 
     def _last_modified(self):
-        agenda = uuidToObject(self.data['uuid'])
-        last_modified = int(agenda.modified().strftime('%s'))
-        agenda_diaria = agenda.get(time.strftime('%Y-%m-%d'), None)
+        last_modified = int(self.agenda.modified().strftime('%s'))
+        agenda_diaria = self.agenda.get(time.strftime('%Y-%m-%d'), None)
         if agenda_diaria:
             modified = int(agenda_diaria.modified().strftime('%s'))
             if modified > last_modified:
@@ -122,13 +120,11 @@ class AgendaTile(PersistentCoverTile, AgendaMixin):
         return uuidToObject(self.data['uuid'])
 
     def agenda_diaria(self):
-        agenda = uuidToObject(self.data['uuid'])
-        agenda_diaria = agenda.get(time.strftime('%Y-%m-%d'), None)
-        return agenda_diaria
+        return self.agenda.get(time.strftime('%Y-%m-%d'), None)
 
     @property
     def agenda_url(self):
-        return self.data.get('agenda_url', None)
+        return self.agenda.absolute_url()
 
     def _collection_events(self, last_modified=None):
         agenda_diaria = self.agenda_diaria()
@@ -164,8 +160,7 @@ class AgendaTile(PersistentCoverTile, AgendaMixin):
         return self._collection_events(self._last_modified())
 
     def _url_agenda(self, last_modified=None):
-        agenda = uuidToObject(self.data['uuid'])
-        agenda_diaria = agenda.get(time.strftime('%Y-%m-%d'), None)
+        agenda_diaria = self.agenda.get(time.strftime('%Y-%m-%d'), None)
         if agenda_diaria:
             return agenda_diaria.absolute_url()
 
