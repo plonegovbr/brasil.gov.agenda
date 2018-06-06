@@ -1,6 +1,6 @@
-***************************************************************
-`.gov.br: Agenda de Membros do Governo Brasileiro`
-***************************************************************
+************************************************
+.gov.br: Agenda de Membros do Governo Brasileiro
+************************************************
 
 .. contents:: Conteúdo
    :depth: 2
@@ -8,12 +8,7 @@
 Introdução
 -----------
 
-Este pacote provê tipos de conteúdo necessários a gestão de Agendas de membros
-do Governo Brasileiro conforme disposto na
-`Lei 12.813, de 16 de Maio de 2013
-<http://www.planalto.gov.br/ccivil_03/_Ato2011-2014/2013/Lei/L12813.htm>`_
-artigos 2o. e 11o.
-
+Este pacote provê tipos de conteúdo necessários a gestão de Agendas de membros do Governo Brasileiro conforme disposto na `Lei 12.813, de 16 de Maio de 2013 <http://www.planalto.gov.br/ccivil_03/_Ato2011-2014/2013/Lei/L12813.htm>`_ artigos 2o. e 11o.
 
 Estado deste pacote
 ---------------------
@@ -35,24 +30,20 @@ O estado atual dos testes pode ser visto nas imagens a seguir:
 Instalação
 ------------
 
-Para habilitar a instalação deste produto em um ambiente que utilize o
-buildout:
+Para habilitar a instalação deste produto em um ambiente que utilize o buildout:
 
-1. Editar o arquivo buildout.cfg (ou outro arquivo de configuração) e
-   adicionar o pacote ``brasil.gov.agenda`` à lista de eggs da instalação::
+1. Editar o arquivo buildout.cfg (ou outro arquivo de configuração) e adicionar o pacote ``brasil.gov.agenda`` à lista de eggs da instalação::
 
         [buildout]
         ...
         eggs =
             brasil.gov.agenda
 
-2. Após alterar o arquivo de configuração é necessário executar
-   ''bin/buildout'', que atualizará sua instalação.
+2. Após alterar o arquivo de configuração é necessário executar ''bin/buildout'', que atualizará sua instalação.
 
 3. Reinicie o Plone
 
-4. Acesse o painel de controle e instale o produto
-**Brasil.gov.br: Agenda de Membros do Governo Brasileiro**.
+4. Acesse o painel de controle e instale o produto **Brasil.gov.br: Agenda de Membros do Governo Brasileiro**.
 
 Rodando o buildout de uma tag antiga do pacote
 ----------------------------------------------
@@ -76,7 +67,7 @@ Exemplo: você clonou o repositório do brasil.gov.portal na sua máquina, e deu
         https://raw.githubusercontent.com/plonegovbr/portal.buildout/master/buildout.d/versions.cfg
         https://raw.githubusercontent.com/plone/plone.app.robotframework/master/versions.cfg
         https://raw.githubusercontent.com/plonegovbr/portalpadrao.release/master/1.0.5/versions.cfg
-        
+
 Para saber qual arquivo de versões é compatível, no caso do brasil.gov.portal, é simples pois é a mesma versão (no máximo um bug fix, por exemplo, brasil.gov.portal é 1.1.3 e o arquivo de versão é 1.1.3.1). Para os demais pacotes, recomendamos comparar a data da tag do pacote e a data nos changelog entre uma versão e outra para adivinhar a versão compatível.
 
 Desenvolvimento
@@ -96,19 +87,21 @@ Este pacote adiciona os seguintes comandos na pasta bin do buildout para process
 
     $ bin/env-brasilgovagenda
 
-Este comando adiciona no terminal o node do buildout no PATH do sistema, dessa forma voce pode trabalhar com webpack conforme a documentação oficial.
+Este comando adiciona no terminal o node do buildout no PATH do sistema,
+dessa forma voce pode trabalhar com webpack conforme a documentação oficial.
 
 .. code-block:: console
 
     $ bin/watch-brasilgovagenda
 
-Este comando instrui ao Webpack para esperar por qualquer mudança nos arquivos SASS e gera a versão minificada do CSS para a aplicação.
+Este comando instrui ao webpack para esperar por qualquer mudança nos arquivos SASS e gera a versão minificada do CSS para a aplicação.
 
 .. code-block:: console
 
     $ bin/debug-brasilgovagenda
 
-Este comando faz o mesmo que o comando watch, mas não minifica o CSS final.  Utilizado para debugar a geração do CSS.
+Este comando faz o mesmo que o comando watch, mas não minifica o CSS final.
+Utilizado para debugar a geração do CSS.
 
 .. code-block:: console
 

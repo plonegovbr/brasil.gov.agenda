@@ -20,5 +20,5 @@ Changelog
 - Atualiza layout e funcionalidades do tile de Agenda.
   [rodfersou]
 
-- Adiciona suporte para processamento de recursos estáticos usando o `webpack <http://webpack.js.org/>`_.
+- Adiciona suporte para processamento de recursos estáticos usando o `webpack`_.
   [rodfersou]
