@@ -1,7 +1,7 @@
 Changelog
 ---------
 
-2.0a1 (unreleased)
+2.0a1 (2018-06-06)
 ^^^^^^^^^^^^^^^^^^
 
 - Adiciona dependência no plone4.csrffixes e corrige testes.
