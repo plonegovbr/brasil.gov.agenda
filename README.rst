@@ -24,6 +24,9 @@ O estado atual dos testes pode ser visto nas imagens a seguir:
 .. image:: https://img.shields.io/travis/plonegovbr/brasil.gov.agenda/master.svg
     :target: http://travis-ci.org/plonegovbr/brasil.gov.agenda
 
+.. image:: https://img.shields.io/codacy/grade/77956b9df8a34087bc7ac4079f0e2ae3.svg
+    :target: https://www.codacy.com/app/hvelarde/brasil.gov.agenda
+
 .. image:: https://img.shields.io/coveralls/plonegovbr/brasil.gov.agenda/master.svg
     :target: https://coveralls.io/r/plonegovbr/brasil.gov.agenda
 
