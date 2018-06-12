@@ -11,9 +11,15 @@ export default class AgendaTile {
     this.datepicker = new DatePicker(this.tile, this.onDateChange.bind(this));
     this.initSwiper();
     this.$('.is-now').append('<div class="now">Agora</div>')
+    this.tzname = tile.dataset.tzname;
   }
   $(selector) {
     return $(selector, this.tile);
+  }
+  extractTime(dateTime) {
+    let [, time] = dateTime.split('T');
+    let [hours, minutes, ] = time.split(':');
+    return `${zfill(hours)}h${zfill(minutes)}`;
   }
   onDateChange(agendaDiaria) {
     this.swiper.removeAllSlides();
@@ -46,9 +52,6 @@ export default class AgendaTile {
         this.swiper.appendSlide(this._$slide);
         this._$slide = $('<div class="swiper-slide"></div>');
       }
-      let now = new Date();
-      let start_date = new Date(compromisso.start_date);
-      let end_date = new Date(compromisso.end_date);
       let $item = $(`
         <div class="collection-events-item">
           <a class="title-item" href="${compromisso['@id']}">${compromisso.title}</a>` +
@@ -57,11 +60,15 @@ export default class AgendaTile {
           </div>`) +
           `<div class="timestamp-cell">
             <span class="timestamp">
-              ${zfill(start_date.getHours())}h${zfill(start_date.getMinutes())}
+              ${this.extractTime(compromisso.start_date)}
             </span>
           </div>
         </div>
       `);
+      let now = new Date();
+      let start_date = new Date(`${compromisso.start_date}${this.tzname}:00`);
+      let end_date = new Date(`${compromisso.end_date}${this.tzname}:00`);
+      // Javascript getTime method return timestamp
       if (now.getTime() > start_date.getTime() && now.getTime() < end_date.getTime()) {
         $('.timestamp-cell', $item).addClass('is-now');
         $('.timestamp-cell', $item).append('<div class="now">Agora</div>')

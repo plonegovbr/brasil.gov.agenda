@@ -9,9 +9,15 @@ export default class AgendaView {
     this.container = container;
     this.datepicker = new DatePicker(container, this.onDateChange.bind(this), true);
     this.$appointments = this.$('.list-compromissos');
+    this.tzname = container.dataset.tzname;
   }
   $(selector) {
     return $(selector, this.container.parentElement);
+  }
+  extractTime(dateTime) {
+    let [, time] = dateTime.split('T');
+    let [hours, minutes, ] = time.split(':');
+    return `${zfill(hours)}h${zfill(minutes)}`;
   }
   onDateChange(agendaDiaria) {
     this.$appointments.html('');
@@ -41,16 +47,13 @@ export default class AgendaView {
       return new Date(a.start_date) - new Date(b.start_date);
     });
     for (let compromisso of this.compromissos) {
-      let now = new Date();
-      let start_date = new Date(compromisso.start_date);
-      let end_date = new Date(compromisso.end_date);
       let $item = $(`
         <li class="item-compromisso-wrapper">
           <div class="item-compromisso">
             <div class="compromisso-horarios">
               <time class="horario compromisso-inicio"
                     datetime="${compromisso.start_date}">
-                ${zfill(start_date.getHours())}h${zfill(start_date.getMinutes())}
+                ${this.extractTime(compromisso.start_date)}
               </time>
             </div>
             <div class="compromisso-dados">
@@ -64,6 +67,10 @@ export default class AgendaView {
           </div>
         </li>
       `);
+      let now = new Date();
+      let start_date = new Date(`${compromisso.start_date}${this.tzname}:00`);
+      let end_date = new Date(`${compromisso.end_date}${this.tzname}:00`);
+      // Javascript getTime method return timestamp
       if (now.getTime() > start_date.getTime() && now.getTime() < end_date.getTime()) {
         $('.compromisso-horarios', $item).append('<div class="now">Agora</div>')
       }
