@@ -41,11 +41,10 @@ END:VEVENT
 
 
 class VCSView(BrowserView):
-    """Visao vCal."""
+    """VCS view."""
 
     def getVCal(self):
-        """get vCal data
-        """
+        """Get vCal data."""
         context = self.context
         out = StringIO()
         map = {
@@ -68,9 +67,7 @@ class VCSView(BrowserView):
         out.write(VCS_EVENT_END)
         return out.getvalue()
 
-    def render(self):
-        """vCalendar output
-        """
+    def __call__(self):
         response = self.request.response
         response.setHeader('Content-Type', 'text/x-vCalendar')
         response.setHeader('Content-Disposition',

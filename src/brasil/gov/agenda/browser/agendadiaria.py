@@ -2,6 +2,7 @@
 from Acquisition import aq_parent
 from brasil.gov.agenda import _
 from brasil.gov.agenda.utils import AgendaMixin
+from datetime import datetime
 from Products.CMFCore.utils import getToolByName
 from Products.Five.browser import BrowserView
 from zope.component import getMultiAdapter
@@ -11,7 +12,7 @@ from zope.i18nmessageid import Message
 class AgendaDiariaView(BrowserView, AgendaMixin):
     """Visao padrao da agenda."""
 
-    def update(self):
+    def setup(self):
         plone_tools = getMultiAdapter((self.context, self.request),
                                       name='plone_tools')
         context_state = getMultiAdapter((self.context, self.request),
@@ -27,6 +28,10 @@ class AgendaDiariaView(BrowserView, AgendaMixin):
             url += '?month:int={0}&year:int={1}'.format(
                 self.date.month, self.date.year)
             return self.context.REQUEST.RESPONSE.redirect(url)
+
+    def __call__(self):
+        self.setup()
+        return self.index()
 
     def _format_time(self, value):
         return value.strftime('%Hh%M')

@@ -10,7 +10,7 @@ from zope.i18nmessageid import Message
 class CompromissoView(BrowserView):
     """Visao padrao do tipo compromisso."""
 
-    def update(self):
+    def setup(self):
         self._ts = getToolByName(self.context, 'translation_service')
         context_state = getMultiAdapter((self.context, self.request),
                                         name=u'plone_context_state')
@@ -30,6 +30,10 @@ class CompromissoView(BrowserView):
             url += '?month:int={0}&year:int={1}'.format(
                 self.date.month, self.date.year)
             return self.context.REQUEST.RESPONSE.redirect(url)
+
+    def __call__(self):
+        self.setup()
+        return self.index()
 
     def _format_time(self, value):
         return value.strftime('%Hh%M')

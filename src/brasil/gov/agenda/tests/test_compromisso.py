@@ -269,7 +269,7 @@ class ContentTypeBrowserTestCase(unittest.TestCase):
         portal = self.portal
         self.setupContent(portal)
         view = self.compromisso.restrictedTraverse('@@view')
-        view.update()
+        view.setup()
         # FIXME: Correção do teste para não levar em consideração a língua
         # para não quebrar o build após o rebase pedido em
         # https://github.com/plonegovbr/brasil.gov.agenda/pull/38#issuecomment-88449501
@@ -283,7 +283,7 @@ class ContentTypeBrowserTestCase(unittest.TestCase):
         portal = self.portal
         self.setupContent(portal)
         view = self.compromisso.restrictedTraverse('@@view')
-        view.update()
+        view.setup()
         self.assertIn(u'<img src="http://nohost/plone/agenda-presidente/@@images/',
                       view.imagem())
 

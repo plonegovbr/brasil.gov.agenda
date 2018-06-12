@@ -41,11 +41,10 @@ END:VEVENT
 
 
 class ICSView(BrowserView):
-    """Visao vCal."""
+    """ICS view."""
 
     def getICal(self):
-        """get iCal data
-        """
+        """Get iCal data."""
         context = self.context
         out = StringIO()
         map = {
@@ -82,9 +81,7 @@ class ICSView(BrowserView):
         out.write(ICS_EVENT_END)
         return out.getvalue()
 
-    def render(self):
-        """vCalendar output
-        """
+    def __call__(self):
         response = self.request.response
         response.setHeader('Content-Type', 'text/calendar')
         response.setHeader('Content-Disposition',
