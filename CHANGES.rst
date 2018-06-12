@@ -4,8 +4,9 @@ Changelog
 2.0a2 (unreleased)
 ^^^^^^^^^^^^^^^^^^
 
-- Fix timezone treatment.
-  [hvelarde, rodfersou]
+- Corrije tratamento de fuso horário na view padrão do tipo de conteúdo ``AgendaDiaria``;
+  isso evita mudanças na hora dos compromissos em browsers com um fuso horário diferente do vigente no Brasil.
+  [rodfersou, hvelarde]
 
 
 2.0a1 (2018-06-06)
