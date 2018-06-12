@@ -1,3 +1,3 @@
 <configure xmlns="http://namespaces.zope.org/zope">
-  <include package=".v5000" />
+  <include package=".v4100" />
 </configure>

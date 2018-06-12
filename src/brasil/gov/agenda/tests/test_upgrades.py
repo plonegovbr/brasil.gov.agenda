@@ -40,10 +40,10 @@ class UpgradeTestCaseBase(unittest.TestCase):
         return len(upgrades[0])
 
 
-class to5000TestCase(UpgradeTestCaseBase):
+class to4100TestCase(UpgradeTestCaseBase):
 
     def setUp(self):
-        UpgradeTestCaseBase.setUp(self, u'*', u'5000')
+        UpgradeTestCaseBase.setUp(self, u'*', u'4100')
 
     def test_registrations(self):
         version = self.setup.getLastVersionForProfile(self.profile_id)[0]
@@ -56,11 +56,11 @@ class to5000TestCase(UpgradeTestCaseBase):
         self.assertIsNotNone(step)
 
         # simulate state on previous version
-        from brasil.gov.agenda.upgrades.v5000 import SWIPER_CSS
-        from brasil.gov.agenda.upgrades.v5000 import SWIPER_JS
-        from brasil.gov.agenda.upgrades.v5000 import NEW_CSS
-        from brasil.gov.agenda.upgrades.v5000 import OLD_CSS
-        from brasil.gov.agenda.upgrades.v5000 import NEW_JS
+        from brasil.gov.agenda.upgrades.v4100 import SWIPER_CSS
+        from brasil.gov.agenda.upgrades.v4100 import SWIPER_JS
+        from brasil.gov.agenda.upgrades.v4100 import NEW_CSS
+        from brasil.gov.agenda.upgrades.v4100 import OLD_CSS
+        from brasil.gov.agenda.upgrades.v4100 import NEW_JS
 
         css_tool = api.portal.get_tool('portal_css')
         css_tool.unregisterResource(SWIPER_CSS)

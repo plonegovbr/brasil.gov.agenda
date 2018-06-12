@@ -40,7 +40,7 @@ class InstallTestCase(BaseTestCase):
 
     def test_version(self):
         self.assertEqual(
-            self.st.getLastVersionForProfile(self.profile), (u'5000',))
+            self.st.getLastVersionForProfile(self.profile), (u'4100',))
 
     def test_css_registered(self):
         cssreg = getattr(self.portal, 'portal_css')

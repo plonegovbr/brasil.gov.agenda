@@ -7,7 +7,7 @@
 
   <genericsetup:upgradeSteps
       source="*"
-      destination="5000"
+      destination="4100"
       profile="brasil.gov.agenda:default">
 
     <genericsetup:upgradeStep
