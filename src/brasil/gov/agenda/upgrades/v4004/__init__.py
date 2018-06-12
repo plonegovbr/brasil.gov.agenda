@@ -17,10 +17,10 @@ def fix_subjects_on_agendas(setup_tool):
     logger.info('{0} items will be analyzed'.format(len(results)))
     n = 0
     for obj in get_valid_objects(results):
-        if obj.subjects is not None:
-            continue
+        if obj.subjects is None:
+            obj.subjects = ()
 
-        obj.subjects = ()
+        catalog.catalog_object(obj)
         n += 1
         if n % 1000 == 0 and not test:
             transaction.commit()
