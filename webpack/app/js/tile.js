@@ -16,6 +16,11 @@ export default class AgendaTile {
   $(selector) {
     return $(selector, this.tile);
   }
+  extractTime(dateTime) {
+    let [, time] = dateTime.split('T');
+    let [hours, minutes, ] = time.split(':');
+    return `${zfill(hours)}h${zfill(minutes)}`;
+  }
   onDateChange(agendaDiaria) {
     this.swiper.removeAllSlides();
     this._$slide = $('<div class="swiper-slide"></div>');
@@ -55,7 +60,7 @@ export default class AgendaTile {
           </div>`) +
           `<div class="timestamp-cell">
             <span class="timestamp">
-              ${zfill(start_date.getHours())}h${zfill(start_date.getMinutes())}
+              ${this.extractTime(compromisso.start_date)}
             </span>
           </div>
         </div>

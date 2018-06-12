@@ -14,6 +14,11 @@ export default class AgendaView {
   $(selector) {
     return $(selector, this.container.parentElement);
   }
+  extractTime(dateTime) {
+    let [, time] = dateTime.split('T');
+    let [hours, minutes, ] = time.split(':');
+    return `${zfill(hours)}h${zfill(minutes)}`;
+  }
   onDateChange(agendaDiaria) {
     this.$appointments.html('');
     if (typeof agendaDiaria.items === 'undefined') {
@@ -48,7 +53,7 @@ export default class AgendaView {
             <div class="compromisso-horarios">
               <time class="horario compromisso-inicio"
                     datetime="${compromisso.start_date}">
-                ${zfill(start_date.getHours())}h${zfill(start_date.getMinutes())}
+                ${this.extractTime(compromisso.start_date)}
               </time>
             </div>
             <div class="compromisso-dados">
