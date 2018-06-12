@@ -4,7 +4,8 @@ Changelog
 2.0a2 (unreleased)
 ^^^^^^^^^^^^^^^^^^
 
-- Nothing changed yet.
+- Fix timezone treatment.
+  [hvelarde, rodfersou]
 
 
 2.0a1 (2018-06-06)
