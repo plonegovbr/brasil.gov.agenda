@@ -132,12 +132,6 @@
         <span i18n:translate="label_agendadiaria_sem_compromissos">Sem compromissos oficiais.</span>
       </li>
     </ul>
-    <a tal:condition="view/editable"
-       class="adicionar_compromisso"
-       tal:attributes="href string:${context/absolute_url}/++add++Compromisso"
-       i18n:translate="">
-      Adicionar Compromisso
-    </a>
     <script>
       // <![CDATA[
       jQuery(function($){
