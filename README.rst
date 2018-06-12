@@ -31,7 +31,7 @@ O estado atual dos testes pode ser visto nas imagens a seguir:
     :target: https://coveralls.io/r/plonegovbr/brasil.gov.agenda
 
 Instalação
-------------
+----------
 
 Para habilitar a instalação deste produto em um ambiente que utilize o buildout:
 
@@ -48,30 +48,14 @@ Para habilitar a instalação deste produto em um ambiente que utilize o buildou
 
 4. Acesse o painel de controle e instale o produto **Brasil.gov.br: Agenda de Membros do Governo Brasileiro**.
 
-Rodando o buildout de uma tag antiga do pacote
-----------------------------------------------
+Atualização de 1.x a 2.x
+------------------------
 
-Para atender ao relato de ter vários jobs de integração contínua em pacotes brasil.gov.* (ver https://github.com/plonegovbr/portalpadrao.release/issues/11), no fim da seção extends do buildout.cfg de todos os pacotes brasil.gov.* temos a seguinte linha:
+.. Warning::
+    Só atualize para a versão 2.x do pacote depois de atualizar à versão mais recente da branch 1.x.
 
-.. code-block:: cfg
-
-    https://raw.githubusercontent.com/plonegovbr/portal.buildout/master/buildout.d/versions.cfg
-
-Hoje, esse arquivo contém sempre as versões pinadas de um release a ser lançado. Por esse motivo, quando é feito o checkout de uma tag mais antiga provavelmente você não conseguirá rodar o buildout. Dessa forma, após fazer o checkout de uma tag antiga, recomendamos que adicione, na última linha do extends, o arquivo de versões do IDG compatível com aquela tag, presente no repositório https://github.com/plonegovbr/portalpadrao.release/.
-
-Exemplo: você clonou o repositório do brasil.gov.portal na sua máquina, e deu checkout na tag 1.0.5. Ao editar o buildout.cfg, ficaria dessa forma, já com a última linha adicionada:
-
-.. code-block:: cfg
-
-    extends =
-        https://raw.github.com/collective/buildout.plonetest/master/test-4.3.x.cfg
-        https://raw.github.com/collective/buildout.plonetest/master/qa.cfg
-        http://downloads.plone.org.br/release/1.0.4/versions.cfg
-        https://raw.githubusercontent.com/plonegovbr/portal.buildout/master/buildout.d/versions.cfg
-        https://raw.githubusercontent.com/plone/plone.app.robotframework/master/versions.cfg
-        https://raw.githubusercontent.com/plonegovbr/portalpadrao.release/master/1.0.5/versions.cfg
-
-Para saber qual arquivo de versões é compatível, no caso do brasil.gov.portal, é simples pois é a mesma versão (no máximo um bug fix, por exemplo, brasil.gov.portal é 1.1.3 e o arquivo de versão é 1.1.3.1). Para os demais pacotes, recomendamos comparar a data da tag do pacote e a data nos changelog entre uma versão e outra para adivinhar a versão compatível.
+As atualizações da versão 1.x à 2.x só são suportadas das versões mais recentes de cada branch.
+Antes de atualizar confira que você está efetivamente utilizando a última versão da branch 1.x e que não existem upgrade steps pendentes de serem aplicados.
 
 Desenvolvimento
 ---------------
