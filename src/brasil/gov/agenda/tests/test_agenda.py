@@ -181,5 +181,3 @@ class ContentTypeBrowserTestCase(unittest.TestCase):
         # Vemos o conteudo da view de Agenda
         browser.open(agenda_url)
         self.assertEqual(browser.headers['status'], '200 Ok')
-        self.assertIn(u'Adicionar Agenda Di',
-                      browser.contents.decode('utf-8'))
