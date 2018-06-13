@@ -51,7 +51,7 @@ export default class DatePicker {
       window.history.pushState(
         {day: this.day, month: this.month, year: this.year},
         title,
-        `${this.agendaURL}/${agendaDiariaURL}?month:int=${this.month + 1}&year:int=${this.year}`
+        `${this.agendaURL}/${agendaDiariaURL}`
       );
       document.title = title;
     }

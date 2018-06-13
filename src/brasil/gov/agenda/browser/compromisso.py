@@ -23,13 +23,6 @@ class CompromissoView(BrowserView):
         if not self.editable:
             url = self.agendadiaria.absolute_url()
             return self.context.REQUEST.RESPONSE.redirect(url)
-        year = self.request.form.get('year', None)
-        month = self.request.form.get('month', None)
-        if not year or not month:
-            url = self.context.absolute_url()
-            url += '?month:int={0}&year:int={1}'.format(
-                self.date.month, self.date.year)
-            return self.context.REQUEST.RESPONSE.redirect(url)
 
     def __call__(self):
         self.setup()
