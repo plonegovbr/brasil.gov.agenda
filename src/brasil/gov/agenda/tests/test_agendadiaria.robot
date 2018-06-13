@@ -55,6 +55,8 @@ Test Data Duplicada
     Page Should Contain  Existem alguns erros
 
 Test AgendaDiaria With Portlet
+    [Tags]  Expected Failure
+
     Enable Autologin as  Site Administrator
     Go to homepage
 

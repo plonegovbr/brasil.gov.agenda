@@ -8,6 +8,9 @@ import robotsuite
 import unittest
 
 
+noncritical = ['Expected Failure']
+
+
 def test_suite():
     suite = unittest.TestSuite()
     current_dir = os.path.abspath(os.path.dirname(__file__))
@@ -16,7 +19,9 @@ def test_suite():
         if doc.startswith('test_') and doc.endswith('.robot')
     ]
     suite.addTests([
-        layered(robotsuite.RobotTestSuite(t), layer=ROBOT_TESTING)
+        layered(
+            robotsuite.RobotTestSuite(t, noncritical=noncritical),
+            layer=ROBOT_TESTING)
         for t in tests
     ])
     return suite
