@@ -26,10 +26,9 @@
                    placeholder="Buscar em agenda"
                    autocomplete="off" />
             <input class="searchButton" type="submit" value="Buscar" />
-            <input type="checkbox"
+            <input type="hidden"
                    name="portal_type:list"
                    value="Compromisso"
-                   class="hiddenStructure"
                    checked="checked"
                    id="portal_type_1_3" />
           </div>
