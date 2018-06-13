@@ -1,24 +1,16 @@
 # -*- coding: utf-8 -*-
-
 from Acquisition import aq_parent
 from brasil.gov.agenda import _
-from brasil.gov.agenda.interfaces import ICompromisso
-from five import grok
 from Products.CMFCore.utils import getToolByName
+from Products.Five.browser import BrowserView
 from zope.component import getMultiAdapter
 from zope.i18nmessageid import Message
 
 
-grok.templatedir('templates')
+class CompromissoView(BrowserView):
+    """Visao padrao do tipo compromisso."""
 
-
-class CompromissoView (grok.View):
-    """ Visao padrao do tipo compromisso
-    """
-    grok.name('view')
-    grok.context(ICompromisso)
-
-    def update(self):
+    def setup(self):
         self._ts = getToolByName(self.context, 'translation_service')
         context_state = getMultiAdapter((self.context, self.request),
                                         name=u'plone_context_state')
@@ -38,6 +30,10 @@ class CompromissoView (grok.View):
             url += '?month:int={0}&year:int={1}'.format(
                 self.date.month, self.date.year)
             return self.context.REQUEST.RESPONSE.redirect(url)
+
+    def __call__(self):
+        self.setup()
+        return self.index()
 
     def _format_time(self, value):
         return value.strftime('%Hh%M')

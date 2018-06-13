@@ -4,6 +4,9 @@ Changelog
 2.0a2 (unreleased)
 ^^^^^^^^^^^^^^^^^^
 
+- Remove dependência no five.grok.
+  [hvelarde]
+
 - Remove atalhos para adicionar agendas diárias e compromissos.
   [hvelarde]
 

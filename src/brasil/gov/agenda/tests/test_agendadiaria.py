@@ -263,7 +263,7 @@ class ContentTypeTestCase(unittest.TestCase):
         agendadiaria = self.agendadiaria
         view = agendadiaria.restrictedTraverse('@@view')
         # AgendaDiaria sem compromissos e sem nada no campo atualizacao
-        view.update()
+        view.setup()
         sem_compromissos = view.exibe_sem_compromissos()
         self.assertTrue(sem_compromissos)
 
@@ -272,7 +272,7 @@ class ContentTypeTestCase(unittest.TestCase):
                                             'text/html',
                                             'text/x-html-safe',
                                             encoding='utf-8')
-        view.update()
+        view.setup()
         sem_compromissos = view.exibe_sem_compromissos()
         self.assertFalse(sem_compromissos)
 
@@ -288,7 +288,7 @@ class ContentTypeTestCase(unittest.TestCase):
         reuniao.location = u'Palacio do Planalto'
         reuniao.attendees = u'Mario de Andrade\nTarsila do Amaral'
         reuniao.reindexObject()
-        view.update()
+        view.setup()
         sem_compromissos = view.exibe_sem_compromissos()
         self.assertFalse(sem_compromissos)
 
@@ -305,7 +305,7 @@ class ContentTypeTestCase(unittest.TestCase):
 
     def test_agendadiaria_view_imagem(self):
         view = self.agendadiaria.restrictedTraverse('@@view')
-        view.update()
+        view.setup()
         self.assertIn(u'<img src="http://nohost/plone/test-folder/agenda/@@images/',
                       view.imagem())
 

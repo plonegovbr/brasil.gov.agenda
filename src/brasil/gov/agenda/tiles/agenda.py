@@ -8,7 +8,7 @@ from collective.cover.tiles.configuration_view import IDefaultConfigureForm
 from datetime import datetime
 from plone.app.imaging.utils import getAllowedSizes
 from plone.app.uuid.utils import uuidToObject
-from plone.directives import form
+from plone.autoform import directives as form
 from plone.namedfile import field
 from plone.tiles.interfaces import ITileDataManager
 from plone.uuid.interfaces import IUUID

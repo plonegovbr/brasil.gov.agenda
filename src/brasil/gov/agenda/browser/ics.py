@@ -1,15 +1,13 @@
 # -*- coding: utf-8 -*-
-
 from brasil.gov.agenda.config import PROJECTNAME
-from brasil.gov.agenda.interfaces import ICompromisso
 from brasil.gov.agenda.utils import rfc2445dt
 from cStringIO import StringIO
 from DateTime import DateTime
-from five import grok
 from plone.uuid.interfaces import IUUID
 from Products.ATContentTypes.lib.calendarsupport import foldLine
 from Products.ATContentTypes.lib.calendarsupport import n2rn
 from Products.ATContentTypes.lib.calendarsupport import vformat
+from Products.Five.browser import BrowserView
 
 
 # iCal header and footer
@@ -42,15 +40,11 @@ END:VEVENT
 """
 
 
-class ICSView (grok.View):
-    """ Visao vCal
-    """
-    grok.name('ical_view')
-    grok.context(ICompromisso)
+class ICSView(BrowserView):
+    """ICS view."""
 
     def getICal(self):
-        """get iCal data
-        """
+        """Get iCal data."""
         context = self.context
         out = StringIO()
         map = {
@@ -87,9 +81,7 @@ class ICSView (grok.View):
         out.write(ICS_EVENT_END)
         return out.getvalue()
 
-    def render(self):
-        """vCalendar output
-        """
+    def __call__(self):
         response = self.request.response
         response.setHeader('Content-Type', 'text/calendar')
         response.setHeader('Content-Disposition',

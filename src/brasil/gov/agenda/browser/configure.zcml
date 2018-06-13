@@ -1,12 +1,50 @@
 <configure
     xmlns="http://namespaces.zope.org/zope"
-    xmlns:five="http://namespaces.zope.org/five"
-    xmlns:grok="http://namespaces.zope.org/grok"
+    xmlns:browser="http://namespaces.zope.org/browser"
     xmlns:i18n="http://namespaces.zope.org/i18n"
     i18n_domain="brasil.gov.agenda">
 
-    <five:registerPackage package="." />
+  <browser:page
+      for="brasil.gov.agenda.interfaces.IAgenda"
+      name="view"
+      class="brasil.gov.agenda.browser.AgendaView"
+      permission="zope2.View"
+      layer="brasil.gov.agenda.interfaces.IBrowserLayer"
+      template="templates/agendaview.pt"
+      />
 
-    <grok:grok package="." />
+  <browser:page
+      for="brasil.gov.agenda.interfaces.IAgendaDiaria"
+      name="view"
+      class="brasil.gov.agenda.browser.AgendaDiariaView"
+      permission="zope2.View"
+      layer="brasil.gov.agenda.interfaces.IBrowserLayer"
+      template="templates/agendadiariaview.pt"
+      />
+
+  <browser:page
+      for="brasil.gov.agenda.interfaces.ICompromisso"
+      name="view"
+      class="brasil.gov.agenda.browser.CompromissoView"
+      permission="zope2.View"
+      layer="brasil.gov.agenda.interfaces.IBrowserLayer"
+      template="templates/compromissoview.pt"
+      />
+
+  <browser:page
+      for="brasil.gov.agenda.interfaces.ICompromisso"
+      name="ical_view"
+      class="brasil.gov.agenda.browser.ICSView"
+      permission="zope2.View"
+      layer="brasil.gov.agenda.interfaces.IBrowserLayer"
+      />
+
+  <browser:page
+      for="brasil.gov.agenda.interfaces.ICompromisso"
+      name="vcal_view"
+      class="brasil.gov.agenda.browser.VCSView"
+      permission="zope2.View"
+      layer="brasil.gov.agenda.interfaces.IBrowserLayer"
+      />
 
 </configure>
