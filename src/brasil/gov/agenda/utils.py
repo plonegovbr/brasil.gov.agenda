@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from six.moves import range  # noqa: I001
 from DateTime import DateTime
 from datetime import date
 from datetime import datetime
@@ -86,7 +87,7 @@ class AgendaMixin:
         tool = getToolByName(self.context, 'translation_service')
         today = datetime.now()
         # get a list with 3 days before and 3 days after today
-        days = [(today + timedelta(i)) for i in xrange(-3, 4)]
+        days = [(today + timedelta(i)) for i in range(-3, 4)]
         weekdays = []
         for day in days:
             cssclass = ['day']

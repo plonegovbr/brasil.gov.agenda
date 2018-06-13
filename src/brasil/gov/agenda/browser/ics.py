@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 from brasil.gov.agenda.config import PROJECTNAME
 from brasil.gov.agenda.utils import rfc2445dt
-from cStringIO import StringIO
 from DateTime import DateTime
+from io import BytesIO
 from plone.uuid.interfaces import IUUID
 from Products.ATContentTypes.lib.calendarsupport import foldLine
 from Products.ATContentTypes.lib.calendarsupport import n2rn
@@ -46,7 +46,7 @@ class ICSView(BrowserView):
     def getICal(self):
         """Get iCal data."""
         context = self.context
-        out = StringIO()
+        out = BytesIO()
         map = {
             'dtstamp': rfc2445dt(DateTime()),
             'created': rfc2445dt(DateTime(context.CreationDate())),
@@ -72,7 +72,8 @@ class ICSView(BrowserView):
         if contact:
             cn.append(contact)
         if cn:
-            out.write('CONTACT:%s\n' % vformat(', '.join(cn)))
+            cn = ', '.join(cn).encode('utf-8')
+            out.write('CONTACT:%s\n' % vformat(cn))
 
         url = context.absolute_url()
         if url:
@@ -86,7 +87,7 @@ class ICSView(BrowserView):
         response.setHeader('Content-Type', 'text/calendar')
         response.setHeader('Content-Disposition',
                            'attachment; filename="%s.ics"' % self.context.getId())
-        out = StringIO()
+        out = BytesIO()
         out.write(ICS_HEADER % {'prodid': PROJECTNAME})
         out.write(self.getICal())
         out.write(ICS_FOOTER)

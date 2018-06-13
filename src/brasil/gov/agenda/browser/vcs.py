@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 from brasil.gov.agenda.config import PROJECTNAME
 from brasil.gov.agenda.utils import rfc2445dt
-from cStringIO import StringIO
 from DateTime import DateTime
+from io import BytesIO
 from plone.uuid.interfaces import IUUID
 from Products.ATContentTypes.lib.calendarsupport import foldLine
 from Products.ATContentTypes.lib.calendarsupport import n2rn
@@ -46,7 +46,7 @@ class VCSView(BrowserView):
     def getVCal(self):
         """Get vCal data."""
         context = self.context
-        out = StringIO()
+        out = BytesIO()
         map = {
             'dtstamp': rfc2445dt(DateTime()),
             'created': rfc2445dt(DateTime(context.CreationDate())),
@@ -72,7 +72,7 @@ class VCSView(BrowserView):
         response.setHeader('Content-Type', 'text/x-vCalendar')
         response.setHeader('Content-Disposition',
                            'attachment; filename="%s.vcs"' % self.context.getId())
-        out = StringIO()
+        out = BytesIO()
         out.write(VCS_HEADER % {'prodid': PROJECTNAME})
         out.write(self.getVCal())
         out.write(VCS_FOOTER)

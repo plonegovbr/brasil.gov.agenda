@@ -69,6 +69,7 @@ setup(
         'Products.CMFQuickInstallerTool',
         'Products.GenericSetup',
         'setuptools',
+        'six',
         'zope.component',
         'zope.container',
         'zope.event',
