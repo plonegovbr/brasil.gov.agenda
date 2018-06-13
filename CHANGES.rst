@@ -14,6 +14,9 @@ Changelog
   o layout do IDG 2.x não faz uso de portlets.
   [hvelarde]
 
+- Ao acessar a Agenda deslogado, redireciona para a ultima Agenda Diária criada.
+  [rodfersou]
+
 - Remove upgrade steps do branch 1.x.
   [hvelarde]
 
