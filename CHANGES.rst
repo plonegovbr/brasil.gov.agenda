@@ -4,6 +4,10 @@ Changelog
 2.0a2 (unreleased)
 ^^^^^^^^^^^^^^^^^^
 
+- Melhora a compatibilidade futura com o Python 3;
+  adiciona dependência no `six <https://pypi.python.org/pypi/six>`_.
+  [hvelarde]
+
 - Remove dependência no five.grok.
   [hvelarde]
 
@@ -11,11 +15,6 @@ Changelog
   [hvelarde]
 
 - Corrige tratamento de fuso horário na view padrão do tipo de conteúdo ``AgendaDiaria``;
-- Melhora a compatibilidade futura com o Python 3;
-  adiciona dependência no `six <https://pypi.python.org/pypi/six>`_.
-  [hvelarde]
-
-- Corrije tratamento de fuso horário na view padrão do tipo de conteúdo ``AgendaDiaria``;
   isso evita mudanças na hora dos compromissos em browsers com um fuso horário diferente do vigente no Brasil.
   [rodfersou, hvelarde]
 
