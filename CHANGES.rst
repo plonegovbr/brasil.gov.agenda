@@ -4,6 +4,9 @@ Changelog
 2.0a2 (unreleased)
 ^^^^^^^^^^^^^^^^^^
 
+- Remove parametros GET sem utilidade na agenda diária.
+  [rodfersou]
+
 - Melhora a compatibilidade futura com o Python 3;
   adiciona dependência no `six <https://pypi.python.org/pypi/six>`_.
   [hvelarde]
