@@ -4,6 +4,9 @@ Changelog
 2.0a2 (unreleased)
 ^^^^^^^^^^^^^^^^^^
 
+- Ao acessar a Agenda deslogado, redireciona para a ultima Agenda Diária criada.
+  [rodfersou]
+
 - Esconde checkbox de seleção de tipo compromisso na busca da agenda diária.
   [rodfersou]
 
