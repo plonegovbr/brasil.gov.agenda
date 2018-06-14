@@ -4,6 +4,9 @@ Changelog
 2.0a2 (unreleased)
 ^^^^^^^^^^^^^^^^^^
 
+- Esconde checkbox de seleção de tipo compromisso na busca da agenda diária.
+  [rodfersou]
+
 - Remove parametros GET sem utilidade na agenda diária.
   [rodfersou]
 
