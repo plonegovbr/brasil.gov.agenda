@@ -42,6 +42,7 @@ setup(
     install_requires=[
         'Acquisition',
         'collective.cover',
+        'cssselect',
         'plone.api',
         'plone.app.content',
         'plone.app.contenttypes',
@@ -59,7 +60,6 @@ setup(
         'plone.indexer',
         'plone.memoize',
         'plone.portlets',
-        'plone.restapi',
         'plone.supermodel',
         'plone.uuid',
         'Products.ATContentTypes',

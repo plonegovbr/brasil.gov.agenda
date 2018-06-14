@@ -14,6 +14,9 @@ Changelog
   o layout do IDG 2.x não faz uso de portlets.
   [hvelarde]
 
+- Remove restapi para evitar problemas com `proxies intermediárias <https://community.plone.org/t/6658>`_.
+  [rodfersou]
+
 - Remove upgrade steps do branch 1.x.
   [hvelarde]
 

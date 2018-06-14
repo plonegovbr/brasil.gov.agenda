@@ -1,13 +1,21 @@
 # -*- coding: utf-8 -*-
 from brasil.gov.agenda import _
 from brasil.gov.agenda.config import AGENDADIARIAFMT
+from brasil.gov.agenda.interfaces import ICompromisso
 from brasil.gov.agenda.utils import AgendaMixin
+from datetime import datetime
+from datetime import timedelta
 from DateTime import DateTime
+from dateutil.tz import tzlocal
+from plone import api
 from Products.CMFCore.utils import getToolByName
 from Products.Five.browser import BrowserView
 from zope.component import getMultiAdapter
 from zope.i18nmessageid import Message
+from zope.publisher.browser import BrowserPage
 from zope.publisher.publish import mapply
+
+import json
 
 
 class AgendaView(BrowserView, AgendaMixin):
@@ -91,3 +99,64 @@ class AgendaView(BrowserView, AgendaMixin):
             scale = view.scale(fieldname='image', scale='large')
             tag = scale.tag()
             return tag
+
+
+class AgendaJSONView(BrowserPage, AgendaMixin):
+    """Visao padrao da agenda."""
+
+    def setup(self):
+        self._ts = getToolByName(self.context, 'translation_service')
+
+    def publishTraverse(self, request, date):
+        """Pega a data da agenda diaria."""
+        self.date = date
+        return self
+
+    def weekday(self, date):
+        return self._translate(self._ts.day_msgid(date.strftime('%w')))
+
+    def extract_data(self):
+        data = []
+        now = datetime.now()
+        tzname = datetime.now(tzlocal()).tzname()
+        selected = datetime.strptime(self.date, AGENDADIARIAFMT)
+        days = [selected + timedelta(days=i) for i in range(-3, 4)]
+        for date in days:
+            strday = date.strftime(AGENDADIARIAFMT)
+            day = {
+                'datetime': '{0}{1}:00'.format(date.isoformat(), tzname),
+                'day': date.day,
+                'weekday': self.weekday(date)[:3],
+                'items': [],
+                'hasAppointment': False,
+                'isSelected': False,
+            }
+            if self.date == strday:
+                day['isSelected'] = True
+            agendadiaria = self.context.get(strday, None)
+            if agendadiaria:
+                day['hasAppointment'] = True
+                compromissos = api.content.find(
+                    context=agendadiaria,
+                    object_provides=ICompromisso,
+                    sort_on='start',
+                )
+                for brain in compromissos:
+                    obj = brain.getObject()
+                    day['items'].append({
+                        'title': obj.title,
+                        'start': obj.start_date.strftime('%Hh%M'),
+                        'datetime': '{0}{1}:00'.format(obj.start_date.isoformat(), tzname),
+                        'location': obj.location,
+                        'href': obj.absolute_url(),
+                        'vcal': '{0}/vcal_view'.format(obj.absolute_url()),
+                        'isNow': obj.start_date <= now <= obj.end_date,
+                    })
+            data.append(day)
+        return data
+
+    def __call__(self):
+        self.setup()
+        response = self.request.response
+        response.setHeader('content-type', 'application/json')
+        return response.setBody(json.dumps(self.extract_data()))
