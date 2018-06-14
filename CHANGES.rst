@@ -1,7 +1,7 @@
 Changelog
 ---------
 
-1.1.3 (unreleased)
+1.1.3 (2018-06-14)
 ^^^^^^^^^^^^^^^^^^
 
 - Corrige ``WrongType`` ao tentar editar agendas sem tags (fecha `#85 <https://github.com/plonegovbr/brasil.gov.agenda/issues/85>`_).
