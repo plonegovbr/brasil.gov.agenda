@@ -8,6 +8,9 @@ Changelog
     Esta versão remove todos os upgrade steps do branch 1.x.
     Atualizações só serão suportadas da versão mais recente desse branch.
 
+- Remove restapi para evitar problemas com `proxies intermediárias <https://community.plone.org/t/6658>`_.
+  [rodfersou]
+
 - Remove upgrade steps do branch 1.x.
   [hvelarde]
 

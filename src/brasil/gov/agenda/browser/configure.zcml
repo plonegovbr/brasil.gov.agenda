@@ -14,6 +14,14 @@
       />
 
   <browser:page
+      for="brasil.gov.agenda.interfaces.IAgenda"
+      name="json"
+      class="brasil.gov.agenda.browser.AgendaJSONView"
+      permission="zope2.View"
+      layer="brasil.gov.agenda.interfaces.IBrowserLayer"
+      />
+
+  <browser:page
       for="brasil.gov.agenda.interfaces.IAgendaDiaria"
       name="view"
       class="brasil.gov.agenda.browser.AgendaDiariaView"
