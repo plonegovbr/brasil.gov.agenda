@@ -4,6 +4,13 @@ Changelog
 2.0a2 (unreleased)
 ^^^^^^^^^^^^^^^^^^
 
+.. Warning::
+    Esta versão remove todos os upgrade steps do branch 1.x.
+    Atualizações só serão suportadas da versão mais recente desse branch.
+
+- Remove upgrade steps do branch 1.x.
+  [hvelarde]
+
 - Esconde checkbox de seleção de tipo compromisso na busca da agenda diária.
   [rodfersou]
 

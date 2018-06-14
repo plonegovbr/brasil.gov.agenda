@@ -35,15 +35,8 @@
     </gs:importStep>
 
 
-    <!-- Oculta products -->
-    <utility
-        factory=".config.HiddenProducts"
-        name="brasil.gov.agenda" />
-
     <!-- Oculta profile -->
-    <utility
-        factory=".config.HiddenProfiles"
-        name="brasil.gov.agenda" />
+    <utility factory=".setuphandlers.HiddenProfiles" name="brasil.gov.agenda" />
 
     <!-- Upgrades -->
     <include package=".upgrades" />

@@ -6,8 +6,8 @@
     i18n_domain="brasil.gov.agenda">
 
   <genericsetup:upgradeSteps
-      source="4003"
-      destination="4004"
+      source="*"
+      destination="4100"
       profile="brasil.gov.agenda:default">
 
     <genericsetup:upgradeStep

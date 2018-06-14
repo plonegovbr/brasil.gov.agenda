@@ -1,5 +1,19 @@
 # -*- coding: utf-8 -*-
 from Products.CMFCore.utils import getToolByName
+from Products.CMFPlone.interfaces import INonInstallable
+from zope.interface import implementer
+
+
+@implementer(INonInstallable)
+class HiddenProfiles(object):  # pragma: no cover
+
+    def getNonInstallableProfiles(self):
+        """Do not show on Plone's list of installable profiles."""
+        return [
+            u'brasil.gov.agenda:uninstall',
+            u'collective.portlet.calendar:default',
+            u'collective.portlet.calendar:uninstall',
+        ]
 
 
 def list_agendadiaria_calendar(p):

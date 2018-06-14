@@ -48,6 +48,15 @@ Para habilitar a instalação deste produto em um ambiente que utilize o buildou
 
 4. Acesse o painel de controle e instale o produto **Brasil.gov.br: Agenda de Membros do Governo Brasileiro**.
 
+Atualização de 1.x a 2.x
+------------------------
+
+.. Warning::
+    Só atualize para a versão 2.x do pacote depois de atualizar à versão mais recente da branch 1.x.
+
+As atualizações da versão 1.x à 2.x só são suportadas das versões mais recentes de cada branch.
+Antes de atualizar confira que você está efetivamente utilizando a última versão da branch 1.x e que não existem upgrade steps pendentes de serem aplicados.
+
 Rodando o buildout de uma tag antiga do pacote
 ----------------------------------------------
 
