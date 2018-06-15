@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from brasil.gov.agenda import _
+from brasil.gov.agenda.config import AGENDADIARIAFMT
 from brasil.gov.agenda.interfaces import IAgendaDiaria
 from brasil.gov.agenda.interfaces import ICompromisso
 from brasil.gov.agenda.utils import AgendaMixin
