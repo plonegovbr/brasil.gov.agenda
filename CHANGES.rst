@@ -8,6 +8,9 @@ Changelog
     Esta versão remove todos os upgrade steps do branch 1.x.
     Atualizações só serão suportadas da versão mais recente desse branch.
 
+- Ao acessar a Agenda deslogado, redireciona para a ultima Agenda Diária criada.
+  [rodfersou]
+
 - Remove restapi para evitar problemas com `proxies intermediárias <https://community.plone.org/t/6658>`_.
   [rodfersou]
 
