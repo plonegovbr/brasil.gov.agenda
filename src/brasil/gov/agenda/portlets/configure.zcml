@@ -16,10 +16,4 @@
         editview=".busca.EditForm"
     />
 
-    <plone:portletRenderer
-        portlet="collective.portlet.calendar.calendar.ICalendarExPortlet"
-        class=".calendar.Renderer"
-        layer="brasil.gov.agenda.interfaces.IBrowserLayer"
-    />
-
 </configure>

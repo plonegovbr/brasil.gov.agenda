@@ -42,7 +42,6 @@ setup(
     install_requires=[
         'Acquisition',
         'collective.cover',
-        'collective.portlet.calendar',
         'plone.api',
         'plone.app.content',
         'plone.app.contenttypes',

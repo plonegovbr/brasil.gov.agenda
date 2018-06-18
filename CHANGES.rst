@@ -7,6 +7,11 @@ Changelog
 .. Warning::
     Esta versão remove todos os upgrade steps do branch 1.x.
     Atualizações só serão suportadas da versão mais recente desse branch.
+    Esta versão também remove a dependência no collective.portlet.calendar.
+    Remova manualmente todos os portlets de calendario estendido e desinstale o pacote antes de atualizar.
+
+- Remove dependência no collective.portlet.calendar.
+  [hvelarde]
 
 - Remove upgrade steps do branch 1.x.
   [hvelarde]
