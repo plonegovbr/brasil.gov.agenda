@@ -13,6 +13,7 @@ from plone.indexer.decorator import indexer
 from plone.supermodel.interfaces import IDefaultFactory
 from Products.CMFPlone.utils import safe_hasattr
 from z3c.form.validator import SimpleFieldValidator
+from zope.component import getMultiAdapter
 from zope.i18nmessageid import Message
 from zope.interface import implementer
 from zope.interface import Invalid
@@ -31,7 +32,9 @@ class AgendaDiaria(Container):
         fmt_date = date.strftime('%d/%m/%Y')
         autoridade = self.autoridade
         mapping = {'autoridade': autoridade, 'fmt_date': fmt_date}
-        current_language = api.portal.get_current_language()
+        portal_state = getMultiAdapter((self, self.REQUEST),
+                                       name=u'plone_portal_state')
+        current_language = portal_state.language()
         tool = api.portal.get_tool('translation_service')
         # FIXME: Ao trocar a língua de um portal, o título de uma agenda não
         # será alterado no folder_contents. Como a recomendação atual de sites
