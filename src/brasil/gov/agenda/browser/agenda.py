@@ -1,8 +1,9 @@
 # -*- coding: utf-8 -*-
 from brasil.gov.agenda import _
-from brasil.gov.agenda.config import AGENDADIARIAFMT
+from brasil.gov.agenda.interfaces import IAgendaDiaria
 from brasil.gov.agenda.utils import AgendaMixin
 from DateTime import DateTime
+from plone import api
 from Products.CMFCore.utils import getToolByName
 from Products.Five.browser import BrowserView
 from zope.component import getMultiAdapter
@@ -37,15 +38,17 @@ class AgendaView(BrowserView, AgendaMixin):
         """Deve retornar a agendadiaria para o dia atual
            caso contrario exibimos
         """
-        agenda = None
-        hoje = DateTime().strftime(AGENDADIARIAFMT)
-        # Validamos se existe uma agenda para o dia de hoje
-        # e se ela esta publicada
-        if hoje in self.context.objectIds():
-            agenda = self.context[hoje]
-            review_state = self.workflow.getInfoFor(agenda, 'review_state')
-            agenda = agenda if review_state == 'published' else None
-        return agenda
+        brains = api.content.find(
+            context=self.context,
+            object_provides=IAgendaDiaria,
+            sort_on='id',
+            sort_order='reverse',
+            sort_limit=1,
+            review_state='published',
+        )
+        if not brains:
+            return None
+        return brains[0].getObject()
 
     def _format_time(self, value):
         return value.strftime('%Hh%M')
