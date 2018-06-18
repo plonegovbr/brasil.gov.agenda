@@ -42,7 +42,6 @@ setup(
     install_requires=[
         'Acquisition',
         'collective.cover',
-        'cssselect',
         'plone.api',
         'plone.app.content',
         'plone.app.contenttypes',

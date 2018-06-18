@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from six.moves import range  # noqa: I001
 from brasil.gov.agenda import _
 from brasil.gov.agenda.config import AGENDADIARIAFMT
 from brasil.gov.agenda.interfaces import ICompromisso
@@ -9,7 +10,7 @@ from DateTime import DateTime
 from dateutil.tz import tzlocal
 from plone import api
 from Products.Five.browser import BrowserView
-from six.moves import range  # noqa: I001
+from zExceptions import NotFound
 from zope.component import getMultiAdapter
 from zope.i18nmessageid import Message
 from zope.interface import implementer
@@ -104,20 +105,21 @@ class AgendaView(BrowserView, AgendaMixin):
 
 @implementer(IPublishTraverse)
 class AgendaJSONView(BrowserView, AgendaMixin):
-    """Visao padrao da agenda."""
-
-    def setup(self):
-        self._ts = api.portal.get_tool('translation_service')
+    """JSON view."""
 
     def publishTraverse(self, request, date):
-        """Pega a data da agenda diaria."""
-        # this raises ValueError if date is invalid date
-        datetime.strptime(date, AGENDADIARIAFMT)
+        """Get the selected date."""
+        try:
+            datetime.strptime(date, AGENDADIARIAFMT)
+        except ValueError:  # invalid date format
+            raise NotFound
+
         self.date = date
         return self
 
     def weekday(self, date):
-        return self._translate(self._ts.day_msgid(date.strftime('%w')))
+        ts = api.portal.get_tool('translation_service')
+        return self._translate(ts.day_msgid(date.strftime('%w')))
 
     def extract_data(self):
         data = []
@@ -160,7 +162,6 @@ class AgendaJSONView(BrowserView, AgendaMixin):
         return data
 
     def __call__(self):
-        self.setup()
         response = self.request.response
         response.setHeader('content-type', 'application/json')
         return response.setBody(json.dumps(self.extract_data()))

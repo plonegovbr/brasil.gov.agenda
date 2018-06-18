@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <metadata>
-  <version>4101</version>
+  <version>4100</version>
   <dependencies>
     <dependency>profile-collective.cover:default</dependency>
     <dependency>profile-plone.app.dexterity:default</dependency>
