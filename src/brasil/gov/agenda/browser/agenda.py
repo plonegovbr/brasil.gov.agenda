@@ -38,9 +38,9 @@ class AgendaView(BrowserView, AgendaMixin):
         # return super(AgendaView, self).__call__()
         agenda_recente = self.agenda_recente()
         if agenda_recente and not self.editable:
-            return agenda_recente.restrictedTraverse('@@view')()
-        else:
-            return super(AgendaView, self).__call__()
+            response = self.request.response
+            response.redirect(agenda_recente.absolute_url())
+        return super(AgendaView, self).__call__()
 
     def agenda_recente(self):
         """Deve retornar a agendadiaria para o dia atual
@@ -111,6 +111,8 @@ class AgendaJSONView(BrowserView, AgendaMixin):
 
     def publishTraverse(self, request, date):
         """Pega a data da agenda diaria."""
+        # this raises ValueError if date is invalid date
+        datetime.strptime(date, AGENDADIARIAFMT)
         self.date = date
         return self
 
