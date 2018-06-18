@@ -57,6 +57,9 @@ Atualização de 1.x a 2.x
 As atualizações da versão 1.x à 2.x só são suportadas das versões mais recentes de cada branch.
 Antes de atualizar confira que você está efetivamente utilizando a última versão da branch 1.x e que não existem upgrade steps pendentes de serem aplicados.
 
+Foi removida a dependência no collective.portlet.calendar pois o layout do IDG 2.x não faz uso de portlets.
+Remova manualmente todos os portlets de calendario estendido e desinstale esse pacote antes de atualizar.
+
 Rodando o buildout de uma tag antiga do pacote
 ----------------------------------------------
 
