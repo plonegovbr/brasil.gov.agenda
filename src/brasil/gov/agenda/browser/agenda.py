@@ -8,8 +8,8 @@ from datetime import timedelta
 from DateTime import DateTime
 from dateutil.tz import tzlocal
 from plone import api
-from Products.CMFCore.utils import getToolByName
 from Products.Five.browser import BrowserView
+from six.moves import range  # noqa: I001
 from zope.component import getMultiAdapter
 from zope.i18nmessageid import Message
 from zope.interface import implementer
@@ -27,7 +27,7 @@ class AgendaView(BrowserView, AgendaMixin):
                                       name='plone_tools')
         context_state = getMultiAdapter((self.context, self.request),
                                         name=u'plone_context_state')
-        self._ts = getToolByName(self.context, 'translation_service')
+        self._ts = api.portal.get_tool('translation_service')
         self.catalog = plone_tools.catalog()
         self.agenda = self.context
         self.workflow = plone_tools.workflow()
@@ -107,7 +107,7 @@ class AgendaJSONView(BrowserView, AgendaMixin):
     """Visao padrao da agenda."""
 
     def setup(self):
-        self._ts = getToolByName(self.context, 'translation_service')
+        self._ts = api.portal.get_tool('translation_service')
 
     def publishTraverse(self, request, date):
         """Pega a data da agenda diaria."""
