@@ -11,7 +11,6 @@ export default class AgendaTile {
     this.datepicker = new DatePicker(this.tile, this.onDateChange.bind(this));
     this.initSwiper();
     this.$('.is-now').append('<div class="now">Agora</div>')
-    this.tzname = tile.dataset.tzname;
   }
   $(selector) {
     return $(selector, this.tile);

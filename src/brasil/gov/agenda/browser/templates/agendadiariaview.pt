@@ -12,8 +12,7 @@
   </metal:slot>
   <metal:block fill-slot="content-core">
     <div class="dados-agenda"
-         tal:attributes="data-url view/agenda/absolute_url;
-                         data-tzname view/tzname">
+         tal:attributes="data-url view/agenda/absolute_url">
       <div class="search-compromisso">
         <form class="search-form"
               tal:attributes="action string:${portal_url}/@@search">

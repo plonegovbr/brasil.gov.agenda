@@ -9,7 +9,6 @@ export default class AgendaView {
     this.container = container;
     this.datepicker = new DatePicker(container, this.onDateChange.bind(this), true);
     this.$appointments = this.$('.list-compromissos');
-    this.tzname = container.dataset.tzname;
   }
   $(selector) {
     return $(selector, this.container.parentElement);

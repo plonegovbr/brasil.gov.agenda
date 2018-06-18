@@ -4,7 +4,6 @@ from DateTime import DateTime
 from datetime import date
 from datetime import datetime
 from datetime import timedelta
-from dateutil.tz import tzlocal
 from Products.CMFCore.utils import getToolByName
 from zope.component import getMultiAdapter
 from zope.i18nmessageid import MessageFactory
@@ -103,7 +102,3 @@ class AgendaMixin:
                 'cssclass': ' '.join(cssclass),
             })
         return weekdays
-
-    @property
-    def tzname(self):
-        return datetime.now(tzlocal()).tzname()
