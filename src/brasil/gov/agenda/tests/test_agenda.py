@@ -140,9 +140,11 @@ class ContentTypeBrowserTestCase(unittest.TestCase):
         agenda_url = self.agenda.absolute_url()
         browser = self.browser
 
-        # Exibe a ultima agenda diaria
+        # Exibimos uma mensagem de que nao temos
+        # compromissos para a data de hoje
         browser.open(agenda_url)
-        self.assertIn('05/02/2014 &mdash;', browser.contents.decode('utf-8'))
+        self.assertIn('existem compromissos agendados.',
+                      browser.contents.decode('utf-8'))
 
         # Criamos uma agenda para o dia de hoje
         hoje = datetime.datetime.now()
@@ -157,9 +159,10 @@ class ContentTypeBrowserTestCase(unittest.TestCase):
         transaction.commit()
 
         # Como esta AgendaDiaria nao foi publicada, continuamos a
-        # exibir a ultima agenda diaria
+        # exibir a mensagem
         browser.open(agenda_url)
-        self.assertIn('05/02/2014 &mdash;', browser.contents.decode('utf-8'))
+        self.assertIn('existem compromissos agendados.',
+                      browser.contents.decode('utf-8'))
 
         # Ao publicarmos a AgendaDiaria de hoje
         with api.env.adopt_roles(['Manager']):
