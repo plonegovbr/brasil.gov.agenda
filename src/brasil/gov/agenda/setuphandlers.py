@@ -11,8 +11,6 @@ class HiddenProfiles(object):  # pragma: no cover
         """Do not show on Plone's list of installable profiles."""
         return [
             u'brasil.gov.agenda:uninstall',
-            u'collective.portlet.calendar:default',
-            u'collective.portlet.calendar:uninstall',
         ]
 
 
