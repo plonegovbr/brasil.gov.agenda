@@ -11,7 +11,6 @@ export default class AgendaTile {
     this.datepicker = new DatePicker(this.tile, this.onDateChange.bind(this));
     this.initSwiper();
     this.$('.is-now').append('<div class="now">Agora</div>')
-    this.tzname = tile.dataset.tzname;
   }
   $(selector) {
     return $(selector, this.tile);
@@ -24,52 +23,31 @@ export default class AgendaTile {
   onDateChange(agendaDiaria) {
     this.swiper.removeAllSlides();
     this._$slide = $('<div class="swiper-slide"></div>');
-    if (typeof agendaDiaria.items === 'undefined') {
+    if (agendaDiaria.hasAppointments === false) {
       this._$slide.addClass('no-events');
       this._$slide.html('Sem compromissos oficiais.');
       this.swiper.appendSlide(this._$slide);
       return;
     }
-    this.compromissos = [];
-    for (let item of agendaDiaria.items) {
-      $.ajax({
-        headers: {
-          Accept: 'application/json'
-        },
-        url: item['@id'],
-        global: false,
-        async: false,
-        context: this,
-      }).done((compromisso) => {
-        this.compromissos.push(compromisso);
-      });
-    }
-    this.compromissos.sort((a, b) => {
-      return new Date(a.start_date) - new Date(b.start_date);
-    });
-    for (let compromisso of this.compromissos) {
+    for (let compromisso of agendaDiaria.items) {
       if (this._$slide.children().length === this.pageSize) {
         this.swiper.appendSlide(this._$slide);
         this._$slide = $('<div class="swiper-slide"></div>');
       }
       let $item = $(`
         <div class="collection-events-item">
-          <a class="title-item" href="${compromisso['@id']}">${compromisso.title}</a>` +
+          <a class="title-item" href="${compromisso.href}">${compromisso.title}</a>` +
           (compromisso.location == null? '' : `<div class="location-item">
             <span class="location">${compromisso.location}</span>
           </div>`) +
           `<div class="timestamp-cell">
             <span class="timestamp">
-              ${this.extractTime(compromisso.start_date)}
+              ${compromisso.start}
             </span>
           </div>
         </div>
       `);
-      let now = new Date();
-      let start_date = new Date(`${compromisso.start_date}${this.tzname}:00`);
-      let end_date = new Date(`${compromisso.end_date}${this.tzname}:00`);
-      // Javascript getTime method return timestamp
-      if (now.getTime() > start_date.getTime() && now.getTime() < end_date.getTime()) {
+      if (compromisso.isNow) {
         $('.timestamp-cell', $item).addClass('is-now');
         $('.timestamp-cell', $item).append('<div class="now">Agora</div>')
       }

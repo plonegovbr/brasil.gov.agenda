@@ -10,6 +10,9 @@ Changelog
     Esta versão também remove a dependência no collective.portlet.calendar.
     Remova manualmente todos os portlets de calendario estendido e desinstale o pacote antes de atualizar.
 
+- Corrige funcionamento da view padrão do tipo de conteúdo ``AgendaDiaria`` para evitar `problemas com proxies intermediárias <https://community.plone.org/t/6658>`_.
+  [rodfersou]
+
 - Remove dependência no collective.portlet.calendar;
   o layout do IDG 2.x não faz uso de portlets.
   [hvelarde]

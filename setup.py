@@ -59,7 +59,6 @@ setup(
         'plone.indexer',
         'plone.memoize',
         'plone.portlets',
-        'plone.restapi',
         'plone.supermodel',
         'plone.uuid',
         'Products.ATContentTypes',

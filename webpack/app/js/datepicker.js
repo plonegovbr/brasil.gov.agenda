@@ -34,16 +34,16 @@ export default class DatePicker {
   }
   update() {
     this.updateMonthPicker();
-    this.updateDayPicker();
     let agendaDiariaURL = `${this.year}-${zfill(this.month + 1)}-${zfill(this.day)}`;
     if (typeof this.callback === 'function') {
       $.ajax({
-        headers: {
-          Accept: 'application/json'
-        },
+        url: `${this.agendaURL}/json/${agendaDiariaURL}`,
+        context: this,
         global: false,
-        url: `${this.agendaURL}/${agendaDiariaURL}`,
-      }).always(this.callback);
+      }).always(function(data) {
+        this.callback(data[3]);
+        this.updateDayPicker(data);
+      });
     }
     if (this.updateTitle) {
       let agendaDiaria = `${zfill(this.day)}/${zfill(this.month + 1)}/${this.year}`;
@@ -75,38 +75,22 @@ export default class DatePicker {
       this.$year.html(this.year);
     }
   }
-  updateDayPicker() {
-    let dayNamesShort = this.$currentPicker.datepicker('option', 'dayNamesShort');
-    // get a list with 3 days before and 3 days after current day
-    let days = range(-3, 4).map(i => new Date(this.year, this.month, this.day + i))
+  updateDayPicker(data) {
     this.$day.html('');
-    for (let day of days) {
+    for (let day of data) {
       let cssclass = ['day'];
-      if (day.getFullYear() === this.year  &&
-          day.getMonth()    === this.month &&
-          day.getDate()     === this.day)  {
+      if (day.isSelected) {
         cssclass.push('is-selected');
       }
-
       let $day = $(`
-        <li data-day="${day.toISOString()}" class="${cssclass.join(' ')}">
-          <div class="daypicker-day">${day.getDate()}</div>
-          <div class="daypicker-weekday">${dayNamesShort[day.getDay()]}</div>
+        <li data-day="${day.datetime}" class="${cssclass.join(' ')}">
+          <div class="daypicker-day">${day.day}</div>
+          <div class="daypicker-weekday">${day.weekday}</div>
         </li>
       `);
-
-      let agendaDiaria = `${day.getFullYear()}-${zfill(day.getMonth() + 1)}-${zfill(day.getDate())}`;
-      $.ajax({
-        headers: {
-          Accept: 'application/json'
-        },
-        url: `${this.agendaURL}/${agendaDiaria}`,
-        global: false,
-        context: $day,
-      }).done(function(result) {
-        this.addClass('has-appointment');
-      });
-
+      if (day.hasAppointment) {
+        $day.addClass('has-appointment');
+      }
       this.$day.append($day);
     }
     // rfs
