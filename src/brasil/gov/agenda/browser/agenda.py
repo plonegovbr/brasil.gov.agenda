@@ -12,7 +12,8 @@ from Products.CMFCore.utils import getToolByName
 from Products.Five.browser import BrowserView
 from zope.component import getMultiAdapter
 from zope.i18nmessageid import Message
-from zope.publisher.browser import BrowserPage
+from zope.interface import implementer
+from zope.publisher.interfaces import IPublishTraverse
 from zope.publisher.publish import mapply
 
 import json
@@ -101,7 +102,8 @@ class AgendaView(BrowserView, AgendaMixin):
             return tag
 
 
-class AgendaJSONView(BrowserPage, AgendaMixin):
+@implementer(IPublishTraverse)
+class AgendaJSONView(BrowserView, AgendaMixin):
     """Visao padrao da agenda."""
 
     def setup(self):
