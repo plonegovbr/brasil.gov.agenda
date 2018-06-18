@@ -15,7 +15,7 @@
          tal:attributes="data-url view/agenda/absolute_url">
       <div class="search-compromisso">
         <form class="search-form"
-              tal:attributes="action string:${portal_url}/@@search">
+              tal:attributes="action string:${view/agenda/absolute_url}/@@search">
           <div class="LSBox">
             <input class="searchField"
                    name="SearchableText"
