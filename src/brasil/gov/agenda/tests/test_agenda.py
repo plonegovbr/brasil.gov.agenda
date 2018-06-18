@@ -1,14 +1,12 @@
 # -*- coding: utf-8 -*-
-
 from brasil.gov.agenda.config import AGENDADIARIAFMT
 from brasil.gov.agenda.interfaces import IAgenda
 from brasil.gov.agenda.testing import FUNCTIONAL_TESTING
 from brasil.gov.agenda.testing import INTEGRATION_TESTING
+from plone import api
 from plone.app.dexterity.behaviors.exclfromnav import IExcludeFromNavigation
 from plone.app.dexterity.behaviors.nextprevious import INextPreviousToggle
 from plone.app.referenceablebehavior.referenceable import IReferenceable
-from plone.app.testing import setRoles
-from plone.app.testing import TEST_USER_ID
 from plone.dexterity.interfaces import IDexterityFTI
 from plone.testing.z2 import Browser
 from plone.uuid.interfaces import IAttributeUUID
@@ -26,13 +24,11 @@ class ContentTypeTestCase(unittest.TestCase):
     def setUp(self):
         self.portal = self.layer['portal']
 
-        setRoles(self.portal, TEST_USER_ID, ['Manager'])
-        self.portal.invokeFactory('Folder', 'test-folder')
-        setRoles(self.portal, TEST_USER_ID, ['Member'])
-        self.folder = self.portal['test-folder']
-
-        self.folder.invokeFactory('Agenda', 'agenda')
-        self.agenda = self.folder['agenda']
+        with api.env.adopt_roles(['Manager']):
+            self.folder = api.content.create(
+                container=self.portal, type='Folder', id='test-folder')
+        self.agenda = api.content.create(
+            container=self.folder, type='Agenda', id='agenda')
 
     def test_adding(self):
         self.assertTrue(IAgenda.providedBy(self.agenda))
@@ -73,13 +69,13 @@ class ContentTypeTestCase(unittest.TestCase):
 
     def test_agendadiaria_ordering(self):
         # Create two AgendaDiaria objects
-        self.agenda.invokeFactory('AgendaDiaria', '2013-10-17')
-        self.agenda.invokeFactory('AgendaDiaria', '2013-02-05')
+        api.content.create(container=self.agenda, type='AgendaDiaria', id='2013-10-17')
+        api.content.create(container=self.agenda, type='AgendaDiaria', id='2013-02-05')
         oIds = list(self.agenda.objectIds())
         # Sorting should be ascending
         self.assertEqual(['2013-02-05', '2013-10-17'], oIds)
         # Add an older one, should be on top of the list
-        self.agenda.invokeFactory('AgendaDiaria', '2012-02-05')
+        api.content.create(container=self.agenda, type='AgendaDiaria', id='2012-02-05')
         oIds = list(self.agenda.objectIds())
         self.assertEqual(['2012-02-05', '2013-02-05', '2013-10-17'], oIds)
 
@@ -90,33 +86,34 @@ class ContentTypeBrowserTestCase(unittest.TestCase):
 
     def setUp(self):
         self.portal = self.layer['portal']
-        self.ct = self.portal.portal_catalog
-        self.wt = self.portal.portal_workflow
 
     def setupContent(self, portal):
-        setRoles(self.portal, TEST_USER_ID, ['Manager'])
-        # Criamos a agenda
-        self.portal.invokeFactory('Agenda', 'agenda-vice-presidente')
-        self.agenda = self.portal['agenda-vice-presidente']
-        self.agenda.autoridade = u'Clarice Lispector'
-        self.agenda.orgao = u'Presidencia da Republica'
-        # Criamos a agenda diaria
-        self.agenda.invokeFactory('AgendaDiaria', '2014-02-05')
-        self.agendadiaria = self.agenda['2014-02-05']
-        self.agendadiaria.date = datetime.datetime(2014, 2, 5)
-        self.agendadiaria.reindexObject()
-        # Criamos o compromisso
-        self.agendadiaria.invokeFactory(
-            'Compromisso',
-            'compromisso',
-            start_date=datetime.datetime(2014, 2, 5, 10, 0, 0),
-            end_date=datetime.datetime(2014, 2, 5, 12, 0, 0),
-        )
-        self.compromisso = self.agendadiaria['compromisso']
-        # Publicamos os conteudos
-        self.wt.doActionFor(self.agenda, 'publish')
-        self.wt.doActionFor(self.agendadiaria, 'publish')
-        setRoles(self.portal, TEST_USER_ID, ['Member'])
+        with api.env.adopt_roles(['Manager']):
+            self.agenda = api.content.create(
+                container=self.portal,
+                type='Agenda',
+                id='agenda-vice-presidente',
+                autoridade=u'Clarice Lispector',
+                orgao=u'Presidencia da Republica',
+            )
+            # Criamos a agenda diaria
+            self.agendadiaria = api.content.create(
+                container=self.agenda,
+                type='AgendaDiaria',
+                id='2014-02-05',
+                date=datetime.datetime(2014, 2, 5),
+            )
+            # Criamos o compromisso
+            self.compromisso = api.content.create(
+                container=self.agendadiaria,
+                type='Compromisso',
+                id='compromisso',
+                start_date=datetime.datetime(2014, 2, 5, 10, 0, 0),
+                end_date=datetime.datetime(2014, 2, 5, 12, 0, 0),
+            )
+            # Publicamos os conteudos
+            api.content.transition(obj=self.agenda, transition='publish')
+            api.content.transition(obj=self.agendadiaria, transition='publish')
 
     def test_agenda_icon(self):
         app = self.layer['app']
@@ -153,10 +150,12 @@ class ContentTypeBrowserTestCase(unittest.TestCase):
         hoje = datetime.datetime.now()
         fmt_id = hoje.strftime(AGENDADIARIAFMT)
         fmt_display = hoje.strftime('%d/%m/%Y')
-        self.agenda.invokeFactory('AgendaDiaria', fmt_id)
-        self.agendahoje = self.agenda[fmt_id]
-        self.agendahoje.date = hoje
-        self.agendahoje.reindexObject()
+        agendahoje = api.content.create(
+            container=self.agenda,
+            type='AgendaDiaria',
+            id=fmt_id,
+            date=hoje,
+        )
         transaction.commit()
 
         # Como esta AgendaDiaria nao foi publicada, continuamos a
@@ -166,9 +165,8 @@ class ContentTypeBrowserTestCase(unittest.TestCase):
                       browser.contents.decode('utf-8'))
 
         # Ao publicarmos a AgendaDiaria de hoje
-        setRoles(self.portal, TEST_USER_ID, ['Manager'])
-        self.wt.doActionFor(self.agendahoje, 'publish')
-        setRoles(self.portal, TEST_USER_ID, ['Member'])
+        with api.env.adopt_roles(['Manager']):
+            api.content.transition(obj=agendahoje, transition='publish')
         transaction.commit()
         # Ela se torna a ativa
         browser.open(agenda_url)
