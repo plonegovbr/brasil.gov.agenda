@@ -10,7 +10,8 @@ Changelog
     Esta versão também remove a dependência no collective.portlet.calendar.
     Remova manualmente todos os portlets de calendario estendido e desinstale o pacote antes de atualizar.
 
-- Remove dependência no collective.portlet.calendar.
+- Remove dependência no collective.portlet.calendar;
+  o layout do IDG 2.x não faz uso de portlets.
   [hvelarde]
 
 - Remove upgrade steps do branch 1.x.
