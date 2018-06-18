@@ -27,7 +27,7 @@
             <input class="searchButton" type="submit" value="Buscar" />
             <input type="hidden"
                    name="portal_type:list"
-                   value="Compromisso"
+                   value="AgendaDiaria"
                    checked="checked"
                    id="portal_type_1_3" />
           </div>
