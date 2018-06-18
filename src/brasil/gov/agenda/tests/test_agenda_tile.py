@@ -80,7 +80,7 @@ class AgendaTileTestCase(unittest.TestCase):
         collection_events = AgendaTile._collection_events(tile)
         # check if lists the compromisso
         self.assertEqual(
-            collection_events.next(),
+            next(collection_events),
             [{
                 'timestamp_class': 'timestamp-cell is-now',
                 'time': '00h00',
