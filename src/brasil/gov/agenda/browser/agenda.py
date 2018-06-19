@@ -141,12 +141,13 @@ class AgendaJSONView(BrowserView, AgendaMixin):
                 day['isSelected'] = True
             agendadiaria = self.context.get(strday, None)
             if agendadiaria:
-                day['hasAppointment'] = True
                 compromissos = api.content.find(
                     context=agendadiaria,
                     object_provides=ICompromisso,
                     sort_on='start',
                 )
+                if compromissos:
+                    day['hasAppointment'] = True
                 for brain in compromissos:
                     obj = brain.getObject()
                     day['items'].append({
