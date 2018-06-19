@@ -10,6 +10,9 @@ Changelog
     Esta versão também remove a dependência no collective.portlet.calendar.
     Remova manualmente todos os portlets de calendario estendido e desinstale o pacote antes de atualizar.
 
+- Corrige mensagem de agenda vazia quando não existem compromissos.
+  [rodfersou]
+
 - Corrige a busca de compromissos na agenda.
   [hvelarde]
 

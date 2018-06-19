@@ -22,17 +22,17 @@ export default class AgendaTile {
   }
   onDateChange(agendaDiaria) {
     this.swiper.removeAllSlides();
-    this._$slide = $('<div class="swiper-slide"></div>');
-    if (agendaDiaria.hasAppointments === false) {
-      this._$slide.addClass('no-events');
-      this._$slide.html('Sem compromissos oficiais.');
-      this.swiper.appendSlide(this._$slide);
+    let $slide = $('<div class="swiper-slide"></div>');
+    if (agendaDiaria.hasAppointment === false) {
+      $slide.addClass('no-events');
+      $slide.html('Sem compromissos oficiais.');
+      this.swiper.appendSlide($slide);
       return;
     }
     for (let compromisso of agendaDiaria.items) {
-      if (this._$slide.children().length === this.pageSize) {
-        this.swiper.appendSlide(this._$slide);
-        this._$slide = $('<div class="swiper-slide"></div>');
+      if ($slide.children().length === this.pageSize) {
+        this.swiper.appendSlide($slide);
+        $slide = $('<div class="swiper-slide"></div>');
       }
       let $item = $(`
         <div class="collection-events-item">
@@ -51,10 +51,10 @@ export default class AgendaTile {
         $('.timestamp-cell', $item).addClass('is-now');
         $('.timestamp-cell', $item).append('<div class="now">Agora</div>')
       }
-      this._$slide.append($item);
+      $slide.append($item);
     }
-    if (this._$slide.children().length > 0) {
-      this.swiper.appendSlide(this._$slide);
+    if ($slide.children().length > 0) {
+      this.swiper.appendSlide($slide);
     }
   }
   initSwiper() {
