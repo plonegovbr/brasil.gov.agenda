@@ -16,6 +16,9 @@ Changelog
     Esta versão também remove a dependência no collective.portlet.calendar.
     Remova manualmente todos os portlets de calendario estendido e desinstale o pacote antes de atualizar.
 
+- Corrige alinhamento do titulo do calendário.
+  [rodfersou]
+
 - Corrige mensagem de agenda vazia quando não existem compromissos.
   [rodfersou]
 
