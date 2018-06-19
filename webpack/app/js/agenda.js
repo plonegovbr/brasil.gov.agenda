@@ -20,7 +20,7 @@ export default class AgendaView {
   }
   onDateChange(agendaDiaria) {
     this.$appointments.html('');
-    if (agendaDiaria.hasAppointments === false) {
+    if (agendaDiaria.hasAppointment === false) {
       this.$appointments.append(`
         <li class="sem-compromisso item-compromisso">
           <span>Atualmente não existem compromissos agendados.</span>
