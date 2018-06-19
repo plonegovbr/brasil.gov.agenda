@@ -108,11 +108,11 @@
   .ui-datepicker-group-middle .ui-datepicker-calendar {
     opacity: 1;
   }
-  .ui-datepicker-group {
-    width: 28%;
+  .ui-datepicker-group-first {
+    transform: translateX(-1rem);
   }
-  .ui-datepicker-group-middle {
-    margin: 0 8%;
+  .ui-datepicker-group-last {
+    transform: translateX(1rem);
   }
   .ui-datepicker-prev {
     transform: translate(-5rem, 7.5rem);
