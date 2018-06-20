@@ -9,7 +9,18 @@
         tal:content="string:${context/Title} ${context/autoridade}"></h1>
   </metal:slot>
   <metal:block fill-slot="content-core">
-    <tal:semagendadiaria tal:condition="not:view/editable">
+    <tal:canedit tal:condition="view/editable" tal:define="batch view/results">
+      <ul class="list-agenda">
+        <li class="agenda-item" tal:repeat="agenda batch">
+          <a tal:attributes="href agenda/getURL" tal:content="agenda/Title" />
+        </li>
+      </ul>
+      <tal:batchnavigation
+          define="batchnavigation nocall:context/@@batchnavigation"
+          replace="structure python:batchnavigation(batch)"
+          />
+    </tal:canedit>
+    <tal:anonymous tal:condition="not:view/editable">
       <div class="dados-agenda"
            tal:attributes="data-url view/agenda/absolute_url">
         <div class="search-compromisso">
@@ -72,6 +83,6 @@
           </span>
         </li>
       </ul>
-    </tal:semagendadiaria>
+    </tal:anonymous>
   </metal:block>
 </html>
