@@ -4,6 +4,9 @@ Changelog
 2.0a3 (unreleased)
 ^^^^^^^^^^^^^^^^^^
 
+- Corrige ações para editar e apagar compromisso.
+  [rodfersou]
+
 - Corrige alinhamento do titulo do calendário.
   [rodfersou]
 

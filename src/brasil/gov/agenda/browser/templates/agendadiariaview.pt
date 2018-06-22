@@ -12,7 +12,8 @@
   </metal:slot>
   <metal:block fill-slot="content-core">
     <div class="dados-agenda"
-         tal:attributes="data-url view/agenda/absolute_url">
+         tal:attributes="data-url view/agenda/absolute_url;
+                         data-editable view/editable">
       <div class="search-compromisso">
         <form class="search-form"
               tal:attributes="action string:${view/agenda/absolute_url}/@@search">
@@ -132,26 +133,6 @@
     </ul>
     <script>
       // <![CDATA[
-      jQuery(function($){
-        $('.compromisso-acao a.acao').prepOverlay({
-          subtype: 'ajax',
-          filter: common_content_filter,
-          formselector: '#delete_confirmation',
-          cssclass: 'overlay-compromisso',
-          noform: function(el) {return $.plonepopups.noformerrorshow(el, 'redirect');},
-          redirect: $.plonepopups.redirectbasehref,
-          closeselector: '[name="form.button.Cancel"]',
-          width:'50%'
-        });
-      });
-      // add style to mark active event on calendar portlet
-      $(document).ready(function () {
-        'use strict';
-        var url = window.location.href;
-        url = url.substring(0, url.indexOf("?"));
-        var active = $('.ploneCalendar a[href="' + url + '"]');
-        active.parents('td').addClass('activeevent');
-      });
       // Fixes the change between months in the extended calendar portlet
       (function ($) {
         function load_portlet_calendar(event, elem) {
