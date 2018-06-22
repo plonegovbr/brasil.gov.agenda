@@ -82,7 +82,7 @@ export default class AgendaView {
           closeselector: '[name="form.button.Cancel"]',
           width:'50%'
         });
-        $('.compromisso-dados', $item).append($edit);
+        $('.item-compromisso', $item).append($edit);
       }
       if (compromisso.isNow) {
         $('.compromisso-horarios', $item).append('<div class="now">Agora</div>');

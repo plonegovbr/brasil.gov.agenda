@@ -72,6 +72,7 @@
     width: 960px;
     padding: 2rem;
     margin-bottom: 1rem;
+    max-width: 100%;
   }
   .item-compromisso {
     display: flex;
@@ -111,6 +112,7 @@
   .compromisso-dados {
     display: flex;
     flex-wrap: wrap;
+    flex: 1;
   }
   .compromisso-titulo {
     flex: 1 100%;
@@ -171,10 +173,17 @@
 /* Botões de editar e remover
    ========================================================================== */
 
-.compromisso-acoes {
-  margin: 10px 0 !important;
+#content .compromisso-acoes {
+  display: flex;
+  align-items: center;
   li {
     display: inline-block !important;
+  }
+  li:first-child {
+    margin-right: .5rem;
+  }
+  a:hover {
+    color: #999 !important;
   }
 }
 

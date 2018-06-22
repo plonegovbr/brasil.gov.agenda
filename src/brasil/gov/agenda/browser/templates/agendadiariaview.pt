@@ -110,20 +110,20 @@
                  i18n:translate="">VCAL</a>
               <span i18n:translate="">Adicionar ao meu calendario</span>
             </span>
-            <ul class="compromisso-acoes"
-                tal:condition="view/editable">
-              <li class="compromisso-acao">
-                <a class="compromisso editar_compromisso acao"
-                   tal:attributes="href string:${comp/url}/edit"
-                   i18n:translate="">Editar</a>
-              </li>
-              <li class="compromisso-acao">
-                <a class="compromisso remover_compromisso acao"
-                   tal:attributes="href string:${comp/url}/delete_confirmation"
-                   i18n:translate="">Remover</a>
-              </li>
-            </ul>
           </div>
+          <ul class="compromisso-acoes"
+              tal:condition="view/editable">
+            <li class="compromisso-acao">
+              <a class="compromisso editar_compromisso acao"
+                 tal:attributes="href string:${comp/url}/edit"
+                 i18n:translate="">Editar</a>
+            </li>
+            <li class="compromisso-acao">
+              <a class="compromisso remover_compromisso acao"
+                 tal:attributes="href string:${comp/url}/delete_confirmation"
+                 i18n:translate="">Remover</a>
+            </li>
+          </ul>
         </div>
       </li>
       <li class="sem-compromisso item-compromisso"
