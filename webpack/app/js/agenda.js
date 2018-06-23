@@ -65,10 +65,10 @@ export default class AgendaView {
         $('.editar_compromisso', $edit).prepOverlay({
           subtype: 'ajax',
           filter: common_content_filter,
-          formselector: '#delete_confirmation',
+          formselector: '#form',
           cssclass: 'overlay-compromisso',
           noform: function(el) {return $.plonepopups.noformerrorshow(el, 'redirect');},
-          redirect: $.plonepopups.redirectbasehref,
+          redirect: location.href,
           closeselector: '[name="form.buttons.cancel"]',
           width:'50%'
         });
@@ -78,7 +78,7 @@ export default class AgendaView {
           formselector: '#delete_confirmation',
           cssclass: 'overlay-compromisso',
           noform: function(el) {return $.plonepopups.noformerrorshow(el, 'redirect');},
-          redirect: $.plonepopups.redirectbasehref,
+          redirect: location.href,
           closeselector: '[name="form.button.Cancel"]',
           width:'50%'
         });

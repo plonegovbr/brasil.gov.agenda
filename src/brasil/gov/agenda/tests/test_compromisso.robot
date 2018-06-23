@@ -60,6 +60,25 @@ Test Compromisso With Portlet
     Create  Compromisso  Compromisso do dia
     Page Should Contain  Outubro
 
+Test Edit Delete Compromisso AgendaDiaria
+    Enable Autologin as  Site Administrator
+    Go to homepage
+
+    Add Right Portlet  Calendário
+    Go to homepage
+
+    Create Agenda
+    Create  Júlio Verne  Compromisso do dia
+    Click Link  Agenda de Clarice Lispector para 28/10/2013
+    Page Should Contain  Júlio Verne
+    Click Link  Editar
+    Input Text  css=${title_selector}  Madre Teresa
+    Click Button  Salvar
+    Wait Until Page Contains  Madre Teresa
+    Click Link  Remover
+    Click Button  Excluir
+    Wait Until Page Contains  Atualmente não existem compromissos agendados.
+
 *** Keywords ***
 
 Click Adicionar Compromisso
