@@ -25,7 +25,7 @@ import json
 class AgendaView(BrowserView, AgendaMixin):
     """Visao padrao da agenda."""
 
-    def update(self):
+    def setup(self):
         plone_tools = getMultiAdapter((self.context, self.request),
                                       name='plone_tools')
         context_state = getMultiAdapter((self.context, self.request),
@@ -51,6 +51,7 @@ class AgendaView(BrowserView, AgendaMixin):
         return results
 
     def __call__(self):
+        self.setup()
         agenda_recente = self.agenda_recente()
         if agenda_recente and not self.editable:
             response = self.request.response
