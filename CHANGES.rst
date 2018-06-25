@@ -4,6 +4,9 @@ Changelog
 2.0a3 (unreleased)
 ^^^^^^^^^^^^^^^^^^
 
+- Adiciona listagem de agendas diárias ao acessar agenda quando estiver autenticado.
+  [rodfersou]
+
 - Corrige ações para editar e apagar compromisso.
   [rodfersou]
 
