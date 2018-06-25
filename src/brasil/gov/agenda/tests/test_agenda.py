@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-from brasil.gov.agenda.config import AGENDADIARIAFMT
 from brasil.gov.agenda.interfaces import IAgenda
 from brasil.gov.agenda.testing import FUNCTIONAL_TESTING
 from brasil.gov.agenda.testing import INTEGRATION_TESTING
@@ -124,58 +123,4 @@ class ContentTypeBrowserTestCase(unittest.TestCase):
 
         browser.open('%s/++resource++brasil.gov.agenda/agenda_icon.png' %
                      portal_url)
-        self.assertEqual(browser.headers['status'], '200 Ok')
-
-    def test_agenda_view(self):
-        from plone.app.testing import TEST_USER_NAME
-        from plone.app.testing import TEST_USER_PASSWORD
-        app = self.layer['app']
-        portal = self.portal
-        self.setupContent(portal)
-        import transaction
-        transaction.commit()
-        self.browser = Browser(app)
-        self.browser.handleErrors = False
-
-        agenda_url = self.agenda.absolute_url()
-        browser = self.browser
-
-        # Exibimos uma mensagem de que nao temos
-        # compromissos para a data de hoje
-        browser.open(agenda_url)
-        self.assertIn('existem compromissos agendados.',
-                      browser.contents.decode('utf-8'))
-
-        # Criamos uma agenda para o dia de hoje
-        hoje = datetime.datetime.now()
-        fmt_id = hoje.strftime(AGENDADIARIAFMT)
-        fmt_display = hoje.strftime('%d/%m/%Y')
-        agendahoje = api.content.create(
-            container=self.agenda,
-            type='AgendaDiaria',
-            id=fmt_id,
-            date=hoje,
-        )
-        transaction.commit()
-
-        # Como esta AgendaDiaria nao foi publicada, continuamos a
-        # exibir a mensagem
-        browser.open(agenda_url)
-        self.assertIn('existem compromissos agendados.',
-                      browser.contents.decode('utf-8'))
-
-        # Ao publicarmos a AgendaDiaria de hoje
-        with api.env.adopt_roles(['Manager']):
-            api.content.transition(obj=agendahoje, transition='publish')
-        transaction.commit()
-        # Ela se torna a ativa
-        browser.open(agenda_url)
-        self.assertIn('%s &mdash;' % fmt_display,
-                      browser.contents.decode('utf-8'))
-
-        # Nos autenticamos como admin
-        browser.addHeader('Authorization', 'Basic %s:%s' % (
-            TEST_USER_NAME, TEST_USER_PASSWORD))
-        # Vemos o conteudo da view de Agenda
-        browser.open(agenda_url)
         self.assertEqual(browser.headers['status'], '200 Ok')
