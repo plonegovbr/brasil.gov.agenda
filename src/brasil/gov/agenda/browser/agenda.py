@@ -18,7 +18,6 @@ from zope.component import getMultiAdapter
 from zope.i18nmessageid import Message
 from zope.interface import implementer
 from zope.publisher.interfaces import IPublishTraverse
-from zope.publisher.publish import mapply
 
 import json
 
@@ -52,7 +51,6 @@ class AgendaView(BrowserView, AgendaMixin):
         return results
 
     def __call__(self):
-        mapply(self.update, (), self.request)
         agenda_recente = self.agenda_recente()
         if agenda_recente and not self.editable:
             response = self.request.response
