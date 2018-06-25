@@ -2,6 +2,7 @@
 from six.moves import range  # noqa: I001
 from brasil.gov.agenda import _
 from brasil.gov.agenda.config import AGENDADIARIAFMT
+from brasil.gov.agenda.interfaces import IAgendaDiaria
 from brasil.gov.agenda.interfaces import ICompromisso
 from brasil.gov.agenda.utils import AgendaMixin
 from datetime import datetime
@@ -9,13 +10,14 @@ from datetime import timedelta
 from DateTime import DateTime
 from dateutil.tz import tzlocal
 from plone import api
+from plone.app.contentlisting.interfaces import IContentListing
+from plone.batching import Batch
 from Products.Five.browser import BrowserView
 from zExceptions import NotFound
 from zope.component import getMultiAdapter
 from zope.i18nmessageid import Message
 from zope.interface import implementer
 from zope.publisher.interfaces import IPublishTraverse
-from zope.publisher.publish import mapply
 
 import json
 
@@ -23,7 +25,7 @@ import json
 class AgendaView(BrowserView, AgendaMixin):
     """Visao padrao da agenda."""
 
-    def update(self):
+    def setup(self):
         plone_tools = getMultiAdapter((self.context, self.request),
                                       name='plone_tools')
         context_state = getMultiAdapter((self.context, self.request),
@@ -34,9 +36,22 @@ class AgendaView(BrowserView, AgendaMixin):
         self.workflow = plone_tools.workflow()
         self.editable = context_state.is_editable()
 
+    def results(self, b_size=16):
+        """Retorna as ultimas agendas diárias"""
+        query = {
+            'context': self.context,
+            'object_provides': IAgendaDiaria,
+            'sort_on': 'Date',
+            'sort_order': 'reverse',
+        }
+        b_start = int(self.request.get('b_start', 0))
+        results = api.content.find(**query)
+        results = IContentListing(results)
+        results = Batch(results, b_size, b_start)
+        return results
+
     def __call__(self):
-        mapply(self.update, (), self.request)
-        # return super(AgendaView, self).__call__()
+        self.setup()
         agenda_recente = self.agenda_recente()
         if agenda_recente and not self.editable:
             response = self.request.response
