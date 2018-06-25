@@ -156,7 +156,6 @@ class AgendaJSONView(BrowserView, AgendaMixin):
                         'datetime': '{0}{1}:00'.format(obj.start_date.isoformat(), tzname),
                         'location': obj.location,
                         'href': obj.absolute_url(),
-                        'vcal': '{0}/vcal_view'.format(obj.absolute_url()),
                         'isNow': obj.start_date <= now <= obj.end_date,
                     })
             data.append(day)
