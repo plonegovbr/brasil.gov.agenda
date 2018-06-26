@@ -67,20 +67,7 @@
           </tal:monthpicker>
           <tal:daypicker
               condition="python:field['id']=='daypicker'">
-            <div class="daypicker-wrapper">
-              <ul class="daypicker"
-                  tal:condition="view/days">
-                <tal:event repeat="day view/days">
-                  <li tal:attributes="data-day day/iso;
-                                      class day/cssclass;">
-                    <div class="daypicker-day"
-                         tal:content="day/day" />
-                    <div class="daypicker-weekday"
-                         tal:content="day/weekday" />
-                  </li>
-                </tal:event>
-              </ul>
-            </div>
+            <span metal:use-macro="context/@@agenda-macros/daypicker" />
           </tal:daypicker>
           <tal:collection_events
               condition="python:field['id']=='collection_events'">

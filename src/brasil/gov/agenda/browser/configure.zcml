@@ -5,6 +5,13 @@
     i18n_domain="brasil.gov.agenda">
 
   <browser:page
+      name="agenda-macros"
+      template="templates/agenda_macros.pt"
+      for="*"
+      permission="zope.Public"
+      />
+
+  <browser:page
       for="brasil.gov.agenda.interfaces.IAgenda"
       name="view"
       class="brasil.gov.agenda.browser.AgendaView"

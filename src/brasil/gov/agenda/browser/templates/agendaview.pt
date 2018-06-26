@@ -5,20 +5,31 @@
       metal:use-macro="context/main_template/macros/master"
       i18n:domain="brasil.gov.agenda">
   <body>
-  <metal:slot metal:fill-slot="content-title">
-    <h1 class="documentFirstHeading"
-        tal:content="string:${context/Title} ${context/autoridade}"></h1>
-  </metal:slot>
-  <metal:block fill-slot="content-core" tal:define="batch view/results">
-    <ul class="list-agenda">
-      <li class="agenda-item" tal:repeat="agenda batch">
-        <a tal:attributes="href agenda/getURL" tal:content="agenda/Title" />
-      </li>
-    </ul>
-    <tal:batchnavigation
-        define="batchnavigation nocall:context/@@batchnavigation"
-        replace="structure python:batchnavigation(batch)"
-        />
-  </metal:block>
+    <metal:slot metal:fill-slot="content-title">
+      <h1 class="documentFirstHeading"
+          tal:content="string:${context/Title} ${context/autoridade}"></h1>
+    </metal:slot>
+    <metal:block fill-slot="content-core" tal:define="batch view/results">
+      <tal:canedit tal:condition="view/editable" tal:define="batch view/results">
+        <ul class="list-agenda">
+          <li class="agenda-item" tal:repeat="agenda batch">
+            <a tal:attributes="href agenda/getURL" tal:content="agenda/Title" />
+          </li>
+        </ul>
+        <tal:batchnavigation
+            define="batchnavigation nocall:context/@@batchnavigation"
+            replace="structure python:batchnavigation(batch)"
+            />
+      </tal:canedit>
+      <tal:anonymous tal:condition="not:view/editable">
+        <div class="dados-agenda"
+             tal:attributes="data-url view/agenda/absolute_url">
+          <span metal:use-macro="context/@@agenda-macros/search" />
+          <span metal:use-macro="context/@@agenda-macros/calendar" />
+          <span metal:use-macro="context/@@agenda-macros/daypicker" />
+          <span metal:use-macro="context/@@agenda-macros/appointments" />
+        </div>
+      </tal:anonymous>
+    </metal:block>
   </body>
 </html>

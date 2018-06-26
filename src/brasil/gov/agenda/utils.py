@@ -102,3 +102,9 @@ class AgendaMixin:
                 'cssclass': ' '.join(cssclass),
             })
         return weekdays
+
+    def compromissos(self):
+        return []
+
+    def exibe_sem_compromissos(self):
+        return True
