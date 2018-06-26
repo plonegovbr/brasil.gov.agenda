@@ -5,6 +5,7 @@ from brasil.gov.agenda.config import AGENDADIARIAFMT
 from brasil.gov.agenda.interfaces import IAgendaDiaria
 from brasil.gov.agenda.interfaces import ICompromisso
 from brasil.gov.agenda.utils import AgendaMixin
+from calendar import monthrange
 from datetime import datetime
 from datetime import timedelta
 from DateTime import DateTime
@@ -136,6 +137,33 @@ class AgendaJSONView(BrowserView, AgendaMixin):
         ts = api.portal.get_tool('translation_service')
         return self._translate(ts.day_msgid(date.strftime('%w')))
 
+    def days_with_appointments(self, date):
+        first_day = datetime(date.year, date.month, 1)
+        _, last_day = monthrange(date.year, date.month)
+        last_day = datetime(date.year, date.month, last_day)
+
+        previous_month = first_day - timedelta(days=1)
+        next_month = last_day + timedelta(days=1)
+
+        previous_month_first_day = DateTime(
+            previous_month.year, previous_month.month, 1)
+        _, next_month_last_day = monthrange(next_month.year, next_month.month)
+        next_month_last_day = DateTime(
+            next_month.year, next_month.month, next_month_last_day)
+
+        date_range_query = {
+            'query': (previous_month_first_day, next_month_last_day), 'range': 'min:max'}
+        appointments = api.content.find(
+            context=self.context,
+            object_provides=ICompromisso,
+            sort_on='start',
+            start=date_range_query,
+        )
+        # get days with appointments (unique)
+        appointments = set(b.start.strftime(AGENDADIARIAFMT) for b in appointments)
+        # transform back to list
+        return [day for day in appointments]
+
     def extract_data(self):
         data = []
         now = datetime.now()
@@ -177,6 +205,7 @@ class AgendaJSONView(BrowserView, AgendaMixin):
                     'href': obj.absolute_url(),
                     'isNow': obj.start_date <= now <= obj.end_date,
                 })
+            day['daysWithAppointments'] = self.days_with_appointments(date)
         return data
 
     def __call__(self):
