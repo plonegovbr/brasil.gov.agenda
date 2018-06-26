@@ -14,6 +14,7 @@ export default class DatePicker {
     this.$datePicker = this.$('.monthpicker input');
     this.$datePicker3 = this.$('.calendar');
     this.$currentPicker = this.$datePicker.length > 0 ? this.$datePicker : this.$datePicker3;
+    this.daysWithAppointments = []
     this.initMonthPicker();
     let today = new Date();
     this.year = today.getFullYear();
@@ -33,7 +34,6 @@ export default class DatePicker {
     return $(selector, this.container);
   }
   update() {
-    this.updateMonthPicker();
     let agendaDiariaURL = `${this.year}-${zfill(this.month + 1)}-${zfill(this.day)}`;
     if (typeof this.callback === 'function') {
       $.ajax({
@@ -43,6 +43,8 @@ export default class DatePicker {
       }).always(function(data) {
         this.callback(data[3]);
         this.updateDayPicker(data);
+        this.daysWithAppointments = data[3].daysWithAppointments;
+        this.updateMonthPicker();
       });
     }
     if (this.updateTitle) {
@@ -93,7 +95,6 @@ export default class DatePicker {
       }
       this.$day.append($day);
     }
-    // rfs
   }
   initMonthPicker() {
     // this event is needed to get right translation
@@ -104,12 +105,21 @@ export default class DatePicker {
         this.day = parseInt(inst.selectedDay);
         this.update();
       }.bind(this);
+      let beforeShowDay = function(date) { 
+        let day = date.toISOString().slice(0, 10);
+        if (this.daysWithAppointments.indexOf(day) >= 0) {
+          return [true, 'ui-has-appointments', ''];
+        }
+        return [true, '', ''];
+      }.bind(this);
       this.$datePicker.datepicker( {
         onSelect: onSelect,
+        beforeShowDay: beforeShowDay,
       });
       this.$datePicker3.datepicker( {
         numberOfMonths: 3,
         onSelect: onSelect,
+        beforeShowDay: beforeShowDay,
       });
       this.update();
     }.bind(this));
