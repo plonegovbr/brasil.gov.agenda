@@ -148,32 +148,35 @@ class AgendaJSONView(BrowserView, AgendaMixin):
                 'datetime': '{0}{1}:00'.format(date.isoformat(), tzname),
                 'day': date.day,
                 'weekday': self.weekday(date)[:3],
-                'items': [],
                 'hasAppointment': False,
                 'isSelected': False,
             }
-            if self.date == strday:
-                day['isSelected'] = True
+            data.append(day)
+            appointments = []
             agendadiaria = self.context.get(strday, None)
             if agendadiaria:
-                compromissos = api.content.find(
+                appointments = api.content.find(
                     context=agendadiaria,
                     object_provides=ICompromisso,
                     sort_on='start',
                 )
-                if compromissos:
-                    day['hasAppointment'] = True
-                for brain in compromissos:
-                    obj = brain.getObject()
-                    day['items'].append({
-                        'title': obj.title,
-                        'start': obj.start_date.strftime('%Hh%M'),
-                        'datetime': '{0}{1}:00'.format(obj.start_date.isoformat(), tzname),
-                        'location': obj.location,
-                        'href': obj.absolute_url(),
-                        'isNow': obj.start_date <= now <= obj.end_date,
-                    })
-            data.append(day)
+            if appointments:
+                day['hasAppointment'] = True
+            if self.date != strday:
+                continue
+            day['isSelected'] = True
+            # just need items into current day
+            day['items'] = []
+            for brain in appointments:
+                obj = brain.getObject()
+                day['items'].append({
+                    'title': obj.title,
+                    'start': obj.start_date.strftime('%Hh%M'),
+                    'datetime': '{0}{1}:00'.format(obj.start_date.isoformat(), tzname),
+                    'location': obj.location,
+                    'href': obj.absolute_url(),
+                    'isNow': obj.start_date <= now <= obj.end_date,
+                })
         return data
 
     def __call__(self):
