@@ -4,6 +4,9 @@ Changelog
 2.0a3 (unreleased)
 ^^^^^^^^^^^^^^^^^^
 
+- Marca dias com compromissos nos calendários (closes `#118 <https://github.com/plonegovbr/brasil.gov.agenda/issues/118>`_).
+  [rodfersou]
+
 - Adiciona listagem de agendas diárias ao acessar agenda quando estiver autenticado.
   [rodfersou]
 
