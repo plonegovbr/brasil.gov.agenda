@@ -17,6 +17,7 @@ export default class DatePicker {
     this.daysWithAppointments = []
     this.initMonthPicker();
     let today = new Date();
+    this.pageLoad = true;
     this.year = today.getFullYear();
     this.month = today.getMonth();
     this.day = today.getDate();
@@ -47,7 +48,8 @@ export default class DatePicker {
         this.updateMonthPicker();
       });
     }
-    if (this.updateTitle) {
+    // we don't want to change URL when page load
+    if (this.updateTitle && ! this.pageLoad) {
       let agendaDiaria = `${zfill(this.day)}/${zfill(this.month + 1)}/${this.year}`;
       let title = `Agenda de ${$('.documentFirstHeading').text().trim()} para ${agendaDiaria}`;
       window.history.pushState(
@@ -57,6 +59,7 @@ export default class DatePicker {
       );
       document.title = title;
     }
+    this.pageLoad = false;
   }
   updateMonthPicker() {
     this.$currentPicker.datepicker('setDate', new Date(this.year, this.month, this.day));
