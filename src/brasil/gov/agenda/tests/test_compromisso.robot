@@ -77,8 +77,6 @@ Test Edit Delete Compromisso AgendaDiaria
     Wait Until Page Contains  Atualmente não existem compromissos agendados.
 
 Test Highlight Appointments
-    [Tags]  Expected Failure
-
     Enable Autologin as  Site Administrator
     Go to homepage
 
@@ -86,8 +84,7 @@ Test Highlight Appointments
 
     Create  Compromisso  Compromisso do dia
     Click Link  Agenda de Clarice Lispector para 28/10/2013
-    # I don't know why this is failing
-    Wait Until Page Contains  xpath=.//td[contains(@class,"ui-has-appointments")]
+    Wait Until Page Contains Element  css=td.ui-has-appointments
 
 
 *** Keywords ***
