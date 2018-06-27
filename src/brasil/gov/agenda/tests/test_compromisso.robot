@@ -64,9 +64,6 @@ Test Edit Delete Compromisso AgendaDiaria
     Enable Autologin as  Site Administrator
     Go to homepage
 
-    Add Right Portlet  Calendário
-    Go to homepage
-
     Create Agenda
     Create  Júlio Verne  Compromisso do dia
     Click Link  Agenda de Clarice Lispector para 28/10/2013
@@ -78,6 +75,17 @@ Test Edit Delete Compromisso AgendaDiaria
     Click Link  Remover
     Click Button  Excluir
     Wait Until Page Contains  Atualmente não existem compromissos agendados.
+
+Test Highlight Appointments
+    Enable Autologin as  Site Administrator
+    Go to homepage
+
+    Create Agenda
+
+    Create  Compromisso  Compromisso do dia
+    Click Link  Agenda de Clarice Lispector para 28/10/2013
+    Wait Until Page Contains Element  css=td.ui-has-appointments
+
 
 *** Keywords ***
 
