@@ -103,8 +103,10 @@ class AgendaMixin:
             })
         return weekdays
 
-    def compromissos(self):
+    @staticmethod
+    def compromissos():
         return []
 
-    def exibe_sem_compromissos(self):
+    @staticmethod
+    def exibe_sem_compromissos():
         return True
