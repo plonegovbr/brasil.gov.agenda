@@ -4,6 +4,9 @@ Changelog
 2.0a3 (unreleased)
 ^^^^^^^^^^^^^^^^^^
 
+- Remove o registro condicional de subscribers incluído no release 2.0a1.
+  [hvelarde]
+
 - Marca dias com compromissos nos calendários (closes `#118 <https://github.com/plonegovbr/brasil.gov.agenda/issues/118>`_).
   [rodfersou]
 
