@@ -1,7 +1,7 @@
 Changelog
 ---------
 
-2.0a3 (unreleased)
+2.0a3 (2018-06-28)
 ^^^^^^^^^^^^^^^^^^
 
 - Remove o registro condicional de subscribers incluído no release 2.0a1.
