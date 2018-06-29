@@ -54,22 +54,8 @@ Test Data Duplicada
     Click Button  Salvar
     Page Should Contain  Existem alguns erros
 
-Test AgendaDiaria With Portlet
-    [Tags]  Expected Failure
-
-    Enable Autologin as  Site Administrator
-    Go to homepage
-
-    Add Right Portlet  Calendário
-    Go to homepage
-
-    Create Agenda
-
-    Create AgendaDiaria  05  2  2013
-    Page Should Contain    Fevereiro
-
-
 *** Keywords ***
+
 Create Agenda
     Click Adicionar Agenda
     Input Text  css=${title_basic_selector}  Agenda da Presidenta

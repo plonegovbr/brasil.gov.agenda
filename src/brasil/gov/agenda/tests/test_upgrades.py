@@ -93,3 +93,21 @@ class to4100TestCase(UpgradeTestCaseBase):
         ids = js_tool.getResourceIds()
         self.assertEqual(SWIPER_JS, ids[0])
         self.assertIn(NEW_JS, ids)
+
+
+class to4101TestCase(UpgradeTestCaseBase):
+
+    def setUp(self):
+        UpgradeTestCaseBase.setUp(self, u'4100', u'4101')
+
+    def test_registrations(self):
+        version = self.setup.getLastVersionForProfile(self.profile_id)[0]
+        self.assertGreaterEqual(int(version), int(self.to_version))
+        self.assertEqual(self.total_steps, 1)
+
+    def test_import_various(self):
+        title = u'Import various'
+        step = self.get_upgrade_step(title)
+        self.assertIsNotNone(step)
+
+        self.execute_upgrade_step(step)

@@ -48,18 +48,6 @@ Test Default Values
     Click Adicionar Compromisso
     Textfield Value Should Be  css=${autoridade_selector}  Clarice Lispector
 
-Test Compromisso With Portlet
-    Enable Autologin as  Site Administrator
-    Go to homepage
-
-    Add Right Portlet  Calendário
-    Go to homepage
-
-    Create Agenda
-
-    Create  Compromisso  Compromisso do dia
-    Page Should Contain  Outubro
-
 Test Edit Delete Compromisso AgendaDiaria
     Enable Autologin as  Site Administrator
     Go to homepage
