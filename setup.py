@@ -84,7 +84,6 @@ setup(
             'plone.browserlayer',
             'plone.namedfile',
             'plone.testing',
-            'plone4.csrffixes',
             'robotsuite',
             'transaction',
             'zope.site',
