@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 from six.moves import range  # noqa: I001
+from brasil.gov.agenda.browser import AgendaMixin
 from brasil.gov.agenda.config import AGENDADIARIAFMT
 from brasil.gov.agenda.interfaces import IAgendaDiaria
 from brasil.gov.agenda.interfaces import ICompromisso
-from brasil.gov.agenda.utils import AgendaMixin
 from calendar import monthrange
 from datetime import datetime
 from datetime import timedelta

@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from brasil.gov.agenda.utils import AgendaMixin
+from brasil.gov.agenda.browser import AgendaMixin
 from collective.cover import _
 from collective.cover.browser.scaling import ImageScale
 from collective.cover.tiles.base import IPersistentCoverTile
