@@ -4,6 +4,9 @@ Changelog
 2.0a4 (unreleased)
 ^^^^^^^^^^^^^^^^^^
 
+- Corrige dependências do pacote.
+  [hvelarde]
+
 - Limpeza e reorganização do código.
   [hvelarde, rodfersou]
 
