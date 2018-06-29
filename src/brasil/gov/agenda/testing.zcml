@@ -9,7 +9,6 @@
        testes. -->
 
   <include file="configure.zcml" />
-  <include package="plone4.csrffixes" />
 
   <genericsetup:registerProfile
       name="testing"
