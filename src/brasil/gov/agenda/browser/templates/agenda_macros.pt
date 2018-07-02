@@ -16,7 +16,7 @@
                name="portal_type:list"
                value="AgendaDiaria"
                checked="checked"
-               id="portal_type_1_3" />
+               />
       </div>
     </form>
   </div>
