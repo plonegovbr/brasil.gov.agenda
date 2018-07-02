@@ -1,4 +1,4 @@
 <?xml version="1.0"?>
 <portlets>
-  <portlet purge="true" addview="brasil.gov.agenda.busca" />
+  <portlet remove="true" addview="brasil.gov.agenda.busca" />
 </portlets>
