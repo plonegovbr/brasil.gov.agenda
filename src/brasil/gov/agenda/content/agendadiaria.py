@@ -1,10 +1,11 @@
 # -*- coding: utf-8 -*-
 from brasil.gov.agenda import _
-from brasil.gov.agenda import utils
 from brasil.gov.agenda.config import AGENDADIARIAFMT
 from brasil.gov.agenda.config import TZ
 from brasil.gov.agenda.interfaces import IAgendaDiaria
 from brasil.gov.agenda.interfaces import ICompromisso
+from datetime import date
+from datetime import timedelta
 from DateTime import DateTime
 from plone import api
 from plone.dexterity.content import Container
@@ -97,7 +98,7 @@ def default_subjects(context):
 @provider(IDefaultFactory)
 def default_date():
     """ Retorna um dia no futuro """
-    return utils.tomorrow()
+    return date.today() + timedelta(1)
 
 
 class DateValidator(SimpleFieldValidator):

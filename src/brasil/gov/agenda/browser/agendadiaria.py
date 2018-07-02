@@ -23,9 +23,6 @@ class AgendaDiariaView(BrowserView, AgendaMixin):
         self.setup()
         return self.index()
 
-    def _format_time(self, value):
-        return value.strftime('%Hh%M')
-
     @property
     def date(self):
         context = self.context
@@ -96,11 +93,9 @@ class AgendaDiariaView(BrowserView, AgendaMixin):
             comp['autoridade'] = self.autoridade()
             comp['title'] = obj.Title()
             comp['description'] = obj.Description()
-            comp['start_date'] = obj.start_date
-            comp['start_time'] = self._format_time(comp['start_date'])
+            comp['start_time'] = obj.start_date.strftime('%Hh%M')
             comp['start_date'] = obj.start_date.strftime('%Y-%m-%d %H:%M')
-            comp['end_date'] = obj.end_date
-            comp['end_time'] = self._format_time(comp['end_date'])
+            comp['end_time'] = obj.start_date.strftime('%Hh%M')
             comp['end_date'] = obj.end_date.strftime('%Y-%m-%d %H:%M')
             comp['is_now'] = obj.start_date < now < obj.end_date
             comp['location'] = obj.location

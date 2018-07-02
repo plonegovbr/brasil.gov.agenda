@@ -28,9 +28,6 @@ class CompromissoView(BrowserView):
         self.setup()
         return self.index()
 
-    def _format_time(self, value):
-        return value.strftime('%Hh%M')
-
     def _translate(self, msgid, locale='plonelocales', mapping=None):
         tool = self._ts
         # XXX: Por que é retornado 'pt-br' do portal_state ao invés de 'pt_BR'?
@@ -97,11 +94,9 @@ class CompromissoView(BrowserView):
         comp['autoridade'] = self.autoridade()
         comp['title'] = obj.Title()
         comp['description'] = obj.Description()
-        comp['start_date'] = obj.start_date
-        comp['start_time'] = self._format_time(comp['start_date'])
+        comp['start_time'] = obj.start_date.strftime('%Hh%M')
         comp['start_date'] = obj.start_date.strftime('%Y-%m-%d %H:%M')
-        comp['end_date'] = obj.end_date
-        comp['end_time'] = self._format_time(comp['end_date'])
+        comp['end_time'] = obj.end_date.strftime('%Hh%M')
         comp['end_date'] = obj.end_date.strftime('%Y-%m-%d %H:%M')
         comp['location'] = obj.location
         comp['attendees'] = obj.attendees

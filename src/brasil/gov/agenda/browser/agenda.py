@@ -67,9 +67,6 @@ class AgendaView(BrowserView, AgendaMixin):
             if review_state == 'published':
                 return agenda
 
-    def _format_time(self, value):
-        return value.strftime('%Hh%M')
-
     def get_link_erros(self):
         portal_obj = self.context.portal_url.getPortalObject()
         if (hasattr(portal_obj, 'relatar-erros')):
