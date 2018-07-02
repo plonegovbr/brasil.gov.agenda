@@ -4,7 +4,8 @@ Changelog
 2.0a4 (unreleased)
 ^^^^^^^^^^^^^^^^^^
 
-- Nothing changed yet.
+- Limpeza e reorganização do código.
+  [hvelarde, rodfersou]
 
 
 2.0a3 (2018-06-28)

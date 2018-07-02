@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from Acquisition import aq_parent
 from brasil.gov.agenda import _
-from brasil.gov.agenda.utils import AgendaMixin
+from brasil.gov.agenda.browser.mixin import AgendaMixin
 from datetime import datetime
 from Products.CMFCore.utils import getToolByName
 from Products.Five.browser import BrowserView

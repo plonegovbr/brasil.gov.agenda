@@ -6,168 +6,26 @@
       i18n:domain="brasil.gov.agenda"
       tal:define="portal_state context/@@plone_portal_state;
                   portal_url portal_state/portal_url;">
-  <metal:slot metal:fill-slot="content-title">
-    <h1 class="documentFirstHeading"
-        tal:content="view/TitleAgenda"></h1>
-  </metal:slot>
-  <metal:block fill-slot="content-core">
-    <div class="dados-agenda"
-         tal:attributes="data-url view/agenda/absolute_url;
-                         data-editable view/editable">
-      <div class="search-compromisso">
-        <form class="search-form"
-              tal:attributes="action string:${view/agenda/absolute_url}/@@search">
-          <div class="LSBox">
-            <input class="searchField"
-                   name="SearchableText"
-                   type="text"
-                   size="15"
-                   title="Busca em agenda"
-                   placeholder="Buscar em agenda"
-                   autocomplete="off" />
-            <input class="searchButton" type="submit" value="Buscar" />
-            <input type="hidden"
-                   name="portal_type:list"
-                   value="AgendaDiaria"
-                   checked="checked"
-                   id="portal_type_1_3" />
-          </div>
-        </form>
-      </div>
-      <div class="calendar-wrapper">
-        <div class="calendar-title"
-             tal:define="month view/month">
-          <span class="strmonth" tal:content="month/strmonthcomplete" />
-          <span class="from" i18n:translate="">de</span>
-          <span class="year" tal:content="month/year" />
-        </div>
-        <div class="calendar"></div>
-      </div>
-      <div class="daypicker-wrapper">
-        <ul class="daypicker"
-            tal:condition="view/days">
-          <tal:event repeat="day view/days">
-            <li tal:attributes="data-day day/iso;
-                                class day/cssclass;">
-              <div class="daypicker-day"
-                   tal:content="day/day" />
-              <div class="daypicker-weekday"
-                   tal:content="day/weekday" />
-            </li>
-          </tal:event>
-        </ul>
-      </div>
-      <div class="portalMessage info"
-           tal:condition="view/update_info"
-           tal:content="structure view/update_info"
-           i18n:translate="">
-        Agenda alterada
-      </div>
-      <div class="collectionevents-title-wrapper">
-        <div class="collectionevents-stroke"></div>
-        <div class="collectionevents-title"
+  <body>
+    <metal:slot metal:fill-slot="content-title">
+      <h1 class="documentFirstHeading"
+          tal:content="view/TitleAgenda"></h1>
+    </metal:slot>
+    <metal:block fill-slot="content-core">
+      <div class="dados-agenda"
+           tal:attributes="data-url view/agenda/absolute_url;
+                           data-editable view/editable">
+        <span metal:use-macro="context/@@agenda-macros/search" />
+        <span metal:use-macro="context/@@agenda-macros/calendar" />
+        <span metal:use-macro="context/@@agenda-macros/daypicker" />
+        <div class="portalMessage info"
+             tal:condition="view/update_info"
+             tal:content="structure view/update_info"
              i18n:translate="">
-          Compromissos do dia
+          Agenda alterada
         </div>
-        <div class="collectionevents-stroke"></div>
+        <span metal:use-macro="context/@@agenda-macros/appointments" />
       </div>
-    </div>
-    <ul class="list-compromissos">
-      <li class="item-compromisso-wrapper"
-          tal:repeat="comp view/compromissos">
-        <div class="item-compromisso">
-          <div class="compromisso-horarios">
-            <time class="horario compromisso-inicio"
-                  tal:attributes="datetime comp/start_date"
-                  tal:content="comp/start_time">16h20</time>
-            <div class="now"
-                 tal:condition="comp/is_now"
-                 i18n:translate="">Agora</div>
-          </div>
-          <div class="compromisso-dados">
-            <h4 class="compromisso-titulo"
-                tal:content="comp/title">
-              Reunião com Dorneles Treméa
-            </h4>
-            <p class="compromisso-participantes"
-               tal:condition="comp/attendees"
-               tal:content="structure comp/attendees_formatted">
-              Dorneles Treméa
-            </p>
-            <p class="compromisso-pauta"
-               tal:condition="comp/description">
-              <label i18n:translate="">Pauta:</label>
-              <span tal:replace="comp/description">Assunto a ser tratado</span>
-            </p>
-            <p class="compromisso-local"
-               tal:condition="comp/location"
-               tal:content="comp/location">
-              Palácio do Planalto
-            </p>
-            <span class="download-compromisso">
-              <a class="add-agenda vcal"
-                 tal:attributes="href string:${comp/url}/vcal_view"
-                 i18n:translate="">VCAL</a>
-              <span i18n:translate="">Adicionar ao meu calendario</span>
-            </span>
-          </div>
-          <ul class="compromisso-acoes"
-              tal:condition="view/editable">
-            <li class="compromisso-acao">
-              <a class="compromisso editar_compromisso acao"
-                 tal:attributes="href string:${comp/url}/edit"
-                 i18n:translate="">Editar</a>
-            </li>
-            <li class="compromisso-acao">
-              <a class="compromisso remover_compromisso acao"
-                 tal:attributes="href string:${comp/url}/delete_confirmation"
-                 i18n:translate="">Remover</a>
-            </li>
-          </ul>
-        </div>
-      </li>
-      <li class="sem-compromisso item-compromisso"
-          tal:condition="view/exibe_sem_compromissos">
-        <span i18n:translate="label_agendadiaria_sem_compromissos">Sem compromissos oficiais.</span>
-      </li>
-    </ul>
-    <script>
-      // <![CDATA[
-      // Fixes the change between months in the extended calendar portlet
-      (function ($) {
-        function load_portlet_calendar(event, elem) {
-          event.preventDefault();
-          event.stopPropagation();
-          var pw, elem_data, portlethash, url;
-          pw = elem.closest('.portletWrapper');
-          elem_data = elem.data();
-          portlethash = pw.attr('id');
-          portlethash = portlethash.substring(15, portlethash.length);
-          url = portal_url +
-            '/@@render-portlet?portlethash=' + portlethash +
-            '&year=' + elem_data.year +
-            '&month=' + elem_data.month;
-          $.ajax({
-            url: url,
-            success: function (data) {
-              pw.html(data);
-              rebind_portlet_calendar();
-            }
-          });
-        }
-        function rebind_portlet_calendar() {
-          $('.portletCalendar a.calendarNext').click(function (event) {
-            load_portlet_calendar(event, $(this));
-          });
-          $('.portletCalendar a.calendarPrevious').click(function (event) {
-            load_portlet_calendar(event, $(this));
-          });
-        }
-        $(document).ready(function () {
-          rebind_portlet_calendar();
-        });
-      }(jQuery));
-      // ]]>
-    </script>
-  </metal:block>
+    </metal:block>
+  </body>
 </html>

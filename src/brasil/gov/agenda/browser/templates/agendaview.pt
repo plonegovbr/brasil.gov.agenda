@@ -4,85 +4,32 @@
       xmlns:i18n="http://xml.zope.org/namespaces/i18n"
       metal:use-macro="context/main_template/macros/master"
       i18n:domain="brasil.gov.agenda">
-  <metal:slot metal:fill-slot="content-title">
-    <h1 class="documentFirstHeading"
-        tal:content="string:${context/Title} ${context/autoridade}"></h1>
-  </metal:slot>
-  <metal:block fill-slot="content-core">
-    <tal:canedit tal:condition="view/editable" tal:define="batch view/results">
-      <ul class="list-agenda">
-        <li class="agenda-item" tal:repeat="agenda batch">
-          <a tal:attributes="href agenda/getURL" tal:content="agenda/Title" />
-        </li>
-      </ul>
-      <tal:batchnavigation
-          define="batchnavigation nocall:context/@@batchnavigation"
-          replace="structure python:batchnavigation(batch)"
-          />
-    </tal:canedit>
-    <tal:anonymous tal:condition="not:view/editable">
-      <div class="dados-agenda"
-           tal:attributes="data-url view/agenda/absolute_url">
-        <div class="search-compromisso">
-          <form class="search-form"
-                tal:attributes="action string:${portal_url}/@@search">
-            <div class="LSBox">
-              <input class="searchField"
-                     name="SearchableText"
-                     type="text"
-                     size="15"
-                     title="Busca em agenda"
-                     placeholder="Buscar em agenda"
-                     autocomplete="off" />
-              <input class="searchButton" type="submit" value="Buscar" />
-              <input type="checkbox"
-                     name="portal_type:list"
-                     value="Compromisso"
-                     class="hiddenStructure"
-                     checked="checked"
-                     id="portal_type_1_3" />
-            </div>
-          </form>
+  <body>
+    <metal:slot metal:fill-slot="content-title">
+      <h1 class="documentFirstHeading"
+          tal:content="string:${context/Title} ${context/autoridade}"></h1>
+    </metal:slot>
+    <metal:block fill-slot="content-core" tal:define="batch view/results">
+      <tal:canedit tal:condition="view/editable" tal:define="batch view/results">
+        <ul class="list-agenda">
+          <li class="agenda-item" tal:repeat="agenda batch">
+            <a tal:attributes="href agenda/getURL" tal:content="agenda/Title" />
+          </li>
+        </ul>
+        <tal:batchnavigation
+            define="batchnavigation nocall:context/@@batchnavigation"
+            replace="structure python:batchnavigation(batch)"
+            />
+      </tal:canedit>
+      <tal:anonymous tal:condition="not:view/editable">
+        <div class="dados-agenda"
+             tal:attributes="data-url view/agenda/absolute_url">
+          <span metal:use-macro="context/@@agenda-macros/search" />
+          <span metal:use-macro="context/@@agenda-macros/calendar" />
+          <span metal:use-macro="context/@@agenda-macros/daypicker" />
+          <span metal:use-macro="context/@@agenda-macros/appointments" />
         </div>
-        <div class="calendar-wrapper">
-          <div class="calendar-title"
-               tal:define="month view/month">
-            <span class="strmonth" tal:content="month/strmonthcomplete" />
-            <span class="from" i18n:translate="">de</span>
-            <span class="year" tal:content="month/year" />
-          </div>
-          <div class="calendar"></div>
-        </div>
-        <div class="daypicker-wrapper">
-          <ul class="daypicker"
-              tal:condition="view/days">
-            <tal:event repeat="day view/days">
-              <li tal:attributes="data-day day/iso;
-                                  class day/cssclass;">
-                <div class="daypicker-day"
-                     tal:content="day/day" />
-                <div class="daypicker-weekday"
-                     tal:content="day/weekday" />
-              </li>
-            </tal:event>
-          </ul>
-        </div>
-        <div class="collectionevents-title-wrapper">
-          <div class="collectionevents-stroke"></div>
-          <div class="collectionevents-title"
-               i18n:translate="">
-            Compromissos do dia
-          </div>
-          <div class="collectionevents-stroke"></div>
-        </div>
-      </div>
-      <ul class="list-compromissos">
-        <li class="sem-compromisso item-compromisso">
-          <span i18n:translate="label_agendadiaria_nao_criada">
-            Atualmente n&atilde;o existem compromissos agendados.
-          </span>
-        </li>
-      </ul>
-    </tal:anonymous>
-  </metal:block>
+      </tal:anonymous>
+    </metal:block>
+  </body>
 </html>

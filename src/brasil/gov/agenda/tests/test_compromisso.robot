@@ -68,12 +68,12 @@ Test Edit Delete Compromisso AgendaDiaria
     Create  Júlio Verne  Compromisso do dia
     Click Link  Agenda de Clarice Lispector para 28/10/2013
     Page Should Contain  Júlio Verne
-    Click Link  Editar
+    Click Link  css=.editar_compromisso
     Input Text  css=${title_selector}  Madre Teresa
-    Click Button  Salvar
+    Click Button  css=#form-buttons-save
     Wait Until Page Contains  Madre Teresa
-    Click Link  Remover
-    Click Button  Excluir
+    Click Link  css=.remover_compromisso
+    Click Button  css=.destructive
     Wait Until Page Contains  Atualmente não existem compromissos agendados.
 
 Test Highlight Appointments
