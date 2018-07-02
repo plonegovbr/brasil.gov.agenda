@@ -106,7 +106,7 @@ class to4101TestCase(UpgradeTestCaseBase):
         self.assertEqual(self.total_steps, 1)
 
     def test_import_various(self):
-        title = u'Import various'
+        title = u'Remove portlet registration'
         step = self.get_upgrade_step(title)
         self.assertIsNotNone(step)
 

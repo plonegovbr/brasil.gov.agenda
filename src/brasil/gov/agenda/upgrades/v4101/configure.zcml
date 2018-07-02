@@ -15,7 +15,7 @@
       profile="brasil.gov.agenda:default">
 
     <genericsetup:upgradeDepends
-        title="Import various"
+        title="Remove portlet registration"
         import_profile="brasil.gov.agenda.upgrades.v4101:default"
         />
 
