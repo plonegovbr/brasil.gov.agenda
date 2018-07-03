@@ -55,14 +55,6 @@
 
 <metal:form define-macro="appointments"
             i18n:domain="brasil.gov.agenda">
-  <div class="collectionevents-title-wrapper">
-    <div class="collectionevents-stroke"></div>
-    <div class="collectionevents-title"
-         i18n:translate="">
-      Compromissos do dia
-    </div>
-    <div class="collectionevents-stroke"></div>
-  </div>
   <ul class="list-compromissos">
     <li class="item-compromisso-wrapper"
         tal:repeat="comp view/compromissos">
