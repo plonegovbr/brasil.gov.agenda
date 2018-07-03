@@ -129,7 +129,7 @@ body .ui-datepicker,
     border: none;
   }
   .ui-datepicker-title {
-    display: flex;
+    display: none;
     align-items: center;
     justify-content: center;
     font-size: 14px;
@@ -137,11 +137,10 @@ body .ui-datepicker,
     line-height: 1.79;
     color: #222222;
   }
+  .ui-datepicker-title.loaded {
+    display: flex;
+  }
   .ui-datepicker-month {
-    font-family: monospace;
-    width: 3ch;
-    overflow: hidden;
-    white-space: nowrap;
     text-transform: uppercase;
   }
   .ui-datepicker-year {

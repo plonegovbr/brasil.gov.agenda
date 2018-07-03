@@ -79,6 +79,7 @@ export default class DatePicker {
       this.$month.html(monthNames[this.month].toUpperCase());
       this.$year.html(this.year);
     }
+    this.fixCalendarTitle();
   }
   updateDayPicker(data) {
     this.$day.html('');
@@ -99,6 +100,15 @@ export default class DatePicker {
       this.$day.append($day);
     }
   }
+  fixCalendarTitle() {
+    $('.ui-datepicker-title').removeClass('loaded');
+    setTimeout(function() {
+      for (let month of $('.ui-datepicker-month')) {
+        month.textContent = month.textContent.substring(0, 3);
+      }
+      $('.ui-datepicker-title').addClass('loaded');
+    }, 10);
+  }
   initMonthPicker() {
     // this event is needed to get right translation
     $(window).on('load', function() {
@@ -117,11 +127,13 @@ export default class DatePicker {
       }.bind(this);
       this.$datePicker.datepicker( {
         onSelect: onSelect,
+        beforeShow: this.fixCalendarTitle,
         beforeShowDay: beforeShowDay,
       });
       this.$datePicker3.datepicker( {
         numberOfMonths: 3,
         onSelect: onSelect,
+        beforeShow: this.fixCalendarTitle,
         beforeShowDay: beforeShowDay,
       });
       this.update();
