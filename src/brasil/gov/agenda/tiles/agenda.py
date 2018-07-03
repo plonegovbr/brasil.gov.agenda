@@ -6,13 +6,13 @@ from collective.cover.tiles.base import IPersistentCoverTile
 from collective.cover.tiles.base import PersistentCoverTile
 from collective.cover.tiles.configuration_view import IDefaultConfigureForm
 from datetime import datetime
+from plone import api
 from plone.app.imaging.utils import getAllowedSizes
 from plone.app.uuid.utils import uuidToObject
 from plone.autoform import directives as form
 from plone.namedfile import field
 from plone.tiles.interfaces import ITileDataManager
 from plone.uuid.interfaces import IUUID
-from Products.CMFCore.utils import getToolByName
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from zope import schema
 
@@ -131,7 +131,7 @@ class AgendaTile(PersistentCoverTile, AgendaMixin):
         page = []
         if agenda_diaria:
             now = datetime.now()
-            catalog = getToolByName(self.context, 'portal_catalog')
+            catalog = api.portal.get_tool('portal_catalog')
             query = {}
             query['portal_type'] = 'Compromisso'
             query['sort_on'] = 'start'

@@ -2,7 +2,7 @@
 from six.moves import range  # noqa: I001
 from datetime import datetime
 from datetime import timedelta
-from Products.CMFCore.utils import getToolByName
+from plone import api
 from zope.component import getMultiAdapter
 
 
@@ -10,7 +10,7 @@ class AgendaMixin:
     """Common methods and functions used by views and and tiles."""
 
     def _translate(self, msgid, locale='plonelocales', mapping=None):
-        tool = getToolByName(self.context, 'translation_service')
+        tool = api.portal.get_tool('translation_service')
         portal_state = getMultiAdapter((self.context, self.request),
                                        name=u'plone_portal_state')
         current_language = portal_state.language()
@@ -26,7 +26,7 @@ class AgendaMixin:
                               target_language=target_language)
 
     def month(self):
-        tool = getToolByName(self.context, 'translation_service')
+        tool = api.portal.get_tool('translation_service')
         today = datetime.now()
         strmonth = self._translate(tool.month_msgid(today.strftime('%m')))
         return {
@@ -37,7 +37,7 @@ class AgendaMixin:
         }
 
     def days(self):
-        tool = getToolByName(self.context, 'translation_service')
+        tool = api.portal.get_tool('translation_service')
         today = datetime.now()
         # get a list with 3 days before and 3 days after today
         days = [(today + timedelta(i)) for i in range(-3, 4)]

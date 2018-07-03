@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from Acquisition import aq_parent
 from brasil.gov.agenda import _
-from Products.CMFCore.utils import getToolByName
+from plone import api
 from Products.Five.browser import BrowserView
 from zope.component import getMultiAdapter
 from zope.i18nmessageid import Message
@@ -11,7 +11,7 @@ class CompromissoView(BrowserView):
     """Visao padrao do tipo compromisso."""
 
     def setup(self):
-        self._ts = getToolByName(self.context, 'translation_service')
+        self._ts = api.portal.get_tool('translation_service')
         context_state = getMultiAdapter((self.context, self.request),
                                         name=u'plone_context_state')
         portal_state = getMultiAdapter((self.context, self.request),
