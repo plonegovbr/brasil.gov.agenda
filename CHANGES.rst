@@ -8,6 +8,9 @@ Changelog
     Esta versão inabilita o uso do portlet de Busca de Agenda.
     Remova manualmente todos os portlets de Busca de Agenda antes de atualizar.
 
+- Ajustes gerais de layout.
+  [agnogueira, rodfersou]
+
 - O portlet de Busca de Agenda foi inabilitado e será completamente removido na versão 3.0.
   [hvelarde]
 
