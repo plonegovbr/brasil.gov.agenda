@@ -13,6 +13,7 @@ export default class DatePicker {
     this.$day = this.$('.daypicker')
     this.$datePicker = this.$('.monthpicker input');
     this.$datePicker3 = this.$('.calendar');
+    this.isMobile = false;
     this.$currentPicker = this.$datePicker.length > 0 ? this.$datePicker : this.$datePicker3;
     this.daysWithAppointments = []
     this.initMonthPicker();
@@ -22,6 +23,7 @@ export default class DatePicker {
     this.month = today.getMonth();
     this.day = today.getDate();
     this.$('.daypicker').on('click', '.day', this.onDayClick.bind(this));
+    $(window).resize(this.resize.bind(this));
     if ($('.portaltype-agendadiaria').length > 0) {
       let pathDate = location.pathname.split('/').pop();
       let [year, month, day] = pathDate.split('-').map(x => parseInt(x));
@@ -69,17 +71,14 @@ export default class DatePicker {
       this.$year.html(this.year);
       $('.monthpicker').attr('data-month', this.month);
       $('.monthpicker').attr('data-year', this.year);
+      this.fixCalendarTitle();
     }
     if (this.$datePicker3.length > 0) {
       let monthNames = this.$currentPicker.datepicker('option', 'monthNames');
-      this.$currentPicker.datepicker('option', 'showCurrentAtPos', 1);
-      setTimeout(function() {
-        this.$currentPicker.datepicker('option', 'showCurrentAtPos', 1);
-      }.bind(this), 1);
+      this.resize();
       this.$month.html(monthNames[this.month].toUpperCase());
       this.$year.html(this.year);
     }
-    this.fixCalendarTitle();
   }
   updateDayPicker(data) {
     this.$day.html('');
@@ -100,14 +99,34 @@ export default class DatePicker {
       this.$day.append($day);
     }
   }
+  resize(e) {
+    let isMobile = ($(window).width() <= 767);
+    // if it is called by resize event and responsive don't change
+    if (e != null && this.isMobile === isMobile) {
+      return;
+    }
+    this.isMobile = isMobile;
+    let showCurrentAtPos = 1;
+    let numberOfMonths = 3;
+    if (isMobile) {
+      showCurrentAtPos = 0;
+      numberOfMonths = 1;
+    }
+    this.$currentPicker.datepicker('option', 'numberOfMonths', numberOfMonths);
+    this.$currentPicker.datepicker('option', 'showCurrentAtPos', showCurrentAtPos);
+    setTimeout(function() {
+      this.$currentPicker.datepicker('option', 'showCurrentAtPos', showCurrentAtPos);
+    }.bind(this), 1);
+    this.fixCalendarTitle();
+  }
   fixCalendarTitle() {
     $('.ui-datepicker-title').removeClass('loaded');
     setTimeout(function() {
       for (let month of $('.ui-datepicker-month')) {
-        month.textContent = month.textContent.substring(0, 3);
+        month.textContent = month.textContent.slice(0, 3);
       }
       $('.ui-datepicker-title').addClass('loaded');
-    }, 10);
+    }, 1);
   }
   initMonthPicker() {
     // this event is needed to get right translation
