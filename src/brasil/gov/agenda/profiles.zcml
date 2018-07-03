@@ -34,9 +34,18 @@
      <depends name="typeinfo"/>
     </gs:importStep>
 
+    <utility
+        factory=".setuphandlers.NonInstallable"
+        name="brasil.gov.agenda"
+        provides="Products.CMFPlone.interfaces.INonInstallable"
+        />
 
-    <!-- Oculta profile -->
-    <utility factory=".setuphandlers.HiddenProfiles" name="brasil.gov.agenda" />
+    <!-- BBB: Plone 4.3 -->
+    <utility
+        factory=".setuphandlers.NonInstallable"
+        name="brasil.gov.agenda"
+        provides="Products.CMFQuickInstallerTool.interfaces.INonInstallable"
+        />
 
     <!-- Upgrades -->
     <include package=".upgrades" />

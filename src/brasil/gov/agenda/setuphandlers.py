@@ -1,16 +1,27 @@
 # -*- coding: utf-8 -*-
 from Products.CMFCore.utils import getToolByName
 from Products.CMFPlone.interfaces import INonInstallable
+from Products.CMFQuickInstallerTool import interfaces as BBB
 from zope.interface import implementer
 
 
+@implementer(BBB.INonInstallable)  # BBB: Plone 4.3
 @implementer(INonInstallable)
-class HiddenProfiles(object):  # pragma: no cover
+class NonInstallable(object):  # pragma: no cover
 
-    def getNonInstallableProfiles(self):
-        """Do not show on Plone's list of installable profiles."""
+    @staticmethod
+    def getNonInstallableProducts():
+        """Hide in the add-ons configlet."""
+        return [
+            u'brasil.gov.agenda.upgrades.v4101',
+        ]
+
+    @staticmethod
+    def getNonInstallableProfiles():
+        """Hide at site creation."""
         return [
             u'brasil.gov.agenda:uninstall',
+            u'brasil.gov.agenda.upgrades.v4101:default',
         ]
 
 

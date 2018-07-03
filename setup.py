@@ -53,7 +53,6 @@ setup(
         'plone.app.referenceablebehavior',
         'plone.app.uuid',
         'plone.app.versioningbehavior',
-        'plone.app.vocabularies',
         'plone.autoform',
         'plone.batching',
         'plone.behavior',

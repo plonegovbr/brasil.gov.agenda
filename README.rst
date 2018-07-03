@@ -60,6 +60,9 @@ Antes de atualizar confira que você está efetivamente utilizando a última ver
 Foi removida a dependência no collective.portlet.calendar pois o layout do IDG 2.x não faz uso de portlets.
 Remova manualmente todos os portlets de calendario estendido e desinstale esse pacote antes de atualizar.
 
+Foi inabilitado o portlet de Busca de Agenda.
+Remova manualmente todos os portlets de Busca de Agenda de seu site.
+
 Rodando o buildout de uma tag antiga do pacote
 ----------------------------------------------
 

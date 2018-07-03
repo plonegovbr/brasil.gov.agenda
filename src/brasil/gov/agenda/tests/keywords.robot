@@ -13,10 +13,6 @@ ${orgao_selector} =  input#form-widgets-orgao
 ${date_day_selector} =  select#form-widgets-date-day
 ${date_month_selector} =  select#form-widgets-date-month
 ${date_year_selector} =  select#form-widgets-date-year
-${title_extended_calendar_selector} =  input#form\\.name
-${mes_anterior_selector} =  a#calendar-previous
-${mes_posterior_selector} =  a#calendar-next
-${csrf_button_selector} =  form.button.confirm
 
 *** Keywords ***
 
@@ -52,43 +48,3 @@ Create AgendaDiaria
     Page Should Contain  ${dia}
     Page Should Contain  de
     Page Should Contain  ${ano}
-
-Manage Portlets
-    Go to   ${PLONE_URL}/@@manage-portlets
-    # HACK: in case CSRF protection is activated, confirm and continue
-    #       we have absolutely no idea why this happens
-    ${present}=  Run Keyword And Return Status  Element Should Be Visible  name=${csrf_button_selector}
-    Run Keyword If  ${present}  Click Button  ${csrf_button_selector}
-
-Add Right Portlet
-    [arguments]  ${portlet}
-    Manage Portlets
-    Select from list  xpath=//div[@id="portletmanager-plone-rightcolumn"]//select  ${portlet}
-
-Add Portlet Calendario Extendido
-    [arguments]  ${title}  ${raiz}
-    Add Right Portlet  Extended Calendar portlet
-    Input Text  css=${title_extended_calendar_selector}  ${title}
-    Select Checkbox  css=input[value="${raiz}"]
-    Click Button  Atualizar
-    Click Button  Salvar
-
-Test Navegacao Portlet Calendario Extendido
-    [arguments]  ${url}
-    Go to  ${url}
-
-    # need to slow down Selenium here to avoid errors on calendar portlet
-    ${speed} =  Set Selenium Speed  2 seconds
-
-    # Testa navegação para o mês anterior
-    Click Link  css=${mes_anterior_selector}
-    Wait Until Page Contains Element  css=#calendar-previous[data-month="${DOIS_MESES_ANTERIORES}"]
-    Wait Until Page Contains Element  css=#calendar-next[data-month="${MES_ATUAL}"]
-
-    # Testa navegação para o mês posterior
-    Click Link  css=${mes_posterior_selector}
-    Click Link  css=${mes_posterior_selector}
-    Wait Until Page Contains Element  css=#calendar-previous[data-month="${MES_ATUAL}"]
-    Wait Until Page Contains Element  css=#calendar-next[data-month="${DOIS_MESES_POSTERIORES}"]
-
-    Set Selenium Speed  ${speed}

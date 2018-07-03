@@ -1,0 +1,24 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:genericsetup="http://namespaces.zope.org/genericsetup">
+
+  <genericsetup:registerProfile
+      name="default"
+      title="brasil.gov.agenda (v4101)"
+      directory="profile"
+      provides="Products.GenericSetup.interfaces.EXTENSION"
+      />
+
+  <genericsetup:upgradeSteps
+      source="4100"
+      destination="4101"
+      profile="brasil.gov.agenda:default">
+
+    <genericsetup:upgradeDepends
+        title="Remove portlet registration"
+        import_profile="brasil.gov.agenda.upgrades.v4101:default"
+        />
+
+  </genericsetup:upgradeSteps>
+
+</configure>

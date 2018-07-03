@@ -4,6 +4,13 @@ Changelog
 2.0a4 (unreleased)
 ^^^^^^^^^^^^^^^^^^
 
+.. Warning::
+    Esta versão inabilita o uso do portlet de Busca de Agenda.
+    Remova manualmente todos os portlets de Busca de Agenda antes de atualizar.
+
+- Inabilita o uso do portlet de Busca de Agenda.
+  [hvelarde]
+
 - Corrige dependências do pacote.
   [hvelarde]
 
