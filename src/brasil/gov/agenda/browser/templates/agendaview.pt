@@ -24,9 +24,9 @@
       <tal:anonymous tal:condition="not:view/editable">
         <div class="dados-agenda"
              tal:attributes="data-url view/agenda/absolute_url">
-          <span metal:use-macro="context/@@agenda-macros/search" />
           <span metal:use-macro="context/@@agenda-macros/calendar" />
           <span metal:use-macro="context/@@agenda-macros/daypicker" />
+          <span metal:use-macro="context/@@agenda-macros/search" />
           <span metal:use-macro="context/@@agenda-macros/appointments" />
         </div>
       </tal:anonymous>
