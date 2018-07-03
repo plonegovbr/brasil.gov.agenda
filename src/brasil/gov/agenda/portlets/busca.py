@@ -12,15 +12,16 @@ logging.captureWarnings(True)
 
 
 class IBuscaPortlet(IPortletDataProvider):
-    pass
+    """BBB."""
 
 
 @implementer(IBuscaPortlet)
 class Assignment(base.Assignment):
-    pass
+    """BBB."""
 
 
 class Renderer(base.Renderer):
+    """BBB."""
 
     def render(self):
         msg = (
@@ -30,8 +31,8 @@ class Renderer(base.Renderer):
 
 
 class AddForm(base.AddForm):
-    pass
+    """BBB."""
 
 
 class EditForm(base.EditForm):
-    pass
+    """BBB."""
