@@ -64,7 +64,6 @@ setup(
         'plone.tiles',
         'plone.uuid',
         'Products.ATContentTypes',
-        'Products.CMFCore',
         'Products.CMFPlone >= 4.3',
         'Products.GenericSetup',
         'setuptools',

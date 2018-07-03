@@ -3,7 +3,7 @@ from Acquisition import aq_parent
 from brasil.gov.agenda import _
 from brasil.gov.agenda.browser.mixin import AgendaMixin
 from datetime import datetime
-from Products.CMFCore.utils import getToolByName
+from plone import api
 from Products.Five.browser import BrowserView
 from zope.component import getMultiAdapter
 from zope.i18nmessageid import Message
@@ -13,21 +13,15 @@ class AgendaDiariaView(BrowserView, AgendaMixin):
     """Visao padrao da agenda."""
 
     def setup(self):
-        plone_tools = getMultiAdapter((self.context, self.request),
-                                      name='plone_tools')
         context_state = getMultiAdapter((self.context, self.request),
                                         name=u'plone_context_state')
-        self._ts = getToolByName(self.context, 'translation_service')
-        self.catalog = plone_tools.catalog()
+        self._ts = api.portal.get_tool('translation_service')
         self.agenda = aq_parent(self.context)
         self.editable = context_state.is_editable()
 
     def __call__(self):
         self.setup()
         return self.index()
-
-    def _format_time(self, value):
-        return value.strftime('%Hh%M')
 
     @property
     def date(self):
@@ -85,7 +79,7 @@ class AgendaDiariaView(BrowserView, AgendaMixin):
         return '%(weekday)s, %(long_date)s' % parts
 
     def compromissos(self):
-        catalog = self.catalog
+        catalog = api.portal.get_tool('portal_catalog')
         now = datetime.now()
         compromissos = []
         query = {}
@@ -99,11 +93,9 @@ class AgendaDiariaView(BrowserView, AgendaMixin):
             comp['autoridade'] = self.autoridade()
             comp['title'] = obj.Title()
             comp['description'] = obj.Description()
-            comp['start_date'] = obj.start_date
-            comp['start_time'] = self._format_time(comp['start_date'])
+            comp['start_time'] = obj.start_date.strftime('%Hh%M')
             comp['start_date'] = obj.start_date.strftime('%Y-%m-%d %H:%M')
-            comp['end_date'] = obj.end_date
-            comp['end_time'] = self._format_time(comp['end_date'])
+            comp['end_time'] = obj.start_date.strftime('%Hh%M')
             comp['end_date'] = obj.end_date.strftime('%Y-%m-%d %H:%M')
             comp['is_now'] = obj.start_date < now < obj.end_date
             comp['location'] = obj.location

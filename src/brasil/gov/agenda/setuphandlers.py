@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from Products.CMFCore.utils import getToolByName
+from plone import api
 from Products.CMFPlone.interfaces import INonInstallable
 from Products.CMFQuickInstallerTool import interfaces as BBB
 from zope.interface import implementer
@@ -27,7 +27,7 @@ class NonInstallable(object):  # pragma: no cover
 
 def list_agendadiaria_calendar(p):
     """ Listaremos o tipo AgendaDiaria no calendario do site """
-    calendar = getToolByName(p, 'portal_calendar', None)
+    calendar = api.portal.get_tool('portal_calendar')
     if calendar is not None:
         our_type = 'AgendaDiaria'
         types = list(calendar.calendar_types)
