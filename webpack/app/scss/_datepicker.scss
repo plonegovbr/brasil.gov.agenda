@@ -93,13 +93,6 @@
     display: flex;
     justify-content: center;
   }
-  .ui-datepicker-group-middle .ui-datepicker-title::after {
-    @include sprite($monthpicker-arrow);
-    content: '';
-    margin-left: .5rem;
-    display: inline-block;
-    transform: rotate(180deg);
-  }
   .ui-datepicker-title,
   .ui-datepicker-calendar {
     opacity: .4;
