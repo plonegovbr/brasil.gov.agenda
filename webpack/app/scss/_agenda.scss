@@ -327,3 +327,37 @@ body.contraste #content {
     background-position: 0 -15px;
   }
 }
+
+/* ==========================================================================
+   Responsivo Agenda
+   ========================================================================== */
+@media (max-width: 767px) {
+  .portaltype-agenda #content,
+  .portaltype-agendadiaria #content {
+    .search-compromisso,
+    .portalMessage,
+    .collectionevents-title-wrapper,
+    .list-compromissos {
+      margin: 0 20px 2rem 20px;
+    }
+    .documentFirstHeading {
+      width: 80%;
+      margin: 0 auto .5em auto;
+    }
+    .compromisso-local {
+      border: none;
+    }
+    .item-compromisso-wrapper {
+      width: auto;
+      padding: 1rem;
+    }
+    .compromisso-horarios {
+      margin-right: 1rem;
+      padding-right: 1rem;
+    }
+  }
+  .daypicker li:first-child,
+  .daypicker li:last-child {
+      display: none !important;
+  }
+}
