@@ -8,8 +8,8 @@ export default class DatePicker {
     this.agendaURL = container.getAttribute('data-url');
     this.callback = callback;
     this.updateTitle = updateTitle;
-    this.$month = this.$('.monthpicker .month, .calendar-title .strmonth');
-    this.$year = this.$('.monthpicker .year, .calendar-title .year');
+    this.$month = this.$('.monthpicker .month');
+    this.$year = this.$('.monthpicker .year');
     this.$day = this.$('.daypicker')
     this.$datePicker = this.$('.monthpicker input');
     this.$datePicker3 = this.$('.calendar');
@@ -74,10 +74,7 @@ export default class DatePicker {
       this.fixCalendarTitle();
     }
     if (this.$datePicker3.length > 0) {
-      let monthNames = this.$currentPicker.datepicker('option', 'monthNames');
       this.resize();
-      this.$month.html(monthNames[this.month].toUpperCase());
-      this.$year.html(this.year);
     }
   }
   updateDayPicker(data) {
@@ -148,12 +145,13 @@ export default class DatePicker {
         onSelect: onSelect,
         beforeShow: this.fixCalendarTitle,
         beforeShowDay: beforeShowDay,
+        onChangeMonthYear: this.fixCalendarTitle,
       });
       this.$datePicker3.datepicker( {
         numberOfMonths: 3,
         onSelect: onSelect,
-        beforeShow: this.fixCalendarTitle,
         beforeShowDay: beforeShowDay,
+        onChangeMonthYear: this.fixCalendarTitle,
       });
       this.update();
     }.bind(this));

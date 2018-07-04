@@ -64,28 +64,11 @@
     filter: invert(100%);
   }
 }
-#content .calendar-wrapper {
+#content .calendar {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  .calendar-title {
-    opacity: 0.3;
-    font-size: 14px;
-    font-weight: bold;
-    line-height: 1.79;
-    color: #222222;
-    text-transform: uppercase;
-  }
-  .calendar-title .year {
-    font-size: 12px;
-  }
-  .calendar {
-    display: flex;
-    justify-content: center;
-    background-color: #fff;
-    width: 100%;
-  }
-
+  justify-content: center;
+  background-color: #fff;
+  width: 100%;
   .ui-datepicker {
     border: none;
   }
@@ -111,7 +94,7 @@
     transform: translate(-5rem, 7.5rem);
   }
   .ui-datepicker-next {
-    transform: translate(7rem, 7.5rem);
+    transform: translate(5rem, 7.5rem);
   }
 }
 body .ui-datepicker,
@@ -249,5 +232,19 @@ body .ui-datepicker,
   .day.has-appointment,
   .day.is-selected {
     color: #fff;
+  }
+}
+
+/* ==========================================================================
+   Responsivo Agenda
+   ========================================================================== */
+@media (max-width: 767px) {
+  #content .calendar-wrapper {
+    .ui-datepicker-prev {
+      transform: translate(-3rem, 7.5rem);
+    }
+    .ui-datepicker-next {
+      transform: translate(3rem, 7.5rem);
+    }
   }
 }
