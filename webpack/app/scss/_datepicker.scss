@@ -91,10 +91,10 @@
     transform: translateX(1rem);
   }
   .ui-datepicker-prev {
-    transform: translate(-5rem, 7.5rem);
+    transform: translate(-5rem, 7.8rem);
   }
   .ui-datepicker-next {
-    transform: translate(5rem, 7.5rem);
+    transform: translate(5rem, 7.8rem);
   }
 }
 body .ui-datepicker,
@@ -239,12 +239,16 @@ body .ui-datepicker,
    Responsivo Agenda
    ========================================================================== */
 @media (max-width: 767px) {
-  #content .calendar-wrapper {
+  #content .calendar {
+    .ui-datepicker-title,
+    .ui-datepicker-calendar {
+      opacity: 1;
+    }
     .ui-datepicker-prev {
-      transform: translate(-3rem, 7.5rem);
+      transform: translate(-3rem, 7.8rem);
     }
     .ui-datepicker-next {
-      transform: translate(3rem, 7.5rem);
+      transform: translate(3rem, 7.8rem);
     }
   }
 }
