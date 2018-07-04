@@ -24,15 +24,7 @@
 
 <metal:form define-macro="calendar"
             i18n:domain="brasil.gov.agenda">
-  <div class="calendar-wrapper">
-    <div class="calendar-title"
-         tal:define="month view/month">
-      <span class="strmonth" tal:content="month/strmonthcomplete" />
-      <span class="from" i18n:translate="">de</span>
-      <span class="year" tal:content="month/year" />
-    </div>
-    <div class="calendar"></div>
-  </div>
+  <div class="calendar"></div>
 </metal:form>
 
 <metal:form define-macro="daypicker"
