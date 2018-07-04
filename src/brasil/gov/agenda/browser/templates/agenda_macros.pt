@@ -22,11 +22,6 @@
   </div>
 </metal:form>
 
-<metal:form define-macro="calendar"
-            i18n:domain="brasil.gov.agenda">
-  <div class="calendar"></div>
-</metal:form>
-
 <metal:form define-macro="daypicker"
             i18n:domain="brasil.gov.agenda">
   <div class="daypicker-wrapper">

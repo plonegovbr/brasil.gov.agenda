@@ -21,7 +21,7 @@
              i18n:translate="">
           Agenda alterada
         </div>
-        <span metal:use-macro="context/@@agenda-macros/calendar" />
+        <div class="calendar"></div>
         <span metal:use-macro="context/@@agenda-macros/daypicker" />
         <span metal:use-macro="context/@@agenda-macros/search" />
         <span metal:use-macro="context/@@agenda-macros/appointments" />
