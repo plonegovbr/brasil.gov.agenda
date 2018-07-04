@@ -148,12 +148,13 @@ export default class DatePicker {
         onSelect: onSelect,
         beforeShow: this.fixCalendarTitle,
         beforeShowDay: beforeShowDay,
+        onChangeMonthYear: this.fixCalendarTitle,
       });
       this.$datePicker3.datepicker( {
         numberOfMonths: 3,
         onSelect: onSelect,
-        beforeShow: this.fixCalendarTitle,
         beforeShowDay: beforeShowDay,
+        onChangeMonthYear: this.fixCalendarTitle,
       });
       this.update();
     }.bind(this));

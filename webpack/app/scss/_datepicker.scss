@@ -111,7 +111,7 @@
     transform: translate(-5rem, 7.5rem);
   }
   .ui-datepicker-next {
-    transform: translate(7rem, 7.5rem);
+    transform: translate(5rem, 7.5rem);
   }
 }
 body .ui-datepicker,
@@ -249,5 +249,22 @@ body .ui-datepicker,
   .day.has-appointment,
   .day.is-selected {
     color: #fff;
+  }
+}
+
+/* ==========================================================================
+   Responsivo Agenda
+   ========================================================================== */
+@media (max-width: 767px) {
+  #content .calendar-wrapper {
+    .calendar-title {
+      display: none;
+    }
+    .ui-datepicker-prev {
+      transform: translate(-3rem, 7.5rem);
+    }
+    .ui-datepicker-next {
+      transform: translate(3rem, 7.5rem);
+    }
   }
 }
