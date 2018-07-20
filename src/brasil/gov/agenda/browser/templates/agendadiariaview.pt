@@ -15,15 +15,15 @@
       <div class="dados-agenda"
            tal:attributes="data-url view/agenda/absolute_url;
                            data-editable view/editable">
+        <div class="calendar"></div>
+        <span metal:use-macro="context/@@agenda-macros/daypicker" />
+        <span metal:use-macro="context/@@agenda-macros/search" />
         <div class="portalMessage info"
              tal:condition="view/update_info"
              tal:content="structure view/update_info"
              i18n:translate="">
           Agenda alterada
         </div>
-        <div class="calendar"></div>
-        <span metal:use-macro="context/@@agenda-macros/daypicker" />
-        <span metal:use-macro="context/@@agenda-macros/search" />
         <span metal:use-macro="context/@@agenda-macros/appointments" />
       </div>
     </metal:block>

@@ -22,6 +22,7 @@ export default class AgendaView {
   onDateChange(agendaDiaria) {
     let $item, $edit;
     this.$appointments.html('');
+    this.$('.portalMessage.info').html(agendaDiaria.update);
     if (agendaDiaria.hasAppointment === false) {
       this.$appointments.append(`
         <li class="sem-compromisso item-compromisso">

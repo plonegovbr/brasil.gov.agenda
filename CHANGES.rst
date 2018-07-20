@@ -4,7 +4,8 @@ Changelog
 2.0a5 (unreleased)
 ^^^^^^^^^^^^^^^^^^
 
-- Nothing changed yet.
+- Corrige o campo atualização ao navegar pelos dias.
+  [rodfersou]
 
 
 2.0a4 (2018-07-06)
