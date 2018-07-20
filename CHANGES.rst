@@ -4,7 +4,7 @@ Changelog
 2.0a5 (unreleased)
 ^^^^^^^^^^^^^^^^^^
 
-- Atualiza campo de observação da agenda ao navegar pelos dias.
+- Corrige o campo atualização ao navegar pelos dias.
   [rodfersou]
 
 

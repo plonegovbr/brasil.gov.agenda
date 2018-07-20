@@ -158,6 +158,7 @@ class AgendaJSONView(BrowserView, AgendaMixin):
             if agendadiaria:
                 update_info = agendadiaria.update
                 day['update'] = getattr(update_info, 'output', '')
+                # FIXME: this is slow, use listFolderContents instead
                 appointments = api.content.find(
                     context=agendadiaria,
                     object_provides=ICompromisso,
