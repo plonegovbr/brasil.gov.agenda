@@ -148,6 +148,7 @@ class AgendaJSONView(BrowserView, AgendaMixin):
                 'datetime': '{0}{1}:00'.format(date.isoformat(), tzname),
                 'day': date.day,
                 'weekday': self.weekday(date)[:3],
+                'update': '',
                 'hasAppointment': False,
                 'isSelected': False,
             }
@@ -155,6 +156,8 @@ class AgendaJSONView(BrowserView, AgendaMixin):
             appointments = []
             agendadiaria = self.context.get(strday, None)
             if agendadiaria:
+                update_info = agendadiaria.update
+                day['update'] = getattr(update_info, 'output', '')
                 appointments = api.content.find(
                     context=agendadiaria,
                     object_provides=ICompromisso,

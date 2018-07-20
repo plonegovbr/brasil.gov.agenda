@@ -4,7 +4,8 @@ Changelog
 2.0a5 (unreleased)
 ^^^^^^^^^^^^^^^^^^
 
-- Nothing changed yet.
+- Atualiza campo de observação da agenda ao navegar pelos dias.
+  [rodfersou]
 
 
 2.0a4 (2018-07-06)
