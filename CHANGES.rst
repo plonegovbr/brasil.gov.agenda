@@ -1,7 +1,7 @@
 Changelog
 ---------
 
-2.0a5 (unreleased)
+2.0a5 (2018-07-20)
 ^^^^^^^^^^^^^^^^^^
 
 - Corrige o campo atualização ao navegar pelos dias.
