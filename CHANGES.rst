@@ -4,7 +4,8 @@ Changelog
 2.0a6 (unreleased)
 ^^^^^^^^^^^^^^^^^^
 
-- Nothing changed yet.
+- Adiciona dependência soft no collective.portlet.calendar para remover browser layer obsoleto (closes `#137 <https://github.com/plonegovbr/brasil.gov.agenda/issues/137>`_).
+  [hvelarde]
 
 
 2.0a5 (2018-07-20)
