@@ -1,0 +1,17 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:genericsetup="http://namespaces.zope.org/genericsetup">
+
+  <genericsetup:upgradeSteps
+      source="4101"
+      destination="4102"
+      profile="brasil.gov.agenda:default">
+
+    <genericsetup:upgradeStep
+        title="Uninstall collective.portlet.calendar"
+        handler=".uninstall_dependency"
+        />
+
+  </genericsetup:upgradeSteps>
+
+</configure>

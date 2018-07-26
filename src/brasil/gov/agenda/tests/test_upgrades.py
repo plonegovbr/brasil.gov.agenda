@@ -111,3 +111,21 @@ class to4101TestCase(UpgradeTestCaseBase):
         self.assertIsNotNone(step)
 
         self.execute_upgrade_step(step)
+
+
+class to4102TestCase(UpgradeTestCaseBase):
+
+    def setUp(self):
+        UpgradeTestCaseBase.setUp(self, u'4101', u'4102')
+
+    def test_registrations(self):
+        version = self.setup.getLastVersionForProfile(self.profile_id)[0]
+        self.assertGreaterEqual(int(version), int(self.to_version))
+        self.assertEqual(self.total_steps, 1)
+
+    def test_uninstall_dependency(self):
+        title = u'Uninstall collective.portlet.calendar'
+        step = self.get_upgrade_step(title)
+        self.assertIsNotNone(step)
+
+        self.execute_upgrade_step(step)

@@ -41,6 +41,7 @@ setup(
     zip_safe=False,
     install_requires=[
         'Acquisition',
+        'collective.portlet.calendar',  # BBB: https://github.com/plonegovbr/brasil.gov.agenda/issues/137
         'collective.cover',
         'plone.api',
         'plone.app.content',
