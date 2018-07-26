@@ -110,7 +110,6 @@ class to4101TestCase(UpgradeTestCaseBase):
         step = self.get_upgrade_step(title)
         self.assertIsNotNone(step)
 
-        # execute upgrade step
         self.execute_upgrade_step(step)
 
 
@@ -129,5 +128,4 @@ class to4102TestCase(UpgradeTestCaseBase):
         step = self.get_upgrade_step(title)
         self.assertIsNotNone(step)
 
-        # execute upgrade step
-        self._do_upgrade(step)
+        self.execute_upgrade_step(step)
