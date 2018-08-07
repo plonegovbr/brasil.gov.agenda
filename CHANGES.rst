@@ -4,6 +4,9 @@ Changelog
 2.0a6 (unreleased)
 ^^^^^^^^^^^^^^^^^^
 
+- Evita ``UnicodeDecodeError`` no título da agenda diária.
+  [hvelarde]
+
 - Adiciona dependência soft no collective.portlet.calendar para remover browser layer obsoleto (closes `#137 <https://github.com/plonegovbr/brasil.gov.agenda/issues/137>`_).
   [hvelarde]
 
