@@ -114,11 +114,10 @@ class AgendaDiariaView(BrowserView, AgendaMixin):
         return compromissos
 
     def TitleAgenda(self):
-        context = self.context
-        agenda = context.aq_parent
-        title = agenda.Title()
+        agenda = aq_parent(self.context)
+        title = agenda.title
         if agenda.autoridade:
-            title += ' ' + agenda.autoridade
+            title += u' ' + agenda.autoridade
         return title
 
     def get_link_erros(self):
