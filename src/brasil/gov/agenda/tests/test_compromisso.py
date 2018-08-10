@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-
 from brasil.gov.agenda.interfaces import ICompromisso
 from brasil.gov.agenda.testing import FUNCTIONAL_TESTING
 from brasil.gov.agenda.testing import INTEGRATION_TESTING
@@ -15,8 +14,6 @@ from plone.testing.z2 import Browser
 from plone.uuid.interfaces import IAttributeUUID
 from zope.component import createObject
 from zope.component import queryUtility
-from zope.event import notify
-from zope.lifecycleevent import ObjectModifiedEvent
 
 import datetime
 import os
@@ -140,15 +137,6 @@ class ContentTypeTestCase(unittest.TestCase):
         ocorre esse problema.
         """
         self.assertTrue(IEvent.providedBy(self.compromisso))
-
-    def test_compromisso_moved_to_new_agenda_diaria(self):
-        self.assertIn('compromisso', self.agendadiaria.objectIds())
-        self.compromisso.start_date = datetime.datetime(2013, 10, 17)
-        notify(ObjectModifiedEvent(self.compromisso))
-        # Moved from old AgendaDiaria
-        self.assertNotIn('compromisso', self.agendadiaria.objectIds())
-        # Moved to new AgendaDiaria
-        self.assertIn('compromisso', self.agenda['2013-10-17'].objectIds())
 
     def test_start_indexing(self):
         ct = self.ct
