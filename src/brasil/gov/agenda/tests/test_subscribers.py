@@ -73,7 +73,36 @@ class CompromissoSubscriberTestCase(unittest.TestCase):
         self.appointment = api.content.create(
             container=self.day, type='Compromisso', id='foo', start_date=date)
 
-    def test_appointment_not_moved(self):
+    def test_create_appointment_on_agenda(self):
+        results = api.content.find(portal_type='Compromisso')
+        self.assertEqual(len(results), 1)
+
+        # create an appointment on a different date
+        date = datetime.datetime(2018, 8, 15)
+        # FIXME: creation is raising AttributeError
+        #        that could be the cause of issues in production
+        try:
+            obj = api.content.create(
+                container=self.agenda, type='Compromisso', id='bar', start_date=date)
+        except AttributeError:
+            obj = self.agenda['2018-08-15']['bar']
+
+        # new day was created
+        self.assertIn('2018-08-15', self.agenda.objectIds())
+        newday = self.agenda['2018-08-15']
+
+        # appointment is there
+        self.assertIn('bar', newday.objectIds())
+
+        # check catalog integrity
+        results = api.content.find(portal_type='Compromisso')
+        self.assertEqual(len(results), 2)
+        results = api.content.find(UID=obj.UID())
+        self.assertEqual(len(results), 1)
+        self.assertEqual(results[0].getPath(), obj.absolute_url_path())
+        self.assertEqual(results[0].getObject(), obj)
+
+    def test_create_appointment_on_day(self):
         results = api.content.find(portal_type='Compromisso')
         self.assertEqual(len(results), 1)
 
@@ -91,7 +120,7 @@ class CompromissoSubscriberTestCase(unittest.TestCase):
         self.assertEqual(results[0].getPath(), obj.absolute_url_path())
         self.assertEqual(results[0].getObject(), obj)
 
-    def test_appointment_moved_on_create(self):
+    def test_create_appointment_on_different_day(self):
         results = api.content.find(portal_type='Compromisso')
         self.assertEqual(len(results), 1)
 
@@ -122,7 +151,7 @@ class CompromissoSubscriberTestCase(unittest.TestCase):
         self.assertEqual(results[0].getPath(), obj.absolute_url_path())
         self.assertEqual(results[0].getObject(), obj)
 
-    def test_appointment_moved_on_edit(self):
+    def test_edit_appointment(self):
         results = api.content.find(portal_type='Compromisso')
         self.assertEqual(len(results), 1)
 
