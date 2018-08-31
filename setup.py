@@ -3,7 +3,7 @@
 from setuptools import find_packages
 from setuptools import setup
 
-version = '2.0a6.dev0'
+version = '2.0a6'
 description = 'Agenda de membros do Governo Brasileiro'
 long_description = (
     open('README.rst').read() + '\n' +

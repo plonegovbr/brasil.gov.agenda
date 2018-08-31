@@ -1,7 +1,7 @@
 Changelog
 ---------
 
-2.0a6 (unreleased)
+2.0a6 (2018-08-31)
 ^^^^^^^^^^^^^^^^^^
 
 - Evita ``UnicodeDecodeError`` no título da agenda diária.
