@@ -5,11 +5,10 @@ Changelog
 ^^^^^^^^^^^^^^^^^^
 
 .. warning::
-    Este release atualiza a versão do NodeJS para gerenciamento de recursos estáticos.
-    Em ambiente de desenvolvimento pode ser necessário remover a pasta parts e webpack/node_modules e rodar buildout 2 vezes
-    para efetivar a atualização de ambiente.
+    Este release atualiza as dependências do processamento de recursos estáticos.
+    Em ambiente de desenvolvimento pode ser necessário remover as pastas ``parts`` e ``webpack/node_modules`` para efetivar a atualização de ambiente.
 
-- Atualiza pacotes node.
+- Atualiza versões do `Node.js <https://nodejs.org/>`_ e sc.recipe.staticresources.
   [rodfersou]
 
 
