@@ -4,7 +4,12 @@ Changelog
 2.0a7 (unreleased)
 ^^^^^^^^^^^^^^^^^^
 
-- Nothing changed yet.
+.. warning::
+    Este release atualiza as dependências do processamento de recursos estáticos.
+    Em ambiente de desenvolvimento pode ser necessário remover as pastas ``parts`` e ``webpack/node_modules`` para efetivar a atualização de ambiente.
+
+- Atualiza versões do `Node.js <https://nodejs.org/>`_ e sc.recipe.staticresources.
+  [rodfersou]
 
 
 2.0a6 (2018-08-31)
