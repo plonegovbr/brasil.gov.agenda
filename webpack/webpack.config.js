@@ -61,7 +61,6 @@ module.exports = {
       ]
     }]
   },
-  devtool: 'source-map',
   plugins: [
     new ExtractTextPlugin({
       filename: 'brasilgovagenda.css',
