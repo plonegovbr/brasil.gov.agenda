@@ -9,7 +9,7 @@
   <body>
     <metal:slot metal:fill-slot="content-title">
       <h1 class="documentFirstHeading"
-          tal:content="view/TitleAgenda"></h1>
+          tal:content="context/Title"></h1>
     </metal:slot>
     <metal:block fill-slot="content-core">
       <div class="dados-agenda"

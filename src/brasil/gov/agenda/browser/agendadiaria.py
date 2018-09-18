@@ -113,13 +113,6 @@ class AgendaDiariaView(BrowserView, AgendaMixin):
             compromissos.append(comp)
         return compromissos
 
-    def TitleAgenda(self):
-        agenda = aq_parent(self.context)
-        title = agenda.title
-        if agenda.autoridade:
-            title += u' ' + agenda.autoridade
-        return title
-
     def get_link_erros(self):
         portal_obj = self.context.portal_url.getPortalObject()
         if (hasattr(portal_obj, 'relatar-erros')):
