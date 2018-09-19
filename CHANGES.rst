@@ -8,6 +8,9 @@ Changelog
     Este release atualiza as dependências do processamento de recursos estáticos.
     Em ambiente de desenvolvimento pode ser necessário remover as pastas ``parts`` e ``webpack/node_modules`` para efetivar a atualização de ambiente.
 
+- Simplifica visão de agenda (closes `#142 <https://github.com/plonegovbr/brasil.gov.agenda/issues/142>`_).
+  [rodfersou]
+
 - Corrige título da agenda diária caso o nome da pessoa no cargo mudar (closes `#142 <https://github.com/plonegovbr/brasil.gov.agenda/issues/142>`_).
   [hvelarde]
 

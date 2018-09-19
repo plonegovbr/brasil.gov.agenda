@@ -179,6 +179,10 @@ class AgendaTile(PersistentCoverTile, AgendaMixin):
         data = data_mgr.get()
         return data
 
+    @property
+    def date(self):
+        return datetime.now()
+
     def is_empty(self):
         data = self.results()
         return data['title'] is None

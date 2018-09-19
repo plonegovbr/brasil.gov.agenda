@@ -30,10 +30,13 @@
       <tal:event repeat="day view/days">
         <li tal:attributes="data-day day/iso;
                             class day/cssclass;">
-          <div class="daypicker-day"
-               tal:content="day/day" />
-          <div class="daypicker-weekday"
-               tal:content="day/weekday" />
+          <a tal:attributes="href string:${view/agenda/absolute_url}/${day/iso}"
+             tal:omit-tag="not:day/hasappointment">
+            <div class="daypicker-day"
+                 tal:content="day/day" />
+            <div class="daypicker-weekday"
+                 tal:content="day/weekday" />
+          </a>
         </li>
       </tal:event>
     </ul>

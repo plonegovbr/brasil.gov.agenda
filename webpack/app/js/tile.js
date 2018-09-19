@@ -11,14 +11,10 @@ export default class AgendaTile {
     this.datepicker = new DatePicker(this.tile, this.onDateChange.bind(this));
     this.initSwiper();
     this.$('.is-now').append('<div class="now">Agora</div>')
+    this.$('.daypicker').on('click', '.day', this.onDayClick.bind(this));
   }
   $(selector) {
     return $(selector, this.tile);
-  }
-  extractTime(dateTime) {
-    let [, time] = dateTime.split('T');
-    let [hours, minutes, ] = time.split(':');
-    return `${zfill(hours)}h${zfill(minutes)}`;
   }
   onDateChange(agendaDiaria) {
     this.swiper.removeAllSlides();
@@ -67,6 +63,49 @@ export default class AgendaTile {
         el: `#${this.tile.id} .collection-events .swiper-pagination`,
         clickable: true,
       },
+    });
+  }
+  updateDayPicker(data) {
+    this.datepicker.$day.html('');
+    for (let day of data) {
+      let cssclass = ['day'];
+      if (day.isSelected) {
+        cssclass.push('is-selected');
+      }
+      let $day = $(`
+        <li data-day="${day.datetime}" class="${cssclass.join(' ')}">
+          <div class="daypicker-day">${day.day}</div>
+          <div class="daypicker-weekday">${day.weekday}</div>
+        </li>
+      `);
+      if (day.hasAppointment) {
+        $day.addClass('has-appointment');
+      }
+      this.datepicker.$day.append($day);
+    }
+  }
+  onDayClick(e) {
+    e.preventDefault();
+    let day = e.target;
+    if (day.tagName !== 'LI') {
+      day = day.parentElement;
+    }
+    let date = new Date(day.getAttribute('data-day'))
+    this.datepicker.year = date.getFullYear();
+    this.datepicker.month = date.getMonth();
+    this.datepicker.day = date.getDate();
+    this.datepicker.$currentPicker.datepicker('setDate', date);
+
+    let agendaDiariaURL = `${this.datepicker.year}-${zfill(this.datepicker.month + 1)}-${zfill(this.datepicker.day)}`;
+    $.ajax({
+      url: `${this.datepicker.agendaURL}/json/${agendaDiariaURL}`,
+      context: this,
+      global: false,
+    }).always(function(data) {
+      this.updateDayPicker(data);
+      this.onDateChange(data[3]);
+      this.datepicker.daysWithAppointments = data[3].daysWithAppointments;
+      this.datepicker.updateMonthPicker();
     });
   }
 }

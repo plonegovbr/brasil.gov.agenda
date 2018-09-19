@@ -45,6 +45,10 @@ class AgendaView(BrowserView, AgendaMixin):
         results = Batch(results, b_size, b_start)
         return results
 
+    @property
+    def date(self):
+        return datetime.now()
+
     def __call__(self):
         self.setup()
         agenda_recente = self.agenda_recente()
