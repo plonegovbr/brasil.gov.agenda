@@ -101,7 +101,7 @@
     </li>
     <li class="sem-compromisso item-compromisso"
         tal:condition="view/exibe_sem_compromissos">
-      <span i18n:translate="label_agendadiaria_sem_compromissos">Sem compromissos oficiais.</span>
+      <span i18n:translate="">Atualmente não existem compromissos agendados.</span>
     </li>
   </ul>
 </metal:form>

@@ -101,7 +101,7 @@
                     </div>
                   </tal:page>
                   <div class="swiper-slide no-events"
-                       i18n:translate="label_agendadiaria_sem_compromissos"
+                       i18n:translate=""
                        tal:condition="not:view/agenda_diaria">
                     Sem compromissos oficiais.
                   </div>
