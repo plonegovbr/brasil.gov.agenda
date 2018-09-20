@@ -13,8 +13,7 @@
     </metal:slot>
     <metal:block fill-slot="content-core">
       <div class="dados-agenda"
-           tal:attributes="data-url view/agenda/absolute_url;
-                           data-editable view/editable">
+           tal:attributes="data-url view/agenda/absolute_url">
         <div class="calendar"></div>
         <span metal:use-macro="context/@@agenda-macros/daypicker" />
         <span metal:use-macro="context/@@agenda-macros/search" />
