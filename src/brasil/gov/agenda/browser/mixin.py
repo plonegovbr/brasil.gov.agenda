@@ -26,29 +26,28 @@ class AgendaMixin:
 
     def month(self):
         tool = api.portal.get_tool('translation_service')
-        date = self.date
-        strmonth = self._translate(tool.month_msgid(date.strftime('%m')))
+        strmonth = self._translate(tool.month_msgid(self.date.strftime('%m')))
         return {
             'strmonth': strmonth[:3].upper(),
             'strmonthcomplete': strmonth.upper(),
-            'month': date.month,
-            'year': date.year,
+            'month': self.date.month,
+            'year': self.date.year,
         }
 
     def days(self):
         tool = api.portal.get_tool('translation_service')
-        date = self.date
         # get a list with 3 days before and 3 days after current day
-        days = [(date + timedelta(i)) for i in range(-3, 4)]
+        days = [(self.date + timedelta(i)) for i in range(-3, 4)]
         weekdays = []
         for day in days:
             cssclass = ['day']
             has_appointment = False
-            if day == date:
+            if day == self.date:
                 cssclass.append('is-selected')
             if self.agenda.get(day.strftime('%Y-%m-%d'), False):
                 has_appointment = True
                 cssclass.append('has-appointment')
+            # Weekday difference between datetime and DateTime objects
             strweek = self._translate(tool.day_msgid((day.weekday() + 1) % 7))
             weekdays.append({
                 'day': day.day,

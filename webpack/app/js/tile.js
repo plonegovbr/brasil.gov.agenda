@@ -65,6 +65,10 @@ export default class AgendaTile {
       },
     });
   }
+  /**
+   * Update day picker
+   * Recreate list of days when ajax finish
+   **/
   updateDayPicker(data) {
     this.datepicker.$day.html('');
     for (let day of data) {
@@ -84,6 +88,10 @@ export default class AgendaTile {
       this.datepicker.$day.append($day);
     }
   }
+  /**
+   * Day Click Event
+   * When click a day need to show the appointments of selected day, and upgate the list of days
+   **/
   onDayClick(e) {
     e.preventDefault();
     let day = e.target;

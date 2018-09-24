@@ -14,7 +14,12 @@ export default class AgendaView {
   $(selector) {
     return $(selector, this.container.parentElement);
   }
+  /**
+   * Create overlays
+   * Create overlays when edit and remove appointments
+   **/
   bindEvents(){
+    // overlay when edit appointment
     this.$('.editar_compromisso').prepOverlay({
       subtype: 'ajax',
       filter: common_content_filter,
@@ -25,6 +30,7 @@ export default class AgendaView {
       closeselector: '[name="form.buttons.cancel"]',
       width:'50%'
     });
+    // overlay when delete appointment
     this.$('.remover_compromisso').prepOverlay({
       subtype: 'ajax',
       filter: common_content_filter,

@@ -30,6 +30,7 @@ class AgendaView(BrowserView, AgendaMixin):
         self._ts = api.portal.get_tool('translation_service')
         self.agenda = self.context
         self.editable = context_state.is_editable()
+        self.date = datetime.now()
 
     def results(self, b_size=16):
         """Retorna as ultimas agendas diárias"""
@@ -44,10 +45,6 @@ class AgendaView(BrowserView, AgendaMixin):
         results = IContentListing(results)
         results = Batch(results, b_size, b_start)
         return results
-
-    @property
-    def date(self):
-        return datetime.now()
 
     def __call__(self):
         self.setup()
