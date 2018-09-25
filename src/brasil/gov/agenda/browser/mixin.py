@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 from six.moves import range  # noqa: I001
-from datetime import datetime
 from datetime import timedelta
 from plone import api
 from zope.component import getMultiAdapter
@@ -27,33 +26,35 @@ class AgendaMixin:
 
     def month(self):
         tool = api.portal.get_tool('translation_service')
-        today = datetime.now()
-        strmonth = self._translate(tool.month_msgid(today.strftime('%m')))
+        strmonth = self._translate(tool.month_msgid(self.date.strftime('%m')))
         return {
             'strmonth': strmonth[:3].upper(),
             'strmonthcomplete': strmonth.upper(),
-            'month': today.month,
-            'year': today.year,
+            'month': self.date.month,
+            'year': self.date.year,
         }
 
     def days(self):
         tool = api.portal.get_tool('translation_service')
-        today = datetime.now()
-        # get a list with 3 days before and 3 days after today
-        days = [(today + timedelta(i)) for i in range(-3, 4)]
+        # get a list with 3 days before and 3 days after current day
+        days = [(self.date + timedelta(i)) for i in range(-3, 4)]
         weekdays = []
         for day in days:
             cssclass = ['day']
-            if day == today:
+            has_appointment = False
+            if day == self.date:
                 cssclass.append('is-selected')
             if self.agenda.get(day.strftime('%Y-%m-%d'), False):
+                has_appointment = True
                 cssclass.append('has-appointment')
-            strweek = self._translate(tool.day_msgid(day.weekday()))
+            # Weekday difference between datetime and DateTime objects
+            strweek = self._translate(tool.day_msgid((day.weekday() + 1) % 7))
             weekdays.append({
                 'day': day.day,
                 'weekday': strweek[:3],
                 'iso': day.isoformat(),
                 'cssclass': ' '.join(cssclass),
+                'hasappointment': has_appointment,
             })
         return weekdays
 

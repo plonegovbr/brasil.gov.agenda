@@ -160,6 +160,9 @@
     height: 15rem;
     align-items: center;
   }
+  .day {
+    cursor: pointer;
+  }
 }
 #content .agenda-tile.has-image {
   .title {

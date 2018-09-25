@@ -82,6 +82,13 @@ class AgendaTile(PersistentCoverTile, AgendaMixin):
     limit = 1
     page_size = 3  # items by swiper slide
 
+    def __init__(self, context, request):
+        super(AgendaTile, self).__init__(context, request)
+        self.setup()
+
+    def setup(self):
+        self.date = datetime.now()
+
     def populate_with_object(self, obj):
         super(AgendaTile, self).populate_with_object(obj)  # check permissions
 

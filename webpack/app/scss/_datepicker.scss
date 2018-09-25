@@ -129,7 +129,12 @@ body .ui-datepicker,
     color: #222222;
     text-transform: uppercase;
   }
-  a.ui-state-default {
+  .ui-state-disabled,
+  .ui-widget-content .ui-state-disabled,
+  .ui-widget-header .ui-state-disabled {
+    opacity: 1;
+  }
+  .ui-state-default {
     width: 30px;
     height: 30px;
     background: none;
@@ -180,25 +185,34 @@ body .ui-datepicker,
 
     list-style-type: none;
   }
-  .day {
+  .day,
+  .day > a:link,
+  .day > a:visited,
+  .day > a:hover {
     display: flex;
     flex-direction: column;
 
+    border: none;
+
     width: 95px;
     height: 95px;
-
-    cursor: pointer;
 
     color: #DBDBDB;
 
     align-items: center;
     justify-content: center;
   }
-  .day.has-appointment {
-    color: #222;
+  .day.has-appointment,
+  .day.has-appointment > a:link,
+  .day.has-appointment > a:visited,
+  .day.has-appointment > a:hover {
+    color: #222 !important;
   }
-  .day.is-selected {
-    color: #FFF;
+  .day.is-selected,
+  .day.is-selected > a:link,
+  .day.is-selected > a:visited,
+  .day.is-selected > a:hover {
+    color: #FFF !important;
     background-color: #56C75F;
   }
   .day:last-child {

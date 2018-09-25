@@ -3,11 +3,9 @@ let zfill = (number, size=2) => (Array(size).fill('0').join('') + number).slice(
 
 
 export default class DatePicker {
-  constructor(container, callback, updateTitle=false) {
+  constructor(container) {
     this.container = container;
     this.agendaURL = container.getAttribute('data-url');
-    this.callback = callback;
-    this.updateTitle = updateTitle;
     this.$month = this.$('.monthpicker .month');
     this.$year = this.$('.monthpicker .year');
     this.$day = this.$('.daypicker')
@@ -18,11 +16,9 @@ export default class DatePicker {
     this.daysWithAppointments = []
     this.initMonthPicker();
     let today = new Date();
-    this.pageLoad = true;
     this.year = today.getFullYear();
     this.month = today.getMonth();
     this.day = today.getDate();
-    this.$('.daypicker').on('click', '.day', this.onDayClick.bind(this));
     $(window).resize(this.resize.bind(this));
     if ($('.portaltype-agendadiaria').length > 0) {
       let pathDate = location.pathname.split('/').pop();
@@ -38,30 +34,14 @@ export default class DatePicker {
   }
   update() {
     let agendaDiariaURL = `${this.year}-${zfill(this.month + 1)}-${zfill(this.day)}`;
-    if (typeof this.callback === 'function') {
-      $.ajax({
-        url: `${this.agendaURL}/json/${agendaDiariaURL}`,
-        context: this,
-        global: false,
-      }).always(function(data) {
-        this.callback(data[3]);
-        this.updateDayPicker(data);
-        this.daysWithAppointments = data[3].daysWithAppointments;
-        this.updateMonthPicker();
-      });
-    }
-    // we don't want to change URL when page load
-    if (this.updateTitle && ! this.pageLoad) {
-      let agendaDiaria = `${zfill(this.day)}/${zfill(this.month + 1)}/${this.year}`;
-      let title = `Agenda de ${$('.documentFirstHeading').text().trim()} para ${agendaDiaria}`;
-      window.history.pushState(
-        {day: this.day, month: this.month, year: this.year},
-        title,
-        `${this.agendaURL}/${agendaDiariaURL}`
-      );
-      document.title = title;
-    }
-    this.pageLoad = false;
+    $.ajax({
+      url: `${this.agendaURL}/json/${agendaDiariaURL}`,
+      context: this,
+      global: false,
+    }).always(function(data) {
+      this.daysWithAppointments = data[3].daysWithAppointments;
+      this.updateMonthPicker();
+    });
   }
   updateMonthPicker() {
     this.$currentPicker.datepicker('setDate', new Date(this.year, this.month, this.day));
@@ -75,25 +55,6 @@ export default class DatePicker {
     }
     if (this.$datePicker3.length > 0) {
       this.resize();
-    }
-  }
-  updateDayPicker(data) {
-    this.$day.html('');
-    for (let day of data) {
-      let cssclass = ['day'];
-      if (day.isSelected) {
-        cssclass.push('is-selected');
-      }
-      let $day = $(`
-        <li data-day="${day.datetime}" class="${cssclass.join(' ')}">
-          <div class="daypicker-day">${day.day}</div>
-          <div class="daypicker-weekday">${day.weekday}</div>
-        </li>
-      `);
-      if (day.hasAppointment) {
-        $day.addClass('has-appointment');
-      }
-      this.$day.append($day);
     }
   }
   resize(e) {
@@ -129,17 +90,19 @@ export default class DatePicker {
     // this event is needed to get right translation
     $(window).on('load', function() {
       let onSelect = function(dateText, inst) { 
-        this.year = inst.selectedYear;
-        this.month = inst.selectedMonth;
-        this.day = parseInt(inst.selectedDay);
-        this.update();
+        let year = inst.selectedYear;
+        let month = inst.selectedMonth + 1;
+        let day = parseInt(inst.selectedDay);
+        // https://stackoverflow.com/a/19374679
+        window.location = `${this.agendaURL}/${year}-${zfill(month)}-${zfill(day)}`;
       }.bind(this);
       let beforeShowDay = function(date) { 
         let day = date.toISOString().slice(0, 10);
         if (this.daysWithAppointments.indexOf(day) >= 0) {
           return [true, 'ui-has-appointments', ''];
         }
-        return [true, '', ''];
+        // disable click for days without appointments
+        return [false, '', ''];
       }.bind(this);
       this.$datePicker.datepicker( {
         onSelect: onSelect,
@@ -155,18 +118,5 @@ export default class DatePicker {
       });
       this.update();
     }.bind(this));
-  }
-  onDayClick(e) {
-    e.preventDefault();
-    let day = e.target;
-    if (day.tagName !== 'LI') {
-      day = day.parentElement;
-    }
-    let date = new Date(day.getAttribute('data-day'))
-    this.year = date.getFullYear();
-    this.month = date.getMonth();
-    this.day = date.getDate();
-    this.$currentPicker.datepicker('setDate', date);
-    this.update();
   }
 }
