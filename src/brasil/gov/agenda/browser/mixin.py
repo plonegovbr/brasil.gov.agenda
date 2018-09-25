@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from six.moves import range  # noqa: I001
+from brasil.gov.agenda.config import AGENDADIARIAFMT
 from datetime import timedelta
 from plone import api
 from zope.component import getMultiAdapter
@@ -44,15 +45,15 @@ class AgendaMixin:
             has_appointment = False
             if day == self.date:
                 cssclass.append('is-selected')
-            if self.agenda.get(day.strftime('%Y-%m-%d'), False):
+            if self.agenda.get(day.strftime(AGENDADIARIAFMT), False):
                 has_appointment = True
                 cssclass.append('has-appointment')
             # Weekday difference between datetime and DateTime objects
             strweek = self._translate(tool.day_msgid((day.weekday() + 1) % 7))
             weekdays.append({
                 'day': day.day,
+                'dayurl': day.strftime(AGENDADIARIAFMT),
                 'weekday': strweek[:3],
-                'iso': day.isoformat(),
                 'cssclass': ' '.join(cssclass),
                 'hasappointment': has_appointment,
             })
