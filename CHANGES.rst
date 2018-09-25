@@ -8,6 +8,9 @@ Changelog
     Este release atualiza as dependências do processamento de recursos estáticos.
     Em ambiente de desenvolvimento pode ser necessário remover as pastas ``parts`` e ``webpack/node_modules`` para efetivar a atualização de ambiente.
 
+- Atualiza traduções ao Português Brasileiro.
+  [hvelarde]
+
 - Simplifica visão de agenda.
   [rodfersou]
 
