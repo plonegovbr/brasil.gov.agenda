@@ -16,7 +16,9 @@ export default class AgendaTile {
   $(selector) {
     return $(selector, this.tile);
   }
-  onDateChange(agendaDiaria) {
+  onDateChange(data) {
+    this.updateDayPicker(data);
+    let agendaDiaria = data[3];
     this.swiper.removeAllSlides();
     let $slide = $('<div class="swiper-slide"></div>');
     if (agendaDiaria.hasAppointment === false) {
@@ -103,17 +105,6 @@ export default class AgendaTile {
     this.datepicker.month = date.getMonth();
     this.datepicker.day = date.getDate();
     this.datepicker.$currentPicker.datepicker('setDate', date);
-
-    let agendaDiariaURL = `${this.datepicker.year}-${zfill(this.datepicker.month + 1)}-${zfill(this.datepicker.day)}`;
-    $.ajax({
-      url: `${this.datepicker.agendaURL}/json/${agendaDiariaURL}`,
-      context: this,
-      global: false,
-    }).always(function(data) {
-      this.updateDayPicker(data);
-      this.onDateChange(data[3]);
-      this.datepicker.daysWithAppointments = data[3].daysWithAppointments;
-      this.datepicker.updateMonthPicker();
-    });
+    this.datepicker.update();
   }
 }
