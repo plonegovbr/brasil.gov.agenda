@@ -47,7 +47,10 @@ export default class DatePicker {
       if (typeof this.callback === 'function') {
         this.callback(data);
       }
-      this.daysWithAppointments = data[3].daysWithAppointments;
+      this.daysWithAppointments = [];
+      if (data[3].daysWithAppointments != null) {
+        this.daysWithAppointments = data[3].daysWithAppointments;
+      }
       this.updateMonthPicker();
     });
   }
@@ -113,13 +116,18 @@ export default class DatePicker {
         if (this.daysWithAppointments.indexOf(day) >= 0) {
           return [true, 'ui-has-appointments', ''];
         }
-        // disable click for days without appointments when it is not 3 calendar
-        return [(this.is3calendar === false), '', ''];
+        return [false, '', ''];
+      };
+      let onChangeMonthYear = function(year, month, inst) {
+        this.year = inst.selectedYear;
+        this.month = inst.selectedMonth;
+        this.day = parseInt(inst.selectedDay);
+        this.update();
       };
       let options = {
         onSelect: onSelect.bind(this),
         beforeShowDay: beforeShowDay.bind(this),
-        onChangeMonthYear: this.fixCalendarTitle.bind(this),
+        onChangeMonthYear: onChangeMonthYear.bind(this),
       }; 
       if (this.is3calendar) {
         options.numberOfMonths = 3;
