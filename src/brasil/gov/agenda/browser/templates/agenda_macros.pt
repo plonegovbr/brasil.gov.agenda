@@ -28,9 +28,9 @@
     <ul class="daypicker"
         tal:condition="view/days">
       <tal:event repeat="day view/days">
-        <li tal:attributes="data-day day/iso;
+        <li tal:attributes="data-day day/dayurl;
                             class day/cssclass;">
-          <a tal:attributes="href string:${view/agenda/absolute_url}/${day/iso}"
+          <a tal:attributes="href string:${view/agenda/absolute_url}/${day/dayurl}"
              tal:omit-tag="not:day/hasappointment">
             <div class="daypicker-day"
                  tal:content="day/day" />

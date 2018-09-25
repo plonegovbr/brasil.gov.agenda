@@ -3,8 +3,9 @@ let zfill = (number, size=2) => (Array(size).fill('0').join('') + number).slice(
 
 
 export default class DatePicker {
-  constructor(container) {
+  constructor(container, callback) {
     this.container = container;
+    this.callback = callback;
     this.agendaURL = container.getAttribute('data-url');
     this.$month = this.$('.monthpicker .month');
     this.$year = this.$('.monthpicker .year');
@@ -12,7 +13,11 @@ export default class DatePicker {
     this.$datePicker = this.$('.monthpicker input');
     this.$datePicker3 = this.$('.calendar');
     this.isMobile = false;
-    this.$currentPicker = this.$datePicker.length > 0 ? this.$datePicker : this.$datePicker3;
+    this.is3calendar = false;
+    if (this.$datePicker[0] == null) {
+      this.is3calendar = true;
+    }
+    this.$currentPicker = this.is3calendar ? this.$datePicker3 : this.$datePicker;
     this.daysWithAppointments = []
     this.initMonthPicker();
     let today = new Date();
@@ -39,13 +44,19 @@ export default class DatePicker {
       context: this,
       global: false,
     }).always(function(data) {
-      this.daysWithAppointments = data[3].daysWithAppointments;
+      if (typeof this.callback === 'function') {
+        this.callback(data);
+      }
+      this.daysWithAppointments = [];
+      if (data[3].daysWithAppointments != null) {
+        this.daysWithAppointments = data[3].daysWithAppointments;
+      }
       this.updateMonthPicker();
     });
   }
   updateMonthPicker() {
     this.$currentPicker.datepicker('setDate', new Date(this.year, this.month, this.day));
-    if (this.$datePicker.length > 0) {
+    if (this.is3calendar === false) {
       let monthNamesShort = this.$currentPicker.datepicker('option', 'monthNamesShort');
       this.$month.html(monthNamesShort[this.month].toUpperCase());
       this.$year.html(this.year);
@@ -53,7 +64,7 @@ export default class DatePicker {
       $('.monthpicker').attr('data-year', this.year);
       this.fixCalendarTitle();
     }
-    if (this.$datePicker3.length > 0) {
+    if (this.is3calendar === true) {
       this.resize();
     }
   }
@@ -90,32 +101,40 @@ export default class DatePicker {
     // this event is needed to get right translation
     $(window).on('load', function() {
       let onSelect = function(dateText, inst) { 
-        let year = inst.selectedYear;
-        let month = inst.selectedMonth + 1;
-        let day = parseInt(inst.selectedDay);
-        // https://stackoverflow.com/a/19374679
-        window.location = `${this.agendaURL}/${year}-${zfill(month)}-${zfill(day)}`;
-      }.bind(this);
+        this.year = inst.selectedYear;
+        this.month = inst.selectedMonth;
+        this.day = parseInt(inst.selectedDay);
+        if (this.is3calendar === true) {
+          // https://stackoverflow.com/a/19374679
+          window.location = `${this.agendaURL}/${this.year}-${zfill(this.month + 1)}-${zfill(this.day)}`;
+        } else {
+          this.update();
+        }
+      };
       let beforeShowDay = function(date) { 
         let day = date.toISOString().slice(0, 10);
         if (this.daysWithAppointments.indexOf(day) >= 0) {
           return [true, 'ui-has-appointments', ''];
         }
-        // disable click for days without appointments
         return [false, '', ''];
-      }.bind(this);
-      this.$datePicker.datepicker( {
-        onSelect: onSelect,
-        beforeShow: this.fixCalendarTitle,
-        beforeShowDay: beforeShowDay,
-        onChangeMonthYear: this.fixCalendarTitle,
-      });
-      this.$datePicker3.datepicker( {
-        numberOfMonths: 3,
-        onSelect: onSelect,
-        beforeShowDay: beforeShowDay,
-        onChangeMonthYear: this.fixCalendarTitle,
-      });
+      };
+      let onChangeMonthYear = function(year, month, inst) {
+        this.year = inst.selectedYear;
+        this.month = inst.selectedMonth;
+        this.day = parseInt(inst.selectedDay);
+        this.update();
+      };
+      let options = {
+        onSelect: onSelect.bind(this),
+        beforeShowDay: beforeShowDay.bind(this),
+        onChangeMonthYear: onChangeMonthYear.bind(this),
+      }; 
+      if (this.is3calendar) {
+        options.numberOfMonths = 3;
+      } else {
+        options.beforeShow = this.fixCalendarTitle.bind(this);
+      }
+      this.$currentPicker.datepicker(options);
       this.update();
     }.bind(this));
   }
