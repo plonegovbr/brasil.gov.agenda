@@ -1,4 +1,4 @@
-brasil.gov.agenda is Copyright 2013, PloneGovBr.
+brasil.gov.agenda is Copyright 2013-2018, PloneGovBr.
 
 This program is free software; you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by

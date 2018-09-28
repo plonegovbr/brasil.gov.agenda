@@ -112,7 +112,7 @@ dessa forma voce pode trabalhar com webpack conforme a documentação oficial.
 
     $ bin/watch-brasilgovagenda
 
-Este comando instrui ao webpack para esperar por qualquer mudança nos arquivos SASS e gera a versão minificada do CSS para a aplicação.
+Este comando instrui ao `webpack`_ para esperar por qualquer mudança nos arquivos SASS e gera a versão minificada do CSS para a aplicação.
 
 .. code-block:: console
 
@@ -125,7 +125,7 @@ Utilizado para debugar a geração do CSS.
 
     $ bin/build-brasilgovagenda
 
-Este comando cria o CSS minificado, mas não espera por mudanças.
+Este comando cria os recursos minificados, mas não espera por mudanças.
 
 Fazendo releases com o zest.releaser
 ------------------------------------
