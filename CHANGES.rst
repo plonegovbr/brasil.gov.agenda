@@ -4,6 +4,12 @@ Changelog
 2.0a8 (unreleased)
 ^^^^^^^^^^^^^^^^^^
 
+- Deprecia uso do resource registries em favor de viewlet para registro de recursos estáticos.
+  [rodfersou]
+
+- Atualiza configuração do webpack.
+  [rodfersou]
+
 - Corrige o tile de Agenda quando a lingua é diferente de Português Brasileiro (fecha `#149 <https://github.com/plonegovbr/brasil.gov.agenda/issues/149>`_).
   [rodfersou]
 

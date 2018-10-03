@@ -35,4 +35,4 @@ htmlcov/
 .DS_Store
 /.settings/*
 
-src/brasil/gov/agenda/static/*
+src/brasil/gov/agenda/browser/static/*

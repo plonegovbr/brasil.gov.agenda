@@ -300,7 +300,7 @@ class ContentTypeTestCase(unittest.TestCase):
         browser = Browser(app)
         portal_url = portal.absolute_url()
 
-        browser.open('%s/++resource++brasil.gov.agenda/agenda_icon.png' % portal_url)
+        browser.open('%s/++resource++brasil.gov.agenda/img/agenda_icon.png' % portal_url)
         self.assertEqual(browser.headers['status'], '200 Ok')
 
     def test_agendadiaria_view_imagem(self):
