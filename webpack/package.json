@@ -25,6 +25,7 @@
   "repository": {},
   "license": "GPL-2.0",
   "dependencies": {
-    "sc-recipe-staticresources": "simplesconsultoria/sc.recipe.staticresources#1.1b4"
+    "sc-recipe-staticresources": "simplesconsultoria/sc.recipe.staticresources#1.1b4",
+    "swiper": "^4.3.5"
   }
 }
