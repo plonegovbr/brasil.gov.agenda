@@ -56,16 +56,43 @@ class to4100TestCase(UpgradeTestCaseBase):
         self.assertIsNotNone(step)
 
         # simulate state on previous version
+        from brasil.gov.agenda.upgrades.v4100 import SWIPER_CSS
+        from brasil.gov.agenda.upgrades.v4100 import SWIPER_JS
+        from brasil.gov.agenda.upgrades.v4100 import NEW_CSS
         from brasil.gov.agenda.upgrades.v4100 import OLD_CSS
+        from brasil.gov.agenda.upgrades.v4100 import NEW_JS
 
         css_tool = api.portal.get_tool('portal_css')
-        css_tool.registerResource(OLD_CSS)
-        self.assertIn(OLD_CSS, css_tool.getResourceIds())
+        css_tool.unregisterResource(SWIPER_CSS)
+        css_tool.getResource(NEW_CSS).setCompression('safe')
+        css_tool.renameResource(NEW_CSS, OLD_CSS)
+
+        ids = css_tool.getResourceIds()
+        self.assertNotIn(SWIPER_CSS, ids)
+        self.assertNotIn(NEW_CSS, ids)
+        self.assertIn(OLD_CSS, ids)
+        self.assertEqual(css_tool.getResource(OLD_CSS).getCompression(), 'safe')
+
+        js_tool = api.portal.get_tool('portal_javascripts')
+        js_tool.unregisterResource(SWIPER_JS)
+        js_tool.unregisterResource(NEW_JS)
+
+        ids = js_tool.getResourceIds()
+        self.assertNotIn(SWIPER_JS, ids)
+        self.assertNotIn(NEW_JS, ids)
 
         # run the upgrade step to validate the update
         self.execute_upgrade_step(step)
 
-        self.assertNotIn(OLD_CSS, css_tool.getResourceIds())
+        ids = css_tool.getResourceIds()
+        self.assertEqual(SWIPER_CSS, ids[0])
+        self.assertNotIn(OLD_CSS, ids)
+        self.assertIn(NEW_CSS, ids)
+        self.assertEqual(css_tool.getResource(NEW_CSS).getCompression(), 'none')
+
+        ids = js_tool.getResourceIds()
+        self.assertEqual(SWIPER_JS, ids[0])
+        self.assertIn(NEW_JS, ids)
 
 
 class to4101TestCase(UpgradeTestCaseBase):
