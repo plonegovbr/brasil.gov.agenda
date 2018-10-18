@@ -18,7 +18,7 @@ class AgendaMixin:
         # Quando uso 'pt-br' ao invés de 'pt_BR', não pega a tradução quando
         # feita de forma manual.
         target_language = ('pt_BR' if current_language == 'pt-br'
-                           else self.current_language)
+                           else current_language)
         return tool.translate(msgid,
                               locale,
                               mapping=mapping,
