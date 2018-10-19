@@ -62,7 +62,6 @@
       layer="brasil.gov.agenda.interfaces.IBrowserLayer"
       />
 
-  <!-- Suporte a arquivos estaticos -->
   <browser:resourceDirectory
       name="brasil.gov.agenda"
       directory="static"

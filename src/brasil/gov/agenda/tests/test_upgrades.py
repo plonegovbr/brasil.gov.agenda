@@ -145,11 +145,13 @@ class to4104TestCase(UpgradeTestCaseBase):
 
         # simulate state on previous version
         from brasil.gov.agenda.upgrades.v4104 import SCRIPTS
+        from brasil.gov.agenda.upgrades.v4104 import STYLES
+
         js_tool = api.portal.get_tool('portal_javascripts')
         for js in SCRIPTS:
             js_tool.registerResource(id=js)
             self.assertIn(js, js_tool.getResourceIds())
-        from brasil.gov.agenda.upgrades.v4104 import STYLES
+
         css_tool = api.portal.get_tool('portal_css')
         for css in STYLES:
             css_tool.registerResource(id=css)

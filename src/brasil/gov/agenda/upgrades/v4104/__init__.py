@@ -17,12 +17,16 @@ def deprecate_resource_registries(setup_tool):
     """Deprecate resource registries."""
     js_tool = api.portal.get_tool('portal_javascripts')
     for js in SCRIPTS:
+        if js not in js_tool.getResourceIds():
+            continue
         js_tool.unregisterResource(id=js)
         assert js not in js_tool.getResourceIds()  # nosec
-    logger.info('Scripts removed')
 
     css_tool = api.portal.get_tool('portal_css')
     for css in STYLES:
+        if css not in css_tool.getResourceIds():
+            continue
         css_tool.unregisterResource(id=css)
         assert css not in css_tool.getResourceIds()  # nosec
-    logger.info('Styles removed')
+
+    logger.info('Static resources successfully removed from registries')

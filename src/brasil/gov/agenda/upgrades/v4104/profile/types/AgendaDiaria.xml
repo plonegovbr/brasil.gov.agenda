@@ -1,5 +1,4 @@
 <?xml version="1.0"?>
-<object name="AgendaDiaria" meta_type="Dexterity FTI"
-    i18n:domain="brasil.gov.agenda">
-    <property name="content_icon" purge="false">++resource++brasil.gov.agenda/img/agenda_icon.png</property>
+<object name="AgendaDiaria">
+  <property name="content_icon">++resource++brasil.gov.agenda/img/agenda_icon.png</property>
 </object>

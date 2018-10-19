@@ -223,7 +223,8 @@ class ContentTypeBrowserTestCase(unittest.TestCase):
         browser = Browser(app)
         portal_url = portal.absolute_url()
 
-        browser.open('%s/++resource++brasil.gov.agenda/img/compromisso_icon.png' % portal_url)
+        browser.open(
+            portal_url + '/++resource++brasil.gov.agenda/img/compromisso_icon.png')
         self.assertEqual(browser.headers['status'], '200 Ok')
 
     def test_compromisso_view(self):
