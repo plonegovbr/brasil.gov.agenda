@@ -13,12 +13,11 @@ class AgendaMixin:
         tool = api.portal.get_tool('translation_service')
         portal_state = getMultiAdapter((self.context, self.request),
                                        name=u'plone_portal_state')
-        current_language = portal_state.language()
+        language = portal_state.language()
         # XXX: Por que é retornado 'pt-br' do portal_state ao invés de 'pt_BR'?
         # Quando uso 'pt-br' ao invés de 'pt_BR', não pega a tradução quando
         # feita de forma manual.
-        target_language = ('pt_BR' if current_language == 'pt-br'
-                           else current_language)
+        target_language = 'pt_BR' if language == 'pt-br' else language
         return tool.translate(msgid,
                               locale,
                               mapping=mapping,

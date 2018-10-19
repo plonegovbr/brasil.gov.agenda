@@ -4,7 +4,7 @@ Changelog
 2.0a8 (unreleased)
 ^^^^^^^^^^^^^^^^^^
 
-- Corrige o tile de Agenda quando a lingua é diferente de pt-br (fixes `#149 <https://github.com/plonegovbr/brasil.gov.agenda/issues/149>`_).
+- Corrige o tile de Agenda quando a lingua é diferente de Português Brasileiro (fecha `#149 <https://github.com/plonegovbr/brasil.gov.agenda/issues/149>`_).
   [rodfersou]
 
 
