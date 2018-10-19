@@ -21,7 +21,7 @@ Changelog
 - Simplifica visão de agenda.
   [rodfersou]
 
-- Corrige título da agenda diária caso o nome da pessoa no cargo mudar (closes `#142 <https://github.com/plonegovbr/brasil.gov.agenda/issues/142>`_).
+- Corrige título da agenda diária caso o nome da pessoa no cargo mudar (fecha `#142 <https://github.com/plonegovbr/brasil.gov.agenda/issues/142>`_).
   [hvelarde]
 
 - Evita a emissão de source maps dos recursos estáticos.
@@ -37,7 +37,7 @@ Changelog
 - Evita ``UnicodeDecodeError`` no título da agenda diária.
   [hvelarde]
 
-- Adiciona dependência soft no collective.portlet.calendar para remover browser layer obsoleto (closes `#137 <https://github.com/plonegovbr/brasil.gov.agenda/issues/137>`_).
+- Adiciona dependência soft no collective.portlet.calendar para remover browser layer obsoleto (fecha `#137 <https://github.com/plonegovbr/brasil.gov.agenda/issues/137>`_).
   [hvelarde]
 
 
@@ -74,7 +74,7 @@ Changelog
 - Remove o registro condicional de subscribers incluído no release 2.0a1.
   [hvelarde]
 
-- Marca dias com compromissos nos calendários (closes `#118 <https://github.com/plonegovbr/brasil.gov.agenda/issues/118>`_).
+- Marca dias com compromissos nos calendários (fecha `#118 <https://github.com/plonegovbr/brasil.gov.agenda/issues/118>`_).
   [rodfersou]
 
 - Adiciona listagem de agendas diárias ao acessar agenda quando estiver autenticado.
