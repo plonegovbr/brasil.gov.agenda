@@ -58,41 +58,27 @@ class to4100TestCase(UpgradeTestCaseBase):
         # simulate state on previous version
         from brasil.gov.agenda.upgrades.v4100 import SWIPER_CSS
         from brasil.gov.agenda.upgrades.v4100 import SWIPER_JS
-        from brasil.gov.agenda.upgrades.v4100 import NEW_CSS
-        from brasil.gov.agenda.upgrades.v4100 import OLD_CSS
-        from brasil.gov.agenda.upgrades.v4100 import NEW_JS
 
         css_tool = api.portal.get_tool('portal_css')
         css_tool.unregisterResource(SWIPER_CSS)
-        css_tool.getResource(NEW_CSS).setCompression('safe')
-        css_tool.renameResource(NEW_CSS, OLD_CSS)
 
         ids = css_tool.getResourceIds()
         self.assertNotIn(SWIPER_CSS, ids)
-        self.assertNotIn(NEW_CSS, ids)
-        self.assertIn(OLD_CSS, ids)
-        self.assertEqual(css_tool.getResource(OLD_CSS).getCompression(), 'safe')
 
         js_tool = api.portal.get_tool('portal_javascripts')
         js_tool.unregisterResource(SWIPER_JS)
-        js_tool.unregisterResource(NEW_JS)
 
         ids = js_tool.getResourceIds()
         self.assertNotIn(SWIPER_JS, ids)
-        self.assertNotIn(NEW_JS, ids)
 
         # run the upgrade step to validate the update
         self.execute_upgrade_step(step)
 
         ids = css_tool.getResourceIds()
         self.assertEqual(SWIPER_CSS, ids[0])
-        self.assertNotIn(OLD_CSS, ids)
-        self.assertIn(NEW_CSS, ids)
-        self.assertEqual(css_tool.getResource(NEW_CSS).getCompression(), 'none')
 
         ids = js_tool.getResourceIds()
         self.assertEqual(SWIPER_JS, ids[0])
-        self.assertIn(NEW_JS, ids)
 
 
 class to4101TestCase(UpgradeTestCaseBase):
@@ -140,3 +126,40 @@ class to4103TestCase(UpgradeTestCaseBase):
         version = self.setup.getLastVersionForProfile(self.profile_id)[0]
         self.assertGreaterEqual(int(version), int(self.to_version))
         self.assertEqual(self.total_steps, 2)
+
+
+class to4104TestCase(UpgradeTestCaseBase):
+
+    def setUp(self):
+        UpgradeTestCaseBase.setUp(self, u'4103', u'4104')
+
+    def test_registrations(self):
+        version = self.setup.getLastVersionForProfile(self.profile_id)[0]
+        self.assertGreaterEqual(int(version), int(self.to_version))
+        self.assertEqual(self.total_steps, 4)
+
+    def test_deprecate_resource_registries(self):
+        title = u'Deprecate resource registries'
+        step = self.get_upgrade_step(title)
+        self.assertIsNotNone(step)
+
+        # simulate state on previous version
+        from brasil.gov.agenda.upgrades.v4104 import SCRIPTS
+        from brasil.gov.agenda.upgrades.v4104 import STYLES
+
+        js_tool = api.portal.get_tool('portal_javascripts')
+        for js in SCRIPTS:
+            js_tool.registerResource(id=js)
+            self.assertIn(js, js_tool.getResourceIds())
+
+        css_tool = api.portal.get_tool('portal_css')
+        for css in STYLES:
+            css_tool.registerResource(id=css)
+            self.assertIn(css, css_tool.getResourceIds())
+
+        # run the upgrade step to validate the update
+        self.execute_upgrade_step(step)
+        for js in SCRIPTS:
+            self.assertNotIn(js, js_tool.getResourceIds())
+        for css in STYLES:
+            self.assertNotIn(css, css_tool.getResourceIds())

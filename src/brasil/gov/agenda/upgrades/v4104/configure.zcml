@@ -1,0 +1,41 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:genericsetup="http://namespaces.zope.org/genericsetup">
+
+  <genericsetup:registerProfile
+      name="default"
+      title="brasil.gov.agenda (v4104)"
+      directory="profile"
+      provides="Products.GenericSetup.interfaces.EXTENSION"
+      />
+
+  <genericsetup:upgradeSteps
+      source="4103"
+      destination="4104"
+      profile="brasil.gov.agenda:default">
+
+    <genericsetup:upgradeDepends
+        title="Update content type icon references"
+        import_profile="brasil.gov.agenda.upgrades.v4104:default"
+        />
+
+    <genericsetup:upgradeStep
+        title="Deprecate resource registries"
+        description="Remove static resources from registries; use a viewlet instead."
+        handler=".deprecate_resource_registries"
+        />
+
+    <genericsetup:upgradeStep
+        title="Cook CSS resources"
+        description="There were changes in the CSS files, so we need to cook the resources."
+        handler="..cook_css_resources"
+        />
+    <genericsetup:upgradeStep
+        title="Cook JS resources"
+        description="There were changes in the JS files, so we need to cook the resources."
+        handler="..cook_javascript_resources"
+        />
+
+  </genericsetup:upgradeSteps>
+
+</configure>

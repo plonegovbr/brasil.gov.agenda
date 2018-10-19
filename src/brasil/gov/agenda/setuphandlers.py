@@ -15,6 +15,7 @@ class NonInstallable(object):  # pragma: no cover
         return [
             u'brasil.gov.agenda.upgrades.v4101',
             u'brasil.gov.agenda.upgrades.v4102',
+            u'brasil.gov.agenda.upgrades.v4104',
             # BBB: https://github.com/plonegovbr/brasil.gov.agenda/issues/137
             u'collective.portlet.calendar',
         ]
@@ -25,6 +26,7 @@ class NonInstallable(object):  # pragma: no cover
         return [
             u'brasil.gov.agenda:uninstall',
             u'brasil.gov.agenda.upgrades.v4101:default',
+            u'brasil.gov.agenda.upgrades.v4104:default',
             # BBB: https://github.com/plonegovbr/brasil.gov.agenda/issues/137
             u'collective.portlet.calendar:default',
             u'collective.portlet.calendar:uninstall',

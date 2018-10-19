@@ -62,4 +62,18 @@
       layer="brasil.gov.agenda.interfaces.IBrowserLayer"
       />
 
+  <browser:resourceDirectory
+      name="brasil.gov.agenda"
+      directory="static"
+      />
+
+  <browser:viewlet
+      name="brasil.gov.agenda.resources"
+      manager="plone.app.layout.viewlets.interfaces.IHtmlHead"
+      class=".ResourcesViewlet"
+      template="static/resources.pt"
+      permission="zope2.Public"
+      layer="brasil.gov.agenda.interfaces.IBrowserLayer"
+      />
+
 </configure>

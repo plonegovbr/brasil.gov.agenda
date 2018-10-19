@@ -1,0 +1,4 @@
+<?xml version="1.0"?>
+<object name="Agenda">
+  <property name="content_icon">++resource++brasil.gov.agenda/img/agenda_icon.png</property>
+</object>

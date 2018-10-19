@@ -4,7 +4,7 @@
   "main": "app/brasilgovagenda.js",
   "scripts": {
     "build": "./node_modules/.bin/webpack -p",
-    "debug": "./node_modules/.bin/webpack --watch",
+    "debug": "NODE_ENV=debug ./node_modules/.bin/webpack --watch",
     "watch": "./node_modules/.bin/webpack -p --watch",
     "test": "NODE_ENV=testing ./node_modules/.bin/karma start --single-run"
   },
@@ -25,6 +25,7 @@
   "repository": {},
   "license": "GPL-2.0",
   "dependencies": {
-	"sc.recipe.staticresources": "simplesconsultoria/sc.recipe.staticresources#1.0b1"
+    "sc-recipe-staticresources": "simplesconsultoria/sc.recipe.staticresources#1.1b5",
+    "swiper": "^4.3.5"
   }
 }

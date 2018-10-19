@@ -40,19 +40,7 @@ class InstallTestCase(BaseTestCase):
 
     def test_version(self):
         self.assertEqual(
-            self.st.getLastVersionForProfile(self.profile), (u'4103',))
-
-    def test_css_registered(self):
-        cssreg = getattr(self.portal, 'portal_css')
-        stylesheets_ids = cssreg.getResourceIds()
-        self.assertIn(
-            '++resource++brasil.gov.agenda/brasilgovagenda.css', stylesheets_ids)
-
-    def test_js_registered(self):
-        jsreg = getattr(self.portal, 'portal_javascripts')
-        scripts_ids = jsreg.getResourceIds()
-        self.assertIn(
-            '++resource++brasil.gov.agenda/brasilgovagenda.js', scripts_ids)
+            self.st.getLastVersionForProfile(self.profile), (u'4104',))
 
     def test_agenda_not_searched(self):
         pp = getattr(self.portal, 'portal_properties')

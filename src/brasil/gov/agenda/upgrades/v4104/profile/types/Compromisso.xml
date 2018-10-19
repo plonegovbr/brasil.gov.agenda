@@ -1,0 +1,4 @@
+<?xml version="1.0"?>
+<object name="Compromisso">
+  <property name="content_icon">++resource++brasil.gov.agenda/img/compromisso_icon.png</property>
+</object>

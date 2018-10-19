@@ -29,7 +29,4 @@
     <include package=".portlets" />
     <include package=".subscribers" />
 
-    <!-- Suporte a arquivos estaticos -->
-    <browser:resourceDirectory name="brasil.gov.agenda" directory="static" />
-
 </configure>
