@@ -1,7 +1,7 @@
 Changelog
 ---------
 
-2.0a8 (unreleased)
+2.0b1 (2018-11-23)
 ^^^^^^^^^^^^^^^^^^
 
 - Remove registro de recursos estaticos dos resource registries;
