@@ -1,14 +1,10 @@
-<configure
-    xmlns="http://namespaces.zope.org/zope"
-    i18n_domain="brasil.gov.agenda">
+<configure xmlns="http://namespaces.zope.org/zope">
 
   <adapter name="Subject" factory=".agenda.tags" />
 
   <adapter name="start" factory=".compromisso.start_date" />
   <adapter name="end" factory=".compromisso.end_date" />
   <adapter name="exclude_from_nav" factory=".compromisso.exclude_from_nav" />
-  <adapter name="Subject" factory=".compromisso.tags" />
-
 
   <adapter name="start" factory=".agendadiaria.start_date" />
   <adapter name="end" factory=".agendadiaria.end_date" />

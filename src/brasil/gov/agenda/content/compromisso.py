@@ -3,7 +3,6 @@ from brasil.gov.agenda.interfaces import IAgendaDiaria
 from brasil.gov.agenda.interfaces import ICompromisso
 from DateTime import DateTime
 from plone.dexterity.content import Container
-from plone.dexterity.utils import safe_utf8
 from plone.indexer.decorator import indexer
 from Products.CMFPlone.utils import safe_hasattr
 from zope.interface import implementer
@@ -37,14 +36,6 @@ def default_location(context):
     if not safe_hasattr(context, 'aq_parent'):
         return u''
     return getattr(context, 'location', u'')
-
-
-@provider(IContextAwareDefaultFactory)
-def default_subjects(context):
-    # XXX: deal with testing issues https://stackoverflow.com/q/35799092/644075
-    if not safe_hasattr(context, 'aq_parent'):
-        return ()
-    return getattr(context, 'subjects', ())
 
 
 @provider(IContextAwareDefaultFactory)
@@ -83,14 +74,6 @@ def start_date(obj):
 @indexer(ICompromisso)
 def end_date(obj):
     return DateTime(ICompromisso(obj).end_date)
-
-
-@indexer(ICompromisso)
-def tags(obj):
-    """Indexa tags de Compromisso."""
-    if obj.subjects is None:
-        return ()
-    return tuple(safe_utf8(s) for s in obj.subjects)
 
 
 @indexer(ICompromisso)

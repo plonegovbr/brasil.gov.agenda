@@ -4,7 +4,8 @@ Changelog
 2.0b2 (unreleased)
 ^^^^^^^^^^^^^^^^^^
 
-- Nothing changed yet.
+- Remove o campo ``subjects`` do tipos de conteúdo ``Compromisso`` por ser considerado `desnecessário <https://listas.interlegis.gov.br/pipermail/plonegov-br/2018-June/004767.html>`_.
+  [hvelarde]
 
 
 2.0b1 (2018-11-23)
