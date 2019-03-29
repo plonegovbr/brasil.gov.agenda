@@ -93,6 +93,7 @@ class CompromissoView(BrowserView):
         comp = {}
         comp['autoridade'] = self.autoridade()
         comp['title'] = obj.Title()
+        comp['solicitante'] = obj.solicitante
         comp['description'] = obj.Description()
         comp['start_time'] = obj.start_date.strftime('%Hh%M')
         comp['start_date'] = obj.start_date.strftime('%Y-%m-%d %H:%M')

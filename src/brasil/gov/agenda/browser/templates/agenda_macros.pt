@@ -69,7 +69,7 @@
           </p>
           <p class="compromisso-pauta"
              tal:condition="comp/description">
-            <label i18n:translate="">Pauta:</label>
+            <label i18n:translate="">Pauta</label>:
             <span tal:replace="comp/description">Assunto a ser tratado</span>
           </p>
           <p class="compromisso-local"

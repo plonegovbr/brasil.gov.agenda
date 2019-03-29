@@ -54,17 +54,26 @@
 
                       <h4 class="comprimisso-titulo" tal:content="comp/title">Reuniao com Dorneles Tremea</h4>
 
+                      <p class="comprimisso-solicitante"
+                        tal:condition="comp/solicitante">
+                        <label i18n:translate="">Solicitante</label>: <span tal:replace="comp/solicitante">Solicitante do compromisso</span>
+                      </p>
+
                       <p class="comprimisso-participantes"
-                        tal:condition="comp/attendees"
-                        tal:content="structure comp/attendees_formatted">Dorneles Tremea</p>
+                        tal:condition="comp/attendees">
+                        <label i18n:translate="">Participante(s)</label>: <br/>
+                        <span tal:replace="structure comp/attendees_formatted">Participantes do compromisso</span>
+                      </p>
 
                       <p class="comprimisso-pauta"
                         tal:condition="comp/description">
-                        <label i18n:translate="">Pauta:</label> <span tal:replace="comp/description">Assunto a ser tratado</span></p>
+                        <label i18n:translate="">Pauta</label>: <span tal:replace="comp/description">Assunto a ser tratado</span>
+                      </p>
 
                       <p class="comprimisso-local"
                         tal:condition="comp/location">
-                        <label i18n:translate="">Local:</label> <span tal:replace="comp/location">Palacio do Planalto</span></p>
+                        <label i18n:translate="">Local</label>: <span tal:replace="comp/location">Palacio do Planalto</span>
+                      </p>
 
                       <span class="download-compromisso">
                         <a class="add-agenda vcal"

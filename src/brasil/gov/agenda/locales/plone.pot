@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2018-09-25 14:03+0000\n"
+"POT-Creation-Date: 2019-03-29 18:10+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,58 +17,58 @@ msgstr ""
 "Preferred-Encodings: utf-8 latin1\n"
 "Domain: plone\n"
 
-#: brasil/gov/agenda/profiles/default/workflows/agendadiaria_workflow/definition.xml
+#: ./profiles/default/workflows/agendadiaria_workflow/definition.xml
 msgid "AgendaDiaria Workflow"
 msgstr ""
 
-#: brasil/gov/agenda/profiles/default/workflows/agendadiaria_workflow/definition.xml
+#: ./profiles/default/workflows/agendadiaria_workflow/definition.xml
 msgid "Can only be seen and edited by the owner."
 msgstr ""
 
-#: brasil/gov/agenda/profiles/default/workflows/agendadiaria_workflow/definition.xml
+#: ./profiles/default/workflows/agendadiaria_workflow/definition.xml
 msgid "If you submitted the item by mistake or want to perform additional edits, this will take it back."
 msgstr ""
 
-#: brasil/gov/agenda/profiles/default/workflows/agendadiaria_workflow/definition.xml
+#: ./profiles/default/workflows/agendadiaria_workflow/definition.xml
 msgid "Member retracts submission"
 msgstr ""
 
-#: brasil/gov/agenda/profiles/default/workflows/agendadiaria_workflow/definition.xml
+#: ./profiles/default/workflows/agendadiaria_workflow/definition.xml
 msgid "Private"
 msgstr ""
 
-#: brasil/gov/agenda/profiles/default/workflows/agendadiaria_workflow/definition.xml
+#: ./profiles/default/workflows/agendadiaria_workflow/definition.xml
 msgid "Publish"
 msgstr ""
 
-#: brasil/gov/agenda/profiles/default/workflows/agendadiaria_workflow/definition.xml
+#: ./profiles/default/workflows/agendadiaria_workflow/definition.xml
 msgid "Published"
 msgstr ""
 
-#: brasil/gov/agenda/profiles/default/workflows/agendadiaria_workflow/definition.xml
+#: ./profiles/default/workflows/agendadiaria_workflow/definition.xml
 msgid "Publishing the item makes it visible to other users."
 msgstr ""
 
-#: brasil/gov/agenda/profiles/default/workflows/agendadiaria_workflow/definition.xml
+#: ./profiles/default/workflows/agendadiaria_workflow/definition.xml
 msgid "Retract"
 msgstr ""
 
-#: brasil/gov/agenda/profiles/default/workflows/agendadiaria_workflow/definition.xml
+#: ./profiles/default/workflows/agendadiaria_workflow/definition.xml
 msgid "Reviewer publishes content"
 msgstr ""
 
-#: brasil/gov/agenda/profiles/default/workflows/agendadiaria_workflow/definition.xml
+#: ./profiles/default/workflows/agendadiaria_workflow/definition.xml
 msgid "Reviewer sends content back for re-drafting"
 msgstr ""
 
-#: brasil/gov/agenda/profiles/default/workflows/agendadiaria_workflow/definition.xml
+#: ./profiles/default/workflows/agendadiaria_workflow/definition.xml
 msgid "Send back"
 msgstr ""
 
-#: brasil/gov/agenda/profiles/default/workflows/agendadiaria_workflow/definition.xml
+#: ./profiles/default/workflows/agendadiaria_workflow/definition.xml
 msgid "Sending the item back will return the item to the original author instead of publishing it. You should preferably include a reason for why it was not published."
 msgstr ""
 
-#: brasil/gov/agenda/profiles/default/workflows/agendadiaria_workflow/definition.xml
+#: ./profiles/default/workflows/agendadiaria_workflow/definition.xml
 msgid "Visible to everyone, editable by the owner."
 msgstr ""
