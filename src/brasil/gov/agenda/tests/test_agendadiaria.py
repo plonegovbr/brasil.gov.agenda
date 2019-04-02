@@ -227,6 +227,7 @@ class ContentTypeTestCase(unittest.TestCase):
         reuniao = agendadiaria['reuniao-ministerial']
         reuniao.title = u'Reunião Ministerial'
         reuniao.description = u'Encontro com todos os ministros'
+        reuniao.solicitante = u'Cecilia Meireles'
         reuniao.autoridade = u'Clarice Lispector'
         reuniao.location = u'Palacio do Planalto'
         reuniao.attendees = u'Mario de Andrade\nTarsila do Amaral'
@@ -257,6 +258,11 @@ class ContentTypeTestCase(unittest.TestCase):
         # Realizamos a busca informando autoridade
         results = ct.searchResults(portal_type='AgendaDiaria',
                                    SearchableText='Clarice')
+        self.assertEqual(len(results), 1)
+
+        # Realizamos a busca informando o solicitante
+        results = ct.searchResults(portal_type='AgendaDiaria',
+                                   SearchableText='Cecilia')
         self.assertEqual(len(results), 1)
 
     def test_view_sem_compromissos(self):

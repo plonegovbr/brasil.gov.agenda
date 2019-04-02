@@ -193,6 +193,7 @@ class ContentTypeBrowserTestCase(unittest.TestCase):
         self.compromisso = self.agendadiaria['compromisso']
         self.compromisso.start_date = datetime.datetime(2014, 2, 5, 12, 0, 0)
         self.compromisso.end_date = datetime.datetime(2014, 2, 5, 13, 0, 0)
+        self.compromisso.solicitante = u'Cecilia Meireles'
         # Publicamos os conteudos
         self.wt.doActionFor(self.agenda, 'publish')
         self.wt.doActionFor(self.agendadiaria, 'publish')
@@ -249,6 +250,14 @@ class ContentTypeBrowserTestCase(unittest.TestCase):
         # nesse teste e nos testes do robots está tudo ok.
         # self.assertIn(u', 05 de', view.Title())
         self.assertIn(u', 05', view.Title())
+
+    def test_compromisso_view_solicitante(self):
+        portal = self.portal
+        self.setupContent(portal)
+        view = self.compromisso.restrictedTraverse('@@view')
+        view.setup()
+        compromisso = view.compromisso()
+        self.assertIn(u'Cecilia Meireles', compromisso['solicitante'])
 
     def test_compromisso_view_imagem(self):
         portal = self.portal
