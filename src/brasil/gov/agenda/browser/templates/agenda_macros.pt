@@ -62,10 +62,15 @@
               tal:content="comp/title">
             Reunião com Dorneles Treméa
           </h4>
+          <p class="compromisso-solicitante"
+             tal:condition="comp/solicitante">
+            <label i18n:translate="">Solicitante</label>:
+            <span tal:replace="comp/solicitante">Solicitante do Compromisso</span>
+          </p>
           <p class="compromisso-participantes"
-             tal:condition="comp/attendees"
-             tal:content="structure comp/attendees_formatted">
-            Dorneles Treméa
+             tal:condition="comp/attendees">
+            <label i18n:translate="">Participante(s)</label>:
+            <span tal:replace="comp/attendees"> Participantes</span>
           </p>
           <p class="compromisso-pauta"
              tal:condition="comp/description">
