@@ -1,267 +1,269 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: brasil.gov.agenda\n"
-"POT-Creation-Date: 2019-03-29 18:10+0000\n"
-"PO-Revision-Date: 2012-09-18 23:00+0000\n"
-"Last-Translator: PloneGov.Br <gov@plone.org.br>\n"
-"Language-Team: PloneGov.Br <gov@plone.org.br>\n"
+"Project-Id-Version: PACKAGE VERSION\n"
+"POT-Creation-Date: 2019-04-03 13:15+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=1; plural=0;\n"
+"Plural-Forms: nplurals=1; plural=0\n"
 "Language-Code: en\n"
 "Language-Name: English\n"
 "Preferred-Encodings: utf-8 latin1\n"
-"Domain: brasil.gov.agenda\n"
+"Domain: DOMAIN\n"
 
-#: ./profiles.zcml:17
+#: brasil/gov/agenda/profiles.zcml:17
 msgid ".gov.br: Agenda de Membros do Governo Brasileiro"
 msgstr ""
 
-#: ./profiles.zcml:26
+#: brasil/gov/agenda/profiles.zcml:26
 msgid ".gov.br: Remoção do suporte a Agenda"
 msgstr ""
 
-#: ./browser/templates/agenda_macros.pt:84
-#: ./browser/templates/compromissoview.pt:81
+#: brasil/gov/agenda/browser/templates/agenda_macros.pt:89
+#: brasil/gov/agenda/browser/templates/compromissoview.pt:81
 msgid "Adicionar ao meu calendario"
 msgstr ""
 
-#: ./tiles/agenda.pt:8
+#: brasil/gov/agenda/tiles/agenda.pt:8
 msgid "Adicione uma agenda a este tile."
 msgstr ""
 
-#: ./profiles/default/types/Agenda.xml
-#: ./tiles/configure.zcml:19
+#: brasil/gov/agenda/profiles/default/types/Agenda.xml
+#: brasil/gov/agenda/tiles/configure.zcml:19
 msgid "Agenda"
 msgstr ""
 
-#: ./profiles/default/types/AgendaDiaria.xml
+#: brasil/gov/agenda/profiles/default/types/AgendaDiaria.xml
 msgid "Agenda Diaria"
 msgstr ""
 
-#: ./tiles/agenda.py:98
+#: brasil/gov/agenda/tiles/agenda.py:98
 msgid "Agenda completa"
 msgstr ""
 
-#: ./profiles/default/types/Agenda.xml
-#: ./profiles/default/types/AgendaDiaria.xml
+#: brasil/gov/agenda/profiles/default/types/Agenda.xml
+#: brasil/gov/agenda/profiles/default/types/AgendaDiaria.xml
 msgid "Agenda de membro do governo brasileiro."
 msgstr ""
 
-#: ./tiles/agenda.py:96
+#: brasil/gov/agenda/tiles/agenda.py:96
 msgid "Agenda do {0}"
 msgstr ""
 
-#: ./browser/templates/agenda_macros.pt:56
+#: brasil/gov/agenda/browser/templates/agenda_macros.pt:56
 msgid "Agora"
 msgstr ""
 
-#: ./content/schema/AgendaDiaria.xml
+#: brasil/gov/agenda/content/schema/AgendaDiaria.xml
 msgid "Atualizacao"
 msgstr ""
 
-#: ./behaviors/configure.zcml:15
+#: brasil/gov/agenda/behaviors/configure.zcml:15
 msgid "Automatically generate short URL name for content based on a date field"
 msgstr ""
 
 #. Default: "Brasao"
-#: ./content/schema/Agenda.xml
+#: brasil/gov/agenda/content/schema/Agenda.xml
 msgid "Brasao"
 msgstr ""
 
-#: ./content/schema/Compromisso.xml
-#: ./profiles/default/types/Compromisso.xml
+#: brasil/gov/agenda/content/schema/Compromisso.xml
+#: brasil/gov/agenda/profiles/default/types/Compromisso.xml
 msgid "Compromisso"
 msgstr ""
 
-#: ./profiles/default/types/Compromisso.xml
+#: brasil/gov/agenda/profiles/default/types/Compromisso.xml
 msgid "Compromisso de membro do governo brasileiro."
 msgstr ""
 
-#: ./tiles/agenda.py:56
+#: brasil/gov/agenda/tiles/agenda.py:56
 msgid "Compromissos"
 msgstr ""
 
-#: ./tiles/agenda.pt:77
+#: brasil/gov/agenda/tiles/agenda.pt:77
 msgid "Compromissos do dia"
 msgstr ""
 
-#: ./content/schema/AgendaDiaria.xml
+#: brasil/gov/agenda/content/schema/AgendaDiaria.xml
 msgid "Data da Agenda"
 msgstr ""
 
-#: ./content/schema/AgendaDiaria.xml
+#: brasil/gov/agenda/content/schema/AgendaDiaria.xml
 msgid "Descreva aqui se esta agenda foi atualizada. Deixe este campo em branco se nao houver nenhuma atualizacao."
 msgstr ""
 
-#: ./browser/templates/compromissoview.pt:23
+#: brasil/gov/agenda/browser/templates/compromissoview.pt:23
 msgid "Detalhe do compromisso"
 msgstr ""
 
-#: ./browser/templates/agenda_macros.pt:90
+#: brasil/gov/agenda/browser/templates/agenda_macros.pt:95
 msgid "Editar"
 msgstr ""
 
-#: ./profiles.zcml:17
+#: brasil/gov/agenda/profiles.zcml:17
 msgid "Fornece suporte de agenda de compromissos dentro de um Portal Padrão"
 msgstr ""
 
-#: ./tiles/agenda.py:27
+#: brasil/gov/agenda/tiles/agenda.py:27
 msgid "Image"
 msgstr ""
 
-#: ./tiles/agenda.py:32
+#: brasil/gov/agenda/tiles/agenda.py:32
 msgid "Image description"
 msgstr ""
 
-#: ./browser/templates/compromissoview.pt:11
+#: brasil/gov/agenda/browser/templates/compromissoview.pt:11
 msgid "Info"
 msgstr ""
 
-#: ./content/schema/Agenda.xml
+#: brasil/gov/agenda/content/schema/Agenda.xml
 msgid "Informe o orgao ao qual esta agenda pertence. ex: Presidencia da Republica"
 msgstr ""
 
-#: ./content/agendadiaria.py:111
+#: brasil/gov/agenda/content/agendadiaria.py:111
 msgid "Ja existe uma agenda para esta data"
 msgstr ""
 
-#: ./tiles/agenda.py:74
+#: brasil/gov/agenda/tiles/agenda.py:74
 msgid "Link do rodapé"
 msgstr ""
 
-#: ./browser/templates/compromissoview.pt:75
+#: brasil/gov/agenda/browser/templates/compromissoview.pt:75
 msgid "Local"
 msgstr ""
 
-#: ./content/schema/Agenda.xml
+#: brasil/gov/agenda/content/schema/Agenda.xml
 msgid "Local padrao para eventos desta agenda"
 msgstr ""
 
-#: ./content/schema/AgendaDiaria.xml
+#: brasil/gov/agenda/content/schema/AgendaDiaria.xml
 msgid "Local padrao para eventos durante este dia"
 msgstr ""
 
-#: ./behaviors/configure.zcml:15
+#: brasil/gov/agenda/behaviors/configure.zcml:15
 msgid "Name from date"
 msgstr ""
 
-#: ./content/schema/Agenda.xml
-#: ./content/schema/AgendaDiaria.xml
-#: ./content/schema/Compromisso.xml
+#: brasil/gov/agenda/content/schema/Agenda.xml
+#: brasil/gov/agenda/content/schema/AgendaDiaria.xml
+#: brasil/gov/agenda/content/schema/Compromisso.xml
 msgid "Nome da autoridade"
 msgstr ""
 
-#: ./content/schema/Agenda.xml
+#: brasil/gov/agenda/content/schema/Agenda.xml
 msgid "Orgao"
 msgstr ""
 
-#: ./content/schema/Compromisso.xml
+#: brasil/gov/agenda/content/schema/Compromisso.xml
 msgid "Outros participantes deste compromisso, um por linha."
 msgstr ""
 
-#: ./browser/templates/compromissoview.pt:64
+#: brasil/gov/agenda/browser/templates/agenda_macros.pt:72
+#: brasil/gov/agenda/browser/templates/compromissoview.pt:64
 msgid "Participante(s)"
 msgstr ""
 
-#: ./browser/templates/agenda_macros.pt:72
-#: ./browser/templates/compromissoview.pt:70
-#: ./content/schema/Compromisso.xml
+#: brasil/gov/agenda/browser/templates/agenda_macros.pt:77
+#: brasil/gov/agenda/browser/templates/compromissoview.pt:70
+#: brasil/gov/agenda/content/schema/Compromisso.xml
 msgid "Pauta"
 msgstr ""
 
-#: ./profiles.zcml:26
+#: brasil/gov/agenda/profiles.zcml:26
 msgid "Remove suporte de agenda de compromissos dentro de um Portal Padrão"
 msgstr ""
 
-#: ./browser/templates/agenda_macros.pt:95
+#: brasil/gov/agenda/browser/templates/agenda_macros.pt:100
 msgid "Remover"
 msgstr ""
 
-#: ./tiles/agenda.py:62
+#: brasil/gov/agenda/tiles/agenda.py:62
 msgid "Rodapé da Agenda"
 msgstr ""
 
-#: ./tiles/agenda.py:50
+#: brasil/gov/agenda/tiles/agenda.py:50
 msgid "Seletor Dia"
 msgstr ""
 
-#: ./tiles/agenda.py:44
+#: brasil/gov/agenda/tiles/agenda.py:44
 msgid "Seletor Mês"
 msgstr ""
 
-#: ./tiles/agenda.pt:103
+#: brasil/gov/agenda/tiles/agenda.pt:103
 msgid "Sem compromissos oficiais."
 msgstr ""
 
-#: ./browser/templates/compromissoview.pt:59
-#: ./content/schema/Compromisso.xml
+#: brasil/gov/agenda/browser/templates/agenda_macros.pt:67
+#: brasil/gov/agenda/browser/templates/compromissoview.pt:59
+#: brasil/gov/agenda/content/schema/Compromisso.xml
 msgid "Solicitante"
 msgstr ""
 
-#: ./content/schema/Compromisso.xml
+#: brasil/gov/agenda/content/schema/Compromisso.xml
 msgid "Solicitante da Reuniao e o Orgao ou entidade que representa."
 msgstr ""
 
-#: ./content/schema/Agenda.xml
-#: ./content/schema/AgendaDiaria.xml
+#: brasil/gov/agenda/content/schema/Agenda.xml
+#: brasil/gov/agenda/content/schema/AgendaDiaria.xml
 msgid "Tags são utilizadas para organização de conteúdo"
 msgstr ""
 
-#: ./tiles/agenda.py:68
+#: brasil/gov/agenda/tiles/agenda.py:68
 msgid "Texto do rodapé"
 msgstr ""
 
-#: ./tiles/configure.zcml:19
+#: brasil/gov/agenda/tiles/configure.zcml:19
 msgid "Tile que exibe uma agenda"
 msgstr ""
 
-#: ./tiles/agenda.py:38
+#: brasil/gov/agenda/tiles/agenda.py:38
 msgid "Title"
 msgstr ""
 
-#: ./browser/templates/agenda_macros.pt:81
-#: ./browser/templates/compromissoview.pt:79
+#: brasil/gov/agenda/browser/templates/agenda_macros.pt:86
+#: brasil/gov/agenda/browser/templates/compromissoview.pt:79
 msgid "VCAL"
 msgstr ""
 
-#: ./browser/templates/compromissoview.pt:12
+#: brasil/gov/agenda/browser/templates/compromissoview.pt:12
 msgid "Voce ve esta pagina porque possui permissao para edita-la. Outros usuarios serao redirecionados para a visao da Agenda Diaria"
 msgstr ""
 
-#: ./content/agendadiaria.py:47
+#: brasil/gov/agenda/content/agendadiaria.py:47
 msgid "agenda_diaria_title"
 msgstr ""
 
 #. Default: "Outros participantes"
-#: ./content/schema/Compromisso.xml
+#: brasil/gov/agenda/content/schema/Compromisso.xml
 msgid "label_event_attendees"
 msgstr ""
 
 #. Default: "Event Ends"
-#: ./content/schema/Compromisso.xml
+#: brasil/gov/agenda/content/schema/Compromisso.xml
 msgid "label_event_end"
 msgstr ""
 
 #. Default: "Event Location"
-#: ./content/schema/Agenda.xml
-#: ./content/schema/AgendaDiaria.xml
-#: ./content/schema/Compromisso.xml
+#: brasil/gov/agenda/content/schema/Agenda.xml
+#: brasil/gov/agenda/content/schema/AgendaDiaria.xml
+#: brasil/gov/agenda/content/schema/Compromisso.xml
 msgid "label_event_location"
 msgstr ""
 
 #. Default: "Event Starts"
-#: ./content/schema/Compromisso.xml
+#: brasil/gov/agenda/content/schema/Compromisso.xml
 msgid "label_event_start"
 msgstr ""
 
 #. Default: "Atualmente não existem compromissos agendados."
-#: ./browser/templates/agenda_macros.pt:104
+#: brasil/gov/agenda/browser/templates/agenda_macros.pt:109
 msgid "label_no_appointments"
 msgstr ""
 
-#: ./browser/agendadiaria.py:43
-#: ./browser/compromisso.py:64
+#: brasil/gov/agenda/browser/agendadiaria.py:43
+#: brasil/gov/agenda/browser/compromisso.py:64
 msgid "long_date_agenda"
 msgstr ""
