@@ -1,7 +1,7 @@
 Changelog
 ---------
 
-2.0b2 (unreleased)
+2.0b2 (2019-04-05)
 ^^^^^^^^^^^^^^^^^^
 
 - Acrestenta o campo 'Solicitante' no tipo de conteúdo ``Compromisso``. 
