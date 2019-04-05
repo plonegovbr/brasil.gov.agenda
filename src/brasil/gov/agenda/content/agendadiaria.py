@@ -132,6 +132,7 @@ def SearchableText_AgendaDiaria(obj):
         # Campos indexaveis
         SearchableText.append(child.title)
         SearchableText.append(child.description)
+        SearchableText.append(child.solicitante)
         SearchableText.append(child.autoridade)
         SearchableText.append(child.location)
         SearchableText.append(child.attendees)

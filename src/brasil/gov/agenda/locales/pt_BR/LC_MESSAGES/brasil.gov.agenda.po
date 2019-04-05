@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: brasil.gov.agenda\n"
-"POT-Creation-Date: 2018-09-25 14:03+0000\n"
+"POT-Creation-Date: 2019-04-03 13:15+0000\n"
 "PO-Revision-Date: 2018-09-25 11:03-0300\n"
 "Last-Translator: PloneGov.Br <gov@plone.org.br>\n"
 "Language-Team: PloneGov.Br <gov@plone.org.br>\n"
@@ -24,8 +24,8 @@ msgstr ".gov.br: Agenda de Membros do Governo Brasileiro"
 msgid ".gov.br: Remoção do suporte a Agenda"
 msgstr ".gov.br: Remoção do suporte a Agenda"
 
-#: brasil/gov/agenda/browser/templates/agenda_macros.pt:84
-#: brasil/gov/agenda/browser/templates/compromissoview.pt:72
+#: brasil/gov/agenda/browser/templates/agenda_macros.pt:89
+#: brasil/gov/agenda/browser/templates/compromissoview.pt:81
 msgid "Adicionar ao meu calendario"
 msgstr "Adicionar ao meu calendário"
 
@@ -101,7 +101,7 @@ msgstr "Descreva aqui se esta agenda foi atualizada. Deixe este campo em branco 
 msgid "Detalhe do compromisso"
 msgstr "Detalhe do compromisso"
 
-#: brasil/gov/agenda/browser/templates/agenda_macros.pt:90
+#: brasil/gov/agenda/browser/templates/agenda_macros.pt:95
 msgid "Editar"
 msgstr "Editar"
 
@@ -133,6 +133,10 @@ msgstr "Já existe uma agenda para esta data."
 msgid "Link do rodapé"
 msgstr "Link do rodapé"
 
+#: brasil/gov/agenda/browser/templates/compromissoview.pt:75
+msgid "Local"
+msgstr "Local"
+
 #: brasil/gov/agenda/content/schema/Agenda.xml
 msgid "Local padrao para eventos desta agenda"
 msgstr "Local padrão para os compromissos desta agenda."
@@ -140,10 +144,6 @@ msgstr "Local padrão para os compromissos desta agenda."
 #: brasil/gov/agenda/content/schema/AgendaDiaria.xml
 msgid "Local padrao para eventos durante este dia"
 msgstr "Local padrão para compromissos durante este dia."
-
-#: brasil/gov/agenda/browser/templates/compromissoview.pt:67
-msgid "Local:"
-msgstr "Local:"
 
 #: brasil/gov/agenda/behaviors/configure.zcml:15
 msgid "Name from date"
@@ -163,20 +163,22 @@ msgstr "Órgão"
 msgid "Outros participantes deste compromisso, um por linha."
 msgstr "Outros participantes deste compromisso, um por linha."
 
+#: brasil/gov/agenda/browser/templates/agenda_macros.pt:72
+#: brasil/gov/agenda/browser/templates/compromissoview.pt:64
+msgid "Participante(s)"
+msgstr "Participante(s)"
+
+#: brasil/gov/agenda/browser/templates/agenda_macros.pt:77
+#: brasil/gov/agenda/browser/templates/compromissoview.pt:70
 #: brasil/gov/agenda/content/schema/Compromisso.xml
 msgid "Pauta"
 msgstr "Pauta"
-
-#: brasil/gov/agenda/browser/templates/agenda_macros.pt:72
-#: brasil/gov/agenda/browser/templates/compromissoview.pt:63
-msgid "Pauta:"
-msgstr "Pauta:"
 
 #: brasil/gov/agenda/profiles.zcml:26
 msgid "Remove suporte de agenda de compromissos dentro de um Portal Padrão"
 msgstr "Remove suporte de agenda de compromissos dentro de um Portal Padrão"
 
-#: brasil/gov/agenda/browser/templates/agenda_macros.pt:95
+#: brasil/gov/agenda/browser/templates/agenda_macros.pt:100
 msgid "Remover"
 msgstr "Remover"
 
@@ -196,9 +198,18 @@ msgstr "Seletor mês"
 msgid "Sem compromissos oficiais."
 msgstr "Sem compromissos oficiais."
 
+#: brasil/gov/agenda/browser/templates/agenda_macros.pt:67
+#: brasil/gov/agenda/browser/templates/compromissoview.pt:59
+#: brasil/gov/agenda/content/schema/Compromisso.xml
+msgid "Solicitante"
+msgstr "Solicitante"
+
+#: brasil/gov/agenda/content/schema/Compromisso.xml
+msgid "Solicitante da Reuniao e o Orgao ou entidade que representa."
+msgstr "Solicitante da Reunião e o Órgão ou entidade que representa."
+
 #: brasil/gov/agenda/content/schema/Agenda.xml
 #: brasil/gov/agenda/content/schema/AgendaDiaria.xml
-#: brasil/gov/agenda/content/schema/Compromisso.xml
 msgid "Tags são utilizadas para organização de conteúdo"
 msgstr "Tags são utilizadas para organização de conteúdo"
 
@@ -214,8 +225,8 @@ msgstr "Tile que exibe uma agenda"
 msgid "Title"
 msgstr "Título"
 
-#: brasil/gov/agenda/browser/templates/agenda_macros.pt:81
-#: brasil/gov/agenda/browser/templates/compromissoview.pt:70
+#: brasil/gov/agenda/browser/templates/agenda_macros.pt:86
+#: brasil/gov/agenda/browser/templates/compromissoview.pt:79
 msgid "VCAL"
 msgstr "VCAL"
 
@@ -250,7 +261,7 @@ msgid "label_event_start"
 msgstr "Data e hora de início"
 
 #. Default: "Atualmente não existem compromissos agendados."
-#: brasil/gov/agenda/browser/templates/agenda_macros.pt:104
+#: brasil/gov/agenda/browser/templates/agenda_macros.pt:109
 msgid "label_no_appointments"
 msgstr "Atualmente não existem compromissos agendados."
 

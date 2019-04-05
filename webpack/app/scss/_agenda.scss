@@ -122,12 +122,16 @@
     color: #222222;
     margin-bottom: .5rem;
   }
+  .compromisso-solicitante,
+  .compromisso-participantes,
+  .compromisso-pauta,
   .compromisso-local,
   .download-compromisso > span {
     font-size: 14px;
     font-weight: 500;
     line-height: 1.79;
     color: #222222;
+    margin-right: 3em;
   }
   .compromisso-local::before {
     @include sprite($agenda-location);

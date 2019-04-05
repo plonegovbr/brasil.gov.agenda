@@ -24,6 +24,11 @@
         <required>true</required>
         <title i18n:translate="">Compromisso</title>
       </field>
+      <field name="solicitante" type="zope.schema.TextLine">
+        <description i18n:translate="">Solicitante da Reuniao e o Orgao ou entidade que representa.</description>
+        <required>False</required>
+        <title i18n:translate="">Solicitante</title>
+      </field>
       <field name="attendees" type="zope.schema.Text" indexer:searchable="true">
         <description i18n:translate="">Outros participantes deste compromisso, um por linha.</description>
         <required>False</required>

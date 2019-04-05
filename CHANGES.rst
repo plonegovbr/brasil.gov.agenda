@@ -4,6 +4,10 @@ Changelog
 2.0b2 (unreleased)
 ^^^^^^^^^^^^^^^^^^
 
+- Acrestenta o campo 'Solicitante' no tipo de conteúdo ``Compromisso``. 
+  (closes `#plonegovbr/brasil.gov.agenda#153 <https://github.com/plonegovbr/brasil.gov.agenda/issues/153>`_).
+  [idgserpro]
+
 - Remove o campo ``subjects`` do tipos de conteúdo ``Compromisso`` por ser considerado `desnecessário <https://listas.interlegis.gov.br/pipermail/plonegov-br/2018-June/004767.html>`_.
   [hvelarde]
 
