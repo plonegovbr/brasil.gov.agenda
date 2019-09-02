@@ -10,7 +10,7 @@ Changelog
 2.0b2 (2019-04-05)
 ^^^^^^^^^^^^^^^^^^
 
-- Acrestenta o campo 'Solicitante' no tipo de conteúdo ``Compromisso``. 
+- Acrescenta o campo 'Solicitante' no tipo de conteúdo ``Compromisso``. 
   (closes `#plonegovbr/brasil.gov.agenda#153 <https://github.com/plonegovbr/brasil.gov.agenda/issues/153>`_).
   [idgserpro]
 
