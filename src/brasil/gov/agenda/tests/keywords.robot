@@ -22,6 +22,7 @@ Click Adicionar Agenda
     Page Should Contain  Adicionar Agenda
 
 Click Adicionar AgendaDiaria
+    Wait Until Page Contains Element  css=a#agendadiaria
     Open Add New Menu
     Click Link  css=a#agendadiaria
     Page Should Contain  Adicionar Agenda Diária
