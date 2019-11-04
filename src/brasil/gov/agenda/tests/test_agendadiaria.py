@@ -7,6 +7,7 @@ from DateTime import DateTime
 from plone import api
 from plone.app.dexterity.behaviors.exclfromnav import IExcludeFromNavigation
 from plone.app.referenceablebehavior.referenceable import IReferenceable
+from plone.app.testing import logout
 from plone.app.testing import setRoles
 from plone.app.testing import TEST_USER_ID
 from plone.app.textfield.value import RichTextValue
@@ -27,12 +28,20 @@ TEST_JPEG_FILE = open(
     os.path.sep.join(__file__.split(os.path.sep)[:-1] + ['brasil.jpg']), 'rb').read()
 
 
+def get_day(days, day):
+    """Retorna um dia específico, da lista de dias."""
+    for _day in days:
+        if _day['day'] == day:
+            return _day
+
+
 class ContentTypeTestCase(unittest.TestCase):
 
     layer = INTEGRATION_TESTING
 
     def setUp(self):
         self.portal = self.layer['portal']
+        self.request = self.layer['request']
         self.ct = self.portal.portal_catalog
         setRoles(self.portal, TEST_USER_ID, ['Manager'])
         self.portal.invokeFactory('Folder', 'test-folder')
@@ -315,3 +324,13 @@ class ContentTypeTestCase(unittest.TestCase):
         view.setup()
         self.assertIn(u'<img src="http://nohost/plone/test-folder/agenda/@@images/',
                       view.imagem())
+
+    def test_private_agendadiaria(self):
+        """Testa que um dia com a agenda diaria privada não é retornado na
+        view com hasappointment True, para usuário anônimo."""
+        logout()
+        view = api.content.get_view('view', self.agendadiaria, self.request)
+        view.setup()
+        days = view.days()
+        day = get_day(days, 5)
+        self.assertFalse(day['hasappointment'])

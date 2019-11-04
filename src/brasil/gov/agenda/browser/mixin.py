@@ -24,6 +24,13 @@ class AgendaMixin:
                               context=self.context,
                               target_language=target_language)
 
+    def has_appointment(self, day):
+        """Verifica se um determinado dia possui agenda diária."""
+        ad = self.agenda.get(day.strftime(AGENDADIARIAFMT), False)
+        if ad and api.user.has_permission('View', obj=ad):
+            return True
+        return False
+
     def month(self):
         tool = api.portal.get_tool('translation_service')
         strmonth = self._translate(tool.month_msgid(self.date.strftime('%m')))
@@ -44,7 +51,7 @@ class AgendaMixin:
             has_appointment = False
             if day == self.date:
                 cssclass.append('is-selected')
-            if self.agenda.get(day.strftime(AGENDADIARIAFMT), False):
+            if self.has_appointment(day):
                 has_appointment = True
                 cssclass.append('has-appointment')
             # Weekday difference between datetime and DateTime objects

@@ -4,13 +4,16 @@ Changelog
 2.0b3 (unreleased)
 ^^^^^^^^^^^^^^^^^^
 
-- Nothing changed yet.
+- Não exibe link para dias com agenda diária privada nos links para dias da
+  semana, se o usuário é anônimo.
+  (closes `#plonegovbr/brasil.gov.agenda#166 <https://github.com/plonegovbr/brasil.gov.agenda/issues/166>`_).
+  [idgserpro]
 
 
 2.0b2 (2019-04-05)
 ^^^^^^^^^^^^^^^^^^
 
-- Acrescenta o campo 'Solicitante' no tipo de conteúdo ``Compromisso``. 
+- Acrescenta o campo 'Solicitante' no tipo de conteúdo ``Compromisso``.
   (closes `#plonegovbr/brasil.gov.agenda#153 <https://github.com/plonegovbr/brasil.gov.agenda/issues/153>`_).
   [idgserpro]
 

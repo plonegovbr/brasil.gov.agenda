@@ -24,10 +24,11 @@
 
 <metal:form define-macro="daypicker"
             i18n:domain="brasil.gov.agenda">
-  <div class="daypicker-wrapper">
+  <div class="daypicker-wrapper"
+       tal:define="days view/days">
     <ul class="daypicker"
-        tal:condition="view/days">
-      <tal:event repeat="day view/days">
+        tal:condition="days">
+      <tal:event repeat="day days">
         <li tal:attributes="data-day day/dayurl;
                             class day/cssclass;">
           <a tal:attributes="href string:${view/agenda/absolute_url}/${day/dayurl}"
