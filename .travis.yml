@@ -20,6 +20,8 @@ install:
 - python bootstrap.py
 - bin/buildout annotate
 - bin/buildout
+before_script:
+  - firefox -v
 script:
 - bin/code-analysis
 - bin/test
