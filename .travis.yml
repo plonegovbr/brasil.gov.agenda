@@ -2,15 +2,15 @@ services:
   - xvfb
 language: python
 python: 2.7
+addons:
+  apt:
+    packages:
+      - firefox-geckodriver
 cache:
   directories:
   - $HOME/.pylint.d
   - eggs
   - parts/node
-addons:
-  # XXX: use an older Firefox ESR as we are stuck with selenium = 2.53.5
-  #      https://github.com/SeleniumHQ/selenium/issues/2739#issuecomment-249482533
-  firefox: 45.9.0esr
 matrix:
   fast_finish: true
 before_install:
@@ -20,6 +20,8 @@ install:
 - python bootstrap.py
 - bin/buildout annotate
 - bin/buildout
+before_script:
+  - firefox -v
 script:
 - bin/code-analysis
 - bin/test
