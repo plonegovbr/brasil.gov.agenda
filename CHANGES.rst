@@ -4,6 +4,11 @@ Changelog
 2.0b3 (unreleased)
 ^^^^^^^^^^^^^^^^^^
 
+- Não desloca mês corrente para o terceiro calendário, ao clicar em um dia do
+  mês atual.
+  (closes `#162 <https://github.com/plonegovbr/brasil.gov.agenda/issues/162>`_).
+  [idgserpro]
+
 - Não exibe link para dias com agenda diária privada nos links para dias da
   semana, se o usuário é anônimo.
   (closes `#plonegovbr/brasil.gov.agenda#166 <https://github.com/plonegovbr/brasil.gov.agenda/issues/166>`_).
