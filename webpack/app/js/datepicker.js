@@ -100,18 +100,23 @@ export default class DatePicker {
   initMonthPicker() {
     // this event is needed to get right translation
     $(window).on('load', function() {
-      let onSelect = function(dateText, inst) { 
+      let onSelect = function(dateText, inst) {
         this.year = inst.selectedYear;
         this.month = inst.selectedMonth;
         this.day = parseInt(inst.selectedDay);
         if (this.is3calendar === true) {
+          // Faz com que o datepicker não seja recarregado antes do
+          // redirecionamento, evitando que o mês atual seja deslocado para o
+          // terceiro calendário. Ver:
+          // https://github.com/jquery/jquery-ui/blob/1.10.2/ui/jquery.ui.datepicker.js#L1014-L1015
+          inst.inline = false;
           // https://stackoverflow.com/a/19374679
           window.location = `${this.agendaURL}/${this.year}-${zfill(this.month + 1)}-${zfill(this.day)}`;
         } else {
           this.update();
         }
       };
-      let beforeShowDay = function(date) { 
+      let beforeShowDay = function(date) {
         let day = date.toISOString().slice(0, 10);
         if (this.daysWithAppointments.indexOf(day) >= 0) {
           return [true, 'ui-has-appointments', ''];
@@ -128,7 +133,7 @@ export default class DatePicker {
         onSelect: onSelect.bind(this),
         beforeShowDay: beforeShowDay.bind(this),
         onChangeMonthYear: onChangeMonthYear.bind(this),
-      }; 
+      };
       if (this.is3calendar) {
         options.numberOfMonths = 3;
       } else {
