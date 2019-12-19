@@ -25,6 +25,9 @@ develop-eggs/
 downloads/
 eggs/
 fake-eggs/
+include/
+lib/
+share/
 parts/
 dist/
 var/
@@ -34,3 +37,4 @@ htmlcov/
 # OSX
 .DS_Store
 /.settings/*
+/.settings/
