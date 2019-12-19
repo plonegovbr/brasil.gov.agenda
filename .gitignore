@@ -25,6 +25,9 @@ develop-eggs/
 downloads/
 eggs/
 fake-eggs/
+include/
+lib/
+share/
 parts/
 dist/
 var/
