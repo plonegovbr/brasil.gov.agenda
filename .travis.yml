@@ -31,5 +31,9 @@ after_success:
   - coverage run bin/test --layer=\!Robot
   # Coveralls
   - coveralls
+  # Codacy
+  - coverage xml
+  - pip install codacy-coverage
+  - python-codacy-coverage -r coverage.xml
 notifications:
   irc: irc.freenode.org#plonegovbr
