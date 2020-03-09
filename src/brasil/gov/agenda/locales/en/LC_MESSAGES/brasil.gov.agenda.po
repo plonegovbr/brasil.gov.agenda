@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: brasil.gov.agenda\n"
-"POT-Creation-Date: 2019-04-03 13:15+0000\n"
+"POT-Creation-Date: 2020-03-12 16:11+0000\n"
 "PO-Revision-Date: 2012-09-18 23:00+0000\n"
 "Last-Translator: PloneGov.Br <gov@plone.org.br>\n"
 "Language-Team: PloneGov.Br <gov@plone.org.br>\n"
@@ -22,7 +22,7 @@ msgstr ""
 msgid ".gov.br: Remoção do suporte a Agenda"
 msgstr ""
 
-#: brasil/gov/agenda/browser/templates/agenda_macros.pt:89
+#: brasil/gov/agenda/browser/templates/agenda_macros.pt:90
 #: brasil/gov/agenda/browser/templates/compromissoview.pt:81
 msgid "Adicionar ao meu calendario"
 msgstr "Add to my calendar"
@@ -53,13 +53,29 @@ msgstr "Brazilian government official's schedule"
 msgid "Agenda do {0}"
 msgstr "{0}'s Schedule"
 
-#: brasil/gov/agenda/browser/templates/agenda_macros.pt:56
+#: brasil/gov/agenda/browser/templates/agenda_macros.pt:57
 msgid "Agora"
+msgstr ""
+
+#: brasil/gov/agenda/browser/export_agenda.py:33
+msgid "Appointment"
+msgstr ""
+
+#: brasil/gov/agenda/browser/export_agenda.py:38
+msgid "Appointment Agenda"
+msgstr ""
+
+#: brasil/gov/agenda/browser/export_agenda.py:34
+msgid "Appointment Location"
 msgstr ""
 
 #: brasil/gov/agenda/content/schema/AgendaDiaria.xml
 msgid "Atualizacao"
 msgstr "Update"
+
+#: brasil/gov/agenda/browser/export_agenda.py:30
+msgid "Authority Name"
+msgstr ""
 
 #: brasil/gov/agenda/behaviors/configure.zcml:15
 msgid "Automatically generate short URL name for content based on a date field"
@@ -87,9 +103,17 @@ msgstr "Appointments"
 msgid "Compromissos do dia"
 msgstr ""
 
+#: brasil/gov/agenda/browser/export_agenda.py:31
+msgid "Daily Schedule Date"
+msgstr ""
+
 #: brasil/gov/agenda/content/schema/AgendaDiaria.xml
 msgid "Data da Agenda"
 msgstr "Date of Schedule"
+
+#: brasil/gov/agenda/browser/export_agenda.py:29
+msgid "Department Name"
+msgstr ""
 
 #: brasil/gov/agenda/content/schema/AgendaDiaria.xml
 msgid "Descreva aqui se esta agenda foi atualizada. Deixe este campo em branco se nao houver nenhuma atualizacao."
@@ -99,12 +123,41 @@ msgstr "Describe here if this schedule has been updated. Leave this field blank 
 msgid "Detalhe do compromisso"
 msgstr "Appointment's details"
 
-#: brasil/gov/agenda/browser/templates/agenda_macros.pt:95
+#: brasil/gov/agenda/browser/templates/agenda_macros.pt:96
 msgid "Editar"
 msgstr "Edit"
 
+#: brasil/gov/agenda/browser/export_agenda.py:36
+msgid "End Time"
+msgstr ""
+
+#: brasil/gov/agenda/browser/export_agenda.py:232
+msgid "Export"
+msgstr ""
+
+#: brasil/gov/agenda/browser/export_agenda.py:256
+#: brasil/gov/agenda/profiles/default/actions.xml
+msgid "Export Schedule"
+msgstr ""
+
+#: brasil/gov/agenda/browser/export_agenda.py:206
+msgid "Final Date"
+msgstr ""
+
+#: brasil/gov/agenda/browser/export_agenda.py:229
+msgid "Final date greater than 1 year after the initial date"
+msgstr ""
+
+#: brasil/gov/agenda/browser/export_agenda.py:224
+msgid "Final date less than initial date"
+msgstr ""
+
 #: brasil/gov/agenda/profiles.zcml:17
 msgid "Fornece suporte de agenda de compromissos dentro de um Portal Padrão"
+msgstr ""
+
+#: brasil/gov/agenda/browser/export_agenda.py:32
+msgid "General information"
 msgstr ""
 
 #: brasil/gov/agenda/tiles/agenda.py:27
@@ -122,6 +175,10 @@ msgstr "Info"
 #: brasil/gov/agenda/content/schema/Agenda.xml
 msgid "Informe o orgao ao qual esta agenda pertence. ex: Presidencia da Republica"
 msgstr "Tell which department this schedule belongs. ex: The Presidency of The Republic"
+
+#: brasil/gov/agenda/browser/export_agenda.py:203
+msgid "Initial Date"
+msgstr ""
 
 #: brasil/gov/agenda/content/agendadiaria.py:111
 msgid "Ja existe uma agenda para esta data"
@@ -157,16 +214,20 @@ msgstr "Authority's name"
 msgid "Orgao"
 msgstr "Department"
 
+#: brasil/gov/agenda/browser/export_agenda.py:37
+msgid "Other attendees"
+msgstr ""
+
 #: brasil/gov/agenda/content/schema/Compromisso.xml
 msgid "Outros participantes deste compromisso, um por linha."
 msgstr "Other attendees in this appointment, one per line."
 
-#: brasil/gov/agenda/browser/templates/agenda_macros.pt:72
+#: brasil/gov/agenda/browser/templates/agenda_macros.pt:73
 #: brasil/gov/agenda/browser/templates/compromissoview.pt:64
 msgid "Participante(s)"
 msgstr "Participants"
 
-#: brasil/gov/agenda/browser/templates/agenda_macros.pt:77
+#: brasil/gov/agenda/browser/templates/agenda_macros.pt:78
 #: brasil/gov/agenda/browser/templates/compromissoview.pt:70
 #: brasil/gov/agenda/content/schema/Compromisso.xml
 msgid "Pauta"
@@ -176,13 +237,21 @@ msgstr "Agenda"
 msgid "Remove suporte de agenda de compromissos dentro de um Portal Padrão"
 msgstr ""
 
-#: brasil/gov/agenda/browser/templates/agenda_macros.pt:100
+#: brasil/gov/agenda/browser/templates/agenda_macros.pt:101
 msgid "Remover"
 msgstr "Remove"
 
 #: brasil/gov/agenda/tiles/agenda.py:62
 msgid "Rodapé da Agenda"
 msgstr "Schedule's footer"
+
+#: brasil/gov/agenda/browser/export_agenda.py:28
+msgid "Schedule Description"
+msgstr ""
+
+#: brasil/gov/agenda/browser/export_agenda.py:27
+msgid "Schedule Title"
+msgstr ""
 
 #: brasil/gov/agenda/tiles/agenda.py:50
 msgid "Seletor Dia"
@@ -196,7 +265,7 @@ msgstr ""
 msgid "Sem compromissos oficiais."
 msgstr ""
 
-#: brasil/gov/agenda/browser/templates/agenda_macros.pt:67
+#: brasil/gov/agenda/browser/templates/agenda_macros.pt:68
 #: brasil/gov/agenda/browser/templates/compromissoview.pt:59
 #: brasil/gov/agenda/content/schema/Compromisso.xml
 msgid "Solicitante"
@@ -205,6 +274,14 @@ msgstr "Requester"
 #: brasil/gov/agenda/content/schema/Compromisso.xml
 msgid "Solicitante da Reuniao e o Orgao ou entidade que representa."
 msgstr "Requester of the Meeting and the Organ or entity it represents."
+
+#: brasil/gov/agenda/browser/export_agenda.py:35
+msgid "Start Time"
+msgstr ""
+
+#: brasil/gov/agenda/browser/export_agenda.py:209
+msgid "State"
+msgstr ""
 
 #: brasil/gov/agenda/content/schema/Agenda.xml
 #: brasil/gov/agenda/content/schema/AgendaDiaria.xml
@@ -223,7 +300,7 @@ msgstr ""
 msgid "Title"
 msgstr "Title"
 
-#: brasil/gov/agenda/browser/templates/agenda_macros.pt:86
+#: brasil/gov/agenda/browser/templates/agenda_macros.pt:87
 #: brasil/gov/agenda/browser/templates/compromissoview.pt:79
 msgid "VCAL"
 msgstr "VCAL"
@@ -259,7 +336,7 @@ msgid "label_event_start"
 msgstr "Event Starts"
 
 #. Default: "Atualmente não existem compromissos agendados."
-#: brasil/gov/agenda/browser/templates/agenda_macros.pt:109
+#: brasil/gov/agenda/browser/templates/agenda_macros.pt:110
 msgid "label_no_appointments"
 msgstr ""
 
@@ -267,3 +344,11 @@ msgstr ""
 #: brasil/gov/agenda/browser/compromisso.py:64
 msgid "long_date_agenda"
 msgstr "${day} ${month} ${year}"
+
+#: brasil/gov/agenda/browser/export_agenda.py:45
+msgid "private"
+msgstr ""
+
+#: brasil/gov/agenda/browser/export_agenda.py:49
+msgid "published"
+msgstr ""

@@ -1,0 +1,29 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
+    xmlns:i18n="http://namespaces.zope.org/i18n"
+    i18n_domain="brasil.gov.agenda">
+
+  <genericsetup:upgradeSteps
+      source="4104"
+      destination="4105"
+      profile="brasil.gov.agenda:default">
+
+    <genericsetup:upgradeDepends
+        title="Adiciona action Exportar Agenda"
+        import_steps="actions"
+        />
+
+    <genericsetup:upgradeDepends
+        title="Atribui perfil para Exportar Agenda"
+        import_steps="rolemap"
+        />
+
+    <genericsetup:upgradeStep
+        title="Cria e reindexa o indice date e os metadados autoridade, update e attendees"
+        handler=".reindex.reindex_catalog"
+        />
+
+  </genericsetup:upgradeSteps>
+
+</configure>

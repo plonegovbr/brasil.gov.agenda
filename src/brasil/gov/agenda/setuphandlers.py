@@ -16,6 +16,7 @@ class NonInstallable(object):  # pragma: no cover
             u'brasil.gov.agenda.upgrades.v4101',
             u'brasil.gov.agenda.upgrades.v4102',
             u'brasil.gov.agenda.upgrades.v4104',
+            u'brasil.gov.agenda.upgrades.v4105',
             # BBB: https://github.com/plonegovbr/brasil.gov.agenda/issues/137
             u'collective.portlet.calendar',
         ]
@@ -44,6 +45,26 @@ def list_agendadiaria_calendar(p):
             calendar.calendar_types = tuple(types)
 
 
+def setup_catalog(portal):
+    """ Cria indice e metadados no catalog.
+    Foi feito aqui em vez de em profiles/default/catalog.xml para que
+    não precise reindexar esses índices após cada reinstalação.
+    https://docs.plone.org/develop/plone/searching_and_indexing/indexing.html#adding-index-using-add-on-product-installer
+    """
+    catalog = api.portal.get_tool('portal_catalog')
+
+    if 'date' not in catalog.indexes():
+        catalog.addIndex('date', 'DateIndex')
+
+    metadatas = ['date', 'autoridade', 'attendees']
+
+    idsMetadatas = catalog.schema()
+
+    for metadata in metadatas:
+        if metadata not in idsMetadatas:
+            catalog.addColumn(metadata)
+
+
 def setup_site(context):
     """ Ajustamos o site para receber o produto de agenda
     """
@@ -52,3 +73,4 @@ def setup_site(context):
         return
     site = context.getSite()
     list_agendadiaria_calendar(site)
+    setup_catalog(site)

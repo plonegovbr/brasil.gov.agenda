@@ -19,5 +19,9 @@
             <role name="Owner"/>
             <role name="Contributor"/>
         </permission>
+        <permission name="brasil.gov.agenda: Exportar Agenda" acquire="True">
+            <role name="Manager"/>
+            <role name="Site Administrator"/>
+        </permission>
     </permissions>
 </rolemap>
