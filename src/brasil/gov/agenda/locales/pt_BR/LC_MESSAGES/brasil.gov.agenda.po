@@ -348,9 +348,9 @@ msgid "long_date_agenda"
 msgstr "${day} de ${month} de ${year}"
 
 #: brasil/gov/agenda/browser/export_agenda.py:45
-msgid "private"
-msgstr "privado"
+msgid "Private"
+msgstr "Privado"
 
 #: brasil/gov/agenda/browser/export_agenda.py:49
-msgid "published"
-msgstr "publicado"
+msgid "Published"
+msgstr "Publicado"

@@ -43,11 +43,11 @@ STATES = SimpleVocabulary(
     [
         SimpleTerm(
             value=u'private',
-            title=_(u'private'),
+            title=_(u'Private'),
         ),
         SimpleTerm(
             value=u'published',
-            title=_(u'published'),
+            title=_(u'Published'),
         ),
     ],
 )
@@ -103,7 +103,11 @@ class ExportAgendaFile(BrowserView):
         for agenda_diaria in agendas_diarias:
             compromissos_agenda = compromissos_por_agenda_diaria.get(agenda_diaria.getPath(), [])
             obj_agenda_diaria = agenda_diaria.getObject()
-            info = obj_agenda_diaria.update.output.encode('utf-8') if obj_agenda_diaria.update else u''
+            html = obj_agenda_diaria.update.output.encode('utf-8') if obj_agenda_diaria.update else u''
+            transforms = api.portal.get_tool('portal_transforms')
+            stream = transforms.convertTo('text/plain', html, mimetype='text/html')
+            # converte o html para texto simples
+            info = stream.getData().strip()
             # O formato da data foi definido pelo cliente
             dados_agenda_diaria = {'data_agenda': agenda_diaria.date.strftime('%d/%m/%Y'),
                                    'autoridade_agenda': agenda_diaria.autoridade,
