@@ -39,3 +39,5 @@ htmlcov/
 /.settings/*
 
 src/brasil/gov/agenda/browser/static/*
+/.settings/
+/local
