@@ -4,6 +4,10 @@ Changelog
 2.0b3 (unreleased)
 ^^^^^^^^^^^^^^^^^^
 
+- Acrescenta subscriver purge ao compromisso, encaminhando requisições de purge
+  à AgendaDiaria e à Agenda após adicionar, mover ou remover um compromisso.
+  [idgserpro]
+
 - Não desloca mês corrente para o terceiro calendário, ao clicar em um dia do
   mês atual.
   (closes `#162 <https://github.com/plonegovbr/brasil.gov.agenda/issues/162>`_).
