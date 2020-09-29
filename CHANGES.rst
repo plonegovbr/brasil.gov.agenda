@@ -1,7 +1,7 @@
 Changelog
 ---------
 
-2.0b3 (unreleased)
+2.0b3 (2020-09-29)
 ^^^^^^^^^^^^^^^^^^
 
 - Acrescenta subscriver purge ao compromisso, encaminhando requisições de purge
