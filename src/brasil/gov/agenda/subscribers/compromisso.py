@@ -7,6 +7,7 @@ from brasil.gov.agenda.interfaces import IAgenda
 from brasil.gov.agenda.interfaces import IAgendaDiaria
 from OFS.event import ObjectWillBeMovedEvent
 from Products.CMFPlone.utils import _createObjectByType
+from z3c.caching.purge import Purge
 from zope.container.contained import notifyContainerModified
 from zope.event import notify
 from zope.lifecycleevent import ObjectMovedEvent
@@ -120,3 +121,26 @@ def _allowed_to_be_moved(obj, destination):
         logger.warn(err)
         return False
     return True
+
+
+def _get_agenda_diaria(obj):
+    if IAgendaDiaria.providedBy(obj):
+        return obj
+    elif IAgenda.providedBy(obj):
+        return None
+    obj = _get_agenda_diaria(aq_parent(obj))
+    return obj
+
+
+def _purge(obj):
+    notify(Purge(obj))
+
+
+def purge(obj, event):
+    if obj:
+        agenda_diaria = _get_agenda_diaria(obj)
+        if agenda_diaria:
+            _purge(agenda_diaria)
+        agenda = _get_agenda(agenda_diaria and agenda_diaria or obj)
+        if agenda:
+            _purge(agenda)

@@ -24,4 +24,23 @@
       handler=".move_compromisso_para_agendadiaria"
       />
 
+  <!-- Purge -->
+  <subscriber
+      for="brasil.gov.agenda.interfaces.ICompromisso
+           zope.lifecycleevent.IObjectAddedEvent"
+      handler=".purge"
+      />
+
+  <subscriber
+      for="brasil.gov.agenda.interfaces.ICompromisso
+           zope.lifecycleevent.IObjectModifiedEvent"
+      handler=".purge"
+      />
+
+  <subscriber
+      for="brasil.gov.agenda.interfaces.ICompromisso
+           zope.lifecycleevent.IObjectRemovedEvent"
+      handler=".purge"
+      />
+
 </configure>
