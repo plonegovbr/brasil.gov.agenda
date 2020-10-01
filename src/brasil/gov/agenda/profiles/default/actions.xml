@@ -4,7 +4,7 @@
  <object name="object_buttons" meta_type="CMF Action Category">
   <object name="export_agenda" meta_type="CMF Action"
      i18n:domain="brasil.gov.agenda">
-   <property name="title" i18n:translate="">Export Schedule</property>
+   <property name="title" i18n:translate="">Export Appointments</property>
    <property name="description" i18n:translate=""></property>
    <property name="url_expr">string:$object_url/export_agenda</property>
    <property name="link_target"></property>

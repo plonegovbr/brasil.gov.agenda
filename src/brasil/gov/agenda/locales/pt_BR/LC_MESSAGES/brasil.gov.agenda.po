@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: brasil.gov.agenda\n"
-"POT-Creation-Date: 2020-03-12 16:11+0000\n"
+"POT-Creation-Date: 2020-10-01 17:19+0000\n"
 "PO-Revision-Date: 2018-09-25 11:03-0300\n"
 "Last-Translator: PloneGov.Br <gov@plone.org.br>\n"
 "Language-Team: PloneGov.Br <gov@plone.org.br>\n"
@@ -105,6 +105,10 @@ msgstr "Compromissos"
 msgid "Compromissos do dia"
 msgstr "Compromissos do dia"
 
+#: brasil/gov/agenda/browser/export_agenda.py:221
+msgid "Daily Agenda Status"
+msgstr "Estado das Agendas Diárias"
+
 #: brasil/gov/agenda/browser/export_agenda.py:31
 msgid "Daily Schedule Date"
 msgstr "Data da Agenda Diária"
@@ -133,24 +137,24 @@ msgstr "Editar"
 msgid "End Time"
 msgstr "Horário de Término"
 
-#: brasil/gov/agenda/browser/export_agenda.py:232
+#: brasil/gov/agenda/browser/export_agenda.py:246
 msgid "Export"
 msgstr "Exportar"
 
-#: brasil/gov/agenda/browser/export_agenda.py:256
+#: brasil/gov/agenda/browser/export_agenda.py:270
 #: brasil/gov/agenda/profiles/default/actions.xml
-msgid "Export Schedule"
-msgstr "Exportar Agenda"
+msgid "Export Appointments"
+msgstr "Exportar Compromissos"
 
-#: brasil/gov/agenda/browser/export_agenda.py:206
+#: brasil/gov/agenda/browser/export_agenda.py:218
 msgid "Final Date"
 msgstr "Data Final"
 
-#: brasil/gov/agenda/browser/export_agenda.py:229
+#: brasil/gov/agenda/browser/export_agenda.py:241
 msgid "Final date greater than 1 year after the initial date"
 msgstr "Data final maior que 1 ano após a data inicial"
 
-#: brasil/gov/agenda/browser/export_agenda.py:224
+#: brasil/gov/agenda/browser/export_agenda.py:236
 msgid "Final date less than initial date"
 msgstr "Data final deve ser maior que a data inicial"
 
@@ -178,7 +182,7 @@ msgstr "Info"
 msgid "Informe o orgao ao qual esta agenda pertence. ex: Presidencia da Republica"
 msgstr "Informe o órgão ao qual esta agenda pertence. ex: Presidência da República"
 
-#: brasil/gov/agenda/browser/export_agenda.py:203
+#: brasil/gov/agenda/browser/export_agenda.py:215
 msgid "Initial Date"
 msgstr "Data Inicial"
 
@@ -235,6 +239,14 @@ msgstr "Participante(s)"
 msgid "Pauta"
 msgstr "Pauta"
 
+#: brasil/gov/agenda/browser/export_agenda.py:46
+msgid "Private"
+msgstr "Privado"
+
+#: brasil/gov/agenda/browser/export_agenda.py:50
+msgid "Published"
+msgstr "Publicado"
+
 #: brasil/gov/agenda/profiles.zcml:26
 msgid "Remove suporte de agenda de compromissos dentro de um Portal Padrão"
 msgstr "Remove suporte de agenda de compromissos dentro de um Portal Padrão"
@@ -280,10 +292,6 @@ msgstr "Solicitante da Reunião e o Órgão ou entidade que representa."
 #: brasil/gov/agenda/browser/export_agenda.py:35
 msgid "Start Time"
 msgstr "Horário de Inicio"
-
-#: brasil/gov/agenda/browser/export_agenda.py:209
-msgid "State"
-msgstr "Estado"
 
 #: brasil/gov/agenda/content/schema/Agenda.xml
 #: brasil/gov/agenda/content/schema/AgendaDiaria.xml
@@ -346,11 +354,3 @@ msgstr "Atualmente não existem compromissos agendados."
 #: brasil/gov/agenda/browser/compromisso.py:64
 msgid "long_date_agenda"
 msgstr "${day} de ${month} de ${year}"
-
-#: brasil/gov/agenda/browser/export_agenda.py:45
-msgid "Private"
-msgstr "Privado"
-
-#: brasil/gov/agenda/browser/export_agenda.py:49
-msgid "Published"
-msgstr "Publicado"

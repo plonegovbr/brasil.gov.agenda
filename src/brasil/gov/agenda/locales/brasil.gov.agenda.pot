@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2020-03-12 16:11+0000\n"
+"POT-Creation-Date: 2020-10-01 17:19+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -103,6 +103,10 @@ msgstr ""
 msgid "Compromissos do dia"
 msgstr ""
 
+#: brasil/gov/agenda/browser/export_agenda.py:221
+msgid "Daily Agenda Status"
+msgstr ""
+
 #: brasil/gov/agenda/browser/export_agenda.py:31
 msgid "Daily Schedule Date"
 msgstr ""
@@ -131,24 +135,24 @@ msgstr ""
 msgid "End Time"
 msgstr ""
 
-#: brasil/gov/agenda/browser/export_agenda.py:232
+#: brasil/gov/agenda/browser/export_agenda.py:246
 msgid "Export"
 msgstr ""
 
-#: brasil/gov/agenda/browser/export_agenda.py:256
+#: brasil/gov/agenda/browser/export_agenda.py:270
 #: brasil/gov/agenda/profiles/default/actions.xml
-msgid "Export Schedule"
+msgid "Export Appointments"
 msgstr ""
 
-#: brasil/gov/agenda/browser/export_agenda.py:206
+#: brasil/gov/agenda/browser/export_agenda.py:218
 msgid "Final Date"
 msgstr ""
 
-#: brasil/gov/agenda/browser/export_agenda.py:229
+#: brasil/gov/agenda/browser/export_agenda.py:241
 msgid "Final date greater than 1 year after the initial date"
 msgstr ""
 
-#: brasil/gov/agenda/browser/export_agenda.py:224
+#: brasil/gov/agenda/browser/export_agenda.py:236
 msgid "Final date less than initial date"
 msgstr ""
 
@@ -176,7 +180,7 @@ msgstr ""
 msgid "Informe o orgao ao qual esta agenda pertence. ex: Presidencia da Republica"
 msgstr ""
 
-#: brasil/gov/agenda/browser/export_agenda.py:203
+#: brasil/gov/agenda/browser/export_agenda.py:215
 msgid "Initial Date"
 msgstr ""
 
@@ -233,6 +237,14 @@ msgstr ""
 msgid "Pauta"
 msgstr ""
 
+#: brasil/gov/agenda/browser/export_agenda.py:46
+msgid "Private"
+msgstr ""
+
+#: brasil/gov/agenda/browser/export_agenda.py:50
+msgid "Published"
+msgstr ""
+
 #: brasil/gov/agenda/profiles.zcml:26
 msgid "Remove suporte de agenda de compromissos dentro de um Portal Padrão"
 msgstr ""
@@ -277,10 +289,6 @@ msgstr ""
 
 #: brasil/gov/agenda/browser/export_agenda.py:35
 msgid "Start Time"
-msgstr ""
-
-#: brasil/gov/agenda/browser/export_agenda.py:209
-msgid "State"
 msgstr ""
 
 #: brasil/gov/agenda/content/schema/Agenda.xml
@@ -343,12 +351,4 @@ msgstr ""
 #: brasil/gov/agenda/browser/agendadiaria.py:43
 #: brasil/gov/agenda/browser/compromisso.py:64
 msgid "long_date_agenda"
-msgstr ""
-
-#: brasil/gov/agenda/browser/export_agenda.py:45
-msgid "private"
-msgstr ""
-
-#: brasil/gov/agenda/browser/export_agenda.py:49
-msgid "published"
 msgstr ""

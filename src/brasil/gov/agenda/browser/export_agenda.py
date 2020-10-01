@@ -87,10 +87,12 @@ class ExportAgendaFile(BrowserView):
         )
         compromissos_por_agenda_diaria = {}
         for compromisso in compromissos:
-            path_agenda_diaria = '/'.join(compromisso.getPath().split('/')[:-1])
+            path_agenda_diaria = '/'.join(
+                compromisso.getPath().split('/')[:-1])
             if not compromissos_por_agenda_diaria.get(path_agenda_diaria, ''):
                 compromissos_por_agenda_diaria[path_agenda_diaria] = []
-            compromissos_por_agenda_diaria[path_agenda_diaria].append(compromisso)
+            compromissos_por_agenda_diaria[path_agenda_diaria].append(
+                compromisso)
 
         agendas_diarias = api.content.find(
             self.context,
@@ -101,11 +103,14 @@ class ExportAgendaFile(BrowserView):
             sort_order='ascending',
         )
         for agenda_diaria in agendas_diarias:
-            compromissos_agenda = compromissos_por_agenda_diaria.get(agenda_diaria.getPath(), [])
+            compromissos_agenda = compromissos_por_agenda_diaria.get(
+                agenda_diaria.getPath(), [])
             obj_agenda_diaria = agenda_diaria.getObject()
-            html = obj_agenda_diaria.update.output.encode('utf-8') if obj_agenda_diaria.update else u''
+            html = obj_agenda_diaria.update.output.encode(
+                'utf-8') if obj_agenda_diaria.update else u''
             transforms = api.portal.get_tool('portal_transforms')
-            stream = transforms.convertTo('text/plain', html, mimetype='text/html')
+            stream = transforms.convertTo(
+                'text/plain', html, mimetype='text/html')
             # converte o html para texto simples
             info = stream.getData().strip()
             # O formato da data foi definido pelo cliente
@@ -125,7 +130,8 @@ class ExportAgendaFile(BrowserView):
                 retorno['hora_fim'] = compromisso.end.strftime('%H:%M')
                 retorno['participantes'] = ''
                 if compromisso.attendees:
-                    retorno['participantes'] = ', '.join(compromisso.attendees.splitlines())
+                    retorno['participantes'] = ', '.join(
+                        compromisso.attendees.splitlines())
                 result.append(retorno)
         return result
 
@@ -149,7 +155,8 @@ class ExportAgendaFile(BrowserView):
 
         out = StringIO()
         writer = csv.writer(out, quoting=csv.QUOTE_ALL)
-        colunas = [self.context.translate(coluna).encode('utf-8') for coluna in HEADER]
+        colunas = [self.context.translate(
+            coluna).encode('utf-8') for coluna in HEADER]
         writer.writerow(colunas)
 
         compromissos = self.get_compromissos()
@@ -211,7 +218,7 @@ class IExportAgendaForm(interface.Interface):
     final_date = schema.Date(title=_(u'Final Date'),
                              required=True)
 
-    review_state = schema.List(title=_(u'State'),
+    review_state = schema.List(title=_(u'Daily Agenda Status'),
                                required=True,
                                constraint=requiredConstraint,
                                value_type=schema.Choice(vocabulary=STATES))
@@ -231,8 +238,10 @@ class ExportAgendaForm(form.Form):
             else:
                 next_year = initial_date + relativedelta(years=1)
                 if final_date > next_year:
-                    msg = _(u'Final date greater than 1 year after the initial date')
-                    raise WidgetActionExecutionError('final_date', Invalid(msg))
+                    msg = _(
+                        u'Final date greater than 1 year after the initial date')
+                    raise WidgetActionExecutionError(
+                        'final_date', Invalid(msg))
 
     @button.buttonAndHandler(_(u'Export'), name='export')
     def handleExport(self, action):  # @UnusedVariable
@@ -256,6 +265,6 @@ class ExportAgendaForm(form.Form):
 
 
 class ExportAgendaFormWrapper(FormWrapper):
-    """View do formulário de exportação de Agenda."""
+    """View do formulário de exportação de Compromissos da Agenda."""
     form = ExportAgendaForm
-    label = _(u'Export Schedule')
+    label = _(u'Export Appointments')
