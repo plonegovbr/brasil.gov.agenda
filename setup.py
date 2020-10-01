@@ -3,7 +3,7 @@
 from setuptools import find_packages
 from setuptools import setup
 
-version = '2.0b4.dev1'
+version = '2.0b4.dev2'
 description = 'Agenda de membros do Governo Brasileiro'
 long_description = (
     open('README.rst').read() + '\n' +
@@ -41,7 +41,8 @@ setup(
     zip_safe=False,
     install_requires=[
         'Acquisition',
-        'collective.portlet.calendar',  # BBB: https://github.com/plonegovbr/brasil.gov.agenda/issues/137
+        # BBB: https://github.com/plonegovbr/brasil.gov.agenda/issues/137
+        'collective.portlet.calendar',
         'collective.cover',
         'plone.api',
         'plone.app.content',
