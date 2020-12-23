@@ -173,18 +173,61 @@ class ExportAgendaFile(BrowserView):
                 local = compromisso.get('local_agenda', '')
 
             row = []
+            if isinstance(title_agenda, unicode):
+                title_agenda = title_agenda.encode('utf-8')
             row.append(title_agenda)
+
+            if isinstance(description_agenda, unicode):
+                description_agenda = description_agenda.encode('utf-8')
             row.append(description_agenda)
+
+            if isinstance(orgao_agenda, unicode):
+                orgao_agenda = orgao_agenda.encode('utf-8')
             row.append(orgao_agenda)
+
+            if isinstance(autoridade, unicode):
+                autoridade = autoridade.encode('utf-8')
             row.append(autoridade)
-            row.append(compromisso.get('data_agenda', ''))
-            row.append(compromisso.get('info', ''))
-            row.append(compromisso.get('compromisso', ''))
+
+            data_agenda = compromisso.get('data_agenda', '')
+            if isinstance(data_agenda, unicode):
+                data_agenda = data_agenda.encode('utf-8')
+            row.append(data_agenda)
+
+            info = compromisso.get('info', '')
+            if isinstance(info, unicode):
+                info = info.encode('utf-8')
+            row.append(info)
+
+            txt = compromisso.get('compromisso', '')
+            if isinstance(txt, unicode):
+                txt = txt.encode('utf-8')
+            row.append(txt)
+
+            if isinstance(local, unicode):
+                local = local.encode('utf-8')
             row.append(local)
-            row.append(compromisso.get('hora_inicio', ''))
-            row.append(compromisso.get('hora_fim', ''))
-            row.append(compromisso.get('participantes', ''))
-            row.append(compromisso.get('pauta', ''))
+
+            hora_inicio = compromisso.get('hora_inicio', '')
+            if isinstance(hora_inicio, unicode):
+                hora_inicio = hora_inicio.encode('utf-8')
+            row.append(hora_inicio)
+
+            hora_fim = compromisso.get('hora_fim', '')
+            if isinstance(hora_fim, unicode):
+                hora_fim = hora_fim.encode('utf-8')
+            row.append(hora_fim)
+
+            participantes = compromisso.get('participantes', '')
+            if isinstance(participantes, unicode):
+                participantes = participantes.encode('utf-8')
+            row.append(participantes)
+
+            pauta = compromisso.get('pauta', '')
+            if isinstance(pauta, unicode):
+                pauta = pauta.encode('utf-8')
+            row.append(pauta)
+
             writer.writerow(row)
 
         return out.getvalue()
