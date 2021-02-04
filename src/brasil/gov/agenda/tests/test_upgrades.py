@@ -185,13 +185,13 @@ class to4105TestCase(UpgradeTestCaseBase):
         object_buttons = portal_actions.object_buttons
         object_buttons.manage_delObjects(['export_agenda'])
         action = object_buttons.listActions()[-1]
-        self.assertNotEqual(action.title, u'Export Schedule')
+        self.assertNotEqual(action.title, u'Export Appointments')
 
         # Executa upgrade.
         self.execute_upgrade_step(step)
 
         action = object_buttons.listActions()[-1]
-        self.assertEqual(action.title, u'Export Schedule')
+        self.assertEqual(action.title, u'Export Appointments')
 
     def test_permission(self):
         permission = 'brasil.gov.agenda: Exportar Agenda'

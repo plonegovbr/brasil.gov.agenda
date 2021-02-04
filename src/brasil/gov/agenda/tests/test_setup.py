@@ -40,7 +40,7 @@ class InstallTestCase(BaseTestCase):
 
     def test_version(self):
         self.assertEqual(
-            self.st.getLastVersionForProfile(self.profile), (u'4105',))
+            self.st.getLastVersionForProfile(self.profile), (u'4106',))
 
     def test_agenda_not_searched(self):
         pp = getattr(self.portal, 'portal_properties')
