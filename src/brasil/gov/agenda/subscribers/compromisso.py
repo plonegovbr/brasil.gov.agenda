@@ -115,7 +115,7 @@ def _allowed_to_be_moved(obj, destination):
     err = ''
     try:
         obj._notifyOfCopyTo(destination, op=1)
-    except Exception, e:
+    except Exception, e:  # NOQA
         err = str(e)
     if err:
         logger.warn(err)
