@@ -62,6 +62,22 @@
       layer="brasil.gov.agenda.interfaces.IBrowserLayer"
       />
 
+  <browser:page
+      name="export_agenda"
+      for="brasil.gov.agenda.interfaces.IAgenda"
+      class=".export_agenda.ExportAgendaFormWrapper"
+      layer="brasil.gov.agenda.interfaces.IBrowserLayer"
+      permission="brasil.gov.agenda.ExportAgenda"
+      />
+
+  <browser:page
+      name="export_agenda_file"
+      for="brasil.gov.agenda.interfaces.IAgenda"
+      class=".export_agenda.ExportAgendaFile"
+      layer="brasil.gov.agenda.interfaces.IBrowserLayer"
+      permission="brasil.gov.agenda.ExportAgenda"
+      />
+
   <browser:resourceDirectory
       name="brasil.gov.agenda"
       directory="static"

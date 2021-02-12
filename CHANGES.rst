@@ -4,7 +4,10 @@ Changelog
 2.0b4 (unreleased)
 ^^^^^^^^^^^^^^^^^^
 
-- Nothing changed yet.
+- Funcionalidade para exportar os compromissos de uma agenda, em um determinado
+  período de tempo, no formato CSV.
+  (closes `#173 <https://github.com/plonegovbr/brasil.gov.agenda/issues/173>`_).
+  [idgserpro]
 
 
 2.0b3 (2020-09-29)

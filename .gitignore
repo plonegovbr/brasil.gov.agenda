@@ -42,3 +42,4 @@ src/brasil/gov/agenda/browser/static/*
 /.settings/
 /local
 pyvenv.cfg
+/local.cfg

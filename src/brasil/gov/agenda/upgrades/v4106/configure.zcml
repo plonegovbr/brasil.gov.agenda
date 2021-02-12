@@ -1,0 +1,19 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
+    xmlns:i18n="http://namespaces.zope.org/i18n"
+    i18n_domain="brasil.gov.agenda">
+
+  <genericsetup:upgradeSteps
+      source="4105"
+      destination="4106"
+      profile="brasil.gov.agenda:default">
+
+    <genericsetup:upgradeDepends
+        title="Atualiza actions"
+        import_steps="actions"
+        />
+
+  </genericsetup:upgradeSteps>
+
+</configure>

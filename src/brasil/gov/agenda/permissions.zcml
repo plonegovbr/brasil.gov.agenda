@@ -17,4 +17,9 @@
         title="brasil.gov.agenda: Add Compromisso"
         />
 
+    <permission
+        id="brasil.gov.agenda.ExportAgenda"
+        title="brasil.gov.agenda: Exportar Agenda"
+        />
+
 </configure>

@@ -163,3 +163,48 @@ class to4104TestCase(UpgradeTestCaseBase):
             self.assertNotIn(js, js_tool.getResourceIds())
         for css in STYLES:
             self.assertNotIn(css, css_tool.getResourceIds())
+
+
+class to4105TestCase(UpgradeTestCaseBase):
+
+    def setUp(self):
+        UpgradeTestCaseBase.setUp(self, u'4104', u'4105')
+
+    def test_registrations(self):
+        version = self.setup.getLastVersionForProfile(self.profile_id)[0]
+        self.assertGreaterEqual(int(version), int(self.to_version))
+        self.assertEqual(self.total_steps, 3)
+
+    def test_add_export_agenda_action(self):
+        # check if the upgrade step is registered
+        title = u'Adiciona action Exportar Agenda'
+        step = self.get_upgrade_step(title)
+        self.assertIsNotNone(step)
+
+        portal_actions = api.content.portal.get_tool('portal_actions')
+        object_buttons = portal_actions.object_buttons
+        object_buttons.manage_delObjects(['export_agenda'])
+        action = object_buttons.listActions()[-1]
+        self.assertNotEqual(action.title, u'Export Appointments')
+
+        # Executa upgrade.
+        self.execute_upgrade_step(step)
+
+        action = object_buttons.listActions()[-1]
+        self.assertEqual(action.title, u'Export Appointments')
+
+    def test_permission(self):
+        permission = 'brasil.gov.agenda: Exportar Agenda'
+        roles = self.portal.rolesOfPermission(permission)
+        roles = [r['name'] for r in roles if r['selected']]
+        expected = ['Manager', 'Site Administrator']
+        self.assertListEqual(roles, expected)
+
+    def test_setup_catalog(self):
+        catalog = api.portal.get_tool('portal_catalog')
+        self.assertIn('date', catalog.indexes())
+
+        metadatas = ['date', 'autoridade', 'attendees']
+        idsMetadatas = catalog.schema()
+        for metadata in metadatas:
+            self.assertIn(metadata, idsMetadatas)
