@@ -107,15 +107,9 @@ class TestExportAgendaFile(unittest.TestCase):
         view = api.content.get_view(
             'export_agenda_file', self.agenda, self.request)
         csv = view.write_csv()
-        linha0 = '"Título da Agenda","Descrição da Agenda","Nome do Órgão","Nome da Autoridade",'
-        '"Data da Agenda Diária","Informações Gerais","Compromisso","Local do Compromisso",'
-        '"Horário de Inicio","Horário de Término","Outros Participantes,Pauta"'
-        linha1 = '"Agenda de Autoridade","Agenda de José","Órgão de José","José"'
-        '"01/12/2019","Atualização","Compromisso 01","Local"'
-        '"12:00","13:00","Maria","Pauta 01"'
-        linha2 = '"Agenda de Autoridade","Agenda de José","Órgão de José","José"'
-        '"25/12/2019","Atualização","Compromisso 25","Local"'
-        '"08:00","09:00","Marta","Pauta 25"'
+        linha0 = '"Título da Agenda","Descrição da Agenda","Nome do Órgão","Nome da Autoridade","Data da Agenda Diária","Informações Gerais","Compromisso","Local do Compromisso","Horário de Inicio","Horário de Término","Outros Participantes","Pauta"'
+        linha1 = '"Agenda de Autoridade","Agenda de José","Órgão de José","José""01/12/2019","Atualização","Compromisso 01","Local""12:00","13:00","Maria","Pauta 01"'
+        linha2 = '"Agenda de Autoridade","Agenda de José","Órgão de José","José""25/12/2019","Atualização","Compromisso 25","Local""08:00","09:00","Marta","Pauta 25"'
         self.assertIn(linha0, csv)
         self.assertIn(linha1, csv)
         self.assertIn(linha2, csv)
@@ -128,15 +122,9 @@ class TestExportAgendaFile(unittest.TestCase):
         view = api.content.get_view(
             'export_agenda_file', self.agenda, self.request)
         render_view = view()
-        linha0 = '"Título da Agenda","Descrição da Agenda","Nome do Órgão","Nome da Autoridade",'
-        '"Data da Agenda Diária","Informações Gerais","Compromisso","Local do Compromisso",'
-        '"Horário de Inicio","Horário de Término","Outros Participantes,Pauta"'
-        linha1 = '"Agenda de Autoridade","Agenda de José","Órgão de José","José"'
-        '"01/12/2019","Atualização","Compromisso 01","Local"'
-        '"12:00","13:00","Maria","Pauta 01"'
-        linha2 = '"Agenda de Autoridade","Agenda de José","Órgão de José","José"'
-        '"25/12/2019","Atualização","Compromisso 25","Local"'
-        '"08:00","09:00","Marta","Pauta 25"'
+        linha0 = '"Título da Agenda","Descrição da Agenda","Nome do Órgão","Nome da Autoridade","Data da Agenda Diária","Informações Gerais","Compromisso","Local do Compromisso","Horário de Inicio","Horário de Término","Outros Participantes","Pauta"'
+        linha1 = '"Agenda de Autoridade","Agenda de José","Órgão de José","José""01/12/2019","Atualização","Compromisso 01","Local""12:00","13:00","Maria","Pauta 01"'
+        linha2 = '"Agenda de Autoridade","Agenda de José","Órgão de José","José""25/12/2019","Atualização","Compromisso 25","Local""08:00","09:00","Marta","Pauta 25"'
         self.assertIn(linha0, render_view)
         self.assertIn(linha1, render_view)
         self.assertIn(linha2, render_view)

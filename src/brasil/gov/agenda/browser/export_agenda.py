@@ -253,6 +253,20 @@ def requiredConstraint(value):
     return True
 
 
+def valid_dates(initial_date, final_date):
+    if initial_date is not None and final_date is not None:
+        if initial_date > final_date:
+            msg = _(u'Final date less than initial date')
+            raise WidgetActionExecutionError('final_date', Invalid(msg))
+        else:
+            next_year = initial_date + relativedelta(years=1)
+            if final_date > next_year:
+                msg = _(
+                    u'Final date greater than 1 year after the initial date')
+                raise WidgetActionExecutionError(
+                    'final_date', Invalid(msg))
+
+
 class IExportAgendaForm(interface.Interface):
 
     initial_date = schema.Date(title=_(u'Initial Date'),
@@ -273,25 +287,12 @@ class ExportAgendaForm(form.Form):
     fields['review_state'].widgetFactory = CheckBoxFieldWidget
     ignoreContext = True
 
-    def valid_dates(self, initial_date, final_date):
-        if initial_date is not None and final_date is not None:
-            if initial_date > final_date:
-                msg = _(u'Final date less than initial date')
-                raise WidgetActionExecutionError('final_date', Invalid(msg))
-            else:
-                next_year = initial_date + relativedelta(years=1)
-                if final_date > next_year:
-                    msg = _(
-                        u'Final date greater than 1 year after the initial date')
-                    raise WidgetActionExecutionError(
-                        'final_date', Invalid(msg))
-
     @button.buttonAndHandler(_(u'Export'), name='export')
     def handleExport(self, action):  # @UnusedVariable
         data, errors = self.extractData()
         initial_date = data.get('initial_date', None)
         final_date = data.get('final_date', None)
-        self.valid_dates(initial_date, final_date)
+        valid_dates(initial_date, final_date)
         if errors:
             self.status = self.formErrorsMessage
             return
