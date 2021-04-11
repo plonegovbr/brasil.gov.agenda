@@ -26,6 +26,6 @@
   "license": "GPL-2.0",
   "dependencies": {
     "sc-recipe-staticresources": "collective/sc.recipe.staticresources#1.1b7",
-    "swiper": "^4.3.5"
+    "swiper": "^6.5.1"
   }
 }
